@@ -1,2 +1,8 @@
 ヤドン　やあん
 ウドン  a
+
+ictの中にクローン(複製)する
+コマンドプロンプトで実行
+pip list
+pip install django==3.2.7
+python manage.py runserver
