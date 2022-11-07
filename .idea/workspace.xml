@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f62b4dcd-2126-419e-91bb-6103e30e50b9" name="変更" comment="">
-      <change beforePath="$PROJECT_DIR$/venv_skillswap/project_skillswap/skillswap/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv_skillswap/project_skillswap/skillswap/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv_skillswap/project_skillswap/project_skillswap/settings_common.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv_skillswap/project_skillswap/project_skillswap/settings_dev.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv_skillswap/project_skillswap/project_skillswap/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv_skillswap/project_skillswap/project_skillswap/settings.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -12,8 +14,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Python Script" />
         <option value="HTML File" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
