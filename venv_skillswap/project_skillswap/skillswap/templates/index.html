@@ -1,19 +1,10 @@
-<!--<!DOCTYPE html>-->
 {% extends 'base.html' %}
+
 {% load static %}
-<!--<html>-->
-<!--<head>-->
-    {% block title %}SKILLSWAP{% endblock %}
-    {% block head %}
-    <style>
-    p{
-      text-align:center;
-    }
-    </style>
-    {% endblock %}
-<!--</head>-->
-<!--<body>-->
-    {% block header %}
+
+{% block title %}SKILLSWAP{% endblock %}
+
+{% block header %}
     <header>
         <h1 class="headline">
             <a>SKILLSWAP</a>
@@ -32,9 +23,9 @@
             </ul>
         </nav>
     </header>
-    {% endblock %}
+{% endblock %}
 
-    {% block contents %}
+{% block contents %}
     <div align="center">
         <button>新規登録</button>
     </div>
@@ -55,6 +46,4 @@
     <footer>
   	    <p>© 2022 SKILLSWAP</p>
     </footer>
-    {% endblock %}
-<!--</body>-->
-<!--</html>-->
+{% endblock %}

@@ -1,17 +1,17 @@
-<!--<!DOCTYPE html>-->
-
 {% load static %}
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <title>{% block title %}{% endblock %}</title>
-    <!--  mystyle  -->
-    <link rel="stylesheet" type="text/css" href="{% static 'css/mystyle.css' %}">
-    {% block head %}{% endblock %}
-</head>
-<body>
-    {% block header %}{% endblock %}
 
-    {% block contents %}{% endblock %}
-</body>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}{% endblock %}</title>
+        <!--  mystyle  -->
+        <link rel="stylesheet" type="text/css" href="{% static 'css/mystyle.css' %}">
+        {% block head %}{% endblock %}
+    </head>
+
+    <body>
+        {% block header %}{% endblock %}
+
+        {% block contents %}{% endblock %}
+    </body>
 </html>
