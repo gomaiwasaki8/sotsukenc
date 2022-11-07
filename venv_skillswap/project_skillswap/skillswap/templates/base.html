@@ -1,0 +1,15 @@
+<!--<!DOCTYPE html>-->
+
+{% load static %}
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    {% block head %}{% endblock %}
+</head>
+<body>
+    {% block header %}{% endblock %}
+
+    {% block contents %}{% endblock %}
+</body>
+</html>
