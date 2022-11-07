@@ -6,3 +6,5 @@ ictの中にクローン(複製)する
 pip list
 pip install django==3.2.7
 python manage.py runserver
+
+test
