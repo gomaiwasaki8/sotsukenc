@@ -1,53 +1,60 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>SKILLSWAP</title>
-  <meta charset="UTF-8">
-  <link rel="stylesheet" href="mystyle.css">
-  <style>
+<!--<!DOCTYPE html>-->
+{% extends 'base.html' %}
+{% load static %}
+<!--<html>-->
+<!--<head>-->
+    {% block title %}SKILLSWAP{% endblock %}
+    {% block head %}
+    <style>
     p{
       text-align:center;
     }
-  </style>
-</head>
-<body>
-  <header>
-    <h1 class="headline">
-      <a>SKILLSWAP</a>
-    </h1>
-    <nav id="global_navi">
-      <ul>
-        <li class="current"><a href="index.html">HOME</a></li>
-        <input type="search" name="search" placeholder="キーワードを入力">
-        <input type="submit" name="submit" value="検索">
-        <select name="sampledrop">
-          <option value="list1">マイページ</option>
-          <option value="list2">メッセージ</option>
-          <option value="list3">お問い合わせ</option>
-          <option value="list4">ログアウト</option>
-        </select>
-      </ul>
-    </nav>
-  </header>
-  <div align="center">
-    <button>新規登録</button>
-  </div>
-  <p>
-    SKILLSWAPでは、欲しい知識を持った相手から学ぶことができます。<br>
-    チャットによるサポートやレビュー機能により、<br>
-    安心してオンラインのレッスンを受けられます。<br>
-  </p>
-  <p>
-    オンラインによる受講のサポート、そしてお金のやり取りが一切発生しないため、<br>
-    気軽にプログラミング知識を学ぶことが出来ます。<br>
-  </p>
-  <P>
-    また、相手に教えることで自分自身の理解を深めることにもつながります。<br>
-    ご自身の得意なプログラミング言語や培ってきた知識を活かし、<br>
-    ぜひ知識を分け合ってみませんか。<br>
-  </P>
-  <footer>
-  	<p>© 2022 SKILLSWAP</p>
-  </footer>
-</body>
-</html>
+    </style>
+    {% endblock %}
+<!--</head>-->
+<!--<body>-->
+    {% block header %}
+    <header>
+        <h1 class="headline">
+            <a>SKILLSWAP</a>
+        </h1>
+        <nav id="global_navi">
+            <ul>
+                <li class="current"><a href="index.html">HOME</a></li>
+                <input type="search" name="search" placeholder="キーワードを入力">
+                <input type="submit" name="submit" value="検索">
+                <select name="sampledrop">
+                <option value="list1">マイページ</option>
+                <option value="list2">メッセージ</option>
+                <option value="list3">お問い合わせ</option>
+                <option value="list4">ログアウト</option>
+                </select>
+            </ul>
+        </nav>
+    </header>
+    {% endblock %}
+
+    {% block contents %}
+    <div align="center">
+        <button>新規登録</button>
+    </div>
+    <p>
+        SKILLSWAPでは、欲しい知識を持った相手から学ぶことができます。<br>
+        チャットによるサポートやレビュー機能により、<br>
+        安心してオンラインのレッスンを受けられます。<br>
+    </p>
+    <p>
+        オンラインによる受講のサポート、そしてお金のやり取りが一切発生しないため、<br>
+        気軽にプログラミング知識を学ぶことが出来ます。<br>
+    </p>
+    <P>
+        また、相手に教えることで自分自身の理解を深めることにもつながります。<br>
+        ご自身の得意なプログラミング言語や培ってきた知識を活かし、<br>
+        ぜひ知識を分け合ってみませんか。<br>
+    </P>
+    <footer>
+  	    <p>© 2022 SKILLSWAP</p>
+    </footer>
+    {% endblock %}
+<!--</body>-->
+<!--</html>-->

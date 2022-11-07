@@ -1,0 +1,47 @@
+body, #wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+footer {
+    margin-top: auto;
+    text-align: center;
+}
+
+header {
+  width: 100%;
+  padding: 15px 0;
+  margin: 0 auto;
+  text-align: center;
+}
+header .headline{
+  font-size: 32px;
+}
+.nav-list {
+  text-align: center;
+  padding: 10px 0;
+  margin: 0 auto;
+}
+.nav-list-item {
+  list-style: none;
+  display: inline-block;
+  margin: 0 20px;
+}
+#global_navi ul li {
+  width: 0px;
+  float: left;
+  margin-right: 0;
+  text-align: center;
+}
+#global_navi ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+#global_navi ul select {
+  width: 100px;
+  float: right;
+  margin-right: 0;
+  text-align: right;
+}
