@@ -7,10 +7,11 @@ from accounts.models import CustomUser
 # スキルシートテーブル
 class Skillseat(models.Model):
 
-    user_id = models.ForeignKey(CustomUser, verbose_name="ユーザーID", on_delete=models.PROTECT, max_length=10)
+    user_id = models.OneToOneField(CustomUser, verbose_name="ユーザーID", on_delete=models.PROTECT, max_length=10)
     user_name = models.CharField(verbose_name='名前', max_length=30)
     gender = models.CharField(verbose_name='性別', max_length=5)
-    age = models.IntegerField(verbose_name="年齢", max_length=4, blank=True, null=True)
+    # max_length=4
+    age = models.IntegerField(verbose_name="年齢", blank=True, null=True)
     user_img = models.ImageField(verbose_name='プロフィール画像', max_length=30, blank=True, null=True)
     user_evaluation = models.FloatField(verbose_name='評価', max_length=2, blank=True, null=True)
     created_at = models.DateTimeField(verbose_name='作成日時', auto_now_add=True)
@@ -23,7 +24,7 @@ class Skillseat(models.Model):
 # 言語テーブル
 class Language(models.Model):
 
-    user_id = models.ForeignKey(CustomUser, verbose_name="ユーザーID", on_delete=models.PROTECT, max_length=10)
+    user_id = models.OneToOneField(CustomUser, verbose_name="ユーザーID", on_delete=models.PROTECT, max_length=10)
     genre_1 = models.CharField(verbose_name="ジャンル大", max_length=100)
     genre_2 = models.CharField(verbose_name="ジャンル小", max_length=100)
     career = models.CharField(verbose_name="経歴", max_length=100, blank=True, null=True)
@@ -38,7 +39,7 @@ class Language(models.Model):
 # 講座テーブル
 class Course(models.Model):
 
-    user_id = models.ForeignKey(CustomUser, verbose_name="ユーザーID", on_delete=models.PROTECT, max_length=10)
+    user_id = models.OneToOneField(CustomUser, verbose_name="ユーザーID", on_delete=models.PROTECT, max_length=10)
     title = models.CharField(verbose_name="講座タイトル", max_length=100)
     detail = models.CharField(verbose_name="講座詳細", max_length=500)
     course_img = models.ImageField(verbose_name='イメージ画像', max_length=30, blank=True, null=True)
@@ -95,9 +96,14 @@ class Chat(models.Model):
 # 評価テーブル
 class Evaluation(models.Model):
 
-    user_1_id = models.ForeignKey(CustomUser, verbose_name="ユーザー1ID", on_delete=models.PROTECT, max_length=10)
-    user_2_id = models.ForeignKey(CustomUser, verbose_name="ユーザー2ID", on_delete=models.PROTECT, max_length=10)
-    evaluation_num = models.IntegerField(verbose_name="評価", max_length=5)
+    user1_id = models.ForeignKey(
+        CustomUser, verbose_name="ユーザー1ID", on_delete=models.PROTECT, max_length=10, related_name="user1_eva"
+    )
+    user2_id = models.ForeignKey(
+        CustomUser, verbose_name="ユーザー2ID", on_delete=models.PROTECT, max_length=10, related_name="user2_eva"
+    )
+    # max_length=5
+    evaluation_num = models.IntegerField(verbose_name="評価",)
     evaluation_text = models.CharField(verbose_name="レビュー文", max_length=500, blank=True, null=True)
     created_at = models.DateTimeField(verbose_name='作成日時', auto_now_add=True)
     updated_at = models.DateTimeField(verbose_name='更新日時', auto_now=True)
@@ -132,8 +138,12 @@ class News(models.Model):
 # ブロックテーブル
 class Block(models.Model):
 
-    user_1_id = models.ForeignKey(CustomUser, verbose_name="ユーザー1ID", on_delete=models.PROTECT, max_length=10)
-    user_2_id = models.ForeignKey(CustomUser, verbose_name="ユーザー2ID", on_delete=models.PROTECT, max_length=10)
+    user1_id = models.ForeignKey(
+        CustomUser, verbose_name="ユーザー1ID", on_delete=models.PROTECT, max_length=10, related_name="user1_block"
+    )
+    user2_id = models.ForeignKey(
+        CustomUser, verbose_name="ユーザー2ID", on_delete=models.PROTECT, max_length=10, related_name="user2_block"
+    )
 
     class Meta:
         verbose_name_plural = 'Block'
