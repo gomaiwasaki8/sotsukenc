@@ -10,7 +10,29 @@
     </head>
 
     <body>
-        {% block header %}{% endblock %}
+        <header>
+            <h1 class="headline">
+                <a>SKILLSWAP</a>
+            </h1>
+            <nav id="global_navi">
+                <ul>
+                    <li class="current"><a href="{% url 'skillswap:index' %}">HOME</a></li>
+                    <input type="search" name="search" placeholder="キーワードを入力">
+                    <input type="submit" name="submit" value="検索">
+                    <select name="sampledrop" onChange="location.href=value;">
+                        <option value="list1">マイページ</option>
+                        <option value="list2">メッセージ</option>
+                        <option value="{% url 'skillswap:inquiry' %}">お問い合わせ</option>
+                        {% if user.is_authenticated %}
+                            <option value="{% url 'account_logout' %}">ログアウト</option>
+                        {% else %}
+                            <option value="{% url 'account_login' %}">ログイン</option>
+                        {% endif %}
+                    </select>
+                </ul>
+            </nav>
+            {% block header %}{% endblock %}
+        </header>
 
         {% block contents %}{% endblock %}
     </body>
