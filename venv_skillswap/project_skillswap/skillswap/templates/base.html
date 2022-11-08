@@ -20,10 +20,10 @@
                     <input type="search" name="search" placeholder="キーワードを入力">
                     <input type="submit" name="submit" value="検索">
                     <select name="sampledrop" onChange="location.href=value;">
-                        <option value="list1">マイページ</option>
-                        <option value="list2">メッセージ</option>
                         <option value="{% url 'skillswap:inquiry' %}">お問い合わせ</option>
                         {% if user.is_authenticated %}
+　　                        <option value="list1">マイページ</option>
+　　                        <option value="list2">チャット</option>
                             <option value="{% url 'account_logout' %}">ログアウト</option>
                         {% else %}
                             <option value="{% url 'account_login' %}">ログイン</option>
