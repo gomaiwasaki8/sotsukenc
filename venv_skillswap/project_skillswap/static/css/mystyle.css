@@ -2,11 +2,13 @@ body, #wrapper {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    background-color: white;
 }
 
 footer {
     margin-top: auto;
     text-align: center;
+    background-color: aquamarine;
 }
 
 header {
@@ -14,12 +16,8 @@ header {
   padding: 15px 0;
   margin: 0 auto;
   text-align: center;
+  background-color: rgb(254, 255, 255);
 }
-
-p {
-    text-align:center;
-}
-
 header .headline{
   font-size: 32px;
 }
@@ -49,4 +47,17 @@ header .headline{
   float: right;
   margin-right: 0;
   text-align: right;
+}
+.btn{
+  width:80px;
+  height:35px;
+  background:rgb(247, 108, 108);
+  border-radius:35px;
+  cursor : pointer;
+}
+div{
+  padding: 130px 0;
+}
+hr{
+  border-top: 2px solid #0000FF;
 }
