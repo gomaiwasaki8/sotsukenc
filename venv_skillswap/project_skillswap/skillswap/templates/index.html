@@ -14,14 +14,13 @@
                 <li class="current"><a href="index.html">HOME</a></li>
                 <input type="search" name="search" placeholder="キーワードを入力">
                 <input type="submit" name="submit" value="検索">
-                <select name="sampledrop">
+                <select name="sampledrop" onChange="location.href=value;">
                 <option value="list1">マイページ</option>
                 <option value="list2">メッセージ</option>
-                <option value="list3">お問い合わせ</option>
+                <option value="{% url 'skillswap:inquiry' %}">お問い合わせ</option>
                 <option value="list4">ログアウト</option>
                 </select>
             </ul>
-            <a href="{% url 'skillswap:inquiry' %}">お問い合わせ</a>
         </nav>
     </header>
 {% endblock %}
