@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}サインアップ | Private Diary{% endblock %}
+{% block title %}SKILLSWAP | 新規登録{% endblock %}
 
 {% block active_signup %}active{% endblock %}
 
@@ -8,7 +8,7 @@
 <div class="container">
     <div class="row">
         <div class="my-div-style">
-            <h1>サインアップ</h1>
+            <h1>新規登録</h1>
             <form method="post" action="{% url 'account_signup' %}">
                 {% csrf_token %}
 
