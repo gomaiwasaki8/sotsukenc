@@ -13,9 +13,16 @@ class IndexView(generic.TemplateView):
     template_name = "index.html"
 
 
-class AfterLoginView(generic.CreateView):
+class AfterLoginView(generic.FormView):
     model = Skillseat
     template_name = "skillseat_create.html"
+    form_class = SkillseatCreateForm
+    success_url = reverse_lazy('skillswap:confirm')
+
+
+class UserDataView(generic.CreateView):
+    model = Skillseat
+    template_name = "skillseat_confirm.html"
     form_class = SkillseatCreateForm
     # 遷移先未定のためinquiryにしてる
     success_url = reverse_lazy('skillswap:inquiry')
@@ -27,20 +34,6 @@ class AfterLoginView(generic.CreateView):
         return super().form_valid(form)
     # 失敗した時の処理特に書いてないのであとで追記するかも
 
-
-# class AfterView(generic.CreateView):
-#     model = Skillseat
-#     template_name = "skillseat_create.html"
-#     form_class = SkillseatCreateForm
-#     # 遷移先未定のためinquiryにしてる
-#     success_url = reverse_lazy('skillswap:inquiry')
-#
-#     def form_valid(self, form):
-#         skillseat = form.save(commit=False)
-#         skillseat.user_id = self.request.user
-#         skillseat.save()
-#         return super().form_valid(form)
-#     # 失敗した時の処理特に書いてないのであとで追記するかも
 
 class InquiryView(generic.CreateView):
     model = Inquiry
