@@ -4,6 +4,12 @@ from django.core.mail import EmailMessage
 from .models import Skillseat, Language, Course, Favorite, Request, Chat, Evaluation, Inquiry, News, Block
 
 
+class SkillseatCreateForm(forms.ModelForm):
+    class Meta:
+        model = Skillseat
+        fields = ('user_name', 'gender', 'age', 'user_img',)
+
+
 class InquiryCreateForm(forms.ModelForm):
     class Meta:
         model = Inquiry

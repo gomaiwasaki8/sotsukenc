@@ -5,13 +5,42 @@ from django.shortcuts import render
 from django.views import generic
 from django.urls import reverse_lazy
 
-from .forms import InquiryCreateForm
-from .models import Inquiry
+from .forms import InquiryCreateForm, SkillseatCreateForm
+from .models import Skillseat, Language, Course, Favorite, Request, Chat, Evaluation, Inquiry, News, Block
 
 
 class IndexView(generic.TemplateView):
     template_name = "index.html"
 
+
+class AfterLoginView(generic.CreateView):
+    model = Skillseat
+    template_name = "skillseat_create.html"
+    form_class = SkillseatCreateForm
+    # 遷移先未定のためinquiryにしてる
+    success_url = reverse_lazy('skillswap:inquiry')
+
+    def form_valid(self, form):
+        skillseat = form.save(commit=False)
+        skillseat.user_id = self.request.user
+        skillseat.save()
+        return super().form_valid(form)
+    # 失敗した時の処理特に書いてないのであとで追記するかも
+
+
+# class AfterView(generic.CreateView):
+#     model = Skillseat
+#     template_name = "skillseat_create.html"
+#     form_class = SkillseatCreateForm
+#     # 遷移先未定のためinquiryにしてる
+#     success_url = reverse_lazy('skillswap:inquiry')
+#
+#     def form_valid(self, form):
+#         skillseat = form.save(commit=False)
+#         skillseat.user_id = self.request.user
+#         skillseat.save()
+#         return super().form_valid(form)
+#     # 失敗した時の処理特に書いてないのであとで追記するかも
 
 class InquiryView(generic.CreateView):
     model = Inquiry

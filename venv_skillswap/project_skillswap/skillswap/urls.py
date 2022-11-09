@@ -8,5 +8,5 @@ app_name = 'skillswap'
 urlpatterns = [
     path('', views.IndexView.as_view(), name="index"),
     path('inquiry/', views.InquiryView.as_view(), name="inquiry"),
-    # path('accounts/', include('allauth.urls')),
+    path('skillseat-create/', views.AfterLoginView.as_view(), name="skillseat-create"),
 ]
