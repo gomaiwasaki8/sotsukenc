@@ -19,8 +19,11 @@
                 <ul>
                     <li class="current"><a href="{% url 'skillswap:index' %}">HOME</a></li>
                     <input type="search" name="search" placeholder="キーワードを入力">
-                    <input type="submit" name="submit" value="検索">
+                    <button type="submit">
+                        <i class="fas fa-search fa-fw"></i>
+                    </button>
                     <select name="sampledrop" onChange="location.href=value;">
+                        <img src="{% static 'assets/sample.png' %}" alt="home" width="135" height="55">
                         <option value="{% url 'skillswap:inquiry' %}">お問い合わせ</option>
                         {% if user.is_authenticated %}
 　　                        <option value="list1">マイページ</option>
