@@ -24,7 +24,7 @@ class Skillseat(models.Model):
 # 言語テーブル
 class Language(models.Model):
 
-    user_id = models.OneToOneField(CustomUser, verbose_name="ユーザーID", on_delete=models.PROTECT, max_length=10)
+    user_id = models.ForeignKey(CustomUser, verbose_name="ユーザーID", on_delete=models.PROTECT, max_length=10)
     genre_1 = models.CharField(verbose_name="ジャンル大", max_length=100)
     genre_2 = models.CharField(verbose_name="ジャンル小", max_length=100)
     career = models.CharField(verbose_name="経歴", max_length=100, blank=True, null=True)

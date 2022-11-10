@@ -8,7 +8,7 @@ from django.views.decorators.http import require_POST
 from django.shortcuts import render, redirect
 
 
-from .forms import InquiryCreateForm, SkillseatCreateForm
+from .forms import InquiryCreateForm, SkillseatCreateForm, LanguageCreateForm
 from .models import Skillseat, Language, Course, Favorite, Request, Chat, Evaluation, Inquiry, News, Block
 
 
@@ -23,6 +23,7 @@ class IndexView(generic.TemplateView):
 #     success_url = reverse_lazy('skillswap:skillseat-confirm')
 
 
+# アカウント登録
 def skillseat_input(request):
     # 一覧表示からの遷移や、確認画面から戻るリンクを押したときはここ。
     if request.method == 'GET':
@@ -76,13 +77,77 @@ def user_data_create(request):
             user_img=session_form_data['user_img']
         )
         object.save()
-        return redirect('skillswap:inquiry')
+        return redirect('skillswap:language-input')
     else:
         # is_validに通過したデータだけセッションに格納しているので、ここ以降の処理は基本的には通らない。
         context = {
             'form': form
         }
         return render(request, '../templates/skillseat_input.html', context)
+
+
+# 言語作成
+def language_input(request):
+    # 一覧表示からの遷移や、確認画面から戻るリンクを押したときはここ。
+    if request.method == 'GET':
+        # セッションに入力途中のデータがあればそれを使う。
+        form = LanguageCreateForm(request.session.get('form_data'))
+    else:
+        form = LanguageCreateForm(request.POST)
+        if form.is_valid():
+            # 入力後の送信ボタンでここ。セッションに入力データを格納する。
+            request.session['form_data'] = request.POST
+            return redirect('skillswap:language-confirm')
+
+    context = {
+        'form': form
+    }
+    return render(request, '../templates/language_input.html', context)
+
+
+def language_data_confirm(request):
+    """入力データの確認画面。"""
+    # user_data_inputで入力したユーザー情報をセッションから取り出す。
+    session_form_data = request.session.get('form_data')
+    if session_form_data is None:
+        # セッション切れや、セッションが空でURL直接入力したら入力画面にリダイレクト。
+        return redirect('skillswap:language-input')
+
+    context = {
+        'form': LanguageCreateForm(session_form_data)
+    }
+    return render(request, '../templates/language_confirm.html', context)
+
+@require_POST
+def language_data_create(request):
+    """ユーザーを作成する。"""
+    # user_data_inputで入力したユーザー情報をセッションから取り出す。
+    # ユーザー作成後は、セッションを空にしたいのでpopメソッドで取り出す。
+    session_form_data = request.session.pop('form_data', None)
+    if session_form_data is None:
+        # ここにはPOSTメソッドで、かつセッションに入力データがなかった場合だけ。
+        # セッション切れや、不正なアクセス対策。
+        return redirect('skillswap:language-input')
+
+    form = LanguageCreateForm(session_form_data)
+
+    if request.method == 'POST':
+        object = Language.objects.create(
+            user_id=request.user,
+            genre_1=session_form_data['genre_1'],
+            genre_2=session_form_data['genre_2'],
+            career=session_form_data['career'],
+            language_detail=session_form_data['language_detail']
+        )
+        object.save()
+        return redirect('skillswap:inquiry')
+    else:
+        # is_validに通過したデータだけセッションに格納しているので、ここ以降の処理は基本的には通らない。
+        context = {
+            'form': form
+        }
+        return render(request, '../templates/language_input.html', context)
+
 
 # class UserDataView(generic.CreateView):
 #     model = Skillseat
