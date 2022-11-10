@@ -4,6 +4,9 @@ from django.shortcuts import render
 
 from django.views import generic
 from django.urls import reverse_lazy
+from django.views.decorators.http import require_POST
+from django.shortcuts import render, redirect
+
 
 from .forms import InquiryCreateForm, SkillseatCreateForm
 from .models import Skillseat, Language, Course, Favorite, Request, Chat, Evaluation, Inquiry, News, Block
@@ -13,27 +16,88 @@ class IndexView(generic.TemplateView):
     template_name = "index.html"
 
 
-class AfterLoginView(generic.FormView):
-    model = Skillseat
-    template_name = "skillseat_create.html"
-    form_class = SkillseatCreateForm
-    success_url = reverse_lazy('skillswap:confirm')
+# class AfterLoginView(generic.FormView):
+#     model = Skillseat
+#     template_name = "skillseat_create.html"
+#     form_class = SkillseatCreateForm
+#     success_url = reverse_lazy('skillswap:skillseat-confirm')
 
 
-class UserDataView(generic.CreateView):
-    model = Skillseat
-    template_name = "skillseat_confirm.html"
-    form_class = SkillseatCreateForm
-    # 遷移先未定のためinquiryにしてる
-    success_url = reverse_lazy('skillswap:inquiry')
+def skillseat_input(request):
+    # 一覧表示からの遷移や、確認画面から戻るリンクを押したときはここ。
+    if request.method == 'GET':
+        # セッションに入力途中のデータがあればそれを使う。
+        form = SkillseatCreateForm(request.session.get('form_data'))
+    else:
+        form = SkillseatCreateForm(request.POST)
+        if form.is_valid():
+            # 入力後の送信ボタンでここ。セッションに入力データを格納する。
+            request.session['form_data'] = request.POST
+            return redirect('skillswap:skillseat-confirm')
 
-    def form_valid(self, form):
-        skillseat = form.save(commit=False)
-        skillseat.user_id = self.request.user
-        skillseat.save()
-        return super().form_valid(form)
-    # 失敗した時の処理特に書いてないのであとで追記するかも
+    context = {
+        'form': form
+    }
+    return render(request, '../templates/skillseat_input.html', context)
 
+
+def user_data_confirm(request):
+    """入力データの確認画面。"""
+    # user_data_inputで入力したユーザー情報をセッションから取り出す。
+    session_form_data = request.session.get('form_data')
+    if session_form_data is None:
+        # セッション切れや、セッションが空でURL直接入力したら入力画面にリダイレクト。
+        return redirect('skillswap:skillseat-input')
+
+    context = {
+        'form': SkillseatCreateForm(session_form_data)
+    }
+    return render(request, '../templates/skillseat_confirm.html', context)
+
+@require_POST
+def user_data_create(request):
+    """ユーザーを作成する。"""
+    # user_data_inputで入力したユーザー情報をセッションから取り出す。
+    # ユーザー作成後は、セッションを空にしたいのでpopメソッドで取り出す。
+    session_form_data = request.session.pop('form_data', None)
+    if session_form_data is None:
+        # ここにはPOSTメソッドで、かつセッションに入力データがなかった場合だけ。
+        # セッション切れや、不正なアクセス対策。
+        return redirect('skillswap:skillseat-input')
+
+    form = SkillseatCreateForm(session_form_data)
+
+    if request.method == 'POST':
+        object = Skillseat.objects.create(
+            user_id = request.user,
+            user_name=session_form_data['user_name'],
+            gender=session_form_data['gender'],
+            age=session_form_data['age'],
+            user_img=session_form_data['user_img']
+        )
+        object.save()
+        return redirect('skillswap:inquiry')
+    else:
+        # is_validに通過したデータだけセッションに格納しているので、ここ以降の処理は基本的には通らない。
+        context = {
+            'form': form
+        }
+        return render(request, '../templates/skillseat_input.html', context)
+
+# class UserDataView(generic.CreateView):
+#     model = Skillseat
+#     template_name = "skillseat_confirm.html"
+#     form_class = SkillseatCreateForm
+#     # 遷移先未定のためinquiryにしてる
+#     success_url = reverse_lazy('skillswap:inquiry')
+#
+#     def form_valid(self, form):
+#         skillseat = form.save(commit=False)
+#         skillseat.user_id = self.request.user
+#         skillseat.save()
+#         return super().form_valid(form)
+#     # 失敗した時の処理特に書いてないのであとで追記するかも
+#
 
 class InquiryView(generic.CreateView):
     model = Inquiry
