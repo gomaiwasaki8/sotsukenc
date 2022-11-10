@@ -14,22 +14,13 @@ footer {
 
 header {
   width: 100%;
-  padding: 0px 0px;
+  padding: 15px 0;
   margin: 0 auto;
   text-align: center;
   background-color: rgb(254, 255, 255);
-  position:fixed;
-  border-bottom: solid 2.5px #0000FF;
 }
 header .headline{
   font-size: 32px;
-}
-header input {
-  margin: 0px auto;
-  text-align: center;
-}
-hr {
-  border-bottom: 15px;
 }
 .nav-list {
   text-align: center;
@@ -52,12 +43,12 @@ hr {
   margin: 0;
   padding: 0;
 }
-/*#global_navi ul select {
+#global_navi ul select {
   width: 100px;
   float: right;
   margin-right: 0;
   text-align: right;
-}*/
+}
 .btn{
   width:80px;
   height:35px;
@@ -70,46 +61,4 @@ div{
 }
 hr{
   border-top: 2px solid #0000FF;
-}
-p{
-  text-align: center;
-  font-family: cursive;
-}
-search-box input[type="text"] {
-  flex-grow: 1;
-  padding: 0.7px 0px 0.7px 800px;
-  border: 1px solid #333947;
-  border-radius: 1.5rem 0 0 1.5rem;
-}
-search-box button {
-  cursor: pointer;
-  padding: .8px .9px .8px .8px;
-  border-radius: 0 1.5rem 1.5rem 0;
-  border: none;
-  background-color: #333947;
-  color: #fff;
-  font-size: .75rem;
-}
-search-box input:focus {
-  outline: 0;
-  border: 1px solid #4ab6f6;
-}
-search-box button:hover {
-  color: #4ab6f6;
-}
-select{
-  background-image:url(sample.png);
-  background-repeat: no-repeat;
-  background-position:50% 0%;
-  left: 500px;
-  position: relative;
-  text-indent: 100%;
-  padding: 15px 0;
-  border: 0 0 0 0;
-	position: relative;
-  height: 30;
-  border: #fff;
-}
-option{
-  text-indent: 100%;
 }

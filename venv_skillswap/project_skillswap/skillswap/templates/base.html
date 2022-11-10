@@ -6,7 +6,6 @@
         <title>{% block title %}{% endblock %}</title>
         <!--  mystyle  -->
         <link rel="stylesheet" type="text/css" href="{% static 'css/mystyle.css' %}">
-        <link rel="icon" href="{% static 'assets/favicon.ico' %}">
         {% block head %}{% endblock %}
     </head>
 
@@ -19,11 +18,9 @@
                 <ul>
                     <li class="current"><a href="{% url 'skillswap:index' %}">HOME</a></li>
                     <input type="search" name="search" placeholder="キーワードを入力">
-                    <button type="submit">
-                        <i class="fas fa-search fa-fw"></i>
-                    </button>
+                    <input type="submit" name="submit" value="検索">
                     <select name="sampledrop" onChange="location.href=value;">
-                        <img src="{% static 'assets/sample.png' %}" alt="home" width="135" height="55">
+                        <option>選択</option>
                         <option value="{% url 'skillswap:inquiry' %}">お問い合わせ</option>
                         {% if user.is_authenticated %}
 　　                        <option value="list1">マイページ</option>
