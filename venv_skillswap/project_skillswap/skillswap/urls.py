@@ -14,4 +14,9 @@ urlpatterns = [
     path('language-input/', views.language_input, name="language-input"),
     path('language-confirm/', views.language_data_confirm, name="language-confirm"),
     path('language-create/', views.language_data_create, name="language-create"),
+    path('my-page/skillseat-browse/', views.SkillseatBrowseView.as_view(), name="skillseat-browse"),
+    # path('my-page/my-course/', views.MyCourseView.as_view(), name="my-couse"),
+    # path('my-page/favorite/', views.favoriteView.as_view(), name="favorite"),
+    # path('my-page/request-course/', views.RequestCourseView.as_view(), name="request-couse"),
+    # path('my-page/history-course/', views.HistoryCourseView.as_view(), name="history-course"),
 ]

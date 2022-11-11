@@ -6,6 +6,7 @@ from django.views import generic
 from django.urls import reverse_lazy
 from django.views.decorators.http import require_POST
 from django.shortcuts import render, redirect
+from django.views.generic import ListView
 
 # フォームの増減に利用する
 import re
@@ -158,20 +159,21 @@ def language_data_create(request):
         return render(request, '../templates/language_input.html', context)
 
 
-# class UserDataView(generic.CreateView):
-#     model = Skillseat
-#     template_name = "skillseat_confirm.html"
-#     form_class = SkillseatCreateForm
-#     # 遷移先未定のためinquiryにしてる
-#     success_url = reverse_lazy('skillswap:inquiry')
-#
-#     def form_valid(self, form):
-#         skillseat = form.save(commit=False)
-#         skillseat.user_id = self.request.user
-#         skillseat.save()
-#         return super().form_valid(form)
-#     # 失敗した時の処理特に書いてないのであとで追記するかも
-#
+class SkillseatBrowseView(ListView):
+    template_name = "skillseat_browse.html"
+    model = Skillseat
+    context_object_name = 'skillseat_list'
+
+    def get_context_data(self, **kwargs):
+        context = super(SkillseatBrowseView, self).get_context_data(**kwargs)
+        context.update({
+            'language_list': Language.objects.filter(user_id_id=self.request.user),
+        })
+        return context
+
+    def get_queryset(self):
+        return Skillseat.objects.filter(user_id_id=self.request.user)
+
 
 class InquiryView(generic.CreateView):
     model = Inquiry

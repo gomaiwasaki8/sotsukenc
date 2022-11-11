@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}SKILLSWAP | スキルシート{% endblock %}
+
+{% block active_diary_list %}active{% endblock %}
+
+{% block head %}{% endblock %}
+
+{% block header %}{% endblock %}
+
+{% block contents %}
+<div class="container">
+    <div class="daily">
+        <h2 class="title">Today</h2>
+        <ul id="daily-content">
+            {% for skillseat in skillseat_list %}
+            {% if skillseat.user_img %}
+            <li>
+                <img src="{{ skillseat.user_img.url }}" width="200" height="200"/>
+            </li>
+            {% else %}
+            <li>
+                <img src="{% static 'assets/sample.png' %}" width="200" height="200"/>
+            </li>
+            {% endif %}
+            <li>名前：{{ skillseat.user_name }}</li>
+            <li>性別：{{ skillseat.gender }}</li>
+            <li>年齢：{{ skillseat.age }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="reminder">
+        <h2 class="title">Reminder</h2>
+        <ul id="reminder-content">
+            {% for language in language_list %}
+            <li>ジャンル大：{{ language.genre_1 }}</li>
+            <li>ジャンル小：{{ language.genre_2 }}</li>
+            <li>経歴：{{ language.career }}</li>
+            <li>詳細：{{ language.language_detail }}</li>
+            <br>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}
