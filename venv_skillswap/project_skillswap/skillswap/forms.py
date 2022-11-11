@@ -8,6 +8,12 @@ class SkillseatCreateForm(forms.ModelForm):
     class Meta:
         model = Skillseat
         fields = ('user_name', 'gender', 'age', 'user_img',)
+    #     fields = "__all__"
+    #     excludeで入力させない列を指定
+    #     exclude = ("create_at")
+
+    gender = forms.fields.ChoiceField(choices=(('男', '男'), ('女', '女'), ('その他', 'その他')), label='性別', required=True,
+                                   widget=forms.widgets.RadioSelect)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

@@ -12,8 +12,8 @@ from django.views.generic import ListView
 import re
 
 from .forms import InquiryCreateForm, SkillseatCreateForm, LanguageCreateForm
-from .models import Skillseat, Language, Course, Favorite, Request, Chat, Evaluation, Inquiry, News, Block
-
+# from .models import Skillseat, Language, Course, Favorite, Request, Chat, Evaluation, Inquiry, News, Block
+from .models import *
 
 class IndexView(generic.TemplateView):
     template_name = "index.html"
