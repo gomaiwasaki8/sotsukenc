@@ -97,7 +97,6 @@ def language_input(request):
         form = LanguageCreateForm(request.session.get('form_data'))
     else:
         form = LanguageCreateForm(request.POST)
-        # print(request.POST)
         if form.is_valid():
             # 入力後の送信ボタンでここ。セッションに入力データを格納する。
             request.session['form_data'] = request.POST
