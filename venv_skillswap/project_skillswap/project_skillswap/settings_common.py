@@ -147,7 +147,7 @@ ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 ACCOUNT_EMAIL_REQUIRED = True
 
 LOGIN_REDIRECT_URL = 'skillswap:skillseat-input'
-ACCOUNT_LOGOUT_REDIRECT_URL = 'account_login'
+ACCOUNT_LOGOUT_REDIRECT_URL = 'skillswap:index'
 
 ACCOUNT_LOGOUT_ON_GET = True
 
