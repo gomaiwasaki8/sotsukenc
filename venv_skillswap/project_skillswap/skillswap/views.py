@@ -27,8 +27,11 @@ class IndexView(generic.TemplateView):
 
 # アカウント登録
 def skillseat_input(request):
+    user = request.user.id
     # 一覧表示からの遷移や、確認画面から戻るリンクを押したときはここ。
     if request.method == 'GET':
+        if Skillseat.objects.filter(user_id_id=user).exists():
+            return redirect('skillswap:language-input')
         # セッションに入力途中のデータがあればそれを使う。
         form = SkillseatCreateForm(request.session.get('form_data'))
     else:
@@ -91,8 +94,11 @@ def user_data_create(request):
 
 # 言語作成
 def language_input(request):
+    user = request.user.id
     # 一覧表示からの遷移や、確認画面から戻るリンクを押したときはここ。
     if request.method == 'GET':
+        if Skillseat.objects.filter(user_id_id=user).exists():
+            return redirect('skillswap:inquiry')
         # セッションに入力途中のデータがあればそれを使う。
         form = LanguageCreateForm(request.session.get('form_data'))
     else:
