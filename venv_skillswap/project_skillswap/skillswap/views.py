@@ -7,6 +7,8 @@ from django.urls import reverse_lazy
 from django.views.decorators.http import require_POST
 from django.shortcuts import render, redirect
 
+# フォームの増減に利用する
+import re
 
 from .forms import InquiryCreateForm, SkillseatCreateForm, LanguageCreateForm
 from .models import Skillseat, Language, Course, Favorite, Request, Chat, Evaluation, Inquiry, News, Block
@@ -31,6 +33,7 @@ def skillseat_input(request):
         form = SkillseatCreateForm(request.session.get('form_data'))
     else:
         form = SkillseatCreateForm(request.POST)
+        # print(request.POST)
         if form.is_valid():
             # 入力後の送信ボタンでここ。セッションに入力データを格納する。
             request.session['form_data'] = request.POST
@@ -94,6 +97,7 @@ def language_input(request):
         form = LanguageCreateForm(request.session.get('form_data'))
     else:
         form = LanguageCreateForm(request.POST)
+        # print(request.POST)
         if form.is_valid():
             # 入力後の送信ボタンでここ。セッションに入力データを格納する。
             request.session['form_data'] = request.POST
