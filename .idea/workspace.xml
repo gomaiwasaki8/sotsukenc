@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="f62b4dcd-2126-419e-91bb-6103e30e50b9" name="変更" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv_skillswap/project_skillswap/skillswap/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/venv_skillswap/project_skillswap/skillswap/templates/base.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -112,9 +113,9 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python.runserver" />
       <item itemvalue="Python.makemigrations" />
       <item itemvalue="Python.migrate" />
+      <item itemvalue="Python.runserver" />
     </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="アプリケーションレベル" UseSingleDictionary="true" transferred="true" />
