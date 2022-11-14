@@ -8,22 +8,13 @@ from django.views.decorators.http import require_POST
 from django.shortcuts import render, redirect
 from django.views.generic import ListView
 
-# フォームの増減に利用する
-import re
-
 from .forms import InquiryCreateForm, SkillseatCreateForm, LanguageCreateForm
 # from .models import Skillseat, Language, Course, Favorite, Request, Chat, Evaluation, Inquiry, News, Block
 from .models import *
 
+
 class IndexView(generic.TemplateView):
     template_name = "index.html"
-
-
-# class AfterLoginView(generic.FormView):
-#     model = Skillseat
-#     template_name = "skillseat_create.html"
-#     form_class = SkillseatCreateForm
-#     success_url = reverse_lazy('skillswap:skillseat-confirm')
 
 
 # アカウント登録
@@ -37,10 +28,17 @@ def skillseat_input(request):
         form = SkillseatCreateForm(request.session.get('form_data'))
     else:
         form = SkillseatCreateForm(request.POST)
-        # print(request.POST)
         if form.is_valid():
             # 入力後の送信ボタンでここ。セッションに入力データを格納する。
             request.session['form_data'] = request.POST
+
+            # print("request.session['form_data]は→", request.session['form_data'])
+            # request.session['user_img'] = request.FILES
+            # print("request.session['user_img']は→", request.session['user_img'])
+            context = {
+                'form': form,
+                # 'img': request.FILES['user_img']
+            }
             return redirect('skillswap:skillseat-confirm')
 
     context = {
@@ -53,12 +51,14 @@ def user_data_confirm(request):
     """入力データの確認画面。"""
     # user_data_inputで入力したユーザー情報をセッションから取り出す。
     session_form_data = request.session.get('form_data')
+    # session_user_img = request.session.get('user_img')
     if session_form_data is None:
         # セッション切れや、セッションが空でURL直接入力したら入力画面にリダイレクト。
         return redirect('skillswap:skillseat-input')
 
     context = {
-        'form': SkillseatCreateForm(session_form_data)
+        'form': SkillseatCreateForm(session_form_data),
+        # 'img': session_user_img.url
     }
     return render(request, '../templates/skillseat_confirm.html', context)
 
@@ -74,14 +74,16 @@ def user_data_create(request):
         return redirect('skillswap:skillseat-input')
 
     form = SkillseatCreateForm(session_form_data)
+    # print("session_form_data['user_img']は→", session_form_data['user_img'])
 
     if request.method == 'POST':
+
         object = Skillseat.objects.create(
             user_id = request.user,
             user_name=session_form_data['user_name'],
             gender=session_form_data['gender'],
             age=session_form_data['age'],
-            user_img=session_form_data['user_img']
+            user_img=session_form_data['user_img'],
         )
         object.save()
         return redirect('skillswap:language-input')
@@ -98,7 +100,7 @@ def language_input(request):
     user = request.user.id
     # 一覧表示からの遷移や、確認画面から戻るリンクを押したときはここ。
     if request.method == 'GET':
-        if Skillseat.objects.filter(user_id_id=user).exists():
+        if Language.objects.filter(user_id_id=user).exists():
             return redirect('skillswap:inquiry')
         # セッションに入力途中のデータがあればそれを使う。
         form = LanguageCreateForm(request.session.get('form_data'))
