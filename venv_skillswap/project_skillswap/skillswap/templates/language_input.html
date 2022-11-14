@@ -7,8 +7,8 @@
 
 {% block head %}
 <!-- フォーム増減に使うjquery -->
-<script src="https://cdn.jsdelivr.net/npm/jquery.add-input-area@4.11.0/dist/jquery.add-input-area.min.js" integrity="sha256-yOwGvcRp3I8/XWkeARhJkgdfLREQygbFA5W2bUpM2FY=" crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<!--<script src="https://cdn.jsdelivr.net/npm/jquery.add-input-area@4.11.0/dist/jquery.add-input-area.min.js" integrity="sha256-yOwGvcRp3I8/XWkeARhJkgdfLREQygbFA5W2bUpM2FY=" crossorigin="anonymous"></script>-->
+<!--<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>-->
 {% endblock %}
 
 {% block header %}{% endblock %}
@@ -22,7 +22,9 @@
                 <table class="table">
                     {{ form.as_table }}
                 </table>
-                <button class="btn btn-primary" type="submit">確定</button>
+                <button class="btn btn-primary" type="submit" name="btn_add">追加</button>
+                <button class="btn btn-primary" type="submit" name="btn_del">削除</button>
+                <button class="btn btn-primary" type="submit" name="btn_submit">確定</button>
                 <a href="{% url 'skillswap:index' %}">戻る</a>
             </form>
         </div>

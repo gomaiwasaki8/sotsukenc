@@ -26,10 +26,10 @@ class LanguageCreateForm(forms.ModelForm):
         model = Language
         fields = ('genre_1', 'genre_2', 'career', 'language_detail')
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        for field in self.fields.values():
-            field.widget.attrs['class'] = 'form-control'
+    # def __init__(self, *args, **kwargs):
+    #     super().__init__(*args, **kwargs)
+    #     for field in self.fields.values():
+    #         field.widget.attrs['class'] = 'form-control'
 
 
 class InquiryCreateForm(forms.ModelForm):
