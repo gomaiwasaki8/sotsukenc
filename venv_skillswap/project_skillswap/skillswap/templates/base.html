@@ -24,7 +24,7 @@
                         <option>選択</option>
                         <option value="{% url 'skillswap:inquiry' %}">お問い合わせ</option>
                         {% if user.is_authenticated %}
-　　                        <option value="list1">マイページ</option>
+　　                        <option value="{% url 'skillswap:skillseat-browse' %}">マイページ</option>
 　　                        <option value="list2">チャット</option>
                             <option value="{% url 'account_logout' %}">ログアウト</option>
                         {% else %}

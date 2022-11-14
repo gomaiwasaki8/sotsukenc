@@ -152,13 +152,21 @@ def language_data_create(request):
             language_detail=session_form_data['language_detail']
         )
         object.save()
-        return redirect('skillswap:inquiry')
+        return redirect('skillswap:skillseat-browse')
     else:
         # is_validに通過したデータだけセッションに格納しているので、ここ以降の処理は基本的には通らない。
         context = {
             'form': form
         }
         return render(request, '../templates/language_input.html', context)
+
+
+class SkillseatUpdate(generic.UpdateView):
+    model = Skillseat
+    template_name = "skillseat_update.html"
+    form_class = SkillseatCreateForm
+
+    success_url = reverse_lazy('skillswap:skillseat-browse')
 
 
 class SkillseatBrowseView(ListView):

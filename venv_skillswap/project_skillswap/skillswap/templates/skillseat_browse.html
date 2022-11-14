@@ -18,6 +18,7 @@
         {% else %}
         <img src="{% static 'assets/sample.png' %}" width="200" height="200"/>
         {% endif %}
+
         <h2>名前：{{ skillseat.user_name }}</h2>
         <h2>性別：{{ skillseat.gender }}</h2>
         <h2>年齢：{{ skillseat.age }}</h2>
@@ -25,7 +26,11 @@
         <h2>評価：{{ skillseat.user_evaluation }}</h2>
         {% endif %}
 
+        <button class="btn"><a href="{% url 'skillswap:skillseat-update' skillseat.pk %}">更新</a></button>
+
         {% endfor %}
+
+
     </div>
     <div>
         <table border="1">
@@ -38,6 +43,7 @@
             </tr>
             {% endfor %}
         </table>
+        <button class="btn"><a href="">更新</a></button>
     </div>
 </div>
 {% endblock %}
