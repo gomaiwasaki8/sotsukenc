@@ -15,14 +15,21 @@
         <div class="my-div-style w-100">
             <form method="POST" enctype='multipart/form-data'>
                 {% csrf_token %}
-                <div id="language">
-                    <div class="language_var">
-                        <table class="table" name="language_0">
-                            {{ form.as_table }}
-                        </table>
-                        <button class="language_del">削除</button>
-                    </div>
-                </div>
+                    <table id="language" class="form-group">
+                        <tr><th>ジャンル大</th><th>ジャンル小</th><th>経歴</th><th>詳細</th></tr>
+                        <tr class="language_var">
+    <!--                        <th>{{ field.genre_1.label_tag }}</th>-->
+                            <td>{{ form.genre_1 }}</td>
+    <!--                        <th>{{ field.genre_2.label_tag }}</th>-->
+                            <td>{{ form.genre_2 }}</td>
+    <!--                        <th>{{ field.career.label_tag }}</th>-->
+                            <td>{{ form.career }}</td>
+    <!--                        <th>{{ field.language_detail.label_tag }}</th>-->
+                            <td>{{ form.language_detail }}</td>
+                            <td><button class="language_del">削除</button></td>
+                        </tr>
+                    </table>
+
                 <button class="language_add">追加</button>
                 <button class="btn btn-primary" type="submit">確定</button>
                 <a href="{% url 'skillswap:index' %}">戻る</a>

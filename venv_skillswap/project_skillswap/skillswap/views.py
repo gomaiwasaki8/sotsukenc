@@ -164,6 +164,7 @@ def language_input(request):
     context = {
         'form': form
     }
+    print(context)
     return render(request, '../templates/language_input.html', context)
 
 
