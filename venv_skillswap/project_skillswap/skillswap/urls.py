@@ -19,7 +19,8 @@ urlpatterns = [
     # スキルシートの更新
     path('skillseat-update/<int:pk>/', views.SkillseatUpdate.as_view(), name="skillseat-update"),
     # 言語の入力
-    path('language-input/', views.LanguageInput.as_view(), name="language-input"),
+    path('language-input/', views.language_input, name="language-input"),
+    # path('language-input/', views.LanguageInput.as_view(), name="language-input"),
     # 言語の確認
     # path('language-confirm/', views.language_data_confirm, name="language-confirm"),
     # 言語の新規作成

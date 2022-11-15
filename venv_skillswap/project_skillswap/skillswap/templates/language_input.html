@@ -5,11 +5,7 @@
 
 {% block active_diary_list %}active{% endblock %}
 
-{% block head %}
-<!-- フォーム増減に使うjquery -->
-<!--<script src="https://cdn.jsdelivr.net/npm/jquery.add-input-area@4.11.0/dist/jquery.add-input-area.min.js" integrity="sha256-yOwGvcRp3I8/XWkeARhJkgdfLREQygbFA5W2bUpM2FY=" crossorigin="anonymous"></script>-->
-<!--<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>-->
-{% endblock %}
+{% block head %}{% endblock %}
 
 {% block header %}{% endblock %}
 
@@ -19,26 +15,24 @@
         <div class="my-div-style w-100">
             <form method="POST" enctype='multipart/form-data'>
                 {% csrf_token %}
-                <table class="table" border="1">
-                    {% for field in form %}
-                    <tr>
-                        <th>{{ field.genre_1.label_tag }}</th>
-                        <td>{{ field.genre_1 }}</td>
-                        <th>{{ field.genre_2.label_tag }}</th>
-                        <td>{{ field.genre_2 }}</td>
-                        <th>{{ field.career.label_tag }}</th>
-                        <td>{{ field.career }}</td>
-                        <th>{{ field.language_detail.label_tag }}</th>
-                        <td>{{ field.language_detail }}</td>
-                    </tr>
-                    {% endfor %}
-                </table>
-                <button class="btn btn-primary" type="submit" name="btn_add">追加</button>
-                <button class="btn btn-primary" type="submit" name="btn_del">削除</button>
-                <button class="btn btn-primary" type="submit" name="btn_submit">確定</button>
+                <div id="language">
+                    <div class="language_var">
+                        <table class="table" name="language_0">
+                            {{ form.as_table }}
+                        </table>
+                        <button class="language_del">削除</button>
+                    </div>
+                </div>
+                <button class="language_add">追加</button>
+                <button class="btn btn-primary" type="submit">確定</button>
                 <a href="{% url 'skillswap:index' %}">戻る</a>
             </form>
         </div>
     </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery.add-input-area@4.11.0/dist/jquery.add-input-area.min.js" integrity="sha256-yOwGvcRp3I8/XWkeARhJkgdfLREQygbFA5W2bUpM2FY=" crossorigin="anonymous"></script>
+<script type="text/javascript">
+    $('#language').addInputArea();
+</script>
 {% endblock %}
