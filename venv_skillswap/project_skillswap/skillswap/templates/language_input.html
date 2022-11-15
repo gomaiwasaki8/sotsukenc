@@ -20,7 +20,11 @@
             <form method="POST" enctype='multipart/form-data'>
                 {% csrf_token %}
                 <table class="table">
-                    {{ form.as_table }}
+                    {% for field in form %}
+                    <tr>
+                        {{ field }}
+                    </tr>
+                    {% endfor %}
                 </table>
                 <button class="btn btn-primary" type="submit" name="btn_add">追加</button>
                 <button class="btn btn-primary" type="submit" name="btn_del">削除</button>

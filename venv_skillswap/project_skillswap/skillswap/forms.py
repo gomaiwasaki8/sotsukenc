@@ -26,6 +26,14 @@ class LanguageCreateForm(forms.ModelForm):
         model = Language
         fields = ('genre_1', 'genre_2', 'career', 'language_detail')
 
+        # テキストエリアの高さ、幅を指定
+        widgets = {
+            'genre_1': forms.Textarea(attrs={'rows': 1, 'cols': 30}),
+            'genre_2': forms.Textarea(attrs={'rows': 1, 'cols': 30}),
+            'career': forms.Textarea(attrs={'rows': 1, 'cols': 30}),
+            'language_detail': forms.Textarea(attrs={'rows': 1, 'cols': 100}),
+        }
+
     # def __init__(self, *args, **kwargs):
     #     super().__init__(*args, **kwargs)
     #     for field in self.fields.values():
