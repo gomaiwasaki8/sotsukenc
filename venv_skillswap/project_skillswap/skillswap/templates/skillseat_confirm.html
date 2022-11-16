@@ -17,10 +17,13 @@
         {% for field in form %}
         <div class="form-group">
     <!--        <label for="{{ field.id_for_label }}">{{ field.label_tag }}</label>-->
-            {{ field.value }}
+            {% if field.value %}
+                {{ field.value }}
+            {% endif %}
         </div>
         {% endfor %}
-<!--        {{ img }}-->
+<!--        {{ img }}<br>-->
+
         <button type="submit" class="btn btn-primary btn-lg">送信</button>
         {% csrf_token %}
     </form>

@@ -35,15 +35,23 @@ def skillseat_input(request):
 
             # print("request.session['form_data]は→", request.session['form_data'])
             # request.session['user_img'] = request.FILES
+            # print(request.FILES['user_img'])
             # print("request.session['user_img']は→", request.session['user_img'])
+            # if request.FILES['user_img'] is None:
             context = {
                 'form': form,
-                # 'img': request.FILES['user_img']
+                # 'img': '',
             }
-            return redirect('skillswap:skillseat-confirm')
+            # else:
+            #     context = {
+            #         'form': form,
+            #         'img': request.FILES['user_img']
+            #     }
+            return render(request, '../templates/skillseat_confirm.html', context)
 
     context = {
-        'form': form
+        'form': form,
+        'img': ''
     }
     return render(request, '../templates/skillseat_input.html', context)
 
