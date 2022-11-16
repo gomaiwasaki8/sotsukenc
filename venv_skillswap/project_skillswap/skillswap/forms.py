@@ -2,7 +2,7 @@ import os
 from django import forms
 from django.core.mail import EmailMessage
 from .models import Skillseat, Language, Course, Favorite, Request, Chat, Evaluation, Inquiry, News, Block
-
+import datetime
 
 class SkillseatCreateForm(forms.ModelForm):
     class Meta:
@@ -14,6 +14,8 @@ class SkillseatCreateForm(forms.ModelForm):
 
     gender = forms.fields.ChoiceField(choices=(('男', '男'), ('女', '女'), ('その他', 'その他')), label='性別', required=True,
                                    widget=forms.widgets.RadioSelect)
+    age = forms.fields.DateField(label="生年月日", widget=forms.DateInput(attrs={"type": "date", "min": "1500-04-01", "max": datetime.date.today(), "value": datetime.date.today()}))
+
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
