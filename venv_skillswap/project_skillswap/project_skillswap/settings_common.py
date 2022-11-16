@@ -36,6 +36,9 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'django_bootstrap5',
+
+    # SES利用時に使う
+    # 'django_ses',
 ]
 
 MIDDLEWARE = [

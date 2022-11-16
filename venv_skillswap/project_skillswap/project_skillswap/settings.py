@@ -1,6 +1,5 @@
 from .settings_common import *
 
-
 # 本番運用環境用にセキュリティキーを生成し環境変数から読み込む
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 
@@ -17,7 +16,8 @@ MEDIA_ROOT = '/usr/share/nginx/html/media'
 # Amazon SES関連設定
 AWS_SES_ACCESS_KEY_ID = os.environ.get('AWS_SES_ACCESS_KEY_ID')
 AWS_SES_SECRET_ACCESS_KEY = os.environ.get('AWS_SES_SECRET_ACCESS_KEY')
-EMAIL_BACKEND = 'django_ses.SESBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+EMAIL_FILE_PATH = '/home/app_admin/log'
 
 # ロギング
 LOGGING = {
@@ -32,7 +32,7 @@ LOGGING = {
             'level': 'INFO',
         },
         # diaryアプリケーションが利用するロガー
-        'diary': {
+        'skillswap': {
             'handlers': ['file'],
             'level': 'INFO',
         },
