@@ -4,10 +4,11 @@ from django.core.mail import EmailMessage
 from .models import Skillseat, Language, Course, Favorite, Request, Chat, Evaluation, Inquiry, News, Block
 import datetime
 
+
 class SkillseatCreateForm(forms.ModelForm):
     class Meta:
         model = Skillseat
-        fields = ('user_name', 'gender', 'age', 'user_img',)
+        fields = ('user_name', 'gender', 'age', 'user_img', 'profile_text', )
     #     fields = "__all__"
     #     excludeで入力させない列を指定
     #     exclude = ("create_at")
@@ -15,11 +16,30 @@ class SkillseatCreateForm(forms.ModelForm):
     gender = forms.fields.ChoiceField(choices=(('男', '男'), ('女', '女'), ('その他', 'その他')), label='性別', required=True,)
     age = forms.fields.DateField(label="生年月日", widget=forms.DateInput(attrs={"type": "date", "min": "1500-04-01", "max": datetime.date.today(), "value": datetime.date.today()}))
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.widget.attrs['class'] = 'form-control'
+
+
+class SkillseatUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Skillseat
+        fields = ('user_name', 'gender', 'age', 'user_img', )
+
+    gender = forms.fields.ChoiceField(choices=(('男', '男'), ('女', '女'), ('その他', 'その他')), label='性別', required=True,)
+    age = forms.fields.DateField(label="生年月日", widget=forms.DateInput(attrs={"type": "date", "min": "1500-04-01", "max": datetime.date.today(), "value": datetime.date.today()}))
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field in self.fields.values():
             field.widget.attrs['class'] = 'form-control'
+
+
+class ProfileTextCreateForm(forms.ModelForm):
+    class Meta:
+        model = Skillseat
+        fields = ('profile_text',)
 
 
 class LanguageCreateForm(forms.ModelForm):

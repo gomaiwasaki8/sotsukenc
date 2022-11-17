@@ -17,7 +17,7 @@ urlpatterns = [
     # スキルシートの新規作成
     path('skillseat-create/', views.user_data_create, name="skillseat-create"),
     # スキルシートの更新
-    path('skillseat-update/<int:pk>/', views.SkillseatUpdate.as_view(), name="skillseat-update"),
+    path('skillseat-update/<int:pk>/', views.SkillseatUpdateView.as_view(), name="skillseat-update"),
     # 言語の入力
     path('language-input/', views.language_input, name="language-input"),
     # path('language-input/', views.LanguageInput.as_view(), name="language-input"),
@@ -25,6 +25,10 @@ urlpatterns = [
     # path('language-confirm/', views.language_data_confirm, name="language-confirm"),
     # 言語の新規作成
     # path('language-create/', views.language_data_create, name="language-create"),
+    # マイページのプロフィール文章閲覧
+    path('my-page/profile-text/', views.ProfileTextView.as_view(), name="profile-text"),
+    # マイページのプロフィール文章更新
+    path('my-page/profile-text-update/<int:pk>/', views.ProfileTextUpdateView.as_view(), name="profile-text-update"),
     # マイページのスキルシート閲覧
     path('my-page/skillseat-browse/', views.SkillseatBrowseView.as_view(), name="skillseat-browse"),
     # マイページのマイ講座閲覧

@@ -13,6 +13,7 @@ class Skillseat(models.Model):
     # max_length=4
     age = models.CharField(verbose_name="生年月日", max_length=15, blank=True, null=True)
     user_img = models.ImageField(verbose_name='プロフィール画像', max_length=30, blank=True, null=True)
+    profile_text = models.CharField(verbose_name='プロフィール文章', max_length=10000, default="よろしくお願いします")
     user_evaluation = models.FloatField(verbose_name='評価', max_length=2, blank=True, null=True)
     created_at = models.DateTimeField(verbose_name='作成日時', auto_now_add=True)
     updated_at = models.DateTimeField(verbose_name='更新日時', auto_now=True)

@@ -161,7 +161,7 @@ def language_input(request):
         # セッションに入力途中のデータがあればそれを使う。
         form = LanguageCreateForm(request.session.get('form_data'))
     else:
-        print(request.POST)
+        # print(request.POST)
         form = LanguageCreateForm(request.POST)
         if form.is_valid():
             # 入力後の送信ボタンでここ。セッションに入力データを格納する。
@@ -171,7 +171,7 @@ def language_input(request):
     context = {
         'form': form
     }
-    print(context)
+    # print(context)
     return render(request, '../templates/language_input.html', context)
 
 
@@ -219,10 +219,10 @@ def language_data_create(request):
         return render(request, '../templates/language_input.html', context)
 
 
-class SkillseatUpdate(generic.UpdateView):
+class SkillseatUpdateView(generic.UpdateView):
     model = Skillseat
     template_name = "skillseat_update.html"
-    form_class = SkillseatCreateForm
+    form_class = SkillseatUpdateForm
 
     success_url = reverse_lazy('skillswap:skillseat-browse')
 
@@ -244,12 +244,26 @@ class SkillseatBrowseView(generic.ListView):
         return Skillseat.objects.filter(user_id_id=self.request.user)
 
 
+# プロフィール文章閲覧
+class ProfileTextView(generic.ListView):
+    model = Skillseat
+    template_name = "profile_text.html"
+
+    def get_queryset(self):
+        profile_text = Skillseat.objects.filter(user_id_id=self.request.user)
+        return profile_text
+
+
+class ProfileTextUpdateView(generic.UpdateView):
+    model = Skillseat
+    template_name = "profile_text_update.html"
+    form_class = ProfileTextCreateForm
+    success_url = reverse_lazy('skillswap:profile-text')
+
 # 講座選択
 class CourseSelectionView(generic.ListView):
     model = Course
     template_name = "course_selection.html"
-
-    # def get_queryset(self):
 
 
 class MyCourseView(generic.ListView):
