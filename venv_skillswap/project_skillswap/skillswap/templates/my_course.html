@@ -17,7 +17,11 @@
             <tr>
                 <th>{{ course.title }}</th>
                 <td>{{ course.detail }}</td>
-                <td>{{ course.course_img }}</td>
+                {% if course.course_img %}
+                <img src="{{ course.course_img.url }}">
+                {% else %}
+                <img src="{% static 'assets/sample.png' %}" width="200" height="200"/>
+                {% endif %}
             </tr>
         </table>
         <button><a href="{% url 'skillswap:my-course-update' course.pk %}">更新</a></button>

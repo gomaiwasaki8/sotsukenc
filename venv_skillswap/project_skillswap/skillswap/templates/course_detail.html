@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}SKILLSWAP | 講座詳細{% endblock %}
+
+{% block active_diary_list %}active{% endblock %}
+
+{% block head %}{% endblock %}
+
+{% block header %}{% endblock %}
+
+{% block contents %}
+<h1>講座詳細</h1>
+<div class="container">
+    <div>
+        <table border="1">
+            <tr>
+                <th>{{ object.title }}</th>
+                <td>{{ object.detail }}</td>
+                {% if object.course_img %}
+                <img src="{{ object.course_img.url }}">
+                {% else %}
+                <img src="{% static 'assets/sample.png' %}" width="200" height="200"/>
+                {% endif %}
+            </tr>
+        </table>
+
+        <a href="{% url 'skillswap:course-selection' %}">戻る</a>
+    </div>
+</div>
+{% endblock %}

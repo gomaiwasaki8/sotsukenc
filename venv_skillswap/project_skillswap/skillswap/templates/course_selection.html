@@ -12,14 +12,21 @@
 {% block contents %}
 <div class="container">
     <div>
+        <h1>講座選択</h1>
         {% for course in object_list %}
-        <table border="1">
-            <tr>
-                <th>{{ course.title }}</th>
-                <td>{{ course.detail }}</td>
-                <td>{{ course.course_img }}</td>
-            </tr>
-        </table>
+        <a href="{% url 'skillswap:course-detail' course.pk %}">
+            <table border="1">
+                <tr>
+                    <th>{{ course.title }}</th>
+                    <td>{{ course.detail }}</td>
+                    {% if course.course_img %}
+                    <img src="{{ course.course_img.url }}">
+                    {% else %}
+                    <img src="{% static 'assets/sample.png' %}" width="200" height="200"/>
+                    {% endif %}
+                </tr>
+            </table>
+        </a>
         {% empty %}
         <p>講座がありません</p>
         {% endfor %}

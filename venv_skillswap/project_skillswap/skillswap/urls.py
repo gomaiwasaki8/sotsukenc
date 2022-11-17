@@ -41,6 +41,7 @@ urlpatterns = [
     # path('my-page/history-course/', views.HistoryCourseView.as_view(), name="history-course"),
     # 講座選択
     path('course-selection/', views.CourseSelectionView.as_view(), name="course-selection"),
-
+    # 講座詳細
+    path('course-detail/<int:pk>/', views.CourseDetailView.as_view(), name="course-detail"),
 
 ]

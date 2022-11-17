@@ -256,6 +256,10 @@ class MyCourseView(generic.ListView):
     model = Course
     template_name = "my_course.html"
 
+    def get_queryset(self):
+        courses = Course.objects.filter(user_id_id=self.request.user).order_by('-created_at')
+        return courses
+
 
 class MyCourseCreateView(generic.CreateView):
     model = Course
@@ -276,6 +280,12 @@ class MyCourseUpdateView(generic.UpdateView):
     template_name = "my_course_update.html"
     form_class = MyCourseCreateForm
     success_url = reverse_lazy('skillswap:my-course')
+
+
+class CourseDetailView(generic.DetailView):
+    model = Course
+    template_name = "course_detail.html"
+
 
 
 class InquiryView(generic.CreateView):
