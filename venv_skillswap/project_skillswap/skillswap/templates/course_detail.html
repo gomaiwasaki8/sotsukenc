@@ -13,17 +13,33 @@
 <h1>講座詳細</h1>
 <div class="container">
     <div>
-        <table border="1">
-            <tr>
-                <th>{{ object.title }}</th>
-                <td>{{ object.detail }}</td>
-                {% if object.course_img %}
-                <img src="{{ object.course_img.url }}">
-                {% else %}
-                <img src="{% static 'assets/sample.png' %}" width="200" height="200"/>
-                {% endif %}
-            </tr>
-        </table>
+        <p>講座イメージ</p>
+        {% if object.course_img %}
+        <img src="{{ object.course_img.url }}" width="200" height="200"/>
+        {% else %}
+        <img src="{% static 'assets/sample.png' %}" width="200" height="200"/>
+        {% endif %}
+
+        {% if object %}
+        <p>講座タイトル：{{ object.title }}</p>
+        <p>説明：{{ object.detail }}</p>
+        {% else %}
+        <p>まだ講座を作成していないユーザーです。</p>
+        {% endif %}
+
+        {% for skillseat in skillseat_list %}
+            {% if skillseat.user_img %}
+            <img src="{{ skillseat.user_img.url }}" width="200" height="200"/>
+            {% else %}
+            <img src="{% static 'assets/sample.png' %}" width="200" height="200"/>
+            {% endif %}
+            <p>{{ skillseat.user_name }} さん</p>
+            {% if skillseat.user_evaluation %}
+            <p>評価：{{ skillseat.user_evaluation }}</p>
+            {% else %}
+            <p>依頼取引を行ったことのないユーザーのため評価はありません。</p>
+            {% endif %}
+        {% endfor %}
 
         <a href="{% url 'skillswap:course-selection' %}">戻る</a>
     </div>

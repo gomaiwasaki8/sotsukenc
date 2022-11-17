@@ -20,7 +20,7 @@
                     <th>{{ course.title }}</th>
                     <td>{{ course.detail }}</td>
                     {% if course.course_img %}
-                    <img src="{{ course.course_img.url }}">
+                    <img src="{{ course.course_img.url }}" width="200" height="200"/>
                     {% else %}
                     <img src="{% static 'assets/sample.png' %}" width="200" height="200"/>
                     {% endif %}
