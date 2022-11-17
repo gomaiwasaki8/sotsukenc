@@ -28,12 +28,19 @@ urlpatterns = [
     # マイページのスキルシート閲覧
     path('my-page/skillseat-browse/', views.SkillseatBrowseView.as_view(), name="skillseat-browse"),
     # マイページのマイ講座閲覧
-    # path('my-page/my-course/', views.MyCourseView.as_view(), name="my-couse"),
+    path('my-page/my-course/', views.MyCourseView.as_view(), name="my-course"),
+    # マイページのマイ講座作成
+    path('my-page/my-course/create/', views.MyCourseCreateView.as_view(), name="my-course-create"),
+    # マイページのマイ講座更新
+    path('my-page/my-course/update/<int:pk>/', views.MyCourseUpdateView.as_view(), name="my-course-update"),
     # マイページのお気に入りの講座閲覧
     # path('my-page/favorite/', views.favoriteView.as_view(), name="favorite"),
     # マイページの依頼済みの講座閲覧
-    # path('my-page/request-course/', views.RequestCourseView.as_view(), name="request-couse"),
+    # path('my-page/request-course/', views.RequestCourseView.as_view(), name="request-course"),
     # マイページの依頼履歴閲覧
     # path('my-page/history-course/', views.HistoryCourseView.as_view(), name="history-course"),
+    # 講座選択
+    path('course-selection/', views.CourseSelectionView.as_view(), name="course-selection"),
+
 
 ]

@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}SKILLSWAP | マイ講座{% endblock %}
+
+{% block active_diary_list %}active{% endblock %}
+
+{% block head %}{% endblock %}
+
+{% block header %}{% endblock %}
+
+{% block contents %}
+<div class="container">
+    <div>
+        {% for course in course_list %}
+        <table border="1">
+            <tr>
+                <th>{{ course.title }}</th>
+                <td>{{ course.detail }}</td>
+                <td>{{ course.course_img }}</td>
+            </tr>
+        </table>
+        <button><a href="{% url 'skillswap:my-course-update' course.pk %}">更新</a></button>
+        {% empty %}
+        <p>マイ講座を作成してください。</p>
+        <button><a href="{% url 'skillswap:my-course-create' %}">作成</a></button>
+        {% endfor %}
+        <a href="{% url 'skillswap:skillseat-browse' %}">戻る</a>
+    </div>
+</div>
+{% endblock %}

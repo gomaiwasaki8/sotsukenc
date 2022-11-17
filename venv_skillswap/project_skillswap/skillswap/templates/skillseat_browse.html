@@ -21,7 +21,7 @@
 
         <h2>名前：{{ skillseat.user_name }}</h2>
         <h2>性別：{{ skillseat.gender }}</h2>
-        <h2>年齢：{{ skillseat.age }}</h2>
+        <h2>生年月日：{{ skillseat.age }}</h2>
         {% if skillseat.user_evaluation %}
         <h2>評価：{{ skillseat.user_evaluation }}</h2>
         {% endif %}
@@ -35,7 +35,7 @@
 
     <div>
         <a href="{% url 'skillswap:skillseat-browse' %}">スキルシート</a><br>
-        <a href="">マイ講座</a><br>
+        <a href="{% url 'skillswap:my-course' %}">マイ講座</a><br>
         <a href="">お気に入りの講座</a><br>
         <a href="">依頼済みの講座</a><br>
         <a href="">講座受講履歴</a><br>

@@ -8,8 +8,7 @@ from django.views.decorators.http import require_POST
 from django.shortcuts import render, redirect
 from django.views.generic import ListView
 
-from .forms import InquiryCreateForm, SkillseatCreateForm, LanguageCreateForm
-# from .models import Skillseat, Language, Course, Favorite, Request, Chat, Evaluation, Inquiry, News, Block
+from .forms import *
 from .models import *
 from django import forms
 
@@ -158,7 +157,7 @@ def language_input(request):
     # 一覧表示からの遷移や、確認画面から戻るリンクを押したときはここ。
     if request.method == 'GET':
         if Language.objects.filter(user_id_id=user).exists():
-            return redirect('skillswap:inquiry')
+            return redirect('skillswap:course-selection')
         # セッションに入力途中のデータがあればそれを使う。
         form = LanguageCreateForm(request.session.get('form_data'))
     else:
@@ -228,7 +227,7 @@ class SkillseatUpdate(generic.UpdateView):
     success_url = reverse_lazy('skillswap:skillseat-browse')
 
 
-class SkillseatBrowseView(ListView):
+class SkillseatBrowseView(generic.ListView):
     template_name = "skillseat_browse.html"
     model = Skillseat
     context_object_name = 'skillseat_list'
@@ -237,11 +236,46 @@ class SkillseatBrowseView(ListView):
         context = super(SkillseatBrowseView, self).get_context_data(**kwargs)
         context.update({
             'language_list': Language.objects.filter(user_id_id=self.request.user),
+            'course_list': Course.objects.filter(user_id_id=self.request.user),
         })
         return context
 
     def get_queryset(self):
         return Skillseat.objects.filter(user_id_id=self.request.user)
+
+
+# 講座選択
+class CourseSelectionView(generic.ListView):
+    model = Course
+    template_name = "course_selection.html"
+
+    # def get_queryset(self):
+
+
+class MyCourseView(generic.ListView):
+    model = Course
+    template_name = "my_course.html"
+
+
+class MyCourseCreateView(generic.CreateView):
+    model = Course
+    template_name = "my_course_create.html"
+    form_class = MyCourseCreateForm
+    success_url = reverse_lazy('skillswap:skillseat-browse')
+
+    def form_valid(self, form):
+        course = form.save(commit=False)
+        course.user_id = self.request.user
+        course.save()
+        return super().form_valid(form)
+    # 失敗した時の処理特に書いてないのであとで追記するかも
+
+
+class MyCourseUpdateView(generic.UpdateView):
+    model = Course
+    template_name = "my_course_update.html"
+    form_class = MyCourseCreateForm
+    success_url = reverse_lazy('skillswap:my-course')
 
 
 class InquiryView(generic.CreateView):

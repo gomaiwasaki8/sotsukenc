@@ -50,6 +50,13 @@ class LanguageCreateForm(forms.ModelForm):
     #         field.widget.attrs['class'] = 'form-control'
 
 
+# マイ講座作成フォーム
+class MyCourseCreateForm(forms.ModelForm):
+    class Meta:
+        model = Course
+        fields = ('title', 'detail', 'course_img',)
+
+
 class InquiryCreateForm(forms.ModelForm):
     class Meta:
         model = Inquiry
