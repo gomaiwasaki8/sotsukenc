@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}SKILLSWAP | 相手のプロフィール{% endblock %}
+
+{% block active_diary_list %}active{% endblock %}
+
+{% block head %}{% endblock %}
+
+{% block header %}{% endblock %}
+
+{% block contents %}
+<h1>相手のプロフィール</h1>
+<div class="container">
+        <p>プロフィール文章：{{ object.profile_text }}</p>
+        <a href="">戻る</a>
+    </div>
+</div>
+{% endblock %}

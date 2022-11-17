@@ -308,6 +308,17 @@ class CourseDetailView(generic.DetailView):
         return context
 
 
+class OthersProfileTextView(generic.DetailView):
+    model = Skillseat
+    template_name = "others_profile_text.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(OthersProfileTextView, self).get_context_data(**kwargs)
+        context.update({
+            'skillseat': Skillseat.objects.filter(user_id_id=self.kwargs['pk']),
+        })
+        return context
+
 
 
 class InquiryView(generic.CreateView):
