@@ -28,7 +28,7 @@
         {% endif %}
 
         {% for skillseat in skillseat_list %}
-            <a href="{% url 'skillswap:others-profile-text' skillseat.user_id_id %}">
+            <a href="{% url 'skillswap:others-profile-text' skillseat.pk %}">
             {% if skillseat.user_img %}
             <img src="{{ skillseat.user_img.url }}" width="200" height="200"/>
             {% else %}

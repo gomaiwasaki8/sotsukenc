@@ -50,6 +50,6 @@ urlpatterns = [
     # 相手のプロフィール（プロフィール文章）閲覧
     path('others-profile/text/<int:pk>/', views.OthersProfileTextView.as_view(), name="others-profile-text"),
     # 相手のプロフィール（講座）閲覧
-    path('others-profile/course/<int:pk>/', views.OthersProfileCourseView.as_view(), name="others-profile-course"),
+    path('others-profile/course/<int:user_id_id>/', views.OthersProfileCourseView.as_view(), name="others-profile-course"),
 
 ]

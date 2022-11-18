@@ -26,9 +26,9 @@
         <h2>評価：{{ skillseat.user_evaluation }}</h2>
         {% endif %}
 
-        <a href="{% url 'skillswap:others-profile-course' skillseat.pk %}">講座</a>
+        <a href="{% url 'skillswap:others-profile-course' skillseat.user_id_id %}">講座</a>
         <p>プロフィール文章：{{ skillseat.profile_text }}</p>
-        <a href="">戻る</a>
+        <a href="{{request.META.HTTP_REFERER}}">戻る</a>
         {% endfor %}
     </div>
 </div>
