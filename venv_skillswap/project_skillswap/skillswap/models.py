@@ -11,7 +11,7 @@ class Skillseat(models.Model):
     user_name = models.CharField(verbose_name='名前', max_length=30)
     gender = models.CharField(verbose_name='性別', max_length=5)
     # max_length=4
-    age = models.CharField(verbose_name="生年月日", max_length=15, blank=True, null=True)
+    birthday = models.DateField(verbose_name="生年月日", blank=True, null=True)
     user_img = models.ImageField(verbose_name='プロフィール画像', max_length=30, blank=True, null=True)
     profile_text = models.CharField(verbose_name='プロフィール文章', max_length=10000, default="よろしくお願いします")
     user_evaluation = models.FloatField(verbose_name='評価', max_length=2, blank=True, null=True)
@@ -66,7 +66,7 @@ class Favorite(models.Model):
 # 依頼テーブル
 class Request(models.Model):
 
-    user_id = models.ForeignKey(CustomUser, verbose_name="送信者ID", on_delete=models.PROTECT, max_length=10)
+    user_id = models.ForeignKey(CustomUser, verbose_name="ユーザーID", on_delete=models.PROTECT, max_length=10)
     course_id = models.ForeignKey(Course, verbose_name="講座ID", on_delete=models.PROTECT, max_length=10)
     message = models.CharField(verbose_name="メッセージ", max_length=500)
     request_completed = models.BooleanField(verbose_name="依頼成立", blank=True, null=True)

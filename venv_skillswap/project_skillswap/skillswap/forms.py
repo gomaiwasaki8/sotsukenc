@@ -8,13 +8,13 @@ import datetime
 class SkillseatCreateForm(forms.ModelForm):
     class Meta:
         model = Skillseat
-        fields = ('user_name', 'gender', 'age', 'user_img', 'profile_text', )
+        fields = ('user_name', 'gender', 'birthday', 'user_img', 'profile_text', )
     #     fields = "__all__"
     #     excludeで入力させない列を指定
     #     exclude = ("create_at")
 
     gender = forms.fields.ChoiceField(choices=(('男', '男'), ('女', '女'), ('その他', 'その他')), label='性別', required=True,)
-    age = forms.fields.DateField(label="生年月日", widget=forms.DateInput(attrs={"type": "date", "min": "1500-04-01", "max": datetime.date.today(), "value": datetime.date.today()}))
+    birthday = forms.fields.DateField(label="生年月日", widget=forms.DateInput(attrs={"type": "date", "min": "1500-04-01", "max": datetime.date.today(), "value": datetime.date.today()}))
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -25,10 +25,10 @@ class SkillseatCreateForm(forms.ModelForm):
 class SkillseatUpdateForm(forms.ModelForm):
     class Meta:
         model = Skillseat
-        fields = ('user_name', 'gender', 'age', 'user_img', )
+        fields = ('user_name', 'gender', 'birthday', 'user_img', )
 
     gender = forms.fields.ChoiceField(choices=(('男', '男'), ('女', '女'), ('その他', 'その他')), label='性別', required=True,)
-    age = forms.fields.DateField(label="生年月日", widget=forms.DateInput(attrs={"type": "date", "min": "1500-04-01", "max": datetime.date.today(), "value": datetime.date.today()}))
+    birthday = forms.fields.DateField(label="生年月日", widget=forms.DateInput(attrs={"type": "date", "min": "1500-04-01", "max": datetime.date.today(), "value": datetime.date.today()}))
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

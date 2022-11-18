@@ -10,21 +10,25 @@ urlpatterns = [
     path('', views.IndexView.as_view(), name="index"),
     # お問い合わせ
     path('inquiry/', views.InquiryView.as_view(), name="inquiry"),
-    # スキルシートの入力
-    path('skillseat-input/', views.skillseat_input, name="skillseat-input"),
-    # スキルシートの確認
-    path('skillseat-confirm/', views.user_data_confirm, name="skillseat-confirm"),
-    # スキルシートの新規作成
-    path('skillseat-create/', views.user_data_create, name="skillseat-create"),
+    # # スキルシートの入力
+    # path('skillseat-input/', views.skillseat_input, name="skillseat-input"),
+    # # スキルシートの確認
+    # path('skillseat-confirm/', views.user_data_confirm, name="skillseat-confirm"),
+    # # スキルシートの新規作成
+    # path('skillseat-create/', views.user_data_create, name="skillseat-create"),
+    # スキルシートの作成
+    path('skilseat-create/', views.SkillseatCreateView.as_view(), name="skillseat-create"),
     # スキルシートの更新
     path('skillseat-update/<int:pk>/', views.SkillseatUpdateView.as_view(), name="skillseat-update"),
-    # 言語の入力
-    path('language-input/', views.language_input, name="language-input"),
+    # # 言語の入力
+    # path('language-input/', views.language_input, name="language-input"),
     # path('language-input/', views.LanguageInput.as_view(), name="language-input"),
     # 言語の確認
     # path('language-confirm/', views.language_data_confirm, name="language-confirm"),
     # 言語の新規作成
     # path('language-create/', views.language_data_create, name="language-create"),
+    # 言語の作成
+    path('language-create/', views.LanguageCreateView.as_view(), name="language-create"),
     # マイページのプロフィール文章閲覧
     path('my-page/profile-text/', views.ProfileTextView.as_view(), name="profile-text"),
     # マイページのプロフィール文章更新
