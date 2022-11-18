@@ -315,8 +315,22 @@ class OthersProfileTextView(generic.DetailView):
     def get_context_data(self, **kwargs):
         context = super(OthersProfileTextView, self).get_context_data(**kwargs)
         context.update({
-            'skillseat': Skillseat.objects.filter(user_id_id=self.kwargs['pk']),
+            'skillseat_list': Skillseat.objects.filter(id=self.kwargs['pk']),
         })
+        return context
+
+
+class OthersProfileCourseView(generic.DetailView):
+    model = Skillseat
+    template_name = "others_profile_course.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(OthersProfileCourseView, self).get_context_data(**kwargs)
+        context.update({
+            'skillseat_list': Skillseat.objects.filter(id=self.kwargs['pk']),
+            'course_list': Course.objects.filter(id=self.kwargs['pk']),
+        })
+        print(context)
         return context
 
 

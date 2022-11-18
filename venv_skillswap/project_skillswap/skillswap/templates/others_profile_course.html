@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}SKILLSWAP | 相手のプロフィール{% endblock %}
+{% block title %}SKILLSWAP | 相手の講座{% endblock %}
 
 {% block active_diary_list %}active{% endblock %}
 
@@ -10,9 +10,9 @@
 {% block header %}{% endblock %}
 
 {% block contents %}
-<h1>相手のプロフィール</h1>
+<h1>相手の講座</h1>
 <div class="container">
-        {% for skillseat in skillseat_list %}
+    {% for skillseat in skillseat_list %}
         {% if skillseat.user_img %}
         <img src="{{ skillseat.user_img.url }}" width="200" height="200"/>
         {% else %}
@@ -26,10 +26,23 @@
         <h2>評価：{{ skillseat.user_evaluation }}</h2>
         {% endif %}
 
-        <a href="{% url 'skillswap:others-profile-course' skillseat.pk %}">講座</a>
         <p>プロフィール文章：{{ skillseat.profile_text }}</p>
+
+    {% endfor %}
+    {% for course in course_list %}
+        <table border="1">
+            <tr>
+                <th>{{ course.title }}</th>
+                <td>{{ course.detail }}</td>
+                {% if course.course_img %}
+                <img src="{{ course.course_img.url }}" width="200" height="200"/>
+                {% else %}
+                <img src="{% static 'assets/sample.png' %}" width="200" height="200"/>
+                {% endif %}
+            </tr>
+        </table>
+    {% endfor %}
         <a href="">戻る</a>
-        {% endfor %}
     </div>
 </div>
 {% endblock %}
