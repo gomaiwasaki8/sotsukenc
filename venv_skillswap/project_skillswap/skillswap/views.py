@@ -338,9 +338,23 @@ class OthersProfileCourseView(generic.DetailView):
             'skillseat_list': Skillseat.objects.filter(user_id_id=self.kwargs['user_id_id']),
             'course_list': Course.objects.filter(user_id_id=self.kwargs['user_id_id']),
         })
-        print(context)
         return context
 
+
+class OthersProfileSkillseatView(generic.DetailView):
+    model = Skillseat
+    template_name = "others_profile_skillseat.html"
+    slug_field = "user_id_id"
+    slug_url_kwarg = "user_id_id"
+
+    def get_context_data(self, **kwargs):
+        context = super(OthersProfileSkillseatView, self).get_context_data(**kwargs)
+        context.update({
+            'skillseat_list': Skillseat.objects.filter(user_id_id=self.kwargs['user_id_id']),
+            'language_list': Language.objects.filter(user_id_id=self.kwargs['user_id_id']),
+        })
+        print(context)
+        return context
 
 class InquiryView(generic.CreateView):
     model = Inquiry

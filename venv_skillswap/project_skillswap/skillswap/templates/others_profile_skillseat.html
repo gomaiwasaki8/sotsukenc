@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}SKILLSWAP | 相手の講座{% endblock %}
+{% block title %}SKILLSWAP | 相手のスキルシート{% endblock %}
 
 {% block active_diary_list %}active{% endblock %}
 
@@ -10,7 +10,7 @@
 {% block header %}{% endblock %}
 
 {% block contents %}
-<h1>相手の講座</h1>
+<h1>相手のスキルシート</h1>
 <div class="container">
     {% for skillseat in skillseat_list %}
         {% if skillseat.user_img %}
@@ -26,26 +26,22 @@
         <h2>評価：{{ skillseat.user_evaluation }}</h2>
         {% endif %}
 
-        <p>プロフィール文章：{{ skillseat.profile_text }}</p>
-
     {% endfor %}
 
     <a href="{% url 'skillswap:others-profile-course' skillseat.user_id_id %}">講座</a>
     <a href="{% url 'skillswap:others-profile-skillseat' skillseat.user_id_id %}">スキルシート</a>
 
-    {% for course in course_list %}
-        <table border="1">
-            <tr>
-                <th>{{ course.title }}</th>
-                <td>{{ course.detail }}</td>
-                {% if course.course_img %}
-                <img src="{{ course.course_img.url }}" width="200" height="200"/>
-                {% else %}
-                <img src="{% static 'assets/sample.png' %}" width="200" height="200"/>
-                {% endif %}
-            </tr>
-        </table>
+    <table border="1">
+    {% for language in language_list %}
+        <tr>
+            <th>{{ language.genre_1 }}</th>
+            <td>{{ language.genre_2 }}</td>
+            <th>{{ language.career }}</th>
+            <td>{{ language.language_detail }}</td>
+        </tr>
     {% endfor %}
+    </table>
+
         <a href="{{request.META.HTTP_REFERER}}">戻る</a>
     </div>
 </div>

@@ -27,6 +27,7 @@
         {% endif %}
 
         <a href="{% url 'skillswap:others-profile-course' skillseat.user_id_id %}">講座</a>
+        <a href="{% url 'skillswap:others-profile-skillseat' skillseat.user_id_id %}">スキルシート</a>
         <p>プロフィール文章：{{ skillseat.profile_text }}</p>
         <a href="{{request.META.HTTP_REFERER}}">戻る</a>
         {% endfor %}
