@@ -226,7 +226,7 @@ class SkillseatCreateView(generic.CreateView):
     success_url = reverse_lazy('skillswap:language-create')
 
     def get(self, request, *args, **kwargs):
-        if Skillseat.objects.filter(user_id_id=request.user.id).exists():
+        if Skillseat.objects.filter(user_id_id=self.request.user).exists():
             return redirect('skillswap:language-create')
 
     def form_valid(self, form):
@@ -244,7 +244,7 @@ class LanguageCreateView(generic.CreateView):
     success_url = reverse_lazy('skillswap:course-selection')
 
     def get(self, request, *args, **kwargs):
-        if Language.objects.filter(user_id_id=request.user.id).exists():
+        if Language.objects.filter(user_id_id=self.request.user).exists():
             return redirect('skillswap:course-selection')
 
     def form_valid(self, form):
