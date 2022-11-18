@@ -225,9 +225,13 @@ class SkillseatCreateView(generic.CreateView):
     form_class = SkillseatCreateForm
     success_url = reverse_lazy('skillswap:language-create')
 
-    def form_valid(self, form):  # 登録が成功した時の処理。formはユーザが入力したのが入っている
-        skillseat = form.save(commit=False)  # 日記をセーブ（登録）する。commit=Falseはまだすべての情報が入っていないからコミットしないって意味
-        skillseat.user_id = self.request.user  # ユーザ名を入れている（ユーザが入力しないでいいようにこっちでユーザ名をセットする）
+    def get(self, request, *args, **kwargs):
+        if Skillseat.objects.filter(user_id_id=request.user.id).exists():
+            return redirect('skillswap:language-create')
+
+    def form_valid(self, form):
+        skillseat = form.save(commit=False)
+        skillseat.user_id = self.request.user
         skillseat.save()
         return super().form_valid(form)
 
@@ -238,6 +242,10 @@ class LanguageCreateView(generic.CreateView):
     template_name = "language_create.html"
     form_class = LanguageCreateForm
     success_url = reverse_lazy('skillswap:course-selection')
+
+    def get(self, request, *args, **kwargs):
+        if Language.objects.filter(user_id_id=request.user.id).exists():
+            return redirect('skillswap:course-selection')
 
     def form_valid(self, form):
         language = form.save(commit=False)
@@ -292,8 +300,6 @@ class ProfileTextUpdateView(generic.UpdateView):
 class CourseSelectionView(generic.ListView):
     model = Course
     template_name = "course_selection.html"
-
-
 
 
 class MyCourseView(generic.ListView):
