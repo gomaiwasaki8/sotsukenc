@@ -46,7 +46,7 @@ urlpatterns = [
     # 講座選択
     path('course-selection/', views.CourseSelectionView.as_view(), name="course-selection"),
     # 講座詳細
-    path('course-detail/<int:pk>/', views.CourseDetailView.as_view(), name="course-detail"),
+    path('course-detail/<int:user_id_id>/', views.CourseDetailView.as_view(), name="course-detail"),
     # 相手のプロフィール（プロフィール文章）閲覧
     path('others-profile/text/<int:pk>/', views.OthersProfileTextView.as_view(), name="others-profile-text"),
     # 相手のプロフィール（講座）閲覧

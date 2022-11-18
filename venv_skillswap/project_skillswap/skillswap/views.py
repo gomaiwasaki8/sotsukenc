@@ -260,10 +260,13 @@ class ProfileTextUpdateView(generic.UpdateView):
     form_class = ProfileTextCreateForm
     success_url = reverse_lazy('skillswap:profile-text')
 
+
 # 講座選択
 class CourseSelectionView(generic.ListView):
     model = Course
     template_name = "course_selection.html"
+
+
 
 
 class MyCourseView(generic.ListView):
@@ -299,11 +302,15 @@ class MyCourseUpdateView(generic.UpdateView):
 class CourseDetailView(generic.DetailView):
     model = Course
     template_name = "course_detail.html"
+    slug_field = "user_id_id"
+    slug_url_kwarg = "user_id_id"
+    # pk_url_kwarg = "user_id_id"
 
     def get_context_data(self, **kwargs):
+        print("self.kwargs['user_id_id']はー＞", self.kwargs['user_id_id'])
         context = super(CourseDetailView, self).get_context_data(**kwargs)
         context.update({
-            'skillseat_list': Skillseat.objects.filter(id=self.kwargs['pk']),
+            'skillseat_list': Skillseat.objects.filter(user_id_id=self.kwargs['user_id_id']),
         })
         return context
 
@@ -332,7 +339,6 @@ class OthersProfileCourseView(generic.DetailView):
         })
         print(context)
         return context
-
 
 
 class InquiryView(generic.CreateView):

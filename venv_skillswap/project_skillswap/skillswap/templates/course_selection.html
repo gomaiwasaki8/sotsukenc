@@ -14,7 +14,7 @@
     <div>
         <h1>講座選択</h1>
         {% for course in object_list %}
-        <a href="{% url 'skillswap:course-detail' course.pk %}">
+        <a href="{% url 'skillswap:course-detail' course.user_id_id %}">
             <table border="1">
                 <tr>
                     <th>{{ course.title }}</th>
