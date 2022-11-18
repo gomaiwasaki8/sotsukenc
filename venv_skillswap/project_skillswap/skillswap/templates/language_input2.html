@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Basic: jquery.add-input-area</title>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery.add-input-area@4.11.0/dist/jquery.add-input-area.min.js" integrity="sha256-yOwGvcRp3I8/XWkeARhJkgdfLREQygbFA5W2bUpM2FY=" crossorigin="anonymous"></script>
+<script>
+$(function() {
+  $('#language').addInputArea();
+});
+</script>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="my-div-style w-100">
+
+			<form method="POST" enctype='multipart/form-data'>
+			    <table id="language">
+			        <tr><th>ジャンル大</th><th>ジャンル小</th><th>経歴</th><th>詳細</th></tr>
+			        <tr class="language_var">
+			            <td><input type="text" size="30" id="genres_1_0" name="genres_1_0"></td>
+			            <td><textarea size="30" name="genres2_0" id="genres2_0"></textarea></td>
+			            <td><textarea size="30" name="area2_0" id="area2_0"></textarea></td>
+			            <td><textarea size="30" name="area3_0" id="area3_0"></textarea></td>
+			            <td><button class="language_del">削除</button></td>
+			        </tr>
+			    </table>
+			    
+
+				<input type="button" value="追加" class="language_add">
+
+			<!--
+			    <button class="language_add">追加</button>
+			-->
+			    <button class="btn btn-primary" type="submit">確定</button>
+			</form>
+	    </div>
+    </div>
+</div>
+</body>
+</html>

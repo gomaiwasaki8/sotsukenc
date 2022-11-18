@@ -17,7 +17,7 @@ urlpatterns = [
     # # スキルシートの新規作成
     # path('skillseat-create/', views.user_data_create, name="skillseat-create"),
     # スキルシートの作成
-    path('skilseat-create/', views.SkillseatCreateView.as_view(), name="skillseat-create"),
+    path('skillseat-create/', views.SkillseatCreateView.as_view(), name="skillseat-create"),
     # スキルシートの更新
     path('skillseat-update/<int:pk>/', views.SkillseatUpdateView.as_view(), name="skillseat-update"),
     # # 言語の入力
