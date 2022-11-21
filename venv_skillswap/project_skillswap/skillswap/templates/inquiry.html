@@ -10,6 +10,38 @@
     p{
       text-align:center;
     }
+    .btn{
+      margin: 15px;
+    }
+    h1{
+      text-align:left;
+      margin: 0;
+      padding: 0;
+      padding-left:100px;
+      padding-bottom:15px;
+      border-bottom:3px double blue;
+      width: 1300px;
+	  margin-left: auto;
+	  margin-right: auto;
+    }
+    textarea{
+      border: 2px solid black;
+      margin: 25px;
+    }
+    th{
+      border: 2px solid black;
+      margin: 25px;
+    }
+    td{
+      border: 2px solid black;
+      margin: 25px;
+    }
+    .table{
+      width: 35%;
+      height: 40%;
+      border: 2px solid black;
+      margin: 25px;
+    }
   </style>
 {% endblock %}
 
@@ -19,15 +51,16 @@
 仮なので変更してください
 <div class="container">
     <div class="row">
-        <div class="my-div-style w-100">
+        <div class="my-div-style w-100" align="center">
             <form method="POST" enctype='multipart/form-data'>
                 {% csrf_token %}
+                <h1>お問い合わせフォーム</h1>
                 <table class="table">
                     {{ form.as_table }}
                 </table>
                 <button class="btn btn-primary" type="submit">送信</button>
                 <div align="center">
-                    <a href="{% url 'skillswap:index' %}">戻る</a>
+<!--                    <a href="{% url 'skillswap:index' %}">戻る</a>-->
                 </div>
             </form>
         </div>

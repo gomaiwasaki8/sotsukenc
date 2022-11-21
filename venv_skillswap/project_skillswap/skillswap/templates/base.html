@@ -8,31 +8,48 @@
         <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon.ico' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'css/mystyle.css' %}">
         {% block head %}{% endblock %}
+        <link href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" rel="stylesheet">
+<!--        書いてること同じ-->
+<!--        <link rel="stylesheet" href="{% static 'css/mystyle.css' %}">-->
+<!--        <link rel="icon" href="{% static 'img/favicon.ico' %}">-->
     </head>
 
     <body>
         <header>
-            <h1 class="headline">
-                <a>SKILLSWAP</a>
-            </h1>
+<!--            <h1 class="headline">-->
+<!--                <a>SKILLSWAP</a>-->
+<!--            </h1>-->
             <nav id="global_navi">
                 <ul>
                     {% if user.is_authenticated %}
-                    <li class="current"><a href="{% url 'skillswap:course-selection' %}">HOME</a></li>
+                    <li class="current">
+                        <a href="{% url 'skillswap:course-selection' %}">
+                            <img src="{% static 'assets/logo.png' %}" alt="home" width="135" height="56">
+                        </a>
+                    </li>
                     {% else %}
-                    <li class="current"><a href="{% url 'skillswap:index' %}">HOME</a></li>
+                    <li class="current">
+                        <a href="{% url 'skillswap:index' %}">
+                            <img src="{% static 'assets/logo.png' %}" alt="home" width="135" height="56">
+                        </a>
+                    </li>
                     {% endif %}
-                    <input type="search" name="search" placeholder="キーワードを入力">
-                    <input type="submit" name="submit" value="検索">
+<!--                    <input type="search" name="search" placeholder="キーワードを入力">-->
+<!--                    <input type="submit" name="submit" value="検索">-->
+                    <input type="text" placeholder="検索ワード">
+                    <button type="submit" al>
+                        <i class="fas fa-search fa-fw"></i>
+                    </button>
                     <select name="sampledrop" onChange="location.href=value;">
-                        <option>選択</option>
+                        <img src="sample.png" alt="home" width="135" height="55">
+                        <option>--選択--</option>
                         <option value="{% url 'skillswap:inquiry' %}">お問い合わせ</option>
                         {% if user.is_authenticated %}
-　　                        <option value="{% url 'skillswap:skillseat-browse' %}">マイページ</option>
-　　                        <option value="list2">チャット</option>
-                            <option value="{% url 'account_logout' %}">ログアウト</option>
+                        <option value="{% url 'skillswap:skillseat-browse' %}">マイページ</option>
+                        <option value="list2">チャット</option>
+                        <option value="{% url 'account_logout' %}">ログアウト</option>
                         {% else %}
-                            <option value="{% url 'account_login' %}">ログイン</option>
+                        <option value="{% url 'account_login' %}">ログイン</option>
                         {% endif %}
                     </select>
                 </ul>
@@ -43,7 +60,8 @@
         {% block contents %}{% endblock %}
 
         <footer>
-  	        <p>© 2022 SKILLSWAP</p>
+<!--  	        <p>© 2022 SKILLSWAP</p>-->
+            <small>&copy; 2022 SKILLSWAP</small>
         </footer>
     </body>
 </html>

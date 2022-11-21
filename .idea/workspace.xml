@@ -2,8 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f62b4dcd-2126-419e-91bb-6103e30e50b9" name="変更" comment="">
+      <change afterPath="$PROJECT_DIR$/venv_skillswap/project_skillswap/static/css/mystyle(before).css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv_skillswap/project_skillswap/accounts/templates/account/email_confirm.html" beforeDir="false" afterPath="$PROJECT_DIR$/venv_skillswap/project_skillswap/accounts/templates/account/email_confirm.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv_skillswap/project_skillswap/accounts/templates/account/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/venv_skillswap/project_skillswap/accounts/templates/account/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv_skillswap/project_skillswap/accounts/templates/account/password_reset.html" beforeDir="false" afterPath="$PROJECT_DIR$/venv_skillswap/project_skillswap/accounts/templates/account/password_reset.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv_skillswap/project_skillswap/accounts/templates/account/password_reset_done.html" beforeDir="false" afterPath="$PROJECT_DIR$/venv_skillswap/project_skillswap/accounts/templates/account/password_reset_done.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv_skillswap/project_skillswap/accounts/templates/account/password_reset_from_key.html" beforeDir="false" afterPath="$PROJECT_DIR$/venv_skillswap/project_skillswap/accounts/templates/account/password_reset_from_key.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv_skillswap/project_skillswap/accounts/templates/account/signup.html" beforeDir="false" afterPath="$PROJECT_DIR$/venv_skillswap/project_skillswap/accounts/templates/account/signup.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/venv_skillswap/project_skillswap/skillswap/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/venv_skillswap/project_skillswap/skillswap/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv_skillswap/project_skillswap/skillswap/templates/inquiry.html" beforeDir="false" afterPath="$PROJECT_DIR$/venv_skillswap/project_skillswap/skillswap/templates/inquiry.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv_skillswap/project_skillswap/skillswap/templates/language_confirm.html" beforeDir="false" afterPath="$PROJECT_DIR$/venv_skillswap/project_skillswap/skillswap/templates/language_confirm.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv_skillswap/project_skillswap/skillswap/templates/skillseat_confirm.html" beforeDir="false" afterPath="$PROJECT_DIR$/venv_skillswap/project_skillswap/skillswap/templates/skillseat_confirm.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv_skillswap/project_skillswap/skillswap/templates/skillseat_input.html" beforeDir="false" afterPath="$PROJECT_DIR$/venv_skillswap/project_skillswap/skillswap/templates/skillseat_input.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv_skillswap/project_skillswap/static/css/mystyle.css" beforeDir="false" afterPath="$PROJECT_DIR$/venv_skillswap/project_skillswap/static/css/mystyle.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

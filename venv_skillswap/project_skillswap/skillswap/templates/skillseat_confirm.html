@@ -5,11 +5,21 @@
 
 {% block active_diary_list %}active{% endblock %}
 
-{% block header %}{% endblock %}
+{% block header %}
+<style>
+    .form-group{
+       padding: 20px;
+       margin: 0 100px 0 0;
+    }
+<!--    label{-->
+
+<!--    }-->
+</style>
+{% endblock %}
 
 {% block contents %}
 仮なので変更してください
-<div class="container">
+<div class="container" align="center">
     確認画面
     <a href="{% url 'skillswap:skillseat-input' %}" class="btn btn-primary btn-lg">戻る</a>
     <hr>

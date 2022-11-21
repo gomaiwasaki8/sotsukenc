@@ -9,9 +9,9 @@
 
 {% block contents %}
 仮なので変更してください
-<div class="container">
+<div class="container" align="center">
     言語確認画面
-    <a href="{% url 'skillswap:language-input' %}" class="btn btn-primary btn-lg">戻る</a>
+<!--    <a href="{% url 'skillswap:language-input' %}" class="btn btn-primary btn-lg">戻る</a>-->
     <hr>
     <form action="{% url 'skillswap:language-create' %}" method="POST">
         {% for field in form %}
