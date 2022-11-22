@@ -22,7 +22,7 @@ class AfterLoginView(generic.View):
         if Language.objects.filter(user_id_id=self.request.user).exists() and Skillseat.objects.filter(user_id_id=self.request.user).exists():
             return redirect('skillswap:inquiry')
         elif Skillseat.objects.filter(user_id_id=self.request.user).exists():
-            return redirect('skillswap:language-create')
+            return redirect('skillswap:')
         else:
             return redirect('skillswap:skillseat-create')
 
