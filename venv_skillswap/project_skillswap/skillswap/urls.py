@@ -10,6 +10,8 @@ urlpatterns = [
     path('', views.IndexView.as_view(), name="index"),
     # お問い合わせ
     path('inquiry/', views.InquiryView.as_view(), name="inquiry"),
+    # ログイン後
+    path('after-login/', views.AfterLoginView.as_view(), name="after-login"),
     # # スキルシートの入力
     # path('skillseat-input/', views.skillseat_input, name="skillseat-input"),
     # # スキルシートの確認

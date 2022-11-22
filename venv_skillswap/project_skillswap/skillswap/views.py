@@ -1,3 +1,4 @@
+import requests
 from django.shortcuts import render
 
 # Create your views here.
@@ -15,6 +16,16 @@ from django import forms
 
 class IndexView(generic.TemplateView):
     template_name = "index.html"
+
+class AfterLoginView(generic.View):
+    def get(self, request):
+        if Language.objects.filter(user_id_id=self.request.user).exists() and Skillseat.objects.filter(user_id_id=self.request.user).exists():
+            return redirect('skillswap:inquiry')
+        elif Skillseat.objects.filter(user_id_id=self.request.user).exists():
+            return redirect('skillswap:language-create')
+        else:
+            return redirect('skillswap:skillseat-create')
+
 
 
 # # アカウント登録
@@ -225,9 +236,9 @@ class SkillseatCreateView(generic.CreateView):
     form_class = SkillseatCreateForm
     success_url = reverse_lazy('skillswap:language-create')
 
-    def get(self, request, *args, **kwargs):
-        if Skillseat.objects.filter(user_id_id=self.request.user).exists():
-            return redirect('skillswap:language-create')
+    # def get(self, request, *args, **kwargs):
+    #     if Skillseat.objects.filter(user_id_id=self.request.user).exists():
+    #         return redirect('skillswap:language-create')
 
     def form_valid(self, form):
         skillseat = form.save(commit=False)
@@ -243,9 +254,9 @@ class LanguageCreateView(generic.CreateView):
     form_class = LanguageCreateForm
     success_url = reverse_lazy('skillswap:course-selection')
 
-    def get(self, request, *args, **kwargs):
-        if Language.objects.filter(user_id_id=self.request.user).exists():
-            return redirect('skillswap:course-selection')
+    # def get(self, request, *args, **kwargs):
+    #     if Language.objects.filter(user_id_id=self.request.user).exists():
+    #         return redirect('skillswap:course-selection')
 
     def form_valid(self, form):
         language = form.save(commit=False)
