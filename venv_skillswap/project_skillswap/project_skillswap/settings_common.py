@@ -149,7 +149,7 @@ ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 ACCOUNT_EMAIL_REQUIRED = True
 
-LOGIN_REDIRECT_URL = 'skillswap:skillseat-create'
+LOGIN_REDIRECT_URL = 'skillswap:after-login'
 ACCOUNT_LOGOUT_REDIRECT_URL = 'skillswap:index'
 
 ACCOUNT_LOGOUT_ON_GET = True
