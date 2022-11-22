@@ -221,6 +221,22 @@ class OthersProfileSkillseatView(generic.DetailView):
         print(context)
         return context
 
+
+class RequestApplicationView(generic.CreateView):
+    model = Request
+    template_name = "request_application.html"
+    form_class = RequestApplicationCreateForm
+    success_url = reverse_lazy('skillswap:course-selection')
+
+    def form_valid(self, form):
+        request = form.save(commit=False)
+        request.user = self.request.user.id
+        # 講座IDもpkかなにかで保存する文書く
+        request.save()
+        return super().form_valid(form)
+
+
+# お問い合わせ
 class InquiryView(generic.CreateView):
     model = Inquiry
     template_name = "inquiry.html"

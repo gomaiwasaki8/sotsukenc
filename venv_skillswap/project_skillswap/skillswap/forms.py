@@ -90,6 +90,13 @@ class MyCourseCreateForm(forms.ModelForm):
         fields = ('title', 'detail', 'course_img',)
 
 
+# 依頼申請文作成フォーム
+class RequestApplicationCreateForm(forms.ModelForm):
+    class Meta:
+        model = Request
+        fields = ('message',)
+
+
 class InquiryCreateForm(forms.ModelForm):
     class Meta:
         model = Inquiry
