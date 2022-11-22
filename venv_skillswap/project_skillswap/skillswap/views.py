@@ -13,6 +13,7 @@ from .forms import *
 from .models import *
 from django import forms
 
+import re
 
 class IndexView(generic.TemplateView):
     template_name = "index.html"
@@ -45,15 +46,44 @@ class SkillseatCreateView(generic.CreateView):
 # 言語作成（確認画面無し）
 class LanguageCreateView(generic.CreateView):
     model = Language
-    template_name = "language_create.html"
+    template_name = "language_create(sensei).html"
     form_class = LanguageCreateForm
     success_url = reverse_lazy('skillswap:course-selection')
 
-    def form_valid(self, form):
-        language = form.save(commit=False)
-        language.user_id = self.request.user
-        language.save()
-        return super().form_valid(form)
+    def post(self, request, *args, **kwrgs):
+        # 空の配列を作ります
+        genre_1List = []
+        genre_2List = []
+        careerList = []
+        language_detailList = []
+
+        # request.POST.items()でPOSTで送られてきた全てを取得。
+        for i in request.POST.items():
+            # name属性のtitle_から始まるものをtitleListに追加
+            if re.match(r'genres_1_*', i[0]):
+                genre_1List.append(i[1])
+            if re.match(r'genres_2_*', i[0]):
+                genre_2List.append(i[1])
+            if re.match(r'career_*', i[0]):
+                careerList.append(i[1])
+            if re.match(r'language_detail_*', i[0]):
+                language_detailList.append(i[1])
+
+        # titleListの要素数分を回す
+        for i in range(len(genre_1List)):
+            language = Language.objects.create(
+                user_id_id=self.request.user.id,
+                genre_1=genre_1List[i],
+                genre_2=genre_2List[i],
+                career=careerList[i],
+                language_detail=language_detailList[i],
+            )
+            language.save()
+        return redirect("skillswap:inquiry")
+
+    def form_invalid(self, form):
+        print("失敗！")
+        return super().form_invalid(form)
 
 
 class SkillseatUpdateView(generic.UpdateView):

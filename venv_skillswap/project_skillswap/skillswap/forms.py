@@ -42,6 +42,15 @@ class ProfileTextCreateForm(forms.ModelForm):
         fields = ('profile_text',)
 
 
+FIELD_NAME_MAPPING = {
+        # 'Modelクラスのフィールド名' : 'name属性の値'
+        'genre_1': 'genres_1_0',
+        'genre_2': 'genres_2_0',
+        'career': 'career_0',
+        'language_detail': 'language_detail_0',
+    }
+
+
 class LanguageCreateForm(forms.ModelForm):
     class Meta:
         model = Language
@@ -50,19 +59,23 @@ class LanguageCreateForm(forms.ModelForm):
         # テキストエリアの高さ、幅を指定
         widgets = {
             'genre_1': forms.Textarea(
-                attrs={'rows': 1, 'cols': 15, 'placeholder': "例）OS", 'id': "language_0", 'name': "genre1_0"}
+                attrs={'rows': 1, 'cols': 15, 'placeholder': "例）OS", 'id': "genres_1_0", }
             ),
             'genre_2': forms.Textarea(
-                attrs={'rows': 1, 'cols': 15, 'placeholder': "例）Linux", 'id': "language_0", 'name': "genre2_0"}
+                attrs={'rows': 1, 'cols': 15, 'placeholder': "例）Linux", 'id': "genres_2_0", }
             ),
             'career': forms.Textarea(
-                attrs={'rows': 1, 'cols': 15, 'placeholder': "例）x年xか月", 'id': "language_0", 'name': "career_0"}
+                attrs={'rows': 1, 'cols': 15, 'placeholder': "例）x年xか月", 'id': "career_0", }
             ),
             'language_detail': forms.Textarea(
                 attrs={'rows': 1, 'cols': 30, 'placeholder': "例）環境設計・構築が可能",
-                       'id': "language_0", 'name': "language_detail_0"
+                       'id': "language_detail_0",
                        }),
         }
+
+    def add_prefix(self, field_name):
+        field_name = FIELD_NAME_MAPPING.get(field_name, field_name)
+        return super(LanguageCreateForm, self).add_prefix(field_name)
 
     # def __init__(self, *args, **kwargs):
     #     super().__init__(*args, **kwargs)
