@@ -203,3 +203,16 @@ Views.py
 #             'form': form
 #         }
 #         return render(request, '../templates/language_input.html', context)
+
+
+
+SkillseatCreateViewの文
+    # def get(self, request, *args, **kwargs):
+    #     if Skillseat.objects.filter(user_id_id=self.request.user).exists():
+    #         return redirect('skillswap:language-create')
+
+LanguageCreateViewの文
+    # def get(self, request, *args, **kwargs):
+    #     if Language.objects.filter(user_id_id=self.request.user).exists():
+    #         return redirect('skillswap:course-selection')
+
