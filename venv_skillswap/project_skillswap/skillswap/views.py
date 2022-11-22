@@ -43,7 +43,7 @@ class SkillseatCreateView(generic.CreateView):
         return super().form_valid(form)
 
 
-# 言語作成（確認画面無し）
+# 言語作成（確認画面無し。入力フォーム増減可能。）
 class LanguageCreateView(generic.CreateView):
     model = Language
     template_name = "language_create(sensei).html"
@@ -79,10 +79,10 @@ class LanguageCreateView(generic.CreateView):
                 language_detail=language_detailList[i],
             )
             language.save()
-        return redirect("skillswap:inquiry")
+        return redirect("skillswap:course-selection")
 
     def form_invalid(self, form):
-        print("失敗！")
+        print("失敗しました。")
         return super().form_invalid(form)
 
 
