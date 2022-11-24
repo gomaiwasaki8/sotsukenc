@@ -25,9 +25,9 @@ class IndexView(generic.TemplateView):
 class AfterLoginView(generic.View):
     def get(self, request):
         if Language.objects.filter(user_id_id=self.request.user).exists() and Skillseat.objects.filter(user_id_id=self.request.user).exists():
-            return redirect('skillswap:inquiry')
+            return redirect('skillswap:course-selection')
         elif Skillseat.objects.filter(user_id_id=self.request.user).exists():
-            return redirect('skillswap:')
+            return redirect('skillswap:language-create')
         else:
             return redirect('skillswap:skillseat-create')
 
@@ -100,7 +100,33 @@ class SkillseatUpdateView(generic.UpdateView):
 
 # 言語スキルシートの更新
 class LanguageUpdateView(generic.UpdateView):
-    template_name = ""
+    model = Language
+    template_name = "language_update.html"
+    form_class = LanguageCreateForm
+
+    # slug_field = "user_id_id"
+    # slug_url_kwarg = "user_id_id"
+    #
+    # def get_context_data(self, **kwargs):
+    #     context = super(LanguageUpdateView, self).get_context_data(**kwargs)
+    #     context.update({
+    #         'language_list': Language.objects.filter(user_id_id=self.kwargs['user_id_id']),
+    #     })
+    #     return context
+
+    success_url = reverse_lazy('skillswap:skillseat-browse')
+
+
+# マイページの言語スキルシート削除
+class LanguageDeleteView(generic.DeleteView):
+    model = Language
+    template_name = "language_delete.html"
+
+    def get_queryset(self):
+        language = Language.objects.filter(id=self.kwargs['pk'])
+        return language
+
+    success_url = reverse_lazy('skillswap:skillseat-browse')
 
 
 # マイページの言語スキルシート閲覧
@@ -112,7 +138,7 @@ class SkillseatBrowseView(generic.ListView):
     def get_context_data(self, **kwargs):
         context = super(SkillseatBrowseView, self).get_context_data(**kwargs)
         context.update({
-            'language_list': Language.objects.filter(user_id_id=self.request.user),
+            'language_list': Language.objects.filter(user_id_id=self.request.user).order_by('created_at'),
             'course_list': Course.objects.filter(user_id_id=self.request.user),
         })
         return context

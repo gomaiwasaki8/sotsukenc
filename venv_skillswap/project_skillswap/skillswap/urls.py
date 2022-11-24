@@ -32,7 +32,9 @@ urlpatterns = [
     # 言語の作成
     path('language-create/', views.LanguageCreateView.as_view(), name="language-create"),
     # 言語の更新
-    path('language-update/', views.LanguageUpdateView.as_view(), name="language-update"),
+    path('language-update/<int:pk>/', views.LanguageUpdateView.as_view(), name="language-update"),
+    # 言語の削除
+    path('language-delete/<int:pk>/', views.LanguageDeleteView.as_view(), name="language-delete"),
     # マイページのプロフィール文章閲覧
     path('my-page/profile-text/', views.ProfileTextView.as_view(), name="profile-text"),
     # マイページのプロフィール文章更新

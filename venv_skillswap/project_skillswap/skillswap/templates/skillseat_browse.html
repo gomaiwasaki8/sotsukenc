@@ -56,10 +56,12 @@
                 <td>{{ language.genre_2 }}</td>
                 <td>{{ language.career }}</td>
                 <td>{{ language.language_detail }}</td>
+                <td><button class="btn"><a href="{% url 'skillswap:language-update' language.pk %}">更新</a></button></td>
+                <td><button class="btn"><a href="{% url 'skillswap:language-delete' language.pk %}">削除</a></button></td>
             </tr>
             {% endfor %}
         </table>
-        <button class="btn"><a href="">更新</a></button>
+        <a href="{% url 'skillswap:language-create' %}"><button class="btn">追加</button></a>
     </div>
 </div>
 {% endblock %}
