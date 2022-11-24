@@ -31,6 +31,8 @@ urlpatterns = [
     # path('language-create/', views.language_data_create, name="language-create"),
     # 言語の作成
     path('language-create/', views.LanguageCreateView.as_view(), name="language-create"),
+    # 言語の更新
+    path('language-update/', views.LanguageUpdateView.as_view(), name="language-update"),
     # マイページのプロフィール文章閲覧
     path('my-page/profile-text/', views.ProfileTextView.as_view(), name="profile-text"),
     # マイページのプロフィール文章更新

@@ -15,10 +15,13 @@ from django import forms
 
 import re
 
+
+# ホーム画面（ログイン前）
 class IndexView(generic.TemplateView):
     template_name = "index.html"
 
 
+# ログイン後の遷移先
 class AfterLoginView(generic.View):
     def get(self, request):
         if Language.objects.filter(user_id_id=self.request.user).exists() and Skillseat.objects.filter(user_id_id=self.request.user).exists():
@@ -43,7 +46,7 @@ class SkillseatCreateView(generic.CreateView):
         return super().form_valid(form)
 
 
-# 言語作成（確認画面無し。入力フォーム増減可能。）
+# 言語スキルシート作成（確認画面無し。入力フォーム増減可能。）
 class LanguageCreateView(generic.CreateView):
     model = Language
     template_name = "language_create(sensei).html"
@@ -86,6 +89,7 @@ class LanguageCreateView(generic.CreateView):
         return super().form_invalid(form)
 
 
+# アカウント情報の更新
 class SkillseatUpdateView(generic.UpdateView):
     model = Skillseat
     template_name = "skillseat_update.html"
@@ -94,6 +98,12 @@ class SkillseatUpdateView(generic.UpdateView):
     success_url = reverse_lazy('skillswap:skillseat-browse')
 
 
+# 言語スキルシートの更新
+class LanguageUpdateView(generic.UpdateView):
+    template_name = ""
+
+
+# マイページの言語スキルシート閲覧
 class SkillseatBrowseView(generic.ListView):
     template_name = "skillseat_browse.html"
     model = Skillseat
@@ -111,7 +121,7 @@ class SkillseatBrowseView(generic.ListView):
         return Skillseat.objects.filter(user_id_id=self.request.user)
 
 
-# プロフィール文章閲覧
+# 自分のプロフィール文章閲覧
 class ProfileTextView(generic.ListView):
     model = Skillseat
     template_name = "profile_text.html"
@@ -121,6 +131,7 @@ class ProfileTextView(generic.ListView):
         return profile_text
 
 
+# 自分のプロフィール文章の更新
 class ProfileTextUpdateView(generic.UpdateView):
     model = Skillseat
     template_name = "profile_text_update.html"
@@ -128,12 +139,13 @@ class ProfileTextUpdateView(generic.UpdateView):
     success_url = reverse_lazy('skillswap:profile-text')
 
 
-# 講座選択
+# 講座選択（ログイン後遷移する）
 class CourseSelectionView(generic.ListView):
     model = Course
     template_name = "course_selection.html"
 
 
+# 自分の講座の閲覧
 class MyCourseView(generic.ListView):
     model = Course
     template_name = "my_course.html"
@@ -143,6 +155,7 @@ class MyCourseView(generic.ListView):
         return courses
 
 
+# 自分の講座作成
 class MyCourseCreateView(generic.CreateView):
     model = Course
     template_name = "my_course_create.html"
@@ -157,6 +170,7 @@ class MyCourseCreateView(generic.CreateView):
     # 失敗した時の処理特に書いてないのであとで追記するかも
 
 
+# 自分の講座の更新
 class MyCourseUpdateView(generic.UpdateView):
     model = Course
     template_name = "my_course_update.html"
@@ -164,6 +178,7 @@ class MyCourseUpdateView(generic.UpdateView):
     success_url = reverse_lazy('skillswap:my-course')
 
 
+# 自分の講座詳細画面
 class CourseDetailView(generic.DetailView):
     model = Course
     template_name = "course_detail.html"
@@ -179,6 +194,7 @@ class CourseDetailView(generic.DetailView):
         return context
 
 
+# 他の人のプロフィール文章閲覧
 class OthersProfileTextView(generic.DetailView):
     model = Skillseat
     template_name = "others_profile_text.html"
@@ -190,7 +206,7 @@ class OthersProfileTextView(generic.DetailView):
         })
         return context
 
-
+# 他の人の講座閲覧
 class OthersProfileCourseView(generic.DetailView):
     model = Skillseat
     template_name = "others_profile_course.html"
@@ -206,6 +222,7 @@ class OthersProfileCourseView(generic.DetailView):
         return context
 
 
+# 他の人のアカウント情報閲覧
 class OthersProfileSkillseatView(generic.DetailView):
     model = Skillseat
     template_name = "others_profile_skillseat.html"
@@ -222,6 +239,7 @@ class OthersProfileSkillseatView(generic.DetailView):
         return context
 
 
+# 依頼申請の作成（未完成）
 class RequestApplicationView(generic.CreateView):
     model = Request
     template_name = "request_application.html"
@@ -236,7 +254,7 @@ class RequestApplicationView(generic.CreateView):
         return super().form_valid(form)
 
 
-# お問い合わせ
+# お問い合わせ入力画面
 class InquiryView(generic.CreateView):
     model = Inquiry
     template_name = "inquiry.html"
