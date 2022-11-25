@@ -49,6 +49,11 @@
                 <th>{{ request.message }}</th>
             </tr>
             {% endfor %}
+            {% for course in course_list %}
+            <tr>
+                <th>{{ course.title }}</th>
+            </tr>
+            {% endfor %}
         </table>
     </div>
 </div>
