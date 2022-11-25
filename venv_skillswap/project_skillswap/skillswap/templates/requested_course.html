@@ -43,18 +43,20 @@
     </div>
 
     <div>
-        <table border="1">
-            {% for request in request_list %}
-            <tr>
-                <th>{{ request.message }}</th>
-            </tr>
-            {% endfor %}
+
+        <ul>
             {% for course in course_list %}
-            <tr>
-                <th>{{ course.title }}</th>
-            </tr>
+            <li><img src="{{ course.course_img.url }}" width="200" height="200"/></li>
+            <li>{{ course.title }}</li>
+            <li>{{ course.detail }}</li>
+            <li><a href=""><button>キャンセル</button></a></li>
             {% endfor %}
-        </table>
+        </ul>
+        <ul>
+            {% for request in request_list %}
+            <li>{{ request.message }}</li>
+            {% endfor %}
+        </ul>
     </div>
 </div>
 {% endblock %}

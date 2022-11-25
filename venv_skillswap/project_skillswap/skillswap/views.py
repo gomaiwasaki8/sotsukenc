@@ -294,7 +294,7 @@ class RequestedCourseView(generic.ListView):
         context.update({
             'request_list': Request.objects.filter(
                 user_id_id=self.request.user, request_completed__isnull=True).order_by('created_at'),
-            'course_list': Course.objects.filter(user_id_id=self.request.user).order_by('created_at'),
+            'course_list': Course.objects.filter(request__user_id_id__exact=self.request.user).order_by('created_at'),
         })
         return context
 
