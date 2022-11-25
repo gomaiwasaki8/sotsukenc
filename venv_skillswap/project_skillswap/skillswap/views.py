@@ -193,8 +193,10 @@ class MyCourseCreateView(generic.CreateView):
 
     def form_valid(self, form):
         course = form.save(commit=False)
+        print("course------>>>>", course)
         course.user_id = self.request.user
         course.save()
+        print("course->>>>>>>>>", course)
         return super().form_valid(form)
     # 失敗した時の処理特に書いてないのであとで追記するかも
 
@@ -276,12 +278,10 @@ class RequestApplicationView(generic.CreateView):
     success_url = reverse_lazy('skillswap:course-selection')
 
     def form_valid(self, form):
-        request = form.save(commit=False)
-        request.user = self.request.user.id
-        # print("request.user---->>>>", request.user)
-        # print("request.course_id---->>>>", request.course_id)
-        request.course_id = self.kwargs['pk']
-        request.save()
+        reques = form.save(commit=False)
+        reques.user_id = self.request.user
+        reques.course_id_id = self.kwargs['pk']
+        reques.save()
         return super().form_valid(form)
 
 
