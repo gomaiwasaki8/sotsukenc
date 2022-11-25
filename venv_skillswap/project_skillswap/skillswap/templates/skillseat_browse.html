@@ -5,7 +5,48 @@
 
 {% block active_diary_list %}active{% endblock %}
 
-{% block head %}{% endblock %}
+{% block head %}
+<style>
+    .btn1{
+      width:80px;
+      height:35px;
+      background:rgb(70,130,180);
+      border-radius:35px;
+      cursor : pointer;
+      font-family: cursive, 'Noto Sans JP', sans-serif;
+      margin-left: 900px;
+    }
+    .img1{
+      position: absolute;
+      top:19%;
+      left:5%;
+      z-index: -1;
+    }
+    .choice{
+      font-family: cursive, 'Noto Sans JP', sans-serif;
+       margin: 0px 0px 0px 60px;
+    }
+    .choice1{
+       margin: 0px 0px 60px 0px;
+    }
+    table{
+      position: absolute;
+      top:38%;
+      left:20%;
+    }
+    .btn2{
+      width:80px;
+      height:35px;
+      background:rgb(70,130,180);
+      border-radius:35px;
+      cursor : pointer;
+      font-family: cursive, 'Noto Sans JP', sans-serif;
+      margin-left: 1200px;
+      position: absolute;
+      top:80%;
+    }
+</style>
+{% endblock %}
 
 {% block header %}{% endblock %}
 
@@ -14,32 +55,41 @@
     <div class="daily">
         {% for skillseat in skillseat_list %}
         {% if skillseat.user_img %}
-        <img src="{{ skillseat.user_img.url }}" width="200" height="200"/>
+        <img class="img1" src="{{ skillseat.user_img.url }}" width="120" height="120"/>
         {% else %}
-        <img src="{% static 'assets/sample.png' %}" width="200" height="200"/>
+        <img class="img1" src="{% static 'assets/sample.png' %}" width="120" height="120"/>
         {% endif %}
 
-        <h2>名前：{{ skillseat.user_name }}</h2>
-        <h2>性別：{{ skillseat.gender }}</h2>
-        <h2>生年月日：{{ skillseat.birthday }}</h2>
-        {% if skillseat.user_evaluation %}
-        <h2>評価：{{ skillseat.user_evaluation }}</h2>
-        {% endif %}
+        <div class="info">
+            <h2>
+                <span class="cl1">名前：{{ skillseat.user_name }}</span>
+                <span class="cl2">性別：{{ skillseat.gender }}</span>
+                生年月日：{{ skillseat.birthday }}
+            </h2>
+            {% if skillseat.user_evaluation %}
+            <h2>評価：{{ skillseat.user_evaluation }}</h2>
+            {% endif %}
+            <button class="btn1"><a href="{% url 'skillswap:skillseat-update' skillseat.pk %}">更新</a></button>
+        </div>
 
-        <button class="btn"><a href="{% url 'skillswap:skillseat-update' skillseat.pk %}">更新</a></button>
 
         {% endfor %}
 
 
     </div>
 
-    <div>
-        <a href="{% url 'skillswap:profile-text' %}">プロフィール文章</a><br>
-        <a href="{% url 'skillswap:skillseat-browse' %}">スキルシート</a><br>
-        <a href="{% url 'skillswap:my-course' %}">マイ講座</a><br>
-        <a href="">お気に入りの講座</a><br>
-        <a href="{% url 'skillswap:requested-course' %}">依頼済みの講座</a><br>
-        <a href="">講座受講履歴</a><br>
+    <div class="choice">
+        <a class="choice1" href="{% url 'skillswap:profile-text' %}">｜プロフィール文章</a><br>
+        <br>
+        <a class="choice1" href="{% url 'skillswap:skillseat-browse' %}">｜スキルシート</a><br>
+        <br>
+        <a class="choice1" href="{% url 'skillswap:my-course' %}">｜マイ講座</a><br>
+        <br>
+        <a class="choice1" href="">｜お気に入りの講座</a><br>
+        <br>
+        <a class="choice1" href="{% url 'skillswap:requested-course' %}">｜依頼済みの講座</a><br>
+        <br>
+        <a class="choice1" href="">｜講座受講履歴</a><br>
     </div>
 
     <div>
@@ -56,12 +106,12 @@
                 <td>{{ language.genre_2 }}</td>
                 <td>{{ language.career }}</td>
                 <td>{{ language.language_detail }}</td>
-                <td><a href="{% url 'skillswap:language-update' language.pk %}"><button class="btn">更新</button></a></td>
-                <td><a href="{% url 'skillswap:language-delete' language.pk %}"><button class="btn">削除</button></a></td>
+                <td><a href="{% url 'skillswap:language-update' language.pk %}"><button class="btn2">更新</button></a></td>
+                <td><a href="{% url 'skillswap:language-delete' language.pk %}"><button class="btn2">削除</button></a></td>
             </tr>
             {% endfor %}
         </table>
-        <a href="{% url 'skillswap:language-create' %}"><button class="btn">追加</button></a>
+        <a href="{% url 'skillswap:language-create' %}"><button class="btn2">追加</button></a>
     </div>
 </div>
 {% endblock %}
