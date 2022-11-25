@@ -193,10 +193,8 @@ class MyCourseCreateView(generic.CreateView):
 
     def form_valid(self, form):
         course = form.save(commit=False)
-        print("course------>>>>", course)
         course.user_id = self.request.user
         course.save()
-        print("course->>>>>>>>>", course)
         return super().form_valid(form)
     # 失敗した時の処理特に書いてないのであとで追記するかも
 
@@ -236,6 +234,7 @@ class OthersProfileTextView(generic.DetailView):
             'skillseat_list': Skillseat.objects.filter(id=self.kwargs['pk']),
         })
         return context
+
 
 # 他の人の講座閲覧
 class OthersProfileCourseView(generic.DetailView):
@@ -278,11 +277,29 @@ class RequestApplicationView(generic.CreateView):
     success_url = reverse_lazy('skillswap:course-selection')
 
     def form_valid(self, form):
-        reques = form.save(commit=False)
-        reques.user_id = self.request.user
-        reques.course_id_id = self.kwargs['pk']
-        reques.save()
+        request = form.save(commit=False)
+        request.user_id = self.request.user
+        request.course_id_id = self.kwargs['pk']
+        request.save()
         return super().form_valid(form)
+
+
+class RequestedCourseView(generic.ListView):
+    template_name = "requested_course.html"
+    model = Skillseat
+    context_object_name = 'skillseat_list'
+
+    def get_context_data(self, **kwargs):
+        context = super(RequestedCourseView, self).get_context_data(**kwargs)
+        context.update({
+            'request_list': Request.objects.filter(
+                user_id_id=self.request.user, request_completed__isnull=True).order_by('created_at'),
+            # 'course_list': Course.objects.filter(user_id_id=),
+        })
+        return context
+
+    def get_queryset(self):
+        return Skillseat.objects.filter(user_id_id=self.request.user)
 
 
 # お問い合わせ入力画面

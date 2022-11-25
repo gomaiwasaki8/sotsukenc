@@ -66,7 +66,8 @@ urlpatterns = [
     path('others-profile/skillseat/<int:user_id_id>/', views.OthersProfileSkillseatView.as_view(),
          name="others-profile-skillseat"),
     # 依頼申請
-    path('request-application/<int:pk>/', views.RequestApplicationView.as_view(), name="request-application")
-
+    path('request-application/<int:pk>/', views.RequestApplicationView.as_view(), name="request-application"),
+    # 依頼申請済みの講座
+    path('my-page/requested-course/', views.RequestedCourseView.as_view(), name="requested-course"),
 
 ]

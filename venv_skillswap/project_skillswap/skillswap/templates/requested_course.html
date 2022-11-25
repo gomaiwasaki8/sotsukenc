@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}SKILLSWAP | スキルシート{% endblock %}
+{% block title %}SKILLSWAP | 依頼済みの講座{% endblock %}
 
 {% block active_diary_list %}active{% endblock %}
 
@@ -38,30 +38,18 @@
         <a href="{% url 'skillswap:skillseat-browse' %}">スキルシート</a><br>
         <a href="{% url 'skillswap:my-course' %}">マイ講座</a><br>
         <a href="">お気に入りの講座</a><br>
-        <a href="{% url 'skillswap:requested-course' %}">依頼済みの講座</a><br>
+        <a href="">依頼済みの講座</a><br>
         <a href="">講座受講履歴</a><br>
     </div>
 
     <div>
         <table border="1">
-<!--            <tr>-->
-<!--                <th></th>-->
-<!--                <th></th>-->
-<!--                <th></th>-->
-<!--                <th></th>-->
-<!--            </tr>-->
-            {% for language in language_list %}
+            {% for request in request_list %}
             <tr>
-                <th>{{ language.genre_1 }}</th>
-                <td>{{ language.genre_2 }}</td>
-                <td>{{ language.career }}</td>
-                <td>{{ language.language_detail }}</td>
-                <td><a href="{% url 'skillswap:language-update' language.pk %}"><button class="btn">更新</button></a></td>
-                <td><a href="{% url 'skillswap:language-delete' language.pk %}"><button class="btn">削除</button></a></td>
+                <th>{{ request.message }}</th>
             </tr>
             {% endfor %}
         </table>
-        <a href="{% url 'skillswap:language-create' %}"><button class="btn">追加</button></a>
     </div>
 </div>
 {% endblock %}
