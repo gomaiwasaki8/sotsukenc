@@ -278,7 +278,9 @@ class RequestApplicationView(generic.CreateView):
     def form_valid(self, form):
         request = form.save(commit=False)
         request.user = self.request.user.id
-        # 講座IDもpkかなにかで保存する文書く
+        # print("request.user---->>>>", request.user)
+        # print("request.course_id---->>>>", request.course_id)
+        request.course_id = self.kwargs['pk']
         request.save()
         return super().form_valid(form)
 

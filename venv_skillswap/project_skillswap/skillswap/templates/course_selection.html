@@ -27,7 +27,7 @@
                     <th>{{ course.title }}</th>
                     <td>{{ course.detail }}</td>
                     {% if course.id != user.id %}
-                    <td><a href="{% url 'skillswap:request-application' %}"><button>依頼</button></a></td>
+                    <td><a href="{% url 'skillswap:request-application' course.pk %}"><button>依頼</button></a></td>
                     {% endif %}
                 </tr>
             </table>
