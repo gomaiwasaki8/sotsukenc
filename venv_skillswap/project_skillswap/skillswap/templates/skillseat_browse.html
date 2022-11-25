@@ -93,6 +93,7 @@
     </div>
 
     <div>
+        {% if language_list %}
         <table border="1">
 <!--            <tr>-->
 <!--                <th></th>-->
@@ -106,12 +107,15 @@
                 <td>{{ language.genre_2 }}</td>
                 <td>{{ language.career }}</td>
                 <td>{{ language.language_detail }}</td>
-                <td><a href="{% url 'skillswap:language-update' language.pk %}"><button class="btn2">更新</button></a></td>
-                <td><a href="{% url 'skillswap:language-delete' language.pk %}"><button class="btn2">削除</button></a></td>
+                <td><a href="{% url 'skillswap:language-update' language.pk %}"><button>更新</button></a></td>
+                <td><a href="{% url 'skillswap:language-delete' language.pk %}"><button>削除</button></a></td>
             </tr>
             {% endfor %}
         </table>
-        <a href="{% url 'skillswap:language-create' %}"><button class="btn2">追加</button></a>
+        {% else %}
+        <p>作成していません。</p>
+        {% endif %}
+    <a href="{% url 'skillswap:language-create' %}"><button class="btn2">追加</button></a>
     </div>
 </div>
 {% endblock %}
