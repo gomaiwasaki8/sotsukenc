@@ -49,7 +49,7 @@ class SkillseatCreateView(generic.CreateView):
 # 言語スキルシート作成（確認画面無し。入力フォーム増減可能。）
 class LanguageCreateView(generic.CreateView):
     model = Language
-    template_name = "language_create(sensei).html"
+    template_name = "language_create.html"
     form_class = LanguageCreateForm
     success_url = reverse_lazy('skillswap:course-selection')
 
@@ -169,6 +169,9 @@ class ProfileTextUpdateView(generic.UpdateView):
 class CourseSelectionView(generic.ListView):
     model = Course
     template_name = "course_selection.html"
+
+    def get_queryset(self):
+        return Course.objects.order_by('created_at')
 
 
 # 自分の講座の閲覧

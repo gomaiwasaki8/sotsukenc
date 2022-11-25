@@ -10,11 +10,11 @@
 {% block header %}{% endblock %}
 
 {% block contents %}
-<div class="container">
+<div class="container" xmlns="http://www.w3.org/1999/html">
     <div class="daily">
         {% for skillseat in skillseat_list %}
         <p>プロフィール文章：{{ skillseat.profile_text }}</p>
-        <button class="btn"><a href="{% url 'skillswap:profile-text-update' skillseat.pk %}">更新</a>
+        <a href="{% url 'skillswap:profile-text-update' skillseat.pk %}"><button class="btn">更新</button></a>
         {% endfor %}
     </div>
 
