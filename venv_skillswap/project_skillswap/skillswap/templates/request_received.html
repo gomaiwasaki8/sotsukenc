@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}SKILLSWAP | もらった依頼{% endblock %}
+
+{% block active_diary_list %}active{% endblock %}
+
+{% block head %}{% endblock %}
+
+{% block header %}{% endblock %}
+
+{% block contents %}
+<div class="container">
+    <div>
+
+        <ul>
+            {% for course in course_list %}
+            {% if course.course_img %}
+            <li><img src="{{ course.course_img.url }}" width="200" height="200"/></li>
+            {% else %}
+            <li><img src="{% static 'assets/sample.png' %}" width="200" height="200"/></li>
+            {% endif %}
+            <li>{{ course.title }}</li>
+            <li>{{ course.detail }}</li>
+            <li><a href=""><button>許可</button></a></li>
+            <li><a href=""><button>拒否</button></a></li>
+            {% endfor %}
+        </ul>
+        <ul>
+            {% for request in request_list %}
+            <li>{{ request.message }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}

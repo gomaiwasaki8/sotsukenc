@@ -269,7 +269,7 @@ class OthersProfileSkillseatView(generic.DetailView):
         return context
 
 
-# 依頼申請の作成（未完成）
+# 依頼申請の作成
 class RequestApplicationView(generic.CreateView):
     model = Request
     template_name = "request_application.html"
@@ -284,6 +284,7 @@ class RequestApplicationView(generic.CreateView):
         return super().form_valid(form)
 
 
+# 依頼申請済みの講座閲覧
 class RequestedCourseView(generic.ListView):
     template_name = "requested_course.html"
     model = Skillseat
@@ -300,6 +301,22 @@ class RequestedCourseView(generic.ListView):
 
     def get_queryset(self):
         return Skillseat.objects.filter(user_id_id=self.request.user)
+
+
+# 自分に来た依頼の閲覧
+class RequestReceivedView(generic.ListView):
+    model = Request
+    template_name = "request_received.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(RequestReceivedView, self).get_context_data(**kwargs)
+        context.update({
+            'request_list': Request.objects.filter().order_by('created_at'),
+            'course_list': Course.objects.filter(user_id_id=self.request.user).order_by('created_at'),
+        })
+        return context
+
+    # course__user_id_id__exact=self.request.user
 
 
 # お問い合わせ入力画面

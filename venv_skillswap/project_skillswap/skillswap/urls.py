@@ -69,5 +69,8 @@ urlpatterns = [
     path('request-application/<int:pk>/', views.RequestApplicationView.as_view(), name="request-application"),
     # 依頼申請済みの講座
     path('my-page/requested-course/', views.RequestedCourseView.as_view(), name="requested-course"),
+    # お知らせ（依頼）
+    path('news/request-received/', views.RequestReceivedView.as_view(), name="request-received"),
+
 
 ]

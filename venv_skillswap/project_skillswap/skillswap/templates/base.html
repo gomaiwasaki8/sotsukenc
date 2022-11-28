@@ -40,6 +40,11 @@
                     <button type="submit" al>
                         <i class="fas fa-search fa-fw"></i>
                     </button>
+
+                    {% if user.is_authenticated %}
+                    <a href="{% url 'skillswap:request-received' %}">お知らせ</a>
+                    {% endif %}
+
                     <select name="sampledrop" onChange="location.href=value;">
                         <img src="sample.png" alt="home" width="135" height="55">
                         <option>--選択--</option>
