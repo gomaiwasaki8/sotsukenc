@@ -173,17 +173,28 @@ class CourseSelectionView(generic.ListView):
     def get_queryset(self, **kwargs):
         course = super().get_queryset(**kwargs)
         query = self.request.GET
+        # print("query---->", query)
+        # print("post_query---->", post_query)
+
+        print(self.request)
 
         if q := query.get('q'):
+            print("qの場合")
             course = course.filter(title__contains=q)
-        return course.order_by('created_at')
+            return course.order_by('created_at')
+        elif query.get('a'):
+            print("aの場合")
+            return course.order_by('-created_at')
+        else:
+            print("elseの場合")
+            return course.order_by('created_at')
 
 
 # 自分の講座の閲覧
 class MyCourseView(generic.ListView):
     model = Course
     template_name = "my_course.html"
-    
+
     def get_context_data(self, **kwargs):
         context = super(MyCourseView, self).get_context_data(**kwargs)
         context.update({

@@ -13,6 +13,16 @@
 <div class="container">
     <div>
         <h1>講座選択</h1>
+
+<!--        <form action="{% url 'skillswap:course-selection' %}" method="POST">-->
+<!--            {% csrf_token %}-->
+<!--            <button type="submit" name="a" value="a">古い順</button>-->
+<!--        </form>-->
+
+        <a href="{% url 'skillswap:course-selection'%}">
+            <input type="button" value="a" name="a">
+        </a>
+
         {% for course in object_list %}
         <a href="{% url 'skillswap:course-detail' course.user_id_id %}">
             <table border="1">

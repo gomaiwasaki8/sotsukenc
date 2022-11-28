@@ -23,6 +23,7 @@
         {% if object %}
         <p>講座タイトル：{{ object.title }}</p>
         <p>説明：{{ object.detail }}</p>
+        <p><a href="{% url 'skillswap:request-application' object.pk %}"><button>依頼</button></a></p>
         {% else %}
         <p>まだ講座を作成していないユーザーです。</p>
         {% endif %}
