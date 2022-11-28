@@ -183,10 +183,14 @@ class CourseSelectionView(generic.ListView):
 class MyCourseView(generic.ListView):
     model = Course
     template_name = "my_course.html"
-
-    def get_queryset(self):
-        courses = Course.objects.filter(user_id_id=self.request.user).order_by('-created_at')
-        return courses
+    
+    def get_context_data(self, **kwargs):
+        context = super(MyCourseView, self).get_context_data(**kwargs)
+        context.update({
+            'skillseat_list': Skillseat.objects.filter(user_id_id=self.request.user),
+            'course_list': Course.objects.filter(user_id_id=self.request.user).order_by('-created_at')
+        })
+        return context
 
 
 # 自分の講座作成
