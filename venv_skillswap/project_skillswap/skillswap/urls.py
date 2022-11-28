@@ -71,6 +71,6 @@ urlpatterns = [
     path('my-page/requested-course/', views.RequestedCourseView.as_view(), name="requested-course"),
     # お知らせ（依頼）
     path('news/request-received/', views.RequestReceivedView.as_view(), name="request-received"),
-
-
+    # # 検索結果
+    # path('search/', views.SearchView.as_view(), )
 ]

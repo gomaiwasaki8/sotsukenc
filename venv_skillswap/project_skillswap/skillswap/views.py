@@ -170,8 +170,13 @@ class CourseSelectionView(generic.ListView):
     model = Course
     template_name = "course_selection.html"
 
-    def get_queryset(self):
-        return Course.objects.order_by('created_at')
+    def get_queryset(self, **kwargs):
+        course = super().get_queryset(**kwargs)
+        query = self.request.GET
+
+        if q := query.get('q'):
+            course = course.filter(title__contains=q)
+        return course.order_by('created_at')
 
 
 # 自分の講座の閲覧
