@@ -85,7 +85,7 @@ class LanguageCreateView(generic.CreateView):
         return redirect("skillswap:course-selection")
 
     def form_invalid(self, form):
-        print("失敗しました。")
+        # print("失敗しました。")
         return super().form_invalid(form)
 
 
@@ -265,7 +265,6 @@ class OthersProfileSkillseatView(generic.DetailView):
             'skillseat_list': Skillseat.objects.filter(user_id_id=self.kwargs['user_id_id']),
             'language_list': Language.objects.filter(user_id_id=self.kwargs['user_id_id']),
         })
-        print(context)
         return context
 
 
@@ -303,7 +302,7 @@ class RequestedCourseView(generic.ListView):
         return Skillseat.objects.filter(user_id_id=self.request.user)
 
 
-# 自分に来た依頼の閲覧
+# 自分に来た依頼の閲覧（未完成）
 class RequestReceivedView(generic.ListView):
     model = Request
     template_name = "request_received.html"
@@ -311,6 +310,7 @@ class RequestReceivedView(generic.ListView):
     def get_context_data(self, **kwargs):
         context = super(RequestReceivedView, self).get_context_data(**kwargs)
         context.update({
+
             'request_list': Request.objects.filter().order_by('created_at'),
             'course_list': Course.objects.filter(user_id_id=self.request.user).order_by('created_at'),
         })

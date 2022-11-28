@@ -67,6 +67,8 @@ class Favorite(models.Model):
 class Request(models.Model):
 
     user_id = models.ForeignKey(CustomUser, verbose_name="ユーザーID", on_delete=models.PROTECT, max_length=10)
+    # user1_id = models.ForeignKey(CustomUser, verbose_name="ユーザー1ID", on_delete=models.PROTECT, max_length=10)
+    # user2_id = models.ForeignKey(CustomUser, verbose_name="ユーザー2ID", on_delete=models.PROTECT, max_length=10)
     course_id = models.ForeignKey(Course, verbose_name="講座ID", on_delete=models.PROTECT, max_length=10)
     message = models.CharField(verbose_name="メッセージ", max_length=500)
     request_completed = models.BooleanField(verbose_name="依頼成立", blank=True, null=True)
