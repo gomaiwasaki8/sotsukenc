@@ -21,8 +21,8 @@
 
         <form action="{% url 'skillswap:course-selection' %}" method="GET">
             {% csrf_token %}
-            <input type="submit" value="新着順" name="a">
-<!--            <input type="hidden" value="新着順" name="a">-->
+            <input type="submit" value="新着順" name="new">
+            <input type="submit" value="投稿順" name="old">
         </form>
 
 <!--        <a href="{% url 'skillswap:course-selection'%}">-->
