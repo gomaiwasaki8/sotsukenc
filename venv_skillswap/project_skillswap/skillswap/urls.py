@@ -44,9 +44,9 @@ urlpatterns = [
     # マイページのマイ講座閲覧
     path('my-page/my-course/', views.MyCourseView.as_view(), name="my-course"),
     # マイページのマイ講座作成
-    path('my-page/my-course/create/', views.MyCourseCreateView.as_view(), name="my-course-create"),
+    path('my-page/my-course-create/', views.MyCourseCreateView.as_view(), name="my-course-create"),
     # マイページのマイ講座更新
-    path('my-page/my-course/update/<int:pk>/', views.MyCourseUpdateView.as_view(), name="my-course-update"),
+    path('my-page/my-course-update/<int:pk>/', views.MyCourseUpdateView.as_view(), name="my-course-update"),
     # マイページのお気に入りの講座閲覧
     # path('my-page/favorite/', views.favoriteView.as_view(), name="favorite"),
     # マイページの依頼済みの講座閲覧
@@ -71,6 +71,5 @@ urlpatterns = [
     path('my-page/requested-course/', views.RequestedCourseView.as_view(), name="requested-course"),
     # お知らせ（依頼）
     path('news/request-received/', views.RequestReceivedView.as_view(), name="request-received"),
-    # # 検索結果
-    # path('search/', views.SearchView.as_view(), )
+
 ]

@@ -14,20 +14,11 @@
     <div>
         <h1>講座選択</h1>
 
-<!--        <form action="{% url 'skillswap:course-selection' %}" method="POST">-->
-<!--            {% csrf_token %}-->
-<!--            <button type="submit" name="a" value="a">古い順</button>-->
-<!--        </form>-->
-
         <form action="{% url 'skillswap:course-selection' %}" method="GET">
             {% csrf_token %}
             <input type="submit" value="新着順" name="new">
             <input type="submit" value="投稿順" name="old">
         </form>
-
-<!--        <a href="{% url 'skillswap:course-selection'%}">-->
-<!--            <input type="submit" value="新着順" name="a">-->
-<!--        </a>-->
 
         {% for course in object_list %}
         <a href="{% url 'skillswap:course-detail' course.user_id_id %}">
@@ -42,7 +33,7 @@
                     </td>
                     <th>{{ course.title }}</th>
                     <td>{{ course.detail }}</td>
-                    {% if course.id != user.id %}
+                    {% if course.user_id_id != user.id %}
                     <td><a href="{% url 'skillswap:request-application' course.pk %}"><button>依頼</button></a></td>
                     {% endif %}
                 </tr>
