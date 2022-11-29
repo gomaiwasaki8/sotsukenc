@@ -12,23 +12,10 @@ urlpatterns = [
     path('inquiry/', views.InquiryView.as_view(), name="inquiry"),
     # ログイン後
     path('after-login/', views.AfterLoginView.as_view(), name="after-login"),
-    # # スキルシートの入力
-    # path('skillseat-input/', views.skillseat_input, name="skillseat-input"),
-    # # スキルシートの確認
-    # path('skillseat-confirm/', views.user_data_confirm, name="skillseat-confirm"),
-    # # スキルシートの新規作成
-    # path('skillseat-create/', views.user_data_create, name="skillseat-create"),
     # スキルシートの作成
     path('skillseat-create/', views.SkillseatCreateView.as_view(), name="skillseat-create"),
     # スキルシートの更新
     path('skillseat-update/<int:pk>/', views.SkillseatUpdateView.as_view(), name="skillseat-update"),
-    # # 言語の入力
-    # path('language-input/', views.language_input, name="language-input"),
-    # path('language-input/', views.LanguageInput.as_view(), name="language-input"),
-    # 言語の確認
-    # path('language-confirm/', views.language_data_confirm, name="language-confirm"),
-    # 言語の新規作成
-    # path('language-create/', views.language_data_create, name="language-create"),
     # 言語の作成
     path('language-create/', views.LanguageCreateView.as_view(), name="language-create"),
     # 言語の更新
@@ -47,12 +34,6 @@ urlpatterns = [
     path('my-page/my-course-create/', views.MyCourseCreateView.as_view(), name="my-course-create"),
     # マイページのマイ講座更新
     path('my-page/my-course-update/<int:pk>/', views.MyCourseUpdateView.as_view(), name="my-course-update"),
-    # マイページのお気に入りの講座閲覧
-    # path('my-page/favorite/', views.favoriteView.as_view(), name="favorite"),
-    # マイページの依頼済みの講座閲覧
-    # path('my-page/request-course/', views.RequestCourseView.as_view(), name="request-course"),
-    # マイページの依頼履歴閲覧
-    # path('my-page/history-course/', views.HistoryCourseView.as_view(), name="history-course"),
     # 講座選択
     path('course-selection/', views.CourseSelectionView.as_view(), name="course-selection"),
     # 講座詳細
@@ -71,5 +52,7 @@ urlpatterns = [
     path('my-page/requested-course/', views.RequestedCourseView.as_view(), name="requested-course"),
     # お知らせ（依頼）
     path('news/request-received/', views.RequestReceivedView.as_view(), name="request-received"),
+    # 依頼の拒否
+    path('news/request-received/rejection/<int:pk>/', views.RequestRejectionView.as_view(), name="request-rejection")
 
 ]

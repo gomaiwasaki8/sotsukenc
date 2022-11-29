@@ -216,3 +216,29 @@ LanguageCreateViewの文
     #     if Language.objects.filter(user_id_id=self.request.user).exists():
     #         return redirect('skillswap:course-selection')
 
+
+
+
+url.py
+
+    # # スキルシートの入力
+    # path('skillseat-input/', views.skillseat_input, name="skillseat-input"),
+    # # スキルシートの確認
+    # path('skillseat-confirm/', views.user_data_confirm, name="skillseat-confirm"),
+    # # スキルシートの新規作成
+    # path('skillseat-create/', views.user_data_create, name="skillseat-create"),
+
+    # # 言語の入力
+    # path('language-input/', views.language_input, name="language-input"),
+    # path('language-input/', views.LanguageInput.as_view(), name="language-input"),
+    # 言語の確認
+    # path('language-confirm/', views.language_data_confirm, name="language-confirm"),
+    # 言語の新規作成
+    # path('language-create/', views.language_data_create, name="language-create"),
+
+    # マイページのお気に入りの講座閲覧
+    # path('my-page/favorite/', views.favoriteView.as_view(), name="favorite"),
+    # マイページの依頼済みの講座閲覧
+    # path('my-page/request-course/', views.RequestCourseView.as_view(), name="request-course"),
+    # マイページの依頼履歴閲覧
+    # path('my-page/history-course/', views.HistoryCourseView.as_view(), name="history-course"),

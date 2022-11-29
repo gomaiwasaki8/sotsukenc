@@ -174,8 +174,6 @@ class CourseSelectionView(generic.ListView):
         course = super().get_queryset(**kwargs)
         query = self.request.GET
 
-        print(self.request.GET)
-
         # 検索バーから抽出
         if q := query.get('q'):
             course = course.filter(title__contains=q)
@@ -300,6 +298,8 @@ class RequestApplicationView(generic.CreateView):
         request = form.save(commit=False)
         request.user_id = self.request.user
         request.course_id_id = self.kwargs['pk']
+        receiver = Course.objects.get(pk=self.kwargs['pk'])
+        request.receiver_id_id = receiver.user_id_id
         request.save()
         return super().form_valid(form)
 
@@ -323,7 +323,7 @@ class RequestedCourseView(generic.ListView):
         return Skillseat.objects.filter(user_id_id=self.request.user)
 
 
-# 自分に来た依頼の閲覧（未完成）
+# 自分に来た依頼の閲覧
 class RequestReceivedView(generic.ListView):
     model = Request
     template_name = "request_received.html"
@@ -331,13 +331,22 @@ class RequestReceivedView(generic.ListView):
     def get_context_data(self, **kwargs):
         context = super(RequestReceivedView, self).get_context_data(**kwargs)
         context.update({
-
-            'request_list': Request.objects.filter().order_by('created_at'),
-            'course_list': Course.objects.filter(user_id_id=self.request.user).order_by('created_at'),
+            # nullの物のみ表示
+            'request_list': Request.objects.filter(receiver_id_id=self.request.user).order_by('created_at'),
+            # 'course_list': Course.objects.filter().order_by('created_at'),
         })
         return context
 
-    # course__user_id_id__exact=self.request.user
+
+class RequestRejectionView(generic.UpdateView):
+    model = Request
+    template_name = "request_rejection.html"
+
+    def get(self, request, *args, **kwargs):
+        result = Request.objects.get(pk=self.kwargs['pk'])
+        result.request_completed = False
+        result.save()
+        return redirect('skillswap:request-received')
 
 
 # お問い合わせ入力画面
