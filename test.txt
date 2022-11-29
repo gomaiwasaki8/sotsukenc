@@ -14,4 +14,4 @@ test
 ①コマンドプロンプトで仮想環境に入る
 ②仮想環境の中でpip install -r requirements.txt
 
-ﾌﾟｷﾞｬｰ
+何で反映されないの
