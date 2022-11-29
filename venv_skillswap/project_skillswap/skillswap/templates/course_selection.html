@@ -19,9 +19,15 @@
 <!--            <button type="submit" name="a" value="a">古い順</button>-->
 <!--        </form>-->
 
-        <a href="{% url 'skillswap:course-selection'%}">
-            <input type="button" value="a" name="a">
-        </a>
+        <form action="{% url 'skillswap:course-selection' %}" method="GET">
+            {% csrf_token %}
+            <input type="submit" value="新着順" name="a">
+<!--            <input type="hidden" value="新着順" name="a">-->
+        </form>
+
+<!--        <a href="{% url 'skillswap:course-selection'%}">-->
+<!--            <input type="submit" value="新着順" name="a">-->
+<!--        </a>-->
 
         {% for course in object_list %}
         <a href="{% url 'skillswap:course-detail' course.user_id_id %}">

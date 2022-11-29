@@ -173,20 +173,16 @@ class CourseSelectionView(generic.ListView):
     def get_queryset(self, **kwargs):
         course = super().get_queryset(**kwargs)
         query = self.request.GET
-        # print("query---->", query)
-        # print("post_query---->", post_query)
 
-        print(self.request)
-
+        # 検索バーから抽出
         if q := query.get('q'):
-            print("qの場合")
             course = course.filter(title__contains=q)
             return course.order_by('created_at')
+        # 新着順
         elif query.get('a'):
-            print("aの場合")
             return course.order_by('-created_at')
+        # それ以外
         else:
-            print("elseの場合")
             return course.order_by('created_at')
 
 
