@@ -33,9 +33,21 @@
                     </td>
                     <th>{{ course.title }}</th>
                     <td>{{ course.detail }}</td>
+
                     {% if course.user_id_id != user.id %}
                     <td><a href="{% url 'skillswap:request-application' course.pk %}"><button>依頼</button></a></td>
                     {% endif %}
+
+
+<!--                    {% for request in request_list %}-->
+<!--                    {% if course.user_id_id != user.id %}-->
+<!--&lt;!&ndash;                        {% if request.user_id_id == user.id %}&ndash;&gt;-->
+<!--                        <td><a href="{% url 'skillswap:request-application' course.pk %}"><button>依頼</button></a></td>-->
+<!--&lt;!&ndash;                        {% else %}&ndash;&gt;-->
+<!--                        <td><a href="{% url 'skillswap:requested-course-cancel' request.pk %}"><button>キャンセル</button></a></td>-->
+<!--&lt;!&ndash;                        {% endif %}&ndash;&gt;-->
+<!--                    {% endif %}-->
+<!--                    {% endfor %}-->
                 </tr>
             </table>
         </a>

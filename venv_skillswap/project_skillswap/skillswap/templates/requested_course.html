@@ -53,12 +53,12 @@
             {% endif %}
             <li>{{ course.title }}</li>
             <li>{{ course.detail }}</li>
-            <li><a href=""><button>キャンセル</button></a></li>
             {% endfor %}
         </ul>
         <ul>
             {% for request in request_list %}
             <li>{{ request.message }}</li>
+            <li><a href="{% url 'skillswap:requested-course-cancel' request.pk %}"><button>キャンセル</button></a></li>
             {% endfor %}
         </ul>
     </div>

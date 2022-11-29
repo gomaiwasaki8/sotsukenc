@@ -170,6 +170,13 @@ class CourseSelectionView(generic.ListView):
     model = Course
     template_name = "course_selection.html"
 
+    def get_context_data(self, **kwargs):
+        context = super(CourseSelectionView, self).get_context_data(**kwargs)
+        context.update({
+            'request_list': Request.objects.order_by('created_at'),
+        })
+        return context
+
     def get_queryset(self, **kwargs):
         course = super().get_queryset(**kwargs)
         query = self.request.GET
@@ -323,6 +330,13 @@ class RequestedCourseView(generic.ListView):
         return Skillseat.objects.filter(user_id_id=self.request.user)
 
 
+# 依頼のキャンセル
+class RequestedCourseCancelView(generic.DeleteView):
+    model = Request
+    template_name = "requested_course_cancel.html"
+    success_url = reverse_lazy('skillswap:requested-course')
+
+
 # 自分に来た依頼の閲覧
 class RequestReceivedView(generic.ListView):
     model = Request
@@ -331,13 +345,14 @@ class RequestReceivedView(generic.ListView):
     def get_context_data(self, **kwargs):
         context = super(RequestReceivedView, self).get_context_data(**kwargs)
         context.update({
-            # nullの物のみ表示
-            'request_list': Request.objects.filter(receiver_id_id=self.request.user).order_by('created_at'),
+            'request_list': Request.objects.filter(
+                receiver_id_id=self.request.user, request_completed__isnull=True).order_by('created_at'),
             # 'course_list': Course.objects.filter().order_by('created_at'),
         })
         return context
 
 
+# 依頼の拒否
 class RequestRejectionView(generic.UpdateView):
     model = Request
     template_name = "request_rejection.html"
