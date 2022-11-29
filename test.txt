@@ -15,3 +15,4 @@ test
 ②仮想環境の中でpip install -r requirements.txt
 
 何で反映されないの
+aaaa
