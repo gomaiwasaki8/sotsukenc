@@ -5,7 +5,48 @@
 
 {% block active_diary_list %}active{% endblock %}
 
-{% block head %}{% endblock %}
+{% block head %}
+<style>
+    .btn1{
+      width:80px;
+      height:35px;
+      background:rgb(70,130,180);
+      border-radius:35px;
+      cursor : pointer;
+      font-family: cursive, 'Noto Sans JP', sans-serif;
+      margin-left: 900px;
+    }
+    .img1{
+      position: absolute;
+      top:19%;
+      left:5%;
+      z-index: -1;
+    }
+    .choice{
+      font-family: cursive, 'Noto Sans JP', sans-serif;
+       margin: 0px 0px 0px 60px;
+    }
+    .choice1{
+       margin: 0px 0px 60px 0px;
+    }
+    table{
+      position: absolute;
+      top:38%;
+      left:20%;
+    }
+    .btn2{
+      width:80px;
+      height:35px;
+      background:rgb(70,130,180);
+      border-radius:35px;
+      cursor : pointer;
+      font-family: cursive, 'Noto Sans JP', sans-serif;
+      margin-left: 1200px;
+      position: absolute;
+      top:80%;
+    }
+</style>
+{% endblock %}
 
 {% block header %}{% endblock %}
 

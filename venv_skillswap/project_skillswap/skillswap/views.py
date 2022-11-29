@@ -364,6 +364,21 @@ class RequestRejectionView(generic.UpdateView):
         return redirect('skillswap:request-received')
 
 
+# 依頼の許可
+class RequestPermissionView(generic.UpdateView):
+    model = Request
+    template_name = "request_rejection.html"
+
+    def get(self, request, *args, **kwargs):
+        result = Request.objects.get(pk=self.kwargs['pk'])
+        result.request_completed = True
+        result.save()
+        # 後でチャット画面に遷移するコード書く
+        return redirect('skillswap:request-received')
+
+
+
+
 # お問い合わせ入力画面
 class InquiryView(generic.CreateView):
     model = Inquiry
