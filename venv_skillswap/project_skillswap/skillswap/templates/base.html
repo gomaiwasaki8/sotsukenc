@@ -36,7 +36,7 @@
                     {% endif %}
 
 
-                    <form action="{% url 'skillswap:course-selection' %}" method="GET">
+                    <form  action="{% url 'skillswap:course-selection' %}" method="GET">
                         {% csrf_token %}
                         <input type="search" name="q" placeholder="検索ワード">
                         <button type="submit">

@@ -117,7 +117,7 @@ search-box button:hover {
   background-image:url("/static/img/sample.png");
   background-repeat: no-repeat;
   background-position:50% 0%;
-  left: 550px;
+  left: 650px;
   position: relative;
   text-indent: 100%;
   padding: 15px 0;
@@ -222,4 +222,26 @@ header button{
 .superimg{
  position: static;
  transform: translateY(0%);
+}
+/* ヘッダー */
+header input{
+  position: absolute;
+  top: 25%;
+  left: 42%
+}
+header button{
+  position: absolute;
+  top: 25.5%;
+  left: 54%;
+}
+.infomation{
+  position: absolute;
+  left:85%;
+  top: 30%;
+}
+form{
+  margin: 0px;
+}
+.headerform{
+  height: 0px;
 }
