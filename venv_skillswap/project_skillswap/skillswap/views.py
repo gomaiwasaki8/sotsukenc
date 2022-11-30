@@ -173,7 +173,8 @@ class CourseSelectionView(generic.ListView):
     def get_context_data(self, **kwargs):
         context = super(CourseSelectionView, self).get_context_data(**kwargs)
         context.update({
-            'request_list': Request.objects.order_by('created_at'),
+            # 'request_list': Request.objects.order_by('created_at'),
+            'course_request_list': Course.objects.select_related('user_id')
         })
         return context
 

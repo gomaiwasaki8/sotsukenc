@@ -38,6 +38,16 @@
                     <td><a href="{% url 'skillswap:request-application' course.pk %}"><button>依頼</button></a></td>
                     {% endif %}
 
+<!--                    {% for r in course_request_list %}-->
+<!--                    <p>-&#45;&#45;&ndash;&gt;>>>>{{ r.user_id }}</p>-->
+<!--                    <p>-&#45;&#45;&ndash;&gt;>>>>{{ r.user_id_id }}</p>-->
+<!--                    <p>-&#45;&#45;&ndash;&gt;>>>>{{ r.title }}</p>-->
+
+<!--                    {% if r.message %}-->
+<!--                    <td><a href="{% url 'skillswap:requested-course-cancel' r.pk %}"><button>キャンセル</button></a></td>-->
+<!--                    {% endif %}-->
+<!--                    {% endfor %}-->
+
 
 <!--                    {% for request in request_list %}-->
 <!--                    {% if course.user_id_id != user.id %}-->
