@@ -48,7 +48,7 @@
                     <a href="{% url 'skillswap:request-received' %}">お知らせ</a>
                     {% endif %}
 
-                    <select name="sampledrop" onChange="location.href=value;">
+                    <select class="select1" name="sampledrop" onChange="location.href=value;">
                         <img src="sample.png" alt="home" width="135" height="55">
                         <option>--選択--</option>
                         <option value="{% url 'skillswap:inquiry' %}">お問い合わせ</option>

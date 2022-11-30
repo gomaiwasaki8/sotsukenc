@@ -6,6 +6,46 @@
 {% block active_diary_list %}active{% endblock %}
 
 {% block head %}
+<!--<style>-->
+<!--    .btn1{-->
+<!--      width:80px;-->
+<!--      height:35px;-->
+<!--      background:rgb(70,130,180);-->
+<!--      border-radius:35px;-->
+<!--      cursor : pointer;-->
+<!--      font-family: cursive, 'Noto Sans JP', sans-serif;-->
+<!--      margin-left: 900px;-->
+<!--    }-->
+<!--    .img1{-->
+<!--      position: absolute;-->
+<!--      top:19%;-->
+<!--      left:5%;-->
+<!--      z-index: -1;-->
+<!--    }-->
+<!--    .choice{-->
+<!--      font-family: cursive, 'Noto Sans JP', sans-serif;-->
+<!--       margin: 0px 0px 0px 60px;-->
+<!--    }-->
+<!--    .choice1{-->
+<!--       margin: 0px 0px 60px 0px;-->
+<!--    }-->
+<!--    table{-->
+<!--      position: absolute;-->
+<!--      top:38%;-->
+<!--      left:20%;-->
+<!--    }-->
+<!--    .btn2{-->
+<!--      width:80px;-->
+<!--      height:35px;-->
+<!--      background:rgb(70,130,180);-->
+<!--      border-radius:35px;-->
+<!--      cursor : pointer;-->
+<!--      font-family: cursive, 'Noto Sans JP', sans-serif;-->
+<!--      margin-left: 1200px;-->
+<!--      position: absolute;-->
+<!--      top:80%;-->
+<!--    }-->
+<!--</style>-->
 <style>
     .btn1{
       width:80px;
@@ -22,17 +62,27 @@
       left:5%;
       z-index: -1;
     }
+    .myimg{
+      position: absolute;
+      top:42.5%;
+      left:25%;
+      z-index: -1;
+    }
     .choice{
+      position: absolute;
+      top:35.5%;
       font-family: cursive, 'Noto Sans JP', sans-serif;
        margin: 0px 0px 0px 60px;
+       padding: 5px 0px;
+
     }
     .choice1{
        margin: 0px 0px 60px 0px;
     }
     table{
-      position: absolute;
-      top:38%;
-      left:20%;
+      position: relative;
+      left:40%;
+
     }
     .btn2{
       width:80px;
@@ -44,6 +94,46 @@
       margin-left: 1200px;
       position: absolute;
       top:80%;
+    }
+    .wbtn{
+      width:80px;
+      height:35px;
+      background:rgb(70,130,180);
+      border-radius:35px;
+      cursor : pointer;
+      font-family: cursive, 'Noto Sans JP', sans-serif;
+      position: relative;
+      top: 80%;
+      left: 79.5%;
+      margin: 15px;
+    }
+    .myinfo{
+      padding: 0px;
+    }
+    th{
+      width:  250px;              /* 幅指定 */
+      height: 80px;
+      font-size: 20px;
+    }
+    td{
+      width:  400px;              /* 幅指定 */
+      height: 169px;
+      font-size: 20px;
+      position: sticky;
+    }
+    .container{
+      padding: 40px 0px 0px 0px;
+    }
+    .wbtn2{
+      width:80px;
+      height:35px;
+      background:rgb(70,130,180);
+      border-radius:35px;
+      cursor : pointer;
+      font-family: cursive, 'Noto Sans JP', sans-serif;
+      position: absolute;
+      top: 50%;
+      left: 47%;
     }
 </style>
 {% endblock %}
