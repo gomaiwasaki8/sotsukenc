@@ -43,9 +43,11 @@
                             <i class="fas fa-search fa-fw"></i>
                         </button>
                     </form>
-
+                    
                     {% if user.is_authenticated %}
-                    <a href="{% url 'skillswap:request-received' %}">お知らせ</a>
+                    <a class="infomation" href="{% url 'skillswap:request-received' %}">
+                        <img src="{% static 'assets/16_2_330.png' %}" alt="news" width="37" height="37">
+                    </a>
                     {% endif %}
 
                     <select class="select1" name="sampledrop" onChange="location.href=value;">
