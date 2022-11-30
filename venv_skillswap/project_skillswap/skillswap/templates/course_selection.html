@@ -20,20 +20,30 @@
             <input type="submit" value="投稿順" name="old">
         </form>
 
-        {% if object_list %}
         <table border="1">
         {% for course in object_list %}
-            <a href="{% url 'skillswap:course-detail' course.user_id_id %}">
+
                 <tr>
+
                     <td>
-                    {% if course.course_img %}
-                    <img class="superimg" src="{{ course.course_img.url }}" width="120" height="120"/>
-                    {% else %}
-                    <img class="superimg" src="{% static 'assets/sample.png' %}" width="120" height="120"/>
-                    {% endif %}
+                        <a href="{% url 'skillswap:course-detail' course.user_id_id %}">
+                        {% if course.course_img %}
+                        <img class="superimg" src="{{ course.course_img.url }}" width="120" height="120"/>
+                        {% else %}
+                        <img class="superimg" src="{% static 'assets/sample.png' %}" width="120" height="120"/>
+                        {% endif %}
+                        </a>
                     </td>
-                    <th>{{ course.title }}</th>
-                    <td>{{ course.detail }}</td>
+                    <th>
+                        <a href="{% url 'skillswap:course-detail' course.user_id_id %}">
+                        {{ course.title }}
+                        </a>
+                    </th>
+                    <td>
+                        <a href="{% url 'skillswap:course-detail' course.user_id_id %}">
+                        {{ course.detail }}
+                        </a>
+                    </td>
 
                     {% if course.user_id_id != user.id %}
                     <td><a href="{% url 'skillswap:request-application' course.pk %}"><button>依頼</button></a></td>
@@ -59,14 +69,12 @@
 <!--&lt;!&ndash;                        {% endif %}&ndash;&gt;-->
 <!--                    {% endif %}-->
 <!--                    {% endfor %}-->
+
+
                 </tr>
 
-        </a>
         {% endfor %}
         </table>
-        {% else %}
-        <p>講座がありません</p>
-        {% endif %}
     </div>
 </div>
 {% endblock %}
