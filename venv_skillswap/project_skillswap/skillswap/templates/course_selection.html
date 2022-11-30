@@ -20,9 +20,10 @@
             <input type="submit" value="投稿順" name="old">
         </form>
 
+        {% if object_list %}
+        <table border="1">
         {% for course in object_list %}
-        <a href="{% url 'skillswap:course-detail' course.user_id_id %}">
-            <table border="1">
+            <a href="{% url 'skillswap:course-detail' course.user_id_id %}">
                 <tr>
                     <td>
                     {% if course.course_img %}
@@ -59,11 +60,13 @@
 <!--                    {% endif %}-->
 <!--                    {% endfor %}-->
                 </tr>
-            </table>
+
         </a>
-        {% empty %}
-        <p>講座がありません</p>
         {% endfor %}
+        </table>
+        {% else %}
+        <p>講座がありません</p>
+        {% endif %}
     </div>
 </div>
 {% endblock %}

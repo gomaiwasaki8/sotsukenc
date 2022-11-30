@@ -58,16 +58,16 @@ class LanguageCreateForm(forms.ModelForm):
 
         # テキストエリアの高さ、幅を指定
         widgets = {
-            'genre_1': forms.Textarea(
+            'genre_1': forms.TextInput(
                 attrs={'rows': 1, 'cols': 15, 'placeholder': "例）OS", 'id': "genres_1_0", }
             ),
-            'genre_2': forms.Textarea(
+            'genre_2': forms.TextInput(
                 attrs={'rows': 1, 'cols': 15, 'placeholder': "例）Linux", 'id': "genres_2_0", }
             ),
-            'career': forms.Textarea(
+            'career': forms.TextInput(
                 attrs={'rows': 1, 'cols': 15, 'placeholder': "例）x年xか月", 'id': "career_0", }
             ),
-            'language_detail': forms.Textarea(
+            'language_detail': forms.TextInput(
                 attrs={'rows': 1, 'cols': 30, 'placeholder': "例）環境設計・構築が可能",
                        'id': "language_detail_0",
                        }),
@@ -103,7 +103,7 @@ class InquiryCreateForm(forms.ModelForm):
         fields = ('user_name', 'email', 'inquiry_content',)
         # テキストエリアの高さ、幅を指定
         widgets = {
-            'user_name': forms.Textarea(attrs={'rows': 1, 'cols': 40}),
-            'email': forms.Textarea(attrs={'rows': 1, 'cols': 40}),
+            'user_name': forms.TextInput(attrs={'rows': 1, 'cols': 40}),
+            'email': forms.TextInput(attrs={'rows': 1, 'cols': 40}),
             'inquiry_content': forms.Textarea(attrs={'rows': 10, 'cols': 40}),
         }
