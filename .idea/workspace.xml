@@ -3,9 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="f62b4dcd-2126-419e-91bb-6103e30e50b9" name="変更" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv_skillswap/project_skillswap/skillswap/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/venv_skillswap/project_skillswap/skillswap/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv_skillswap/project_skillswap/skillswap/templates/course_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/venv_skillswap/project_skillswap/skillswap/templates/course_detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv_skillswap/project_skillswap/skillswap/templates/course_selection.html" beforeDir="false" afterPath="$PROJECT_DIR$/venv_skillswap/project_skillswap/skillswap/templates/course_selection.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/venv_skillswap/project_skillswap/skillswap/templates/my_course.html" beforeDir="false" afterPath="$PROJECT_DIR$/venv_skillswap/project_skillswap/skillswap/templates/my_course.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/venv_skillswap/project_skillswap/skillswap/templates/profile_text.html" beforeDir="false" afterPath="$PROJECT_DIR$/venv_skillswap/project_skillswap/skillswap/templates/profile_text.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv_skillswap/project_skillswap/skillswap/templates/requested_course.html" beforeDir="false" afterPath="$PROJECT_DIR$/venv_skillswap/project_skillswap/skillswap/templates/requested_course.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

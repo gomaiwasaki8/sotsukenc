@@ -115,19 +115,25 @@
         {% endfor %}
     </div>
 
-    <div class="daily">
+    <div class="profile">
         {% for skillseat in skillseat_list %}
         <p>プロフィール文章：{{ skillseat.profile_text }}</p>
-        <a href="{% url 'skillswap:profile-text-update' skillseat.pk %}"><button class="btn">更新</button></a>
+        <a href="{% url 'skillswap:profile-text-update' skillseat.pk %}"><button class="btn2">更新</button></a>
         {% endfor %}
     </div>
 
-    <div>
-        <a href="{% url 'skillswap:skillseat-browse' %}">スキルシート</a><br>
-        <a href="{% url 'skillswap:my-course' %}">マイ講座</a><br>
-        <a href="">お気に入りの講座</a><br>
-        <a href="">依頼済みの講座</a><br>
-        <a href="">講座受講履歴</a><br>
+    <div class="choice">
+        <a class="choice1" href="{% url 'skillswap:profile-text' %}">| プロフィール文章</a><br>
+        <br>
+        <a class="choice1" href="{% url 'skillswap:skillseat-browse' %}">| スキルシート</a><br>
+        <br>
+        <a class="choice1" href="{% url 'skillswap:my-course' %}">| マイ講座</a><br>
+        <br>
+        <a class="choice1" href="">| お気に入りの講座</a><br>
+        <br>
+        <a class="choice1" href="">| 依頼済みの講座</a><br>
+        <br>
+        <a class="choice1" href="">| 講座受講履歴</a><br>
     </div>
 </div>
 {% endblock %}

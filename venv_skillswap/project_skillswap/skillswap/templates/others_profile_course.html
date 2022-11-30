@@ -14,9 +14,9 @@
 <div class="container">
     {% for skillseat in skillseat_list %}
         {% if skillseat.user_img %}
-        <img src="{{ skillseat.user_img.url }}" width="200" height="200"/>
+        <img class="superimg" src="{{ skillseat.user_img.url }}" width="200" height="200"/>
         {% else %}
-        <img src="{% static 'assets/sample.png' %}" width="200" height="200"/>
+        <img class="superimg" src="{% static 'assets/sample.png' %}" width="200" height="200"/>
         {% endif %}
 
         <h2>名前：{{ skillseat.user_name }}</h2>
@@ -36,9 +36,9 @@
                 <th>{{ course.title }}</th>
                 <td>{{ course.detail }}</td>
                 {% if course.course_img %}
-                <img src="{{ course.course_img.url }}" width="200" height="200"/>
+                <img class="superimg" src="{{ course.course_img.url }}" width="200" height="200"/>
                 {% else %}
-                <img src="{% static 'assets/sample.png' %}" width="200" height="200"/>
+                <img class="superimg" src="{% static 'assets/sample.png' %}" width="200" height="200"/>
                 {% endif %}
             </tr>
         </table>
