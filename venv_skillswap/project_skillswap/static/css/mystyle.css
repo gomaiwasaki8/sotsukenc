@@ -191,14 +191,6 @@ a{
 .form-group{
   padding: 15px;
 }
-header input{
-  position: relative;
-  left: 50px;
-}
-header button{
-  position: relative;
-  left: 50px;
-}
 .row{
   padding: 10px 15px;
 }
