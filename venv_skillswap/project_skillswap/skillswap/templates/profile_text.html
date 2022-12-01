@@ -97,42 +97,4 @@
     <a href="{% url 'skillswap:profile-text-update' skillseat.pk %}"><button class="btn2">更新</button></a>
     {% endfor %}
 </div>
-<!--<div class="container" xmlns="http://www.w3.org/1999/html">-->
-
-<!--    <div class="daily">-->
-<!--        {% for skillseat in skillseat_list %}-->
-<!--        {% if skillseat.user_img %}-->
-<!--        <img class="img1" src="{{ skillseat.user_img.url }}" width="120" height="120"/>-->
-<!--        {% else %}-->
-<!--        <img class="img1" src="{% static 'assets/sample.png' %}" width="120" height="120"/>-->
-<!--        {% endif %}-->
-
-<!--        <div class="info">-->
-<!--            <h2>-->
-<!--                <span class="cl1">名前：{{ skillseat.user_name }}</span>-->
-<!--                <span class="cl2">性別：{{ skillseat.gender }}</span>-->
-<!--                生年月日：{{ skillseat.birthday }}-->
-<!--            </h2>-->
-<!--            {% if skillseat.user_evaluation %}-->
-<!--            <h2>評価：{{ skillseat.user_evaluation }}</h2>-->
-<!--            {% endif %}-->
-<!--            <button class="btn1"><a href="{% url 'skillswap:skillseat-update' skillseat.pk %}">更新</a></button>-->
-<!--        </div>-->
-<!--        {% endfor %}-->
-<!--    </div>-->
-
-<!--    <div class="choice">-->
-<!--        <a class="choice1" href="{% url 'skillswap:profile-text' %}">| プロフィール文章</a><br>-->
-<!--        <br>-->
-<!--        <a class="choice1" href="{% url 'skillswap:skillseat-browse' %}">| スキルシート</a><br>-->
-<!--        <br>-->
-<!--        <a class="choice1" href="{% url 'skillswap:my-course' %}">| マイ講座</a><br>-->
-<!--        <br>-->
-<!--        <a class="choice1" href="">| お気に入りの講座</a><br>-->
-<!--        <br>-->
-<!--        <a class="choice1" href="{% url 'skillswap:requested-course' %}">| 依頼済みの講座</a><br>-->
-<!--        <br>-->
-<!--        <a class="choice1" href="">| 講座受講履歴</a><br>-->
-<!--    </div>-->
-<!--</div>-->
 {% endblock %}

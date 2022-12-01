@@ -74,37 +74,4 @@
         {% endfor %}
     </ul>
 </div>
-<!--<div class="container">-->
-<!--    <div class="daily">-->
-<!--        {% for skillseat in skillseat_list %}-->
-<!--        {% if skillseat.user_img %}-->
-<!--        <img src="{{ skillseat.user_img.url }}" width="200" height="200"/>-->
-<!--        {% else %}-->
-<!--        <img src="{% static 'assets/sample.png' %}" width="200" height="200"/>-->
-<!--        {% endif %}-->
-
-<!--        <h2>名前：{{ skillseat.user_name }}</h2>-->
-<!--        <h2>性別：{{ skillseat.gender }}</h2>-->
-<!--        <h2>生年月日：{{ skillseat.birthday }}</h2>-->
-<!--        {% if skillseat.user_evaluation %}-->
-<!--        <h2>評価：{{ skillseat.user_evaluation }}</h2>-->
-<!--        {% endif %}-->
-
-<!--        <button class="btn"><a href="{% url 'skillswap:skillseat-update' skillseat.pk %}">更新</a></button>-->
-
-<!--        {% endfor %}-->
-
-
-<!--    </div>-->
-
-<!--    <div>-->
-<!--        <a href="{% url 'skillswap:profile-text' %}">プロフィール文章</a><br>-->
-<!--        <a href="{% url 'skillswap:skillseat-browse' %}">スキルシート</a><br>-->
-<!--        <a href="{% url 'skillswap:my-course' %}">マイ講座</a><br>-->
-<!--        <a href="">お気に入りの講座</a><br>-->
-<!--        <a href="">依頼済みの講座</a><br>-->
-<!--        <a href="">講座受講履歴</a><br>-->
-<!--    </div>-->
-
-<!--</div>-->
 {% endblock %}
