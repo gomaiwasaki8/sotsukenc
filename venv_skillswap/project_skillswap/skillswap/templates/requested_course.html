@@ -45,6 +45,10 @@
     .profile p{
       font-size: 18px;
     }
+    .superimg{
+        position: static;
+        transform: translateY(0%);
+    }
 </style>
 {% endblock %}
 
@@ -55,9 +59,9 @@
     <ul>
         {% for course in course_list %}
         {% if course.course_img %}
-        <li><img src="{{ course.course_img.url }}" width="200" height="200"/></li>
+        <li><img class="superimg" src="{{ course.course_img.url }}" width="200" height="200"/></li>
         {% else %}
-        <li><img src="{% static 'assets/sample.png' %}" width="200" height="200"/></li>
+        <li><img class="superimg" src="{% static 'assets/sample.png' %}" width="200" height="200"/></li>
         {% endif %}
         <li>{{ course.title }}</li>
         <li>{{ course.detail }}</li>
