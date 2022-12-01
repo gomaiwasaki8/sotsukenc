@@ -67,6 +67,7 @@
             {% block header %}{% endblock %}
         </header>
 
+        <h1>{% block contents-title %}{% endblock %}</h1>
         <div class="container" xmlns="http://www.w3.org/1999/html">
             <div class="daily">
                 {% for skillseat in skillseat_list %}
@@ -90,19 +91,19 @@
                 {% endfor %}
             </div>
 
-            <div class="choice">
-                <a class="choice1" href="{% url 'skillswap:profile-text' %}">| プロフィール文章</a><br>
-                <br>
-                <a class="choice1" href="{% url 'skillswap:skillseat-browse' %}">| スキルシート</a><br>
-                <br>
-                <a class="choice1" href="{% url 'skillswap:my-course' %}">| マイ講座</a><br>
-                <br>
-                <a class="choice1" href="">| お気に入りの講座</a><br>
-                <br>
-                <a class="choice1" href="{% url 'skillswap:requested-course' %}">| 依頼済みの講座</a><br>
-                <br>
-                <a class="choice1" href="">| 講座受講履歴</a><br>
-            </div>
+<!--            <div class="choice">-->
+<!--                <a class="choice1" href="{% url 'skillswap:profile-text' %}">| プロフィール文章</a><br>-->
+<!--                <br>-->
+<!--                <a class="choice1" href="{% url 'skillswap:skillseat-browse' %}">| スキルシート</a><br>-->
+<!--                <br>-->
+<!--                <a class="choice1" href="{% url 'skillswap:my-course' %}">| マイ講座</a><br>-->
+<!--                <br>-->
+<!--                <a class="choice1" href="">| お気に入りの講座</a><br>-->
+<!--                <br>-->
+<!--                <a class="choice1" href="{% url 'skillswap:requested-course' %}">| 依頼済みの講座</a><br>-->
+<!--                <br>-->
+<!--                <a class="choice1" href="">| 講座受講履歴</a><br>-->
+<!--            </div>-->
 
             {% block contents %}{% endblock %}
         </div>
