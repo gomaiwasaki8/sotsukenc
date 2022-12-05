@@ -1,18 +1,15 @@
 @import url('https://fonts.googleapis.com/css?family=Noto+Sans+JP');
+/*「#」から始まるのはID、「.」から始まるのはクラス*/
 body, #wrapper {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    background-color: white;
+    /* 背景色赤はエグい */
+    /*background-color: rgb(244, 46, 46);*/
     margin: 0;
 }
 
-footer {
-    margin-top: auto;
-    text-align: center;
-    background-color: aquamarine;
-}
-
+/*ヘッダー調整*/
 header {
   width: 100%;
   padding: 0px 0px;
@@ -23,70 +20,59 @@ header {
   border-bottom: solid 2.5px #0000FF;
   z-index: 5;
 }
-header .headline{
-  font-size: 32px;
-}
-header input {
-  margin: 0px auto;
-  text-align: center;
-}
-hr {
-  border-bottom: 15px;
-}
-.nav-list {
-  text-align: center;
-  padding: 10px 0;
-  margin: 0 auto;
-}
-.nav-list-item {
+
+/*かつて表示されていたタイトル。消していい*/
+/*header .headline{
+  font-size: 3px;
+}*/
+
+/* nav全体 */
+#global_navi ul {
   list-style: none;
-  display: inline-block;
-  margin: 0 20px;
+  margin: 0;
+  padding: 0;
 }
+/* ロゴ */
 #global_navi ul li {
   width: 0px;
   float: left;
   margin-right: 0;
   text-align: center;
 }
-#global_navi ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+/*ヘッダー左上の画像位置調整(非推奨)*/
+img{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
 }
-/*#global_navi ul select {
-  width: 100px;
-  float: right;
-  margin-right: 0;
-  text-align: right;
-}*/
-.btn{
-  width:80px;
-  height:35px;
-  background:rgb(70,130,180);
-  border-radius:35px;
-  cursor : pointer;
-  font-family: cursive, 'Noto Sans JP', sans-serif;
+
+/* フォーム全体(非推奨) */
+form{
+  margin: 0px;
 }
-.row{
-  padding: 20px;
+/*formで囲われた検索ボックス達の無駄な高さを無くす*/
+.headerform{
+  height: 0px;
 }
-.profile{
-      position: absolute;
-      top:33%;
-      left:18.5%;
-      padding:25px;
-}
-div{
-  padding: 40px 0px 25px 0px;
-}
-hr{
-  border-top: 2px solid #0000FF;
-}
-p{
+
+/*検索ボックスのマージン、文字を真ん中表示*/
+header input {
+  margin: 0px auto;
   text-align: center;
-  font-family: cursive, 'Noto Sans JP', sans-serif;
 }
+/*ヘッダー検索関連の位置最終調整*/
+header input{
+  position: absolute;
+  top: 25%;
+  left: 42%
+}
+header button{
+  position: absolute;
+  top: 25.5%;
+  left: 53.8%;
+}
+
+/*ネットから引っ張って来た検索ボックスとボタン。URLは見つけられないかもごめん*/
 search-box input[type="text"] {
   flex-grow: 1;
   padding: 0.7px 0px 0.7px 800px;
@@ -113,6 +99,28 @@ search-box input:focus {
 search-box button:hover {
   color: #4ab6f6;
 }
+
+/*ヘッダー鈴アイコンの調整*/
+.infomation{
+  position: absolute;
+  left:87.5%;
+  top: 47%;
+}
+
+/* 鈴の周りが青くなる */
+/*.infomation img{
+  border: solid 2.5px #0000FF;
+}*/
+
+/* 画像付きセレクトボックス */
+/*#global_navi ul select {
+  width: 100px;
+  float: right;
+  margin-right: 0;
+  text-align: right;
+}*/
+
+/*右上の画像付きセレクトボックス。まだ連動して画像は変えれない*/
 .select1{
   background-image:url("/static/img/sample.png");
   background-repeat: no-repeat;
@@ -127,31 +135,140 @@ search-box button:hover {
   border: #fff;
   cursor : pointer;
 }
+
+/*チェックボックス本体の高さ*/
+.select1{
+  transform: translateY(0%);
+  top: 50%;
+  height: 55px;border
+}
+
+/*チェックボックスの中身の文字スタイル*/
 option{
   text-indent: 100%;
   font-family: cursive, 'Noto Sans JP', sans-serif;
 }
+
+/*他のチェックボックスにも画像が適用されてしまうのでコメント化している*/
 /*a:hover img { opacity: 0.7; }
 select:hover png { opacity: 0.7; }*/
-img{
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
+
+/* 共通 */
+/*様々なボタンの基本CSS。1つのHTMLに二つ以上ボタンがあるときは.btn1や.btn2に変わる*/
+.btn{
+  width:80px;
+  height:35px;
+  background:rgb(70,130,180);
+  border-radius:35px;
+  cursor : pointer;
+  font-family: cursive, 'Noto Sans JP', sans-serif;
 }
+/*汎用ボタン位置調整(下に下げる)*/
 .btn{
   margin-top: 150px;
 }
-.select1{
-  transform: translateY(0%);
-  top: 50%;
-  height: 55px;
+
+/*クラスのないすべてのdivに適用。左から順に「上、右、下、左」の時計回り*/
+div{
+  padding: 40px 0px 25px 0px;
 }
+/*横線の調整。多分消していい*/
+hr {
+  border-bottom: 15px;
+}
+/*上のhrと同じ。多分消していい*/
+hr{
+  border-top: 2px solid #0000FF;
+}
+/*クラスのないすべてのpタグに適用。文字の見た目を変えるのと中央揃え*/
+p{
+  text-align: center;
+  font-family: cursive, 'Noto Sans JP', sans-serif;
+}
+/*aタグの下線を削除*/
+a{
+  text-decoration: none;
+  color: black;
+}
+/*今h1は使っていない*/
 /*h1{
   text-align: center;
 }*/
+
+
+/* ここからマイページ */
+/*マイページ上部情報群の右の空白*/
+.daily{
+  margin-right: 100px;
+}
+/*マイページ上部の情報群を枠線で囲う。位置調整*/
+.info{
+  border: 1px solid black;
+  margin: 0px 0px 0px 300px;
+  padding: 0px 0px 15px 0px;
+}
+/*マイページ上部、ユーザー情報を横並びにした時の左右の余白*/
+/* 名前 */
+.cl1{
+  margin-right: 55px;
+  margin-left: 60px;
+}
+/* 性別 */
+.cl2{
+  margin-right: 55px;
+}
+
+/*プロフィール文章の位置*/
+.profile{
+      position: absolute;
+      top:33%;
+      left:18.5%;
+      padding:25px;
+}
+
+/*講座選択関連のクラス"superimg"
+  course_selection, course_detail, others_profile_text, others_profile_skillseat, others_profile_course*/
+.superimg{
+ position: static;
+ transform: translateY(0%);
+}
+
+/*スキルシート作成確認画面の余白*/
+.form-group{
+  padding: 15px;
+}
+/* ここからprivate_diary */
+/* divにあった */
+.row{
+  padding: 10px 15px;
+}
+/*新規登録やログイン等の画面の上幅。数値を大きくすると下に下がる(上の余白が大きくなる)*/
 .my-div-style{
     padding: 0;
 }
+/*教科書と同じ文。横並びや行頭アイコンの削除*/
+/* 多分使ってない */
+.nav-list {
+  text-align: center;
+  padding: 10px 0;
+  margin: 0 auto;
+}
+.nav-list-item {
+  list-style: none;
+  display: inline-block;
+  margin: 0 20px;
+}
+
+/*フッター調整*/
+footer {
+    margin-top: auto;
+    text-align: center;
+    background-color: aquamarine;
+}
+
+
+/*マイページ編集等の位置。HTMLからは干渉出来ない。tdとかthとかもそう*/
+/* 多分forms.pyのところ */
 label{
     display: inline-block;
     text-align: right;
@@ -184,56 +301,3 @@ td{
   border: 2px solid black;
   margin: 25px;
 }*/
-a{
-  text-decoration: none;
-  color: black;
-}
-.form-group{
-  padding: 15px;
-}
-.row{
-  padding: 10px 15px;
-}
-.cl1{
-  margin-right: 55px;
-  margin-left: 60px;
-}
-.cl2{
-  margin-right: 55px;
-}
-.info{
-  border: 1px solid black;
-  margin: 0px 0px 0px 300px;
-  padding: 0px 0px 15px 0px;
-}
-.daily{
-  margin-right: 100px;
-}
-/*講座選択関連のクラス"superimg"
-  course_selection, course_detail, others_profile_text, others_profile_skillseat, others_profile_course*/
-.superimg{
- position: static;
- transform: translateY(0%);
-}
-/* ヘッダー */
-header input{
-  position: absolute;
-  top: 25%;
-  left: 42%
-}
-header button{
-  position: absolute;
-  top: 25.5%;
-  left: 54%;
-}
-.infomation{
-  position: absolute;
-  left:87%;
-  top: 47%;
-}
-form{
-  margin: 0px;
-}
-.headerform{
-  height: 0px;
-}
