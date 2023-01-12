@@ -56,7 +56,7 @@
                         <option value="{% url 'skillswap:inquiry' %}">お問い合わせ</option>
                         {% if user.is_authenticated %}
                         <option value="{% url 'skillswap:skillseat-browse' %}">マイページ</option>
-                        <option value="list2">チャット</option>
+                        <option value="{% url 'skillswap:search_user' %}">チャット</option>
                         <option value="{% url 'account_logout' %}">ログアウト</option>
                         {% else %}
                         <option value="{% url 'account_login' %}">ログイン</option>
