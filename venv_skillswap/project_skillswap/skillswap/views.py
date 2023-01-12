@@ -16,6 +16,10 @@ from django import forms
 import re
 
 # チャット機能で使う
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.decorators import method_decorator
+from django.http.response import JsonResponse
+from rest_framework.parsers import JSONParser
 from skillswap.serializers import MessageSerializer
 
 
