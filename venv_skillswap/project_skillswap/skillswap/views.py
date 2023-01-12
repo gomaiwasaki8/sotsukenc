@@ -394,3 +394,9 @@ class InquiryView(generic.CreateView):
         inquiry.save()
         return super().form_valid(form)
     # 失敗した時の処理特に書いてないのであとで追記するかも
+
+    # チャット
+    class ChatRoom(TemplateView):
+        # Home画面を表示するビュー
+        template_name = 'chat/chat_box.html'
+

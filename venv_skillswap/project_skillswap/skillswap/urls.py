@@ -57,7 +57,14 @@ urlpatterns = [
     # 依頼の拒否
     path('news/request-received/rejection/<int:pk>/', views.RequestRejectionView.as_view(), name="request-rejection"),
     # 依頼の許可
-    path('news/request-received/permission/<int:pk>/', views.RequestPermissionView.as_view(), name="request-permission")
+    path('news/request-received/permission/<int:pk>/', views.RequestPermissionView.as_view(), name="request-permission"),
 
+    # チャット
+    path('chat_room/', ChatRoom.as_view(), name="chat_room"),
+    # path("search/", SearchUser.as_view(), name="search_user"),
+    # path("addfriend/<str:username>", addFriend, name="addfriend"),
+    # path("chat/<str:username>", get_message, name="get_message"),
+    # path('api/messages', UpdateMessage.as_view()),
+    # path('api/messages/<int:sender>/<int:receiver>', UpdateMessage.as_view()),
 
 ]
