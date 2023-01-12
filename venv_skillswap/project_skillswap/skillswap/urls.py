@@ -60,11 +60,11 @@ urlpatterns = [
     path('news/request-received/permission/<int:pk>/', views.RequestPermissionView.as_view(), name="request-permission"),
 
     # チャット
-    path('chat_room/', ChatRoom.as_view(), name="chat_room"),
-    # path("search/", SearchUser.as_view(), name="search_user"),
-    # path("addfriend/<str:username>", addFriend, name="addfriend"),
-    # path("chat/<str:username>", get_message, name="get_message"),
-    # path('api/messages', UpdateMessage.as_view()),
-    # path('api/messages/<int:sender>/<int:receiver>', UpdateMessage.as_view()),
+    path('chat_room/', views.ChatRoom.as_view(), name="chat_room"),
+    path("search/", views.SearchUser.as_view(), name="search_user"),
+    path("addfriend/<str:username>", views.addFriend, name="addfriend"),
+    path("chat/<str:username>", views.get_message, name="get_message"),
+    path('api/messages', views.UpdateMessage.as_view()),
+    path('api/messages/<int:sender>/<int:receiver>', views.UpdateMessage.as_view()),
 
 ]

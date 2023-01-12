@@ -24,11 +24,11 @@
        <li class="nav-item">
         <a class="nav-link" href="#">{{ user.username}}さん</a></li>
        <li class="nav-item">
-        <a class="nav-link" href="{% url 'chat:search_user' %}">検索</a>
+        <a class="nav-link" href="{% url 'skillswap:search_user' %}">検索</a>
        <li class="nav-item">
-          <a class="nav-link" href="{% url 'logout' %}">ログアウト</a></li>
+          <a class="nav-link" href="#">ログアウト</a></li>
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'password_change' %}">パスワード変更</a>
+          <a class="nav-link" href="#">パスワード変更</a>
       </li>
       </ul>
     </div>
@@ -47,7 +47,7 @@
           </div>
           <div class="inbox_chat">
             {% for friend in friends %}
-            <a href="{% url 'chat:get_message' friend.friend.username %}">
+            <a href="{% url 'skillswap:get_message' friend.friend.username %}">
             <div class="chat_list">
               <div class="chat_people">
                 <div class="chat_img"> <img src="{{ friend.friend.thumbnail.url }}" alt="sunil"> </div>
