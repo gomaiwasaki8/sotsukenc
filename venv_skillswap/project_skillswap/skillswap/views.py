@@ -463,6 +463,8 @@ def addFriend(request, username):
         # お互いにフレンド登録を行う。
         current_user.user_friends.create(friend=friend)  # ログオンユーザ視点でフレンドを登録
         friend.user_friends.create(friend=current_user)  # フレンド視点でログオンユーザをフレンドに登録
+        # フレンドになったら取引が許可されたことをrequestテーブルに保存
+        # request.request_completed.update(request_completed=True)
     return redirect("skillswap:search_user")
 
 
