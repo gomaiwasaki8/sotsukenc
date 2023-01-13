@@ -3,57 +3,88 @@
 <head>
     <meta charset="utf-8">
     <!-- This file has been downloaded from Bootsnipp.com. Enjoy! -->
-    <title>Django Chat</title>
+    <title>SKILLSWAP | チャット</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="http://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/chat_room.css' %}">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" type="text/css" rel="stylesheet">
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+    <!--  mystyle  -->
+    <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon.ico' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/mystyle.css' %}">
 </head>
 <body>
 <html>
-<head>
-<nav class="navbar navbar-expand-md navbar-dark bg-info navbar-fixed-top">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-      </ul>
-      <ul class="navbar-nav">
-       <li class="nav-item">
-        <a class="nav-link" href="#">{{ user.username}}さん</a></li>
-       <li class="nav-item">
-        <a class="nav-link" href="{% url 'skillswap:search_user' %}">検索</a>
-       <li class="nav-item">
-          <a class="nav-link" href="#">ログアウト</a></li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">パスワード変更</a>
-      </li>
-      </ul>
-    </div>
-  </nav>
-</head>
+<header>
+<nav id="global_navi">
+    <ul>
+        {% if user.is_authenticated %}
+        <li class="current">
+            <a href="{% url 'skillswap:course-selection' %}">
+                <img src="{% static 'assets/logo.png' %}" alt="home" width="135" height="56">
+            </a>
+        </li>
+        {% else %}
+        <li class="current">
+            <a href="{% url 'skillswap:index' %}">
+                <img src="{% static 'assets/logo.png' %}" alt="home" width="135" height="56">
+            </a>
+        </li>
+        {% endif %}
+
+
+        <form class="headerform" action="{% url 'skillswap:course-selection' %}" method="GET">
+            {% csrf_token %}
+            <input type="search" name="q" placeholder="検索ワード">
+            <button type="submit">
+                <i class="fas fa-search fa-fw"></i>
+            </button>
+        </form>
+
+        {% if user.is_authenticated %}
+        <a class="infomation" href="{% url 'skillswap:request-received' %}">
+            <img src="{% static 'assets/news.png' %}" alt="news" width="37" height="37">
+        </a>
+        {% endif %}
+
+        <select class="select1" name="sampledrop" onChange="location.href=value;">
+            <img src="sample.png" alt="home" width="135" height="55">
+            <option>--選択--</option>
+            <option value="{% url 'skillswap:inquiry' %}">お問い合わせ</option>
+            {% if user.is_authenticated %}
+            <option value="{% url 'skillswap:skillseat-browse' %}">マイページ</option>
+            <option value="{% url 'skillswap:search_user' %}">チャット</option>
+            <option value="{% url 'account_logout' %}">ログアウト</option>
+            {% else %}
+            <option value="{% url 'account_login' %}">ログイン</option>
+            {% endif %}
+        </select>
+    </ul>
+</nav>
+</header>
 <body>
-<div class="container">
+<div class="container my-div-style-chat">
 {% block title%}{% endblock %}
-<div class="messaging">
-      <div class="inbox_msg">
+<div class="messaging my-div-style">
+      <div class="inbox_msg my-div-style">
         <div class="inbox_people">
-          <div class="headind_srch">
-            <div class="recent_heading">
+          <div class="headind_srch my-div-style">
+            <div class="recent_heading my-div-style">
               <h5>ユーザ検索画面</h5>
             </div>
           </div>
-          <div class="inbox_chat">
+          <div class="inbox_chat my-div-style">
             {% for friend in friends %}
             <a href="{% url 'skillswap:get_message' friend.friend.username %}">
-            <div class="chat_list">
-              <div class="chat_people">
-                <div class="chat_img"> <img src="{{ friend.friend.thumbnail.url }}" alt="sunil"> </div>
+            <div class="chat_list my-div-style">
+              <div class="chat_people my-div-style">
+<!--                <div class="chat_img"> <img src="{{ friend.friend.thumbnail.url }}" alt="sunil"> </div>-->
                 <div class="chat_ib">
                   <h5>{{friend.friend.username}}</h5>
+                  <a href=""><button>レビュー</button></a>
                 </div>
+
               </div>
             </div>
             </a>
@@ -62,7 +93,7 @@
         </div>
         {% block contents%}{% endblock %}
       </div>
-      <p class="text-center top_spac"> It is composed of Django + DRF + JavaScript.<a target="_blank" href="https://www.linkedin.com/in/sunil-rajput-nattho-singh/"></a></p>
+<!--      <p class="text-center top_spac"> It is composed of Django + DRF + JavaScript.<a target="_blank" href="https://www.linkedin.com/in/sunil-rajput-nattho-singh/"></a></p>-->
     </div></div>
     </body>
     </html>

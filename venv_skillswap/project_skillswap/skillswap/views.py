@@ -518,3 +518,11 @@ class UpdateMessage(generic.View):
         serializer = MessageSerializer(instance=messages, many=True)
         return JsonResponse(serializer.data, safe=False)
 
+
+# class ReviewView(generic.CreateView):
+#     model = Inquiry
+#     template_name = "review.html"
+#     form_class = InquiryCreateForm
+#     # 処理を行った後遷移する画面の指定
+#     success_url = reverse_lazy('skillswap:index')
+

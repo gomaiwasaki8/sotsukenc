@@ -128,7 +128,7 @@ img{ max-width:100%;}
   top: 11px;
   width: 33px;
 }
-.messaging { padding: 0 0 50px 0;}
+
 .msg_history {
   height: 516px;
   overflow-y: auto;
@@ -137,3 +137,9 @@ img{ max-width:100%;}
 .user-add{
     color: #2196F3;	  
   }
+
+.my-div-style-chat{
+    padding: 0;
+    margin: 0 auto;
+    margin-top: 70px;
+    }
