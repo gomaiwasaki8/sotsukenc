@@ -444,13 +444,24 @@ class SearchUser(generic.View):
         return render(request, "chat/search.html", {'users': user_list, 'friends': friends})
 
 
-def addFriend(request, username):
+def addFriend(request, user_id_id):
     """
     引数で受け取ったユーザ名(username)を Friendsテーブルに友達として登録する。
     """
+    print("user_id_id   ", user_id_id)
+
     login_user = request.user.username
-    friend = CustomUser.objects.get(username=username)
+    print("login_user   ", login_user)
+
+    user_name = CustomUser.objects.get(pk=user_id_id)
+    print("user_name   ", user_name)
+
+    friend = CustomUser.objects.get(username=user_name)
+    print("friend   ", friend)
+
     current_user = CustomUser.objects.get(username=login_user)
+    print("current_user   ", current_user)
+
     friend_lists = current_user.user_friends.all()
     #既に友達登録済みの場合flag=1にセット
     flag = 0
