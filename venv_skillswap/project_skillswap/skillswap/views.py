@@ -452,24 +452,23 @@ def addFriend(request, username):
     friend = CustomUser.objects.get(username=username)
     current_user = CustomUser.objects.get(username=login_user)
     friend_lists = current_user.user_friends.all()
-    # 既に友達登録済みの場合flag=1にセット
+    #既に友達登録済みの場合flag=1にセット
     flag = 0
     for friend_list in friend_lists:
         if friend_list.friend.pk == friend.pk:
             flag = 1
             break
-    # フレンド未登録の場合
+    #フレンド未登録の場合
     if flag == 0:
-        # お互いにフレンド登録を行う。
-        current_user.user_friends.create(friend=friend)  # ログオンユーザ視点でフレンドを登録
-        friend.user_friends.create(friend=current_user)  # フレンド視点でログオンユーザをフレンドに登録
+        #お互いにフレンド登録を行う。
+        current_user.user_friends.create(friend=friend)  #ログオンユーザ視点でフレンドを登録
+        friend.user_friends.create(friend=current_user)   #フレンド視点でログオンユーザをフレンドに登録
         # フレンドになったら取引が許可されたことをrequestテーブルに保存
-        object = Request.objects.get(user_id_id=current_user, receiver_id_id=friend)
+        object = Request.objects.get(user_id_id=friend, receiver_id_id=current_user)
         context = {'object': object}
         object.request_completed = True
         object.save()
     return redirect("skillswap:search_user")
-
 
 def get_message(request, username):
     """

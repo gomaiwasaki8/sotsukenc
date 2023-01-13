@@ -62,6 +62,7 @@ urlpatterns = [
     # チャット
     path('chat_room/', views.ChatRoom.as_view(), name="chat_room"),
     path("search/", views.SearchUser.as_view(), name="search_user"),
+    # path("addfriend/<int:user_id_id>", views.addFriend, name="addfriend"),
     path("addfriend/<str:username>", views.addFriend, name="addfriend"),
     path("chat/<str:username>", views.get_message, name="get_message"),
     path('api/messages', views.UpdateMessage.as_view()),
