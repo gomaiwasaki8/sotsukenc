@@ -69,5 +69,6 @@ urlpatterns = [
     path('api/messages/<int:sender>/<int:receiver>', views.UpdateMessage.as_view()),
 
     # レビュー
-    # path("chat/<int:pk>", views.ReviewView.as_view(), name="review"),
+    path("review/<int:pk>", views.ReviewView.as_view(), name="review"),
+    path("review/completed/", views.ReviewCompletedView.as_view(), name="review_completed"),
 ]

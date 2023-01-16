@@ -97,6 +97,18 @@ class RequestApplicationCreateForm(forms.ModelForm):
         fields = ('message',)
 
 
+class EvaluationCreateForm(forms.ModelForm):
+    class Meta:
+        model = Evaluation
+        fields = ('evaluation_num', 'evaluation_text',)
+        # テキストエリアの高さ、幅を指定
+        widgets = {
+            'evaluation_num': forms.TextInput(attrs={'rows': 1, 'cols': 40}),
+            'evaluation_text': forms.TextInput(attrs={'rows': 1, 'cols': 40}),
+        }
+
+
+
 class InquiryCreateForm(forms.ModelForm):
     class Meta:
         model = Inquiry

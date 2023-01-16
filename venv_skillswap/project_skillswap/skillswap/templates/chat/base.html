@@ -82,7 +82,7 @@
 <!--                <div class="chat_img"> <img src="{{ friend.friend.thumbnail.url }}" alt="sunil"> </div>-->
                 <div class="chat_ib">
                   <h5>{{friend.friend.username}}</h5>
-                  <a href=""><button>レビュー</button></a>
+                  <a href="{% url 'skillswap:review' friend.friend.pk %}"><button>レビュー</button></a>
                 </div>
 
               </div>

@@ -448,20 +448,10 @@ def addFriend(request, user_id_id):
     """
     引数で受け取ったユーザ名(username)を Friendsテーブルに友達として登録する。
     """
-    print("user_id_id   ", user_id_id)
-
     login_user = request.user.username
-    print("login_user   ", login_user)
-
     user_name = CustomUser.objects.get(pk=user_id_id)
-    print("user_name   ", user_name)
-
     friend = CustomUser.objects.get(username=user_name)
-    print("friend   ", friend)
-
     current_user = CustomUser.objects.get(username=login_user)
-    print("current_user   ", current_user)
-
     friend_lists = current_user.user_friends.all()
     #既に友達登録済みの場合flag=1にセット
     flag = 0
@@ -519,10 +509,29 @@ class UpdateMessage(generic.View):
         return JsonResponse(serializer.data, safe=False)
 
 
-# class ReviewView(generic.CreateView):
-#     model = Inquiry
-#     template_name = "review.html"
-#     form_class = InquiryCreateForm
-#     # 処理を行った後遷移する画面の指定
-#     success_url = reverse_lazy('skillswap:index')
+class ReviewView(generic.CreateView):
+    model = Evaluation
+    template_name = "review.html"
+    form_class = EvaluationCreateForm
+    # 処理を行った後遷移する画面の指定
+    success_url = reverse_lazy('skillswap:review_completed')
+
+    def get_context_data(self, **kwargs):
+        context = super(ReviewView, self).get_context_data(**kwargs)
+        context.update({
+            'course_list': Course.objects.filter(user_id_id=self.kwargs['pk']),
+        })
+        return context
+
+    def form_valid(self, form):
+        evaluation = form.save(commit=False)
+        evaluation.user1_id_id = self.request.user.id
+        print(self.request.user)
+        evaluation.user2_id_id = self.kwargs['pk']
+        evaluation.save()
+        return super().form_valid(form)
+
+
+class ReviewCompletedView(generic.TemplateView):
+    template_name = "review_completed.html"
 
