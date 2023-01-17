@@ -15,6 +15,9 @@ from django import forms
 
 import re
 
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.shortcuts import get_object_or_404
+
 # チャット機能で使う
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
@@ -23,13 +26,22 @@ from rest_framework.parsers import JSONParser
 from skillswap.serializers import MessageSerializer
 
 
+# ログインユーザのみ閲覧出来る
+class OnlyYouMixin(UserPassesTestMixin):
+    raise_exception = True
+
+    def test_func(self):
+        skillseat = get_object_or_404(Skillseat, pk=self.kwargs['pk'])
+        return self.request.user == skillseat.user
+
+
 # ホーム画面（ログイン前）
 class IndexView(generic.TemplateView):
     template_name = "index.html"
 
 
 # ログイン後の遷移先
-class AfterLoginView(generic.View):
+class AfterLoginView(LoginRequiredMixin, generic.View):
     def get(self, request):
         if self.request.user.is_superuser:
             return redirect('skillswap:administrator')
@@ -42,7 +54,7 @@ class AfterLoginView(generic.View):
 
 
 # アカウント情報新規作成（確認画面無し）
-class SkillseatCreateView(generic.CreateView):
+class SkillseatCreateView(LoginRequiredMixin, generic.CreateView):
     model = Skillseat
     template_name = "skillseat_create.html"
     form_class = SkillseatCreateForm
@@ -56,7 +68,7 @@ class SkillseatCreateView(generic.CreateView):
 
 
 # 言語スキルシート作成（確認画面無し。入力フォーム増減可能。）
-class LanguageCreateView(generic.CreateView):
+class LanguageCreateView(LoginRequiredMixin, generic.CreateView):
     model = Language
     template_name = "language_create.html"
     form_class = LanguageCreateForm
@@ -99,7 +111,7 @@ class LanguageCreateView(generic.CreateView):
 
 
 # アカウント情報の更新
-class SkillseatUpdateView(generic.UpdateView):
+class SkillseatUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Skillseat
     template_name = "skillseat_update.html"
     form_class = SkillseatUpdateForm
@@ -108,7 +120,7 @@ class SkillseatUpdateView(generic.UpdateView):
 
 
 # 言語スキルシートの更新
-class LanguageUpdateView(generic.UpdateView):
+class LanguageUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Language
     template_name = "language_update.html"
     form_class = LanguageCreateForm
@@ -127,7 +139,7 @@ class LanguageUpdateView(generic.UpdateView):
 
 
 # マイページの言語スキルシート削除
-class LanguageDeleteView(generic.DeleteView):
+class LanguageDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Language
     template_name = "language_delete.html"
 
@@ -139,7 +151,7 @@ class LanguageDeleteView(generic.DeleteView):
 
 
 # マイページの言語スキルシート閲覧
-class SkillseatBrowseView(generic.ListView):
+class SkillseatBrowseView(LoginRequiredMixin, generic.ListView):
     template_name = "skillseat_browse.html"
     model = Skillseat
     context_object_name = 'skillseat_list'
@@ -157,7 +169,7 @@ class SkillseatBrowseView(generic.ListView):
 
 
 # 自分のプロフィール文章閲覧
-class ProfileTextView(generic.ListView):
+class ProfileTextView(LoginRequiredMixin, generic.ListView):
     model = Skillseat
     template_name = "profile_text.html"
 
@@ -167,7 +179,7 @@ class ProfileTextView(generic.ListView):
 
 
 # 自分のプロフィール文章の更新
-class ProfileTextUpdateView(generic.UpdateView):
+class ProfileTextUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Skillseat
     template_name = "profile_text_update.html"
     form_class = ProfileTextCreateForm
@@ -210,7 +222,7 @@ class CourseSelectionView(generic.ListView):
 
 
 # 自分の講座の閲覧
-class MyCourseView(generic.ListView):
+class MyCourseView(LoginRequiredMixin, generic.ListView):
     model = Course
     template_name = "my_course.html"
 
@@ -224,7 +236,7 @@ class MyCourseView(generic.ListView):
 
 
 # 自分の講座作成
-class MyCourseCreateView(generic.CreateView):
+class MyCourseCreateView(LoginRequiredMixin, generic.CreateView):
     model = Course
     template_name = "my_course_create.html"
     form_class = MyCourseCreateForm
@@ -239,7 +251,7 @@ class MyCourseCreateView(generic.CreateView):
 
 
 # 自分の講座の更新
-class MyCourseUpdateView(generic.UpdateView):
+class MyCourseUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Course
     template_name = "my_course_update.html"
     form_class = MyCourseCreateForm
@@ -247,7 +259,7 @@ class MyCourseUpdateView(generic.UpdateView):
 
 
 # 自分の講座詳細画面
-class CourseDetailView(generic.DetailView):
+class CourseDetailView(LoginRequiredMixin, generic.DetailView):
     model = Course
     template_name = "course_detail.html"
     slug_field = "user_id_id"
@@ -308,7 +320,7 @@ class OthersProfileSkillseatView(generic.DetailView):
 
 
 # 依頼申請の作成
-class RequestApplicationView(generic.CreateView):
+class RequestApplicationView(LoginRequiredMixin, generic.CreateView):
     model = Request
     template_name = "request_application.html"
     form_class = RequestApplicationCreateForm
@@ -325,7 +337,7 @@ class RequestApplicationView(generic.CreateView):
 
 
 # 依頼申請済みの講座閲覧
-class RequestedCourseView(generic.ListView):
+class RequestedCourseView(LoginRequiredMixin, generic.ListView):
     template_name = "requested_course.html"
     model = Skillseat
     context_object_name = 'skillseat_list'
@@ -344,14 +356,14 @@ class RequestedCourseView(generic.ListView):
 
 
 # 依頼のキャンセル
-class RequestedCourseCancelView(generic.DeleteView):
+class RequestedCourseCancelView(LoginRequiredMixin, generic.DeleteView):
     model = Request
     template_name = "requested_course_cancel.html"
     success_url = reverse_lazy('skillswap:requested-course')
 
 
 # 自分に来た依頼の閲覧
-class RequestReceivedView(generic.ListView):
+class RequestReceivedView(LoginRequiredMixin, generic.ListView):
     model = Request
     template_name = "request_received.html"
 
@@ -366,7 +378,7 @@ class RequestReceivedView(generic.ListView):
 
 
 # 依頼の拒否
-class RequestRejectionView(generic.UpdateView):
+class RequestRejectionView(LoginRequiredMixin, generic.UpdateView):
     model = Request
     template_name = "request_rejection.html"
 
@@ -378,7 +390,7 @@ class RequestRejectionView(generic.UpdateView):
 
 
 # 依頼の許可
-class RequestPermissionView(generic.UpdateView):
+class RequestPermissionView(LoginRequiredMixin, generic.UpdateView):
     model = Request
     template_name = "request_rejection.html"
 
@@ -407,7 +419,7 @@ class InquiryView(generic.CreateView):
 
 
 # チャット
-class ChatRoom(generic.TemplateView):
+class ChatRoom(LoginRequiredMixin, generic.TemplateView):
     # Home画面を表示するビュー
     template_name = 'chat/chat_box.html'
 
@@ -426,7 +438,7 @@ def getFriendsList(username):
         return []
 
 
-class SearchUser(generic.View):
+class SearchUser(LoginRequiredMixin, generic.View):
 
     def get(self, request, *args, **kwargs):
 
@@ -491,7 +503,7 @@ def get_message(request, username):
                    'current_user': current_user, 'friend': friend})
 
 
-class UpdateMessage(generic.View):
+class UpdateMessage(LoginRequiredMixin, generic.View):
 
     def post(self, request, *args, **kwargs):
         data = JSONParser().parse(request)
@@ -514,7 +526,7 @@ class UpdateMessage(generic.View):
         return JsonResponse(serializer.data, safe=False)
 
 
-class ReviewView(generic.CreateView):
+class ReviewView(LoginRequiredMixin, generic.CreateView):
     model = Evaluation
     template_name = "review.html"
     form_class = EvaluationCreateForm
@@ -537,15 +549,15 @@ class ReviewView(generic.CreateView):
         return super().form_valid(form)
 
 
-class ReviewCompletedView(generic.TemplateView):
+class ReviewCompletedView(LoginRequiredMixin, generic.TemplateView):
     template_name = "review_completed.html"
 
 
 # 管理者ログイン後
-class AdministratorView(generic.TemplateView):
+class AdministratorView(LoginRequiredMixin, generic.TemplateView):
     template_name = "Administrator.html"
 
-class UserListView(generic.ListView):
+class UserListView(LoginRequiredMixin, generic.ListView):
     model = CustomUser
     template_name = "user_list.html"
 
@@ -574,7 +586,7 @@ class UserListView(generic.ListView):
     #     else:
     #         return course.order_by('created_at')
 
-class SuspensionView(generic.View):
+class SuspensionView(LoginRequiredMixin, generic.View):
     template_name = "skillseat_update.html"
 
     def get(self, *args, **kwargs):
@@ -585,7 +597,7 @@ class SuspensionView(generic.View):
 
 
 # お問い合わせ一覧
-class InquiryListView(generic.ListView):
+class InquiryListView(LoginRequiredMixin, generic.ListView):
     model = Inquiry
     template_name = "inquiry_list.html"
 
