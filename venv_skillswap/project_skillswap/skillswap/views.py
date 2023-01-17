@@ -419,10 +419,10 @@ class InquiryView(generic.CreateView):
 
 
 # チャット
-class ChatRoom(LoginRequiredMixin, generic.TemplateView):
-    # Home画面を表示するビュー
-    template_name = 'chat/chat_box.html'
-
+# class ChatRoom(LoginRequiredMixin, generic.TemplateView):
+#     # Home画面を表示するビュー
+#     template_name = 'chat/chat_box.html'
+#
 
 def getFriendsList(username):
     """
