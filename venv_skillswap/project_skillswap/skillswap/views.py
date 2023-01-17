@@ -43,6 +43,15 @@ class OnlyYouCourse(UserPassesTestMixin):
         return self.request.user.id == course.user_id_id
 
 
+# ログインしているユーザが友達の人だけに評価できる
+class OnlyYouFriends(UserPassesTestMixin):
+    raise_exception = True
+
+    def test_func(self):
+        friends = get_object_or_404(Friends, pk=self.kwargs['pk'])
+        return self.request.user.id == friends.user_id
+
+
 # ホーム画面（ログイン前）
 class IndexView(generic.TemplateView):
     template_name = "index.html"
@@ -452,14 +461,14 @@ class SearchUser(LoginRequiredMixin, generic.View):
 
         if 'search' in self.request.GET:
             query = request.GET.get("search")
-            users = list(CustomUser.objects.all())
+            users = list(CustomUser.objects.filter(is_active=True))
             user_list = []
             for user in users:
                 # 検索文字列を含むユーザ情報を取得(自分は除外)
                 if query in user.username and user.username != request.user.username:
                     user_list.append(user)
         else:
-            user_list = list(CustomUser.objects.all())  # 全ユーザ一覧を取得
+            user_list = list(CustomUser.objects.filter(is_active=True))  # 全ユーザ一覧を取得
             for user in user_list:
                 if user.username == request.user.username:
                     user_list.remove(user)  # 自分のユーザだけ除外
@@ -500,6 +509,9 @@ def get_message(request, username):
     """
     特定ユーザ間のチャット情報を取得する
     """
+    # usernameがis_active出なければこの処理を抜ける
+    # if CustomUser.objects.filter(is_active=True):
+
     friend = CustomUser.objects.get(username=username)
     current_user = CustomUser.objects.get(username=request.user.username)
     messages = Messages.objects.filter(sender_name=current_user.id, receiver_name=friend.id) | \
@@ -534,7 +546,7 @@ class UpdateMessage(LoginRequiredMixin, generic.View):
         return JsonResponse(serializer.data, safe=False)
 
 
-class ReviewView(LoginRequiredMixin, generic.CreateView):
+class ReviewView(LoginRequiredMixin, OnlyYouFriends, generic.CreateView):
     model = Evaluation
     template_name = "review.html"
     form_class = EvaluationCreateForm
