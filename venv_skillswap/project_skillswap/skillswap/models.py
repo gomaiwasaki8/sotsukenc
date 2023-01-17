@@ -120,6 +120,7 @@ class Inquiry(models.Model):
     email = models.CharField(verbose_name="メールアドレス", max_length=256)
     user_name = models.CharField(verbose_name="名前", max_length=500)
     inquiry_content = models.CharField(verbose_name="お問い合わせ内容", max_length=500)
+    replied = models.BooleanField(verbose_name="返信の有無", blank=True, null=True)
     created_at = models.DateTimeField(verbose_name='作成日時', auto_now_add=True)
 
     class Meta:
@@ -129,8 +130,9 @@ class Inquiry(models.Model):
 # お知らせテーブル
 class News(models.Model):
 
-    user_id = models.ForeignKey(CustomUser, verbose_name="ユーザーID", on_delete=models.PROTECT, max_length=10)
+    user_id = models.ForeignKey(CustomUser, verbose_name="ユーザーID", on_delete=models.PROTECT, max_length=10, blank=True, null=True)
     news_detail = models.CharField(verbose_name="お知らせ内容", max_length=500)
+    reply_all = models.BooleanField(verbose_name="全員へ返信", blank=True, null=True)
     created_at = models.DateTimeField(verbose_name='作成日時', auto_now_add=True)
 
     class Meta:

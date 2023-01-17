@@ -71,4 +71,10 @@ urlpatterns = [
     # レビュー
     path("review/<int:pk>", views.ReviewView.as_view(), name="review"),
     path("review/completed/", views.ReviewCompletedView.as_view(), name="review_completed"),
+
+    # 管理者ログイン後
+    path("administrator/", views.AdministratorView.as_view(), name="administrator"),
+    path("administrator/user-list/", views.UserListView.as_view(), name="user-list"),
+    path("administrator/user-list/suspension/<int:user_id_id>", views.SuspensionView.as_view(), name="suspension"),
+    path("administrator/inquiry-list/", views.InquiryListView.as_view(), name="inquiry-list"),
 ]

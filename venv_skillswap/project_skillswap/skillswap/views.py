@@ -31,7 +31,9 @@ class IndexView(generic.TemplateView):
 # ログイン後の遷移先
 class AfterLoginView(generic.View):
     def get(self, request):
-        if Language.objects.filter(user_id_id=self.request.user).exists() and Skillseat.objects.filter(user_id_id=self.request.user).exists():
+        if self.request.user.is_superuser:
+            return redirect('skillswap:administrator')
+        elif Language.objects.filter(user_id_id=self.request.user).exists() and Skillseat.objects.filter(user_id_id=self.request.user).exists():
             return redirect('skillswap:course-selection')
         elif Skillseat.objects.filter(user_id_id=self.request.user).exists():
             return redirect('skillswap:language-create')
@@ -177,6 +179,7 @@ class CourseSelectionView(generic.ListView):
     model = Course
     template_name = "course_selection.html"
 
+    # このget_context_dataいらないかも
     def get_context_data(self, **kwargs):
         context = super(CourseSelectionView, self).get_context_data(**kwargs)
         context.update({
@@ -189,19 +192,21 @@ class CourseSelectionView(generic.ListView):
         course = super().get_queryset(**kwargs)
         query = self.request.GET
 
+        active = CustomUser.objects.filter(is_active=True)
+        print(active)
+
         # 検索バーから抽出
         if q := query.get('q'):
-            course = course.filter(title__contains=q)
-            return course.order_by('created_at')
+            course = course.filter(title__contains=q, user_id_id__in=active)
         # 新着順
-        elif query.get('new'):
-            return course.order_by('-created_at')
+        if query.get('new'):
+            return course.filter(user_id_id__in=active).order_by('-created_at')
         # 投稿順
         elif query.get('old'):
-            return course.order_by('created_at')
+            return course.filter(user_id_id__in=active).order_by('created_at')
         # それ以外
         else:
-            return course.order_by('created_at')
+            return course.filter(user_id_id__in=active).order_by('created_at')
 
 
 # 自分の講座の閲覧
@@ -534,4 +539,68 @@ class ReviewView(generic.CreateView):
 
 class ReviewCompletedView(generic.TemplateView):
     template_name = "review_completed.html"
+
+
+# 管理者ログイン後
+class AdministratorView(generic.TemplateView):
+    template_name = "Administrator.html"
+
+class UserListView(generic.ListView):
+    model = CustomUser
+    template_name = "user_list.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(UserListView, self).get_context_data(**kwargs)
+        context.update({
+            'skillseat_list': Skillseat.objects.all()
+        })
+        return context
+
+    # def get_queryset(self, **kwargs):
+    #     course = super().get_queryset(**kwargs)
+    #     query = self.request.GET
+    #
+    #     # 検索バーから抽出
+    #     if q := query.get('q'):
+    #         course = course.filter(title__contains=q)
+    #         return course.order_by('created_at')
+    #     # 新着順
+    #     elif query.get('new'):
+    #         return course.order_by('-created_at')
+    #     # 投稿順
+    #     elif query.get('old'):
+    #         return course.order_by('created_at')
+    #     # それ以外
+    #     else:
+    #         return course.order_by('created_at')
+
+class SuspensionView(generic.View):
+    template_name = "skillseat_update.html"
+
+    def get(self, *args, **kwargs):
+        user = CustomUser.objects.get(pk=self.kwargs['user_id_id'])
+        user.is_active = False
+        user.save()
+        return redirect('skillswap:user-list')
+
+
+# お問い合わせ一覧
+class InquiryListView(generic.ListView):
+    model = Inquiry
+    template_name = "inquiry_list.html"
+
+    def get_queryset(self, **kwargs):
+        inquiry = super().get_queryset(**kwargs)
+        query = self.request.GET
+
+        # 返信済み
+        if query.get('replied'):
+            return inquiry.filter(replied=True)
+        # 未返信
+        elif query.get('no-reply'):
+            return inquiry.filter(replied__isnull=True)
+        # それ以外
+        else:
+            return inquiry.order_by('created_at')
+
 

@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}SKILLSWAP | お問い合わせ一覧{% endblock %}
+
+{% block active_diary_list %}active{% endblock %}
+
+{% block head %}{% endblock %}
+
+{% block header %}{% endblock %}
+
+{% block contents %}
+<div class="container">
+    <div class="row">
+        <div class="my-div-style w-100">
+            <h1>管理者画面（仮）</h1>
+
+            <form action="{% url 'skillswap:inquiry-list' %}" method="GET">
+            {% csrf_token %}
+            <input type="submit" value="すべて">
+            <input type="submit" value="返信済み" name="replied">
+            <input type="submit" value="未返信" name="no-reply">
+            </form>
+
+            {% for object in object_list %}
+            <table border="1">
+                <tr>
+                    <td>名前</td><td>{{ object.user_name }}</td>
+                </tr>
+                <tr>
+                    <td>メールアドレス</td><td>{{ object.email }}</td>
+                </tr>
+                <tr>
+                    <td>お問い合わせ内容</td><td>{{ object.inquiry_content }}</td>
+                </tr>
+                <tr>
+                    <td>返信済み</td><td>{{ object.replied }}</td>
+                </tr>
+                </table>
+            <br>
+                {% endfor %}
+
+            <a href="{% url 'skillswap:user-list' %}"><button>登録ユーザ情報一覧</button></a>
+        </div>
+    </div>
+</div>
+{% endblock %}
