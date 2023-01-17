@@ -26,13 +26,21 @@ from rest_framework.parsers import JSONParser
 from skillswap.serializers import MessageSerializer
 
 
-# ログインユーザのみ閲覧出来る
-class OnlyYouMixin(UserPassesTestMixin):
+# ログインユーザのみスキルシートを閲覧出来る
+class OnlyYouSkillseat(UserPassesTestMixin):
     raise_exception = True
 
     def test_func(self):
         skillseat = get_object_or_404(Skillseat, pk=self.kwargs['pk'])
-        return self.request.user == skillseat.user
+        return self.request.user.id == skillseat.user_id_id
+
+# ログインユーザのみ講座を閲覧出来る
+class OnlyYouCourse(UserPassesTestMixin):
+    raise_exception = True
+
+    def test_func(self):
+        course = get_object_or_404(Course, pk=self.kwargs['pk'])
+        return self.request.user.id == course.user_id_id
 
 
 # ホーム画面（ログイン前）
@@ -111,7 +119,7 @@ class LanguageCreateView(LoginRequiredMixin, generic.CreateView):
 
 
 # アカウント情報の更新
-class SkillseatUpdateView(LoginRequiredMixin, generic.UpdateView):
+class SkillseatUpdateView(LoginRequiredMixin, OnlyYouSkillseat, generic.UpdateView):
     model = Skillseat
     template_name = "skillseat_update.html"
     form_class = SkillseatUpdateForm
@@ -179,7 +187,7 @@ class ProfileTextView(LoginRequiredMixin, generic.ListView):
 
 
 # 自分のプロフィール文章の更新
-class ProfileTextUpdateView(LoginRequiredMixin, generic.UpdateView):
+class ProfileTextUpdateView(LoginRequiredMixin, OnlyYouSkillseat, generic.UpdateView):
     model = Skillseat
     template_name = "profile_text_update.html"
     form_class = ProfileTextCreateForm
@@ -251,7 +259,7 @@ class MyCourseCreateView(LoginRequiredMixin, generic.CreateView):
 
 
 # 自分の講座の更新
-class MyCourseUpdateView(LoginRequiredMixin, generic.UpdateView):
+class MyCourseUpdateView(LoginRequiredMixin, OnlyYouCourse, generic.UpdateView):
     model = Course
     template_name = "my_course_update.html"
     form_class = MyCourseCreateForm
