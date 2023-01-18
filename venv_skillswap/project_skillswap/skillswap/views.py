@@ -208,12 +208,13 @@ class CourseSelectionView(generic.ListView):
     model = Course
     template_name = "course_selection.html"
 
-    # このget_context_dataいらないかも
+    # CourseとSkillseat両方を持ってくる方法が分からない！！！！
     def get_context_data(self, **kwargs):
         context = super(CourseSelectionView, self).get_context_data(**kwargs)
+        course = Course.objects.select_related('user_id')
         context.update({
             # 'request_list': Request.objects.order_by('created_at'),
-            'course_request_list': Course.objects.select_related('user_id')
+            'course_request_list': course
         })
         return context
 

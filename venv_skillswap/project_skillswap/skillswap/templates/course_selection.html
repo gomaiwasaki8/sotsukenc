@@ -49,6 +49,7 @@
                     <td><a href="{% url 'skillswap:request-application' course.pk %}"><button>依頼</button></a></td>
                     {% endif %}
 
+
 <!--                    {% for r in course_request_list %}-->
 <!--                    <p>-&#45;&#45;&ndash;&gt;>>>>{{ r.user_id }}</p>-->
 <!--                    <p>-&#45;&#45;&ndash;&gt;>>>>{{ r.user_id_id }}</p>-->
@@ -75,6 +76,17 @@
 
         {% endfor %}
         </table>
+
+        {% for i in course_request_list %}
+
+        <h1>あ{{ i.user_id }}</h1>
+        <h1>い{{ i.user_name }}</h1>
+        <h1>う{{ i.user_id.last_login }}</h1>
+        <h1>タイトル：{{ i.title }}</h1>
+        <br>
+
+        {% endfor %}
+
     </div>
 </div>
 {% endblock %}
