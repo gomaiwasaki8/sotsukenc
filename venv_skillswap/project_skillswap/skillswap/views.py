@@ -222,7 +222,6 @@ class CourseSelectionView(generic.ListView):
         query = self.request.GET
 
         active = CustomUser.objects.filter(is_active=True)
-        print(active)
 
         # 検索バーから抽出
         if q := query.get('q'):
@@ -441,6 +440,7 @@ class InquiryView(generic.CreateView):
 #     template_name = 'chat/chat_box.html'
 #
 
+# フレンドの取得
 def getFriendsList(username):
     """
     指定したユーザの友達リストを取得
@@ -455,6 +455,7 @@ def getFriendsList(username):
         return []
 
 
+# フレンド一覧の表示
 class SearchUser(LoginRequiredMixin, generic.View):
 
     def get(self, request, *args, **kwargs):
@@ -478,6 +479,7 @@ class SearchUser(LoginRequiredMixin, generic.View):
         return render(request, "chat/search.html", {'users': user_list, 'friends': friends})
 
 
+# 許可を押した際にフレンド登録を行う
 def addFriend(request, user_id_id):
     """
     引数で受け取ったユーザ名(username)を Friendsテーブルに友達として登録する。
@@ -505,6 +507,8 @@ def addFriend(request, user_id_id):
         object.save()
     return redirect("skillswap:search_user")
 
+
+# チャット情報を取得
 def get_message(request, username):
     """
     特定ユーザ間のチャット情報を取得する
@@ -523,6 +527,7 @@ def get_message(request, username):
                    'current_user': current_user, 'friend': friend})
 
 
+# チャットを送る
 class UpdateMessage(LoginRequiredMixin, generic.View):
 
     def post(self, request, *args, **kwargs):
@@ -546,6 +551,7 @@ class UpdateMessage(LoginRequiredMixin, generic.View):
         return JsonResponse(serializer.data, safe=False)
 
 
+# レビューを行う
 class ReviewView(LoginRequiredMixin, OnlyYouFriends, generic.CreateView):
     model = Evaluation
     template_name = "review.html"
@@ -554,21 +560,23 @@ class ReviewView(LoginRequiredMixin, OnlyYouFriends, generic.CreateView):
     success_url = reverse_lazy('skillswap:review_completed')
 
     def get_context_data(self, **kwargs):
+        friend = Friends.objects.values('friend_id').get(pk=self.kwargs['pk'])
         context = super(ReviewView, self).get_context_data(**kwargs)
         context.update({
-            'course_list': Course.objects.filter(user_id_id=self.kwargs['pk']),
+            'course_list': Course.objects.filter(user_id_id=friend['friend_id']),
         })
         return context
 
     def form_valid(self, form):
+        friend = Friends.objects.values('friend_id').get(pk=self.kwargs['pk'])
         evaluation = form.save(commit=False)
         evaluation.user1_id_id = self.request.user.id
-        print(self.request.user)
-        evaluation.user2_id_id = self.kwargs['pk']
+        evaluation.user2_id_id = friend['friend_id']
         evaluation.save()
         return super().form_valid(form)
 
 
+# レビュー完了
 class ReviewCompletedView(LoginRequiredMixin, generic.TemplateView):
     template_name = "review_completed.html"
 
@@ -577,6 +585,8 @@ class ReviewCompletedView(LoginRequiredMixin, generic.TemplateView):
 class AdministratorView(LoginRequiredMixin, generic.TemplateView):
     template_name = "Administrator.html"
 
+
+# 管理者側からユーザの一覧
 class UserListView(LoginRequiredMixin, generic.ListView):
     model = CustomUser
     template_name = "user_list.html"
@@ -606,6 +616,8 @@ class UserListView(LoginRequiredMixin, generic.ListView):
     #     else:
     #         return course.order_by('created_at')
 
+
+# 管理者側からユーザのアカウント停止処理
 class SuspensionView(LoginRequiredMixin, generic.View):
     template_name = "skillseat_update.html"
 
@@ -616,7 +628,7 @@ class SuspensionView(LoginRequiredMixin, generic.View):
         return redirect('skillswap:user-list')
 
 
-# お問い合わせ一覧
+# 管理者側からお問い合わせ一覧
 class InquiryListView(LoginRequiredMixin, generic.ListView):
     model = Inquiry
     template_name = "inquiry_list.html"
