@@ -58,6 +58,9 @@ urlpatterns = [
     path('news/request-received/rejection/<int:pk>/', views.RequestRejectionView.as_view(), name="request-rejection"),
     # 依頼の許可
     path('news/request-received/permission/<int:pk>/', views.RequestPermissionView.as_view(), name="request-permission"),
+    # お知らせ（運営から）
+    path('news/management-list/', views.ManagementListView.as_view(), name="management-list"),
+
 
     # チャット
     # path('chat_room/', views.ChatRoom.as_view(), name="chat_room"),
@@ -77,4 +80,7 @@ urlpatterns = [
     path("administrator/user-list/", views.UserListView.as_view(), name="user-list"),
     path("administrator/user-list/suspension/<int:user_id_id>", views.SuspensionView.as_view(), name="suspension"),
     path("administrator/inquiry-list/", views.InquiryListView.as_view(), name="inquiry-list"),
+    path("administrator/news-list/", views.NewsListView.as_view(), name="news-list"),
+    path("administrator/news-create/", views.NewsCreateView.as_view(), name="news-create"),
+
 ]

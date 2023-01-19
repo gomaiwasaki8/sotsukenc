@@ -13,6 +13,7 @@ from .forms import *
 from .models import *
 from django import forms
 
+from django.db.models import Q
 import re
 
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
@@ -648,4 +649,30 @@ class InquiryListView(LoginRequiredMixin, generic.ListView):
         else:
             return inquiry.order_by('created_at')
 
+
+class NewsListView(LoginRequiredMixin, generic.ListView):
+    model = News
+    template_name = "news_list.html"
+
+class NewsCreateView(LoginRequiredMixin, generic.CreateView):
+    model = News
+    template_name = "news_create.html"
+    form_class = NewsCreateForm
+    success_url = reverse_lazy('skillswap:news-list')
+
+    def form_valid(self, form):
+        news = form.save(commit=False)
+        news.reply_all = True
+        # news.user_id = Null
+        news.save()
+        return super().form_valid(form)
+
+
+class ManagementListView(LoginRequiredMixin, ListView):
+    model = News
+    template_name = "management_list.html"
+
+    def get_queryset(self):
+        news = News.objects.filter(Q(reply_all=True) | Q(user_id_id=self.request.user.id))
+        return news
 

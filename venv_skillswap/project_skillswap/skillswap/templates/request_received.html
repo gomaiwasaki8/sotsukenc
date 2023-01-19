@@ -28,12 +28,14 @@
 <!--        </ul>-->
         <br><br><br><br><br><br><br>
         <a href="{% url 'skillswap:request-received' %}">もらった依頼一覧</a>
-        <a href="">運営からのお知らせ</a>
+        <a href="{% url 'skillswap:management-list' %}">運営からのお知らせ</a>
         <ul>
             {% for request in request_list %}
             <li>メッセージ：{{ request.message }}</li>
             <li><a href="{% url 'skillswap:addfriend' request.user_id_id %}"><button>許可</button></a></li>
             <li><a href="{% url 'skillswap:request-rejection' request.pk %}"><button>拒否</button></a></li>
+            {% empty %}
+            <p>申請された依頼はありません</p>
             {% endfor %}
         </ul>
     </div>

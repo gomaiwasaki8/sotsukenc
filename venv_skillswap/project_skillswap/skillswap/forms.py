@@ -108,7 +108,6 @@ class EvaluationCreateForm(forms.ModelForm):
         }
 
 
-
 class InquiryCreateForm(forms.ModelForm):
     class Meta:
         model = Inquiry
@@ -119,3 +118,15 @@ class InquiryCreateForm(forms.ModelForm):
             'email': forms.TextInput(attrs={'rows': 1, 'cols': 40}),
             'inquiry_content': forms.Textarea(attrs={'rows': 10, 'cols': 40}),
         }
+
+
+class NewsCreateForm(forms.ModelForm):
+    class Meta:
+        model = News
+        fields = ('news_detail',)
+        # テキストエリアの高さ、幅を指定
+        widgets = {
+            'news_detail': forms.Textarea(attrs={'rows': 10, 'cols': 40}),
+        }
+
+
