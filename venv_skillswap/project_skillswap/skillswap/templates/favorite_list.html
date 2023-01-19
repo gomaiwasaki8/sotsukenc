@@ -74,7 +74,7 @@
       font-size: 20px;
     }
     td{
-      width:  400px;              /* 幅指定 */
+      /* width:  400px;              幅指定 */
       height: 169px;
       font-size: 20px;
       position: sticky;
@@ -104,13 +104,15 @@
     <table border="1">
         {% for favorite in favorite_list %}
         <tr>
+            <td>
+            {% if favorite.course_id.course_img %}
+            <img class="superimg" src="{{ favorite.course_id.course_img.url }}" width="170" height="170"/>
+            {% else %}
+            <img class="superimg" src="{% static 'assets/sample.png' %}" width="170" height="170"/>
+            {% endif %}
+            </td>
             <th>{{ favorite.course_id.title }}</th>
-            <td>{{ favorite.user_id_id }}</td>
-<!--            {% if favorite.course_img %}-->
-<!--            <img class="myimg" src="{{ favorite.course_img.url }}" width="170" height="170"/>-->
-<!--            {% else %}-->
-<!--            <img class="myimg" src="{% static 'assets/sample.png' %}" width="170" height="170"/>-->
-<!--            {% endif %}-->
+            <td><a href="{% url 'skillswap:favorite' favorite.course_id.pk %}"><button>お気に入り</button></a></td>
         </tr>
 
     {% empty %}

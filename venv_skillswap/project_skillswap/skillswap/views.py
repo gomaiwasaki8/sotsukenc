@@ -256,6 +256,7 @@ class FavoriteView(LoginRequiredMixin, generic.View):
         return redirect('skillswap:course-selection')
 
 
+# お気に入り一覧
 class FavoriteListView(LoginRequiredMixin, generic.ListView):
     models = Favorite
     template_name = "favorite_list.html"
@@ -264,8 +265,10 @@ class FavoriteListView(LoginRequiredMixin, generic.ListView):
     def get_context_data(self, **kwargs):
         context = super(FavoriteListView, self).get_context_data(**kwargs)
         favorite = Favorite.objects.select_related('course_id')
+        skillseat = Skillseat.objects.filter(user_id_id=self.request.user)
         context.update({
-            'favorite_list': favorite
+            'favorite_list': favorite,
+            'skillseat_list': skillseat,
         })
         return context
 
