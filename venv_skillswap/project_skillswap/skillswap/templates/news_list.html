@@ -15,12 +15,8 @@
         <div class="my-div-style w-100">
             <h1>管理者画面（仮）</h1>
 
-<!--            <form action="{% url 'skillswap:inquiry-list' %}" method="GET">-->
-<!--            {% csrf_token %}-->
-<!--            <input type="submit" value="すべて">-->
-<!--            <input type="submit" value="返信済み" name="replied">-->
-<!--            <input type="submit" value="未返信" name="no-reply">-->
-<!--            </form>-->
+            <a href="{% url 'skillswap:user-list' %}"><button>登録ユーザ情報一覧</button></a>
+            <a href="{% url 'skillswap:inquiry-list' %}"><button>受信済みお問い合わせ一覧</button></a>
 
             <a href="{% url 'skillswap:news-create' %}"><button>お知らせ作成</button></a>
 
@@ -45,8 +41,6 @@
             </table>
             <br>
             {% endfor %}
-
-            <a href="{% url 'skillswap:user-list' %}"><button>登録ユーザ情報一覧</button></a>
         </div>
     </div>
 </div>

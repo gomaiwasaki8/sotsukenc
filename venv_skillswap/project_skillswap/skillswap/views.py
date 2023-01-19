@@ -239,6 +239,18 @@ class CourseSelectionView(generic.ListView):
             return course.filter(user_id_id__in=active).order_by('created_at')
 
 
+# お気に入り登録
+class FavoriteView(LoginRequiredMixin, generic.View):
+
+    def get(self, request):
+        if Favorite.objects.filter(user_id_id=self.request.user.id, course_id_id=self.kwargs['pk']).exists():
+            # deleteの処理を入れる
+            return redirect('skillswap:administrator')
+        else:
+            # クリエイトの処理を入れる
+            return redirect('skillswap:skillseat-create')
+
+
 # 自分の講座の閲覧
 class MyCourseView(LoginRequiredMixin, generic.ListView):
     model = Course

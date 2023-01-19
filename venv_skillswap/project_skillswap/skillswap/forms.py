@@ -8,7 +8,7 @@ import datetime
 class SkillseatCreateForm(forms.ModelForm):
     class Meta:
         model = Skillseat
-        fields = ('user_name', 'gender', 'birthday', 'user_img', 'profile_text', )
+        fields = ('user_img', 'user_name', 'gender', 'birthday', 'profile_text', )
     #     fields = "__all__"
     #     excludeで入力させない列を指定
     #     exclude = ("create_at")
