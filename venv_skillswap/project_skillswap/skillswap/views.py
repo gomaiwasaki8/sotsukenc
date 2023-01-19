@@ -242,13 +242,42 @@ class CourseSelectionView(generic.ListView):
 # お気に入り登録
 class FavoriteView(LoginRequiredMixin, generic.View):
 
-    def get(self, request):
+    def get(self, request, *args, **kwargs):
         if Favorite.objects.filter(user_id_id=self.request.user.id, course_id_id=self.kwargs['pk']).exists():
-            # deleteの処理を入れる
-            return redirect('skillswap:administrator')
+            # お気に入りの解除
+            favorite = Favorite.objects.filter(user_id_id=self.request.user.id, course_id_id=self.kwargs['pk']).delete()
         else:
-            # クリエイトの処理を入れる
-            return redirect('skillswap:skillseat-create')
+            # お気に入りの登録
+            favorite = Favorite.objects.create(
+                user_id_id=self.request.user.id,
+                course_id_id=self.kwargs['pk'],
+            )
+            favorite.save()
+        return redirect('skillswap:course-selection')
+
+
+class FavoriteListView(LoginRequiredMixin, generic.ListView):
+    models = Favorite
+    template_name = "favorite_list.html"
+
+    # CourseとFavoriteを結合したい
+    def get_context_data(self, **kwargs):
+        context = super(FavoriteListView, self).get_context_data(**kwargs)
+        favorite = Favorite.objects.select_related('course_id')
+        context.update({
+            'favorite_list': favorite
+        })
+        return context
+
+    def get_queryset(self):
+        favorite = Favorite.objects.filter(user_id_id=self.request.user)
+        return favorite
+    #
+    # def get_queryset(self, **kwargs):
+    #     favorite = super().get_queryset(**kwargs)
+    #     query = self.request.GET
+    #     active = CustomUser.objects.filter(is_active=True)
+    #     return favorite.filter(user_id_id__in=active).order_by('created_at')
 
 
 # 自分の講座の閲覧

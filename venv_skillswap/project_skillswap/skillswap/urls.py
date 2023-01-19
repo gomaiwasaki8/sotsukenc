@@ -36,7 +36,7 @@ urlpatterns = [
     path('my-page/my-course-update/<int:pk>/', views.MyCourseUpdateView.as_view(), name="my-course-update"),
     # 講座選択
     path('course-selection/', views.CourseSelectionView.as_view(), name="course-selection"),
-    # お気に入り登録
+    # お気に入り登録・解除
     path('favorite/<int:pk>/', views.FavoriteView.as_view(), name="favorite"),
     # 講座詳細
     path('course-detail/<int:user_id_id>/', views.CourseDetailView.as_view(), name="course-detail"),
@@ -54,6 +54,8 @@ urlpatterns = [
     path('my-page/requested-course/', views.RequestedCourseView.as_view(), name="requested-course"),
     # 依頼のキャンセル
     path('my-page/requested-course-cancel/<int:pk>/', views.RequestedCourseCancelView.as_view(), name="requested-course-cancel"),
+    # お気に入りの講座一覧
+    path('my-page/favorite-list/', views.FavoriteListView.as_view(), name="favorite-list"),
     # お知らせ（依頼）
     path('news/request-received/', views.RequestReceivedView.as_view(), name="request-received"),
     # 依頼の拒否
