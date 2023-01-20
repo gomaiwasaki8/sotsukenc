@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}SKILLSWAP | お問い合わせ{% endblock %}
+{% block title %}SKILLSWAP | お問い合わせ完了{% endblock %}
 
 {% block active_diary_list %}active{% endblock %}
 
@@ -54,12 +54,12 @@
             <form method="POST" enctype='multipart/form-data'>
                 {% csrf_token %}
                 <h1>お問い合わせフォーム</h1>
-                <table class="table">
-                    {{ form.as_table }}
-                </table>
-                <button class="btn btn-primary" type="submit">送信</button>
                 <div align="center">
-<!--                    <a href="{% url 'skillswap:index' %}">戻る</a>-->
+                    <p>お問い合わせありがとうございました。数日以内に担当者から返信させていただきます。</p>
+                    <p>今後ともSKILLSWAPをよろしくお願いいたします。</p>
+                    <br>
+                    <p>※内容によっては、お答えできない場合がございます。</p>
+                    <a href="{% url 'skillswap:index' %}">戻る</a>
                 </div>
             </form>
         </div>

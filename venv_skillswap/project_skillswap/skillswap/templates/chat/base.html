@@ -69,19 +69,14 @@
 <div class="messaging my-div-style">
       <div class="inbox_msg my-div-style">
         <div class="inbox_people">
-          <div class="headind_srch my-div-style">
-            <div class="recent_heading my-div-style">
-              <h5>ユーザ検索画面</h5>
-            </div>
-          </div>
           <div class="inbox_chat my-div-style">
             {% for friend in friends %}
             <a href="{% url 'skillswap:get_message' friend.friend.username %}">
             <div class="chat_list my-div-style">
               <div class="chat_people my-div-style">
-<!--                <div class="chat_img"> <img src="{{ friend.friend.thumbnail.url }}" alt="sunil"> </div>-->
                 <div class="chat_ib">
-                  <h5>{{friend.friend.username}}</h5>
+                    <h5>{{ friend.friend.username }}</h5>
+<!--                    <h5>{{ friend.friend.id.skillseat }}</h5>-->
                   <a href="{% url 'skillswap:review' friend.pk %}"><button>レビュー</button></a>
                 </div>
 
