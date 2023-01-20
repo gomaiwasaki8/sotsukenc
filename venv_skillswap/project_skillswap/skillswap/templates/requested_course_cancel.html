@@ -21,9 +21,10 @@
         <div class="my-div-style w-100">
             <form method="POST">
                 {% csrf_token %}
-                <p>本当にキャンセルしますか？</p>
-                <button type="submit">キャンセルする</button>
-                <a href="{{request.META.HTTP_REFERER}}">戻る</a>
+                <h1>この予約をキャンセルします</h1>
+                <p>本当にこの予約をキャンセルしますか？</p>
+                <button type="submit">はい</button>
+                <a href="{% url 'skillswap:requested-course' %}">いいえ</a>
             </form>
         </div>
     </div>

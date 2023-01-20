@@ -209,34 +209,33 @@ class CourseSelectionView(generic.ListView):
     model = Course
     template_name = "course_selection.html"
 
-    # CourseとSkillseat両方を持ってくる方法が分からない！！！！
+    # CourseとSkillseat結合
     def get_context_data(self, **kwargs):
         context = super(CourseSelectionView, self).get_context_data(**kwargs)
-        course = Course.objects.select_related('user_id')
+        courses = Course.objects.select_related('user_id').filter(~Q(user_id_id=self.request.user.id))
         context.update({
-            # 'request_list': Request.objects.order_by('created_at'),
-            'course_request_list': course
+            'course_request_list': courses
         })
         return context
 
     def get_queryset(self, **kwargs):
         course = super().get_queryset(**kwargs)
         query = self.request.GET
-
+        course.select_related('user_id').filter(~Q(user_id_id=self.request.user.id))
         active = CustomUser.objects.filter(is_active=True)
 
         # 検索バーから抽出
         if q := query.get('q'):
-            course = course.filter(title__contains=q, user_id_id__in=active)
+            course = course.select_related('user_id').filter(~Q(user_id_id=self.request.user.id), title__contains=q, user_id_id__in=active)
         # 新着順
         if query.get('new'):
-            return course.filter(user_id_id__in=active).order_by('-created_at')
+            return course.select_related('user_id').filter(~Q(user_id_id=self.request.user.id), user_id_id__in=active).order_by('-created_at')
         # 投稿順
         elif query.get('old'):
-            return course.filter(user_id_id__in=active).order_by('created_at')
+            return course.select_related('user_id').filter(~Q(user_id_id=self.request.user.id), user_id_id__in=active).order_by('created_at')
         # それ以外
         else:
-            return course.filter(user_id_id__in=active).order_by('created_at')
+            return course.select_related('user_id').filter(~Q(user_id_id=self.request.user.id), user_id_id__in=active).order_by('created_at')
 
 
 # お気に入り登録
@@ -261,10 +260,10 @@ class FavoriteListView(LoginRequiredMixin, generic.ListView):
     models = Favorite
     template_name = "favorite_list.html"
 
-    # CourseとFavoriteを結合したい
+    # CourseとFavoriteを結合
     def get_context_data(self, **kwargs):
         context = super(FavoriteListView, self).get_context_data(**kwargs)
-        favorite = Favorite.objects.select_related('course_id')
+        favorite = Favorite.objects.select_related('course_id').filter(user_id_id=self.request.user)
         skillseat = Skillseat.objects.filter(user_id_id=self.request.user)
         context.update({
             'favorite_list': favorite,
@@ -405,11 +404,14 @@ class RequestedCourseView(LoginRequiredMixin, generic.ListView):
     context_object_name = 'skillseat_list'
 
     def get_context_data(self, **kwargs):
+
         context = super(RequestedCourseView, self).get_context_data(**kwargs)
+        request = Request.objects.select_related('course_id').filter(user_id_id=self.request.user, request_completed__isnull=True).order_by('created_at')
+        # course = Course.objects.filter(request__user_id_id__exact=self.request.user).order_by('created_at')
+
         context.update({
-            'request_list': Request.objects.filter(
-                user_id_id=self.request.user, request_completed__isnull=True).order_by('created_at'),
-            'course_list': Course.objects.filter(request__user_id_id__exact=self.request.user).order_by('created_at'),
+            'request_list': request,
+            # 'course_list': course,
         })
         return context
 
@@ -422,6 +424,26 @@ class RequestedCourseCancelView(LoginRequiredMixin, generic.DeleteView):
     model = Request
     template_name = "requested_course_cancel.html"
     success_url = reverse_lazy('skillswap:requested-course')
+
+
+# 講座受講履歴
+class AttendanceHistoryView(LoginRequiredMixin, generic.ListView):
+    template_name = "attendance_history.html"
+    model = Skillseat
+    context_object_name = 'skillseat_list'
+
+    def get_context_data(self, **kwargs):
+        context = super(AttendanceHistoryView, self).get_context_data(**kwargs)
+        request = Request.objects.select_related('course_id').filter(user_id_id=self.request.user,
+                                                                     request_completed=True).order_by('created_at')
+        course = Course.objects.filter(request__user_id_id__exact=self.request.user).order_by('created_at')
+        context.update({
+            'request_list': request,
+        })
+        return context
+
+    def get_queryset(self):
+        return Skillseat.objects.filter(user_id_id=self.request.user)
 
 
 # 自分に来た依頼の閲覧

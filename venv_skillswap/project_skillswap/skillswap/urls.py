@@ -54,6 +54,8 @@ urlpatterns = [
     path('my-page/requested-course/', views.RequestedCourseView.as_view(), name="requested-course"),
     # 依頼のキャンセル
     path('my-page/requested-course-cancel/<int:pk>/', views.RequestedCourseCancelView.as_view(), name="requested-course-cancel"),
+    # 受講済みの講座
+    path('my-page/attendance-history/', views.AttendanceHistoryView.as_view(), name="attendance-history"),
     # お気に入りの講座一覧
     path('my-page/favorite-list/', views.FavoriteListView.as_view(), name="favorite-list"),
     # お知らせ（依頼）

@@ -72,9 +72,9 @@
             <div class="daily">
                 {% for skillseat in skillseat_list %}
                 {% if skillseat.user_img %}
-                <img class="img1" src="{{ skillseat.user_img.url }}" width="120" height="120"/>
+                <img class="superimg" src="{{ skillseat.user_img.url }}" width="120" height="120"/>
                 {% else %}
-                <img class="img1" src="{% static 'assets/sample.png' %}" width="120" height="120"/>
+                <img class="superimg" src="{% static 'assets/sample.png' %}" width="120" height="120"/>
                 {% endif %}
 
                 <div class="info">
@@ -86,10 +86,14 @@
                     {% if skillseat.user_evaluation %}
                     <h2>評価：{{ skillseat.user_evaluation }}</h2>
                     {% endif %}
-                    <button class="btn1"><a href="{% url 'skillswap:skillseat-update' skillseat.pk %}">更新</a></button>
                 </div>
                 {% endfor %}
             </div>
+
+            <a href="{% url 'skillswap:others-profile-text' skillseat.pk %}">プロフィール</a>
+            <a href="{% url 'skillswap:others-profile-course' skillseat.user_id_id %}">講座</a>
+            <a href="{% url 'skillswap:others-profile-skillseat' skillseat.user_id_id %}">スキルシート</a>
+            <a href="#">レビュー</a>
 
 <!--            <div class="choice">-->
 <!--                <a class="choice1" href="{% url 'skillswap:profile-text' %}">| プロフィール文章</a><br>-->

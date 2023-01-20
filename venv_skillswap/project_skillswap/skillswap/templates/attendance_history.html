@@ -1,7 +1,7 @@
 {% extends 'mypage.html' %}
 {% load static %}
 
-{% block title %}SKILLSWAP | 依頼済みの講座{% endblock %}
+{% block title %}SKILLSWAP | 講座受講履歴{% endblock %}
 
 {% block active_diary_list %}active{% endblock %}
 
@@ -107,12 +107,12 @@
             {% endif %}
             </td>
             <th>{{ request.course_id.title }}</th>
-            <td>{{ request.message }}</td>
-            <td><a href="{% url 'skillswap:requested-course-cancel' request.pk %}"><button>キャンセル</button></a></td>
+<!--            <td>{{ request.message }}</td>-->
+<!--            <td><a href="{% url 'skillswap:requested-course-cancel' request.pk %}"><button>キャンセル</button></a></td>-->
         </tr>
 
     {% empty %}
-    <p>依頼申請した講座はありません。</p>
+    <p>受講した講座はありません。</p>
     {% endfor %}
     </table>
 

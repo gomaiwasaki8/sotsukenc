@@ -45,49 +45,15 @@
                         </a>
                     </td>
 
-                    {% if course.user_id_id != user.id %}
-                    <td><a href="{% url 'skillswap:request-application' course.pk %}"><button>依頼</button></a></td>
-                    {% endif %}
-
-                    <td><a href="{% url 'skillswap:favorite' course.pk %}"><button>お気に入り</button></a></td>
-
-
-<!--                    {% for r in course_request_list %}-->
-<!--                    <p>-&#45;&#45;&ndash;&gt;>>>>{{ r.user_id }}</p>-->
-<!--                    <p>-&#45;&#45;&ndash;&gt;>>>>{{ r.user_id_id }}</p>-->
-<!--                    <p>-&#45;&#45;&ndash;&gt;>>>>{{ r.title }}</p>-->
-
-<!--                    {% if r.message %}-->
-<!--                    <td><a href="{% url 'skillswap:requested-course-cancel' r.pk %}"><button>キャンセル</button></a></td>-->
-<!--                    {% endif %}-->
-<!--                    {% endfor %}-->
-
-
-<!--                    {% for request in request_list %}-->
 <!--                    {% if course.user_id_id != user.id %}-->
-<!--&lt;!&ndash;                        {% if request.user_id_id == user.id %}&ndash;&gt;-->
-<!--                        <td><a href="{% url 'skillswap:request-application' course.pk %}"><button>依頼</button></a></td>-->
-<!--&lt;!&ndash;                        {% else %}&ndash;&gt;-->
-<!--                        <td><a href="{% url 'skillswap:requested-course-cancel' request.pk %}"><button>キャンセル</button></a></td>-->
-<!--&lt;!&ndash;                        {% endif %}&ndash;&gt;-->
+                    <td><a href="{% url 'skillswap:request-application' course.pk %}"><button>依頼</button></a></td>
+                    <td><a href="{% url 'skillswap:favorite' course.pk %}"><button>お気に入り</button></a></td>
 <!--                    {% endif %}-->
-<!--                    {% endfor %}-->
-
 
                 </tr>
 
         {% endfor %}
         </table>
-
-<!--        {% for i in course_request_list %}-->
-
-<!--        <h1>あ{{ i.user_id }}</h1>-->
-<!--        <h1>い{{ i.user_name }}</h1>-->
-<!--        <h1>う{{ i.user_id.last_login }}</h1>-->
-<!--        <h1>タイトル：{{ i.title }}</h1>-->
-<!--        <br>-->
-
-<!--        {% endfor %}-->
 
     </div>
 </div>
