@@ -91,10 +91,14 @@
 
 {% block contents %}
 <div class="profile">
+    {% if skillseat_list %}
     <p>プロフィール</p>
     {% for skillseat in skillseat_list %}
     <p>{{ skillseat.profile_text }}</p>
     <a href="{% url 'skillswap:profile-text-update' skillseat.pk %}"><button class="btn2">更新</button></a>
     {% endfor %}
+    {% else %}
+    <p>プロフィールを作成してください。</p>
+    {% endif %}
 </div>
 {% endblock %}

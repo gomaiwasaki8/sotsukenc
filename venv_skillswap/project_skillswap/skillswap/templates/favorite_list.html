@@ -101,6 +101,7 @@
 {% block contents %}
 <div class="myinfo">
 
+    {% if favorite_list %}
     <table border="1">
         {% for favorite in favorite_list %}
         <tr>
@@ -114,10 +115,10 @@
             <th>{{ favorite.course_id.title }}</th>
             <td><a href="{% url 'skillswap:favorite' favorite.course_id.pk %}"><button>お気に入り</button></a></td>
         </tr>
-
-    {% empty %}
-    <p>お気に入りに追加した講座はありません。</p>
-    {% endfor %}
+        {% endfor %}
     </table>
+    {% else %}
+        <p>お気に入りに追加した講座はありません。</p>
+    {% endif %}
 </div>
 {% endblock %}
