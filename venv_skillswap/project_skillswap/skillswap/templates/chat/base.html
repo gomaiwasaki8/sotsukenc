@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <!-- This file has been downloaded from Bootsnipp.com. Enjoy! -->
     <title>SKILLSWAP | チャット</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="http://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/chat_room.css' %}">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" type="text/css" rel="stylesheet">
@@ -13,6 +13,7 @@
     <!--  mystyle  -->
     <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon.ico' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/mystyle.css' %}">
+    <link href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" rel="stylesheet">
 </head>
 <body>
 <html>
@@ -42,11 +43,11 @@
             </button>
         </form>
 
-        {% if user.is_authenticated %}
+<!--        {% if user.is_authenticated %}-->
         <a class="infomation" href="{% url 'skillswap:request-received' %}">
             <img src="{% static 'assets/news.png' %}" alt="news" width="37" height="37">
         </a>
-        {% endif %}
+<!--        {% endif %}-->
 
         <select class="select1" name="sampledrop" onChange="location.href=value;">
             <img src="sample.png" alt="home" width="135" height="55">
@@ -70,6 +71,7 @@
       <div class="inbox_msg my-div-style">
         <div class="inbox_people">
           <div class="inbox_chat my-div-style">
+            {% if friends %}
             {% for friend in friends %}
             <a href="{% url 'skillswap:get_message' friend.friend.username %}">
             <div class="chat_list my-div-style">
@@ -83,6 +85,9 @@
             </a>
             {% endfor %}
             </div>
+            {% else %}
+            <p>相手がいません。</p>
+            {% endif %}
         </div>
         {% block contents%}{% endblock %}
       </div>
