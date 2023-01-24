@@ -709,12 +709,25 @@ class UserListView(LoginRequiredMixin, generic.ListView):
 
 
 # 管理者側からユーザのアカウント停止処理
-class SuspensionView(LoginRequiredMixin, generic.View):
-    template_name = "skillseat_update.html"
 
-    def get(self, *args, **kwargs):
+class SuspensionView(LoginRequiredMixin, generic.TemplateView):
+    template_name = "suspension_update.html"
+
+    def post(self, *args, **kwargs):
         user = CustomUser.objects.get(pk=self.kwargs['user_id_id'])
         user.is_active = False
+        user.save()
+        return redirect('skillswap:user-list')
+
+
+# 管理者側からユーザのアカウント停止処理
+
+class RestorationView(LoginRequiredMixin, generic.TemplateView):
+    template_name = "restoration_update.html"
+
+    def post(self, *args, **kwargs):
+        user = CustomUser.objects.get(pk=self.kwargs['user_id_id'])
+        user.is_active = True
         user.save()
         return redirect('skillswap:user-list')
 

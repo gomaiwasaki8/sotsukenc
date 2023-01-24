@@ -91,6 +91,7 @@ urlpatterns = [
     path("administrator/", views.AdministratorView.as_view(), name="administrator"),
     path("administrator/user-list/", views.UserListView.as_view(), name="user-list"),
     path("administrator/user-list/suspension/<int:user_id_id>", views.SuspensionView.as_view(), name="suspension"),
+    path("administrator/user-list/restoration/<int:user_id_id>", views.RestorationView.as_view(), name="restoration"),
     path("administrator/inquiry-list/", views.InquiryListView.as_view(), name="inquiry-list"),
     path("administrator/news-list/", views.NewsListView.as_view(), name="news-list"),
     path("administrator/news-create/", views.NewsCreateView.as_view(), name="news-create"),
