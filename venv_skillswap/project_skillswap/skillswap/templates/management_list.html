@@ -14,8 +14,8 @@
     <div>
 
         <br><br><br><br><br><br><br>
-        <a href="{% url 'skillswap:user-list' %}"><button>登録ユーザ情報一覧</button></a>
-        <a href="{% url 'skillswap:inquiry-list' %}"><button>受信済みお問い合わせ一覧</button></a>
+        <a href="{% url 'skillswap:request-received' %}">もらった依頼一覧</a>
+        <a href="{% url 'skillswap:management-list' %}">運営からのお知らせ</a>
 
         {% for object in object_list %}
         <table border="1">

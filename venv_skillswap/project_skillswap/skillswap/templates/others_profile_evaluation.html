@@ -1,0 +1,32 @@
+{% extends 'others_profile.html' %}
+{% load static %}
+
+{% block title %}SKILLSWAP | 相手のレビュー{% endblock %}
+
+{% block active_diary_list %}active{% endblock %}
+
+{% block head %}{% endblock %}
+
+{% block header %}{% endblock %}
+
+{% block contents %}
+<div class="container">
+        <table border="1">
+            {% for evaluation in evaluation_list %}
+            <tr>
+                <td>
+                    {% if evaluation.user1_id.skillseat.user_img %}
+                    <img class="superimg" src="{{ evaluation.user1_id.skillseat.user_img.url }}" width="170" height="170"/>
+                    {% else %}
+                    <img class="superimg" src="{% static 'assets/sample.png' %}" width="170" height="170"/>
+                    {% endif %}
+                </td>
+                <td>{{ evaluation.evaluation_num }}</td>
+                <td>{{ evaluation.evaluation_text }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        <a href="{{request.META.HTTP_REFERER}}">戻る</a>
+    </div>
+</div>
+{% endblock %}

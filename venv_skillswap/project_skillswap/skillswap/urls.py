@@ -10,6 +10,8 @@ urlpatterns = [
     path('', views.IndexView.as_view(), name="index"),
     # お問い合わせ
     path('inquiry/', views.InquiryView.as_view(), name="inquiry"),
+    # お問い合わせ完了
+    path('inquiry/completed', views.InquiryCompletedView.as_view(), name="inquiry-completed"),
     # ログイン後
     path('after-login/', views.AfterLoginView.as_view(), name="after-login"),
     # スキルシートの作成
@@ -40,6 +42,7 @@ urlpatterns = [
     path('favorite/<int:pk>/', views.FavoriteView.as_view(), name="favorite"),
     # 講座詳細
     path('course-detail/<int:user_id_id>/', views.CourseDetailView.as_view(), name="course-detail"),
+
     # 相手のプロフィール（プロフィール文章）閲覧
     path('others-profile/text/<int:pk>/', views.OthersProfileTextView.as_view(), name="others-profile-text"),
     # 相手のプロフィール（講座）閲覧
@@ -48,6 +51,9 @@ urlpatterns = [
     # 相手のプロフィール（スキルシート）閲覧
     path('others-profile/skillseat/<int:user_id_id>/', views.OthersProfileSkillseatView.as_view(),
          name="others-profile-skillseat"),
+    # 相手のプロフィール（レビュー）閲覧
+    path('others-profile/review/<int:user_id_id>/', views.OthersProfileReviewView.as_view(), name="others-profile-review"),
+
     # 依頼申請
     path('request-application/<int:pk>/', views.RequestApplicationView.as_view(), name="request-application"),
     # 依頼申請済みの講座
@@ -85,6 +91,7 @@ urlpatterns = [
     path("administrator/", views.AdministratorView.as_view(), name="administrator"),
     path("administrator/user-list/", views.UserListView.as_view(), name="user-list"),
     path("administrator/user-list/suspension/<int:user_id_id>", views.SuspensionView.as_view(), name="suspension"),
+    path("administrator/user-list/restoration/<int:user_id_id>", views.RestorationView.as_view(), name="restoration"),
     path("administrator/inquiry-list/", views.InquiryListView.as_view(), name="inquiry-list"),
     path("administrator/news-list/", views.NewsListView.as_view(), name="news-list"),
     path("administrator/news-create/", views.NewsCreateView.as_view(), name="news-create"),

@@ -380,6 +380,25 @@ class OthersProfileSkillseatView(generic.DetailView):
         return context
 
 
+class OthersProfileReviewView(generic.ListView):
+    model = Skillseat
+    template_name = "others_profile_evaluation.html"
+    slug_field = "user_id_id"
+    slug_url_kwarg = "user_id_id"
+
+    def get_context_data(self, **kwargs):
+        context = super(OthersProfileReviewView, self).get_context_data(**kwargs)
+        context.update({
+            'skillseat_list': Skillseat.objects.filter(user_id_id=self.kwargs['user_id_id']),
+            'evaluation_list': Evaluation.objects.select_related('user1_id').filter(user2_id_id=self.kwargs['user_id_id'])
+        })
+        return context
+
+    def get_queryset(self, **kwargs):
+        skillseat = Skillseat.objects.select_related('user2_id').filter(user_id_id=self.kwargs['user_id_id'])
+        return skillseat
+
+
 # 依頼申請の作成
 class RequestApplicationView(LoginRequiredMixin, generic.CreateView):
     model = Request
@@ -492,7 +511,7 @@ class InquiryView(generic.CreateView):
     template_name = "inquiry.html"
     form_class = InquiryCreateForm
     # 処理を行った後遷移する画面の指定
-    success_url = reverse_lazy('skillswap:index')
+    success_url = reverse_lazy('skillswap:inquiry-completed')
 
     # 成功した時の処理。
     def form_valid(self, form):
@@ -500,6 +519,10 @@ class InquiryView(generic.CreateView):
         inquiry.save()
         return super().form_valid(form)
     # 失敗した時の処理特に書いてないのであとで追記するかも
+
+
+class InquiryCompletedView(generic.TemplateView):
+    template_name="inquiry_completed.html"
 
 
 # チャット
@@ -686,12 +709,25 @@ class UserListView(LoginRequiredMixin, generic.ListView):
 
 
 # 管理者側からユーザのアカウント停止処理
-class SuspensionView(LoginRequiredMixin, generic.View):
-    template_name = "skillseat_update.html"
 
-    def get(self, *args, **kwargs):
+class SuspensionView(LoginRequiredMixin, generic.TemplateView):
+    template_name = "suspension_update.html"
+
+    def post(self, *args, **kwargs):
         user = CustomUser.objects.get(pk=self.kwargs['user_id_id'])
         user.is_active = False
+        user.save()
+        return redirect('skillswap:user-list')
+
+
+# 管理者側からユーザのアカウント停止処理
+
+class RestorationView(LoginRequiredMixin, generic.TemplateView):
+    template_name = "restoration_update.html"
+
+    def post(self, *args, **kwargs):
+        user = CustomUser.objects.get(pk=self.kwargs['user_id_id'])
+        user.is_active = True
         user.save()
         return redirect('skillswap:user-list')
 

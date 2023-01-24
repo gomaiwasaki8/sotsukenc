@@ -96,6 +96,7 @@
 {% block contents %}
 <div>
 
+    {% if request_list %}
     <table border="1">
         {% for request in request_list %}
         <tr>
@@ -110,11 +111,10 @@
             <td>{{ request.message }}</td>
             <td><a href="{% url 'skillswap:requested-course-cancel' request.pk %}"><button>キャンセル</button></a></td>
         </tr>
-
-    {% empty %}
-    <p>依頼申請した講座はありません。</p>
-    {% endfor %}
+        {% endfor %}
     </table>
-
+    {% else %}
+        <p>依頼申請した講座はありません。</p>
+    {% endif %}
 </div>
 {% endblock %}

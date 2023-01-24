@@ -13,7 +13,7 @@
 <div class="container">
     <div class="row">
         <div class="my-div-style w-100">
-            <h1>管理者画面（仮）</h1>
+            <h1>管理者</h1>
 
             <a href="{% url 'skillswap:inquiry-list' %}"><button>受信済みお問い合わせ一覧</button></a>
             <a href="{% url 'skillswap:news-list' %}"><button>運営からのお知らせ一覧</button></a>
@@ -23,7 +23,11 @@
             <table>
                 <tr>
                     <th>{{ skillseat.user_name }}</th>
+                    {% if skillseat.user_id.is_active == True %}
                     <td><a href="{% url 'skillswap:suspension' skillseat.user_id_id %}"><button>停止</button></a></td>
+                    {% else %}
+                    <td><a href="{% url 'skillswap:restoration' skillseat.user_id_id %}"><button>復旧</button></a></td>
+                    {% endif %}
                 </tr>
             </table>
             {% endfor %}

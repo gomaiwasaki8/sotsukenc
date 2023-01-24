@@ -85,7 +85,7 @@
                     {% if skillseat.user_evaluation %}
                     <h2>評価：{{ skillseat.user_evaluation }}</h2>
                     {% endif %}
-                    <button class="btn1"><a href="{% url 'skillswap:skillseat-update' skillseat.pk %}">更新</a></button>
+                    <a href="{% url 'skillswap:skillseat-update' skillseat.pk %}"><button class="btn1">更新</button></a>
                 </div>
                 {% endfor %}
             </div>
