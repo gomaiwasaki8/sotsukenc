@@ -4,8 +4,7 @@ body, #wrapper {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    /* 背景色赤はエグい */
-    /*background-color: rgb(244, 46, 46);*/
+    background-color: white;
     margin: 0;
 }
 
@@ -24,6 +23,7 @@ header {
 /*かつて表示されていたタイトル。消していい*/
 /*header .headline{
   font-size: 3px;
+  font-size: 32px;
 }*/
 
 /* nav全体 */
@@ -71,6 +71,17 @@ header button{
   top: 25.5%;
   left: 53.8%;
 }
+/* ヘッダーの残り香 */
+/*
+header input{
+  position: relative;
+  left: 50px;
+}
+header button{
+  position: relative;
+  left: 50px;
+}
+*/
 
 /*ネットから引っ張って来た検索ボックスとボタン。URLは見つけられないかもごめん*/
 search-box input[type="text"] {
@@ -135,6 +146,13 @@ search-box button:hover {
   border: #fff;
   cursor : pointer;
 }
+/*
+.select1{
+  transform: translateY(0%);
+  top: 50%;
+  height: 55px;
+}
+*/
 
 /*チェックボックス本体の高さ*/
 .select1{
@@ -161,12 +179,13 @@ select:hover png { opacity: 0.7; }*/
   background:rgb(70,130,180);
   border-radius:35px;
   cursor : pointer;
+  margin-top: 150px;
   font-family: cursive, 'Noto Sans JP', sans-serif;
 }
 /*汎用ボタン位置調整(下に下げる)*/
-.btn{
+/*.btn{
   margin-top: 150px;
-}
+}*/
 
 /*クラスのないすべてのdivに適用。左から順に「上、右、下、左」の時計回り*/
 div{
@@ -175,11 +194,9 @@ div{
 /*横線の調整。多分消していい*/
 hr {
   border-bottom: 15px;
-}
-/*上のhrと同じ。多分消していい*/
-hr{
   border-top: 2px solid #0000FF;
 }
+
 /*クラスのないすべてのpタグに適用。文字の見た目を変えるのと中央揃え*/
 p{
   text-align: center;
@@ -240,6 +257,7 @@ a{
 /* ここからprivate_diary */
 /* divにあった */
 .row{
+/*padding: 20px;*/
   padding: 10px 15px;
 }
 /*新規登録やログイン等の画面の上幅。数値を大きくすると下に下がる(上の余白が大きくなる)*/
@@ -301,3 +319,6 @@ td{
   border: 2px solid black;
   margin: 25px;
 }*/
+input{
+  border: 2px solid black
+}
