@@ -45,14 +45,23 @@
                         </a>
                     </td>
 
-<!--                    {% if course.user_id_id != user.id %}-->
+
                     <td><a href="{% url 'skillswap:request-application' course.pk %}"><button>依頼</button></a></td>
+<!--                    <td>あいうえお　{{ course.favorite.id }}</td>-->
+<!--                    {% if course.user_id.favorite != user.id %}-->
                     <td><a href="{% url 'skillswap:favorite' course.pk %}"><button>お気に入り</button></a></td>
 <!--                    {% endif %}-->
 
                 </tr>
 
             {% endfor %}
+
+<!--           {% for favorite in course_request_list %}-->
+<!--            <tr>-->
+<!--                <td>{{ favorite.course_id_id }}</td>-->
+<!--                <td>{{ favorite.course_id_id.title }}</td>-->
+<!--            </tr>-->
+<!--            {% endfor %}-->
         </table>
         {% else %}
         <p>条件に合う講座がありません。</p>

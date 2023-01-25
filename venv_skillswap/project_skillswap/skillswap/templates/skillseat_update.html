@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}SKILLSWAP | 更新{% endblock %}
+{% block title %}SKILLSWAP | プロフィール更新{% endblock %}
 
 {% block active_diary_list %}active{% endblock %}
 
@@ -15,7 +15,7 @@
                     {{ form.as_table }}
                 </table>
                 <button class="btn btn-primary" type="submit">更新</button>
-                <a class="btn btn-secondary ml-2" href="{% url 'skillswap:skillseat-browse' %}">キャンセル</a>
+                <a class="btn btn-secondary ml-2" href="{% url 'skillswap:skillseat-browse' %}"><button class="btn btn-primary">キャンセル</button></a>
             </form>
         </div>
     </div>

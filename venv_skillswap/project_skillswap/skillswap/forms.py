@@ -67,7 +67,7 @@ class LanguageCreateForm(forms.ModelForm):
             'career': forms.TextInput(
                 attrs={'rows': 1, 'cols': 15, 'placeholder': "例）x年xか月", 'id': "career_0", }
             ),
-            'language_detail': forms.TextInput(
+            'language_detail': forms.Textarea(
                 attrs={'rows': 1, 'cols': 30, 'placeholder': "例）環境設計・構築が可能",
                        'id': "language_detail_0",
                        }),
@@ -89,6 +89,12 @@ class MyCourseCreateForm(forms.ModelForm):
         model = Course
         fields = ('title', 'detail', 'course_img',)
 
+        # テキストエリアの高さ、幅を指定
+        widgets = {
+            'detail': forms.Textarea(attrs={'rows': 5, 'cols': 40}),
+        }
+
+
 
 # 依頼申請文作成フォーム
 class RequestApplicationCreateForm(forms.ModelForm):
@@ -96,15 +102,23 @@ class RequestApplicationCreateForm(forms.ModelForm):
         model = Request
         fields = ('message',)
 
+        # テキストエリアの高さ、幅を指定
+        widgets = {
+            'message': forms.Textarea(attrs={'rows': 5, 'cols': 40}),
+        }
+
 
 class EvaluationCreateForm(forms.ModelForm):
     class Meta:
         model = Evaluation
         fields = ('evaluation_num', 'evaluation_text',)
+
+        # evaluation_num = forms.fields.ChoiceField(choices=((1, 1), (2, 2), (3, 3)), label='性別', required=True,)
+
         # テキストエリアの高さ、幅を指定
         widgets = {
             'evaluation_num': forms.TextInput(attrs={'rows': 1, 'cols': 40}),
-            'evaluation_text': forms.TextInput(attrs={'rows': 1, 'cols': 40}),
+            'evaluation_text': forms.Textarea(attrs={'rows': 1, 'cols': 40}),
         }
 
 
