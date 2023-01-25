@@ -5,6 +5,7 @@ body, #wrapper {
     flex-direction: column;
     min-height: 100vh;
     background-color: white;
+    /*background-color: rgb(244, 46, 46);*/
     margin: 0;
 }
 
@@ -197,7 +198,7 @@ hr {
   border-top: 2px solid #0000FF;
 }
 
-/*クラスのないすべてのpタグに適用。文字の見た目を変えるのと中央揃え*/
+/*クラスのない(クラスが有っても)すべてのpタグに適用。文字の見た目を変えるのと中央揃え*/
 p{
   text-align: center;
   font-family: cursive, 'Noto Sans JP', sans-serif;
