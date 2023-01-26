@@ -492,7 +492,7 @@ class RequestRejectionView(LoginRequiredMixin, generic.UpdateView):
         return redirect('skillswap:request-received')
 
 
-# 依頼の許可
+# 依頼の許可機能してない
 class RequestPermissionView(LoginRequiredMixin, generic.UpdateView):
     model = Request
     template_name = "request_rejection.html"
@@ -580,6 +580,12 @@ def addFriend(request, user_id_id):
     friend = CustomUser.objects.get(username=user_name)
     current_user = CustomUser.objects.get(username=login_user)
     friend_lists = current_user.user_friends.all()
+
+    # 今
+    result = Request.objects.get(Q(user_id=current_user, receiver_id=friend)| Q(user_id=friend, receiver_id=current_user), request_completed__isnull=True)
+    result.request_completed = True
+    result.save()
+
     #既に友達登録済みの場合flag=1にセット
     flag = 0
     for friend_list in friend_lists:
@@ -664,6 +670,16 @@ class ReviewView(LoginRequiredMixin, OnlyYouFriends, generic.CreateView):
         evaluation.user1_id_id = self.request.user.id
         evaluation.user2_id_id = friend['friend_id']
         evaluation.save()
+        # レビューを計算して対象のユーザの平均評価を保存
+        evaluation_list = Evaluation.objects.filter(user2_id_id=friend['friend_id'])
+        evaluation_num = 0
+        for eva in evaluation_list:
+            evaluation_num += eva.evaluation_num
+        # 平均の計算
+        evaluation_ave = round(evaluation_num / evaluation_list.count(), 1)
+        skillseat = Skillseat.objects.get(user_id_id=friend['friend_id'])
+        skillseat.user_evaluation = evaluation_ave
+        skillseat.save()
         return super().form_valid(form)
 
 
