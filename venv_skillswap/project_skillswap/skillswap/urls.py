@@ -68,8 +68,6 @@ urlpatterns = [
     path('news/request-received/', views.RequestReceivedView.as_view(), name="request-received"),
     # 依頼の拒否
     path('news/request-received/rejection/<int:pk>/', views.RequestRejectionView.as_view(), name="request-rejection"),
-    # 依頼の許可
-    path('news/request-received/permission/<int:pk>/', views.RequestPermissionView.as_view(), name="request-permission"),
     # お知らせ（運営から）
     path('news/management-list/', views.ManagementListView.as_view(), name="management-list"),
 

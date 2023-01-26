@@ -16,6 +16,12 @@ class SkillseatCreateForm(forms.ModelForm):
     gender = forms.fields.ChoiceField(choices=(('男', '男'), ('女', '女'), ('その他', 'その他')), label='性別', required=True,)
     birthday = forms.fields.DateField(label="生年月日", widget=forms.DateInput(attrs={"type": "date", "min": "1500-04-01", "max": datetime.date.today(), "value": datetime.date.today()}))
 
+    widgets = {
+        'profile_text': forms.Textarea(
+            attrs={'rows': 10, 'cols': 30}
+        ),
+    }
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field in self.fields.values():
@@ -40,6 +46,13 @@ class ProfileTextCreateForm(forms.ModelForm):
     class Meta:
         model = Skillseat
         fields = ('profile_text',)
+
+        widgets = {
+            'profile_text': forms.Textarea(
+                attrs={'rows': 10, 'cols': 30}
+            ),
+        }
+
 
 
 FIELD_NAME_MAPPING = {

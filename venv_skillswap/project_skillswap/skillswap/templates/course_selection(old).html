@@ -6,47 +6,46 @@
 {% block active_diary_list %}active{% endblock %}
 
 {% block head %}
-  <style>
+<style>
     table{
-      text-align:center;
-      position: relative;
-      left:30%;
-      top: 10px;
+        text-align:center;
+        position: relative;
+        left:30%;
+        top: 10px;
     }
     th{
-      width: 150px;
+        width: 150px;
     }
     td{
-      width: 0px;
+        width: 0px;
     }
     h1{
-      position: fixed;
-      top: 70px;
-      left: 50px;
+        position: fixed;
+        top: 70px;
+        left: 50px;
      }
-     .superform{
-       position: fixed;
-       top: 140px;
-       left: 50px;
-     }
-     table tr td:nth-of-type(2){
-       width: 550px;
-     }
-     table tr td:nth-of-type(3){
-       width: 100px;
-     }
-     .btnc{
-       width:80px;
-       height:35px;
-       background:rgb(0,206,209);
-       border-radius:35px;
-       cursor : pointer;
-       font-family: cursive, 'Noto Sans JP', sans-serif;
-     }
-     .favoritebtn{
-
-     }
-  </style>
+    .superform{
+        position: fixed;
+        top: 140px;
+        left: 50px;
+    }
+    table tr td:nth-of-type(2){
+        width: 500px;
+        /* お気に入りボタンハートになったら横幅増やす */
+    }
+    table tr td:nth-of-type(3){
+        width: 100px;
+    }
+    .btnc{
+    /* お気に入りマークハートにしたら適用やめる */
+        width:100px;
+        height:35px;
+        background:rgb(0,206,209);
+        border-radius:35px;
+        cursor : pointer;
+        font-family: cursive, 'Noto Sans JP', sans-serif;
+    }
+</style>
 {% endblock %}
 
 {% block header %}{% endblock %}
@@ -88,10 +87,10 @@
                     </td>
 
 
-                    <td><a href="{% url 'skillswap:request-application' course.pk %}"><button  class="btnc" >依頼</button></a></td>
+                    <td><a href="{% url 'skillswap:request-application' course.pk %}"><button class="btnc">依頼</button></a></td>
 <!--                    <td>あいうえお　{{ course.favorite.id }}</td>-->
 <!--                    {% if course.user_id.favorite != user.id %}-->
-                    <td><a href="{% url 'skillswap:favorite' course.pk %}"><img class="superimg" src="{% static 'assets/favo.png' %}" alt="favorite" height ="30" width="30"></a></td>
+                    <td><a href="{% url 'skillswap:favorite' course.pk %}"><button class="btnc">お気に入り</button></a></td>
 <!--                    {% endif %}-->
 
                 </tr>

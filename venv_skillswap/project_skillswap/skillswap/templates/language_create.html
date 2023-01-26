@@ -20,8 +20,8 @@ $(function() {
 {% block contents %}
 <div class="container">
     <div class="row">
-        <div class="my-div-style w-100">
-
+        <div>
+            <h1></h1>
             <form method="POST" enctype='multipart/form-data'>
                 {% csrf_token %}
                     <table id="language" class="form-group">
@@ -35,7 +35,7 @@ $(function() {
                         </tr>
                     </table>
 
-                <input type="button" value="追加" class="language_add">
+                <input type="button" value="追加" class="language_add btn">
                 <button class="btn btn-primary" type="submit">確定</button>
             </form>
         </div>

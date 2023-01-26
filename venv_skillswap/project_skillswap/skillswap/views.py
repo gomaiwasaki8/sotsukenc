@@ -35,6 +35,7 @@ class OnlyYouSkillseat(UserPassesTestMixin):
         skillseat = get_object_or_404(Skillseat, pk=self.kwargs['pk'])
         return self.request.user.id == skillseat.user_id_id
 
+
 # ログインユーザのみ講座を閲覧出来る
 class OnlyYouCourse(UserPassesTestMixin):
     raise_exception = True
@@ -81,8 +82,11 @@ class SkillseatCreateView(LoginRequiredMixin, generic.CreateView):
     def form_valid(self, form):
         skillseat = form.save(commit=False)
         skillseat.user_id = self.request.user
+        # try:
         skillseat.save()
         return super().form_valid(form)
+        # except:
+        #     return None
 
 
 # 言語スキルシート作成（確認画面無し。入力フォーム増減可能。）
@@ -123,9 +127,6 @@ class LanguageCreateView(LoginRequiredMixin, generic.CreateView):
             language.save()
         return redirect("skillswap:course-selection")
 
-    def form_invalid(self, form):
-        # print("失敗しました。")
-        return super().form_invalid(form)
 
 
 # アカウント情報の更新
@@ -308,7 +309,7 @@ class MyCourseCreateView(LoginRequiredMixin, generic.CreateView):
         course.user_id = self.request.user
         course.save()
         return super().form_valid(form)
-    # 失敗した時の処理特に書いてないのであとで追記するかも
+    # 失敗した時の処理
 
 
 # 自分の講座の更新
@@ -492,19 +493,6 @@ class RequestRejectionView(LoginRequiredMixin, generic.UpdateView):
         return redirect('skillswap:request-received')
 
 
-# 依頼の許可機能してない
-class RequestPermissionView(LoginRequiredMixin, generic.UpdateView):
-    model = Request
-    template_name = "request_rejection.html"
-
-    def get(self, request, *args, **kwargs):
-        result = Request.objects.get(pk=self.kwargs['pk'])
-        result.request_completed = True
-        result.save()
-        # 後でチャット画面に遷移するコード書く
-        return redirect('skillswap:request-received')
-
-
 # お問い合わせ入力画面
 class InquiryView(generic.CreateView):
     model = Inquiry
@@ -518,18 +506,12 @@ class InquiryView(generic.CreateView):
         inquiry = form.save()
         inquiry.save()
         return super().form_valid(form)
-    # 失敗した時の処理特に書いてないのであとで追記するかも
+    # 失敗した時の処理
 
 
 class InquiryCompletedView(generic.TemplateView):
     template_name="inquiry_completed.html"
 
-
-# チャット
-# class ChatRoom(LoginRequiredMixin, generic.TemplateView):
-#     # Home画面を表示するビュー
-#     template_name = 'chat/chat_box.html'
-#
 
 # フレンドの取得
 def getFriendsList(username):
@@ -581,7 +563,7 @@ def addFriend(request, user_id_id):
     current_user = CustomUser.objects.get(username=login_user)
     friend_lists = current_user.user_friends.all()
 
-    # 今
+    # 許可した場合Requestテーブルに許可した事を追加する（request_completedをTrueにする）
     result = Request.objects.get(Q(user_id=current_user, receiver_id=friend)| Q(user_id=friend, receiver_id=current_user), request_completed__isnull=True)
     result.request_completed = True
     result.save()
@@ -725,7 +707,6 @@ class UserListView(LoginRequiredMixin, generic.ListView):
 
 
 # 管理者側からユーザのアカウント停止処理
-
 class SuspensionView(LoginRequiredMixin, generic.TemplateView):
     template_name = "suspension_update.html"
 
@@ -737,7 +718,6 @@ class SuspensionView(LoginRequiredMixin, generic.TemplateView):
 
 
 # 管理者側からユーザのアカウント停止処理
-
 class RestorationView(LoginRequiredMixin, generic.TemplateView):
     template_name = "restoration_update.html"
 
@@ -768,10 +748,13 @@ class InquiryListView(LoginRequiredMixin, generic.ListView):
             return inquiry.order_by('created_at')
 
 
+# 管理者側からお知らせ一覧
 class NewsListView(LoginRequiredMixin, generic.ListView):
     model = News
     template_name = "news_list.html"
 
+
+# 管理者側からお知らせを作成
 class NewsCreateView(LoginRequiredMixin, generic.CreateView):
     model = News
     template_name = "news_create.html"
@@ -786,6 +769,7 @@ class NewsCreateView(LoginRequiredMixin, generic.CreateView):
         return super().form_valid(form)
 
 
+# 運営からのお知らせ表示
 class ManagementListView(LoginRequiredMixin, ListView):
     model = News
     template_name = "management_list.html"
