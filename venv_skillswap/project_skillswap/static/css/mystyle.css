@@ -175,7 +175,8 @@ select:hover png { opacity: 0.7; }*/
 /* 共通 */
 /*様々なボタンの基本CSS。1つのHTMLに二つ以上ボタンがあるときは.btn1や.btn2に変わる*/
 .btn{
-  width:80px;
+  /*width:80px;*/
+  width:100px;
   height:35px;
   background:rgb(70,130,180);
   border-radius:35px;
@@ -322,4 +323,28 @@ td{
 }*/
 input{
   border: 2px solid black
+}
+/* 青いボタン */
+.wbtn{
+  width:80px;
+  height:35px;
+  background:rgb(70,130,180);
+  border-radius:35px;
+  cursor : pointer;
+  font-family: cursive, 'Noto Sans JP', sans-serif;
+  position: relative;
+  top: 80%;
+  left: 79.5%;
+  margin: 15px;
+}
+.wbtn2{
+  width:80px;
+  height:35px;
+  background:rgb(70,130,180);
+  border-radius:35px;
+  cursor : pointer;
+  font-family: cursive, 'Noto Sans JP', sans-serif;
+  position: absolute;
+  top: 50%;
+  left: 47%;
 }

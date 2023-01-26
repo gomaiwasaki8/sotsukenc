@@ -26,9 +26,8 @@
 <!--            <li><a href=""><button>拒否</button></a></li>-->
 <!--            {% endfor %}-->
 <!--        </ul>-->
-        <br><br><br><br><br><br><br>
-        <a href="{% url 'skillswap:request-received' %}">もらった依頼一覧</a>
-        <a href="{% url 'skillswap:management-list' %}">運営からのお知らせ</a>
+        <a href="{% url 'skillswap:request-received' %}"><button>もらった依頼一覧</button></a>
+        <a href="{% url 'skillswap:management-list' %}"><button>運営からのお知らせ</button></a>
         <ul>
             {% for request in request_list %}
             <li>メッセージ：{{ request.message }}</li>
