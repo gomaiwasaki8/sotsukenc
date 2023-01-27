@@ -5,29 +5,21 @@
 
 {% block active_diary_list %}active{% endblock %}
 
-{% block head %}
-  <style>
-    p{
-      text-align:center;
-    }
-  </style>
-{% endblock %}
+{% block head %}{% endblock %}
 
 {% block header %}{% endblock %}
 
 {% block contents %}
 <div class="container">
     <div class="row">
-        <div class="my-div-style w-100">
+        <div>
             <form method="POST" enctype='multipart/form-data'>
                 {% csrf_token %}
                 <table class="table">
                     {{ form.as_table }}
                 </table>
                 <button class="btn btn-primary" type="submit">送信</button>
-                <div align="center">
-                    <a href="{% url 'skillswap:index' %}">戻る</a>
-                </div>
+                <a href="{% url 'skillswap:index' %}">戻る</a>
             </form>
         </div>
     </div>

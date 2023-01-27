@@ -112,7 +112,7 @@
             {% endif %}
         </tr>
     </table>
-    <button class="wbtn"><a href="{% url 'skillswap:my-course-update' course.pk %}">編集</a></button>
+    <a href="{% url 'skillswap:my-course-update' course.pk %}"><button class="wbtn">編集</button></a>
     {% empty %}
     <p>マイ講座を作成してください。</p>
     <button class="wbtn"><a href="{% url 'skillswap:my-course-create' %}">作成</a></button>

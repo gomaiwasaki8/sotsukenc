@@ -125,12 +125,9 @@ class EvaluationCreateForm(forms.ModelForm):
     class Meta:
         model = Evaluation
         fields = ('evaluation_num', 'evaluation_text',)
-
-        # evaluation_num = forms.fields.ChoiceField(choices=((1, 1), (2, 2), (3, 3)), label='性別', required=True,)
-
         # テキストエリアの高さ、幅を指定
         widgets = {
-            'evaluation_num': forms.TextInput(attrs={'rows': 1, 'cols': 40}),
+            'evaluation_num': forms.NumberInput(attrs={'max':5, 'min':1}),
             'evaluation_text': forms.Textarea(attrs={'rows': 1, 'cols': 40}),
         }
 
