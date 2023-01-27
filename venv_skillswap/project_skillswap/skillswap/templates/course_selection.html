@@ -121,14 +121,26 @@
 
                     <td><a href="{% url 'skillswap:request-application' course.pk %}"><button  class="btnc" >依頼</button></a></td>
                     <td>
-                        {% for i in course.favorite_set.all %}
-<!--                        {{ course.favorite_set.all.course_id }}{{ course.favorite_set.course_id_id }}-->
-                        {% if i.user_id_id == user.id and course.pk == i.course_id_id %}
+
+                        <!--                    ☆の画像    -->
                         <a href="{% url 'skillswap:favorite' course.pk %}"><img class="superimg" src="{% static 'assets/favo.png' %}" alt="favorite" height ="30" width="30"></a>
-                        {% else %}
-                        <a href="{% url 'skillswap:favorite' course.pk %}"><img class="superimg" src="{% static 'assets/sample.png' %}" alt="favorite" height ="30" width="30"></a>
-                        {% endif %}
-                        {% endfor %}
+
+<!--                        {% for favorite in favorite_list %}-->
+<!--                        {% if course.id == favorite.course_id_id %}-->
+<!--                        済-->
+<!--                        {% endif %}-->
+<!--                        {% endfor %}-->
+
+<!--                        {{ course.favorite_set.all }}-->
+<!--                        {% for i in course.favorite_set.all %}-->
+<!--&lt;!&ndash;                        {{ course.favorite_set.all.course_id }}{{ course.favorite_set.course_id_id }}&ndash;&gt;-->
+<!--                        {% if i.user_id_id == user.id and course.pk == i.course_id_id %}-->
+<!--                        <a href="{% url 'skillswap:favorite' course.pk %}"><img class="superimg" src="{% static 'assets/favo.png' %}" alt="favorite" height ="30" width="30"></a>-->
+<!--                        {% else %}-->
+<!--                        <a href="{% url 'skillswap:favorite' course.pk %}"><img class="superimg" src="{% static 'assets/sample.png' %}" alt="favorite" height ="30" width="30"></a>-->
+<!--                        {% endif %}-->
+<!--                        {% endfor %}-->
+<!--                        0-&ndash;&gt;>>{{ course.favorite_set.all.0.id }}-->
                     </td>
 <!--                    {% if course.user_id.favorite != user.id %}-->
 <!--                    <td><a href="{% url 'skillswap:favorite' course.pk %}"><img class="superimg" src="{% static 'assets/favo.png' %}" alt="favorite" height ="30" width="30"></a></td>-->
