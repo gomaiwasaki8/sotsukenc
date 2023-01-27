@@ -214,8 +214,10 @@ class CourseSelectionView(generic.ListView):
     def get_context_data(self, **kwargs):
         context = super(CourseSelectionView, self).get_context_data(**kwargs)
         courses = Course.objects.select_related('user_id').filter(~Q(user_id_id=self.request.user.id))
+        # favorite = Favorite.objects.filter()
         context.update({
-            'course_request_list': courses
+            'course_request_list': courses,
+            # 'favorite_list': favorite,
         })
         return context
 
@@ -227,7 +229,7 @@ class CourseSelectionView(generic.ListView):
 
         # 検索バーから抽出
         if q := query.get('q'):
-            course = course.select_related('user_id').filter(~Q(user_id_id=self.request.user.id), title__contains=q, user_id_id__in=active)
+            course = course.select_related('user_id').filter(Q(user_id_id__in=active), ~Q(user_id_id=self.request.user.id), Q(title__icontains=q) | Q(detail__icontains=q), )
         # 新着順
         if query.get('new'):
             return course.select_related('user_id').filter(~Q(user_id_id=self.request.user.id), user_id_id__in=active).order_by('-created_at')

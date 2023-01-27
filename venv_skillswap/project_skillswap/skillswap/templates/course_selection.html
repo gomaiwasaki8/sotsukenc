@@ -29,6 +29,11 @@
        top: 140px;
        left: 50px;
      }
+     .superform2{
+       position: fixed;
+       top: 190px;
+       left: 50px;
+     }
      table tr td:nth-of-type(2){
        width: 550px;
      }
@@ -54,12 +59,38 @@
 {% block contents %}
 <div class="container">
     <div>
-        <h1>講座選択</h1>
-
         <form action="{% url 'skillswap:course-selection' %}" method="GET" class="superform">
             {% csrf_token %}
+            <h1>講座選択</h1>
             <input type="submit" value="新着順" name="new">
             <input type="submit" value="投稿順" name="old">
+        </form>
+
+
+        <form action="{% url 'skillswap:course-selection' %}" method="GET" class="superform2">
+            {% csrf_token %}
+            <h2>言語、環境で探す</h2>
+            <ul>
+                <li>
+                    <input type="submit" value="すべて">
+                </li>
+                <li>
+                    <input type="submit" value="Java" name="q">
+                </li>
+                <li>
+                    <input type="submit" value="C#" name="q">
+                </li>
+                <li>
+                    <input type="submit" value="JavaScript" name="q">
+                </li>
+                <li>
+                    <input type="submit" value="PHP" name="q">
+                </li>
+                <li>
+                    <input type="submit" value="Python" name="q">
+                </li>
+            </ul>
+
         </form>
 
         {% if object_list %}
@@ -89,9 +120,18 @@
 
 
                     <td><a href="{% url 'skillswap:request-application' course.pk %}"><button  class="btnc" >依頼</button></a></td>
-<!--                    <td>あいうえお　{{ course.favorite.id }}</td>-->
+                    <td>
+<!--                        {% for i in course.favorite_set.all %}-->
+                        {{ course.favorite_set.all.course_id }}{{ course.favorite_set.course_id_id }}
+                        {% if course.favorite_set.user_id_id == user.id and course.pk == course.favorite_set.course_id_id %}
+                        <a href="{% url 'skillswap:favorite' course.pk %}"><img class="superimg" src="{% static 'assets/favo.png' %}" alt="favorite" height ="30" width="30"></a>
+                        {% else %}
+                        <a href="{% url 'skillswap:favorite' course.pk %}"><img class="superimg" src="{% static 'assets/sample.png' %}" alt="favorite" height ="30" width="30"></a>
+                        {% endif %}
+<!--                        {% endfor %}-->
+                    </td>
 <!--                    {% if course.user_id.favorite != user.id %}-->
-                    <td><a href="{% url 'skillswap:favorite' course.pk %}"><img class="superimg" src="{% static 'assets/favo.png' %}" alt="favorite" height ="30" width="30"></a></td>
+<!--                    <td><a href="{% url 'skillswap:favorite' course.pk %}"><img class="superimg" src="{% static 'assets/favo.png' %}" alt="favorite" height ="30" width="30"></a></td>-->
 <!--                    {% endif %}-->
 
                 </tr>
