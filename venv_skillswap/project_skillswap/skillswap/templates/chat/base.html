@@ -78,6 +78,7 @@
               <div class="chat_people my-div-style">
                 <div class="chat_ib">
                     <h5>{{ friend.friend.skillseat.user_name }}</h5>
+                        {{ friend.friend.evaluation.user1_id }}
                     <a href="{% url 'skillswap:review' friend.pk %}"><button>レビュー</button></a>
                 </div>
               </div>

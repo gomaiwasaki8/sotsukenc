@@ -12,7 +12,17 @@
 <!--        書いてること同じ-->
 <!--        <link rel="stylesheet" href="{% static 'css/mystyle.css' %}">-->
 <!--        <link rel="icon" href="{% static 'img/favicon.ico' %}">-->
+        <style>
+        .a3{
+          position: relative;
+          top: -50px;
+          left: 80%;
+        }
+        </style>
+
     </head>
+
+
 
     <body>
         <header>
@@ -90,7 +100,7 @@
                     </h2>
 
                     {% endif %}
-                    <button class="btn1"><a href="{% url 'skillswap:skillseat-update' skillseat.pk %}">編集</a></button>
+                    <a class="a3" href="{% url 'skillswap:skillseat-update' skillseat.pk %}"><button class="btn1">編集</button></a>
                 </div>
                 {% endfor %}
             </div>
