@@ -83,9 +83,14 @@
                         生年月日：{{ skillseat.birthday }}
                     </h2>
                     {% if skillseat.user_evaluation %}
-                    <h2>評価：{{ skillseat.user_evaluation }}</h2>
+
+                    <h2>評価
+                        <span class="star5_rating" data-rate="{{ skillseat.user_evaluation }}"></span>
+                        <span class="small-span">星{{ skillseat.user_evaluation }}</span>
+                    </h2>
+
                     {% endif %}
-                    <a href="{% url 'skillswap:skillseat-update' skillseat.pk %}"><button class="btn1">編集</button></a>
+                    <button class="btn1"><a href="{% url 'skillswap:skillseat-update' skillseat.pk %}">編集</a></button>
                 </div>
                 {% endfor %}
             </div>
@@ -108,7 +113,6 @@
         </div>
 
         <footer>
-<!--  	        <p>© 2022 SKILLSWAP</p>-->
             <small>&copy; 2022 SKILLSWAP</small>
         </footer>
     </body>
