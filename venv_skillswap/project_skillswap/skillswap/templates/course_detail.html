@@ -7,10 +7,69 @@
 
 {% block head %}
 <style>
-    .superimg{
-        position: relative;
-        top: 0px;
+    .userimg{
+      position: relative;
+      top: -180px;
+      left: 1050px;
     }
+    .title{
+      position: relative;
+      top: -160px;
+      left: -300px;
+      font-size: 250%;
+    }
+    .btnc{
+       width:80px;
+       height:35px;
+       background:rgb(0,206,209);
+       border-radius:35px;
+       cursor : pointer;
+       font-family: cursive, 'Noto Sans JP', sans-serif;
+       position: relative;
+       top: -245px;
+       left: 80px;
+     }
+     .image{
+       position: relative;
+       top: 10px;
+       left: -280px;
+     }
+     .kouzaimg{
+       position: absolute;
+       top: 350px;
+       left: 375px;
+     }
+     .explanation{
+       position: absolute;
+       top: 25%;
+       left: 45%;
+       width: 300px;
+       word-wrap: break-word;
+     }
+     .username{
+       position: absolute;
+       top: 80px;
+       left: 1120px;
+     }
+     .text1{
+       position: relative;
+       top: -130px;
+       left: 0px;
+     }
+     .backbtn{
+       width:80px;
+       height:35px;
+       background:rgb(0,206,209);
+       border-radius:35px;
+       cursor : pointer;
+       font-family: cursive, 'Noto Sans JP', sans-serif;
+       position: relative;
+       top: -90px;
+       left: 700px;
+     }
+     .container{
+       padding: 40px 0px 0px 0px;
+     }
 </style>
 {% endblock %}
 
@@ -20,18 +79,17 @@
 <h1>講座詳細</h1>
 <div class="container">
     <div>
+        <p class="image">講座イメージ</p>
+        {% if object.course_img %}
+        <img class="kouzaimg" src="{{ object.course_img.url }}" width="200" height="200"/>
+        {% else %}
+        <img class="kouzaimg" src="{% static 'assets/sample.png' %}" width="200" height="200"/>
+        {% endif %}
+
         {% if object %}
-        <p>{{ object.title }}</p>
-
-            {% if object.course_img %}
-            <img class="superimg" src="{{ object.course_img.url }}" width="200" height="200"/>
-            {% else %}
-            <img class="superimg" src="{% static 'assets/sample.png' %}" width="200" height="200"/>
-            {% endif %}
-
-        <p>{{ object.detail }}</p>
-        <p><a href="{% url 'skillswap:request-application' object.pk %}"><button>依頼</button></a></p>
-        <p><a href="{% url 'skillswap:favorite' object.pk %}"><button>お気に入り</button></a></p>
+        <p class="title">講座タイトル：{{ object.title }}</p>
+        <p class="explanation">説明：{{ object.detail }}</p>
+        <p><a href="{% url 'skillswap:request-application' object.pk %}"><button class="btnc" >依頼</button></a></p>
         {% else %}
         <p>まだ講座を作成していないユーザーです。</p>
         {% endif %}
@@ -39,20 +97,20 @@
         {% for skillseat in skillseat_list %}
             <a href="{% url 'skillswap:others-profile-text' skillseat.pk %}">
             {% if skillseat.user_img %}
-            <img class="superimg" src="{{ skillseat.user_img.url }}" width="200" height="200"/>
+            <img class="userimg" src="{{ skillseat.user_img.url }}" width="180" height="180"/>
             {% else %}
-            <img class="superimg" src="{% static 'assets/sample.png' %}" width="200" height="200"/>
+            <img class="userimg" src="{% static 'assets/sample.png' %}" width="180" height="180"/>
             {% endif %}
             </a>
-            <p>{{ skillseat.user_name }} さん</p>
+            <p class="username">{{ skillseat.user_name }} さん</p>
             {% if skillseat.user_evaluation %}
             <p>評価：{{ skillseat.user_evaluation }}</p>
             {% else %}
-            <p>依頼取引を行ったことのないユーザーのため評価はありません。</p>
+            <p class="text1">依頼取引を行ったことのないユーザーのため評価はありません。</p>
             {% endif %}
         {% endfor %}
 
-        <a href="{% url 'skillswap:course-selection' %}">戻る</a>
+        <a href="{% url 'skillswap:course-selection' %}"><button class="backbtn">戻る</button></a>
     </div>
 </div>
 {% endblock %}
