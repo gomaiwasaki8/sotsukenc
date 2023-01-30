@@ -115,7 +115,7 @@
     <a href="{% url 'skillswap:my-course-update' course.pk %}"><button class="wbtn">編集</button></a>
     {% empty %}
     <p>マイ講座を作成してください。</p>
-    <button class="wbtn"><a href="{% url 'skillswap:my-course-create' %}">作成</a></button>
+    <a href="{% url 'skillswap:my-course-create' %}"><button class="wbtn">作成</button></a>
     {% endfor %}
 <!--        <a href="{% url 'skillswap:skillseat-browse' %}">戻る</a>-->
 </div>

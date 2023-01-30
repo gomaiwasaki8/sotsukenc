@@ -295,6 +295,23 @@ class FavoriteView(LoginRequiredMixin, generic.View):
         return redirect('skillswap:course-selection')
 
 
+# お気に入り登録
+class FavoriteMypageView(LoginRequiredMixin, generic.View):
+
+    def get(self, request, *args, **kwargs):
+        if Favorite.objects.filter(user_id_id=self.request.user.id, course_id_id=self.kwargs['pk']).exists():
+            # お気に入りの解除
+            favorite = Favorite.objects.filter(user_id_id=self.request.user.id, course_id_id=self.kwargs['pk']).delete()
+        else:
+            # お気に入りの登録
+            favorite = Favorite.objects.create(
+                user_id_id=self.request.user.id,
+                course_id_id=self.kwargs['pk'],
+            )
+            favorite.save()
+        return redirect('skillswap:favorite-list')
+
+
 # お気に入り一覧
 class FavoriteListView(LoginRequiredMixin, generic.ListView):
     models = Favorite

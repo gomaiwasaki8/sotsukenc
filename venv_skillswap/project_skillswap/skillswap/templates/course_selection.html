@@ -81,26 +81,20 @@
             {% csrf_token %}
             <h2>言語、環境で探す</h2>
             <ul>
-                <li>
-                    <input type="submit" value="すべて">
-                </li>
-                <li>
-                    <input type="submit" value="Java" name="q">
-                </li>
-                <li>
-                    <input type="submit" value="C#" name="q">
-                </li>
-                <li>
-                    <input type="submit" value="JavaScript" name="q">
-                </li>
-                <li>
-                    <input type="submit" value="PHP" name="q">
-                </li>
-                <li>
-                    <input type="submit" value="Python" name="q">
-                </li>
+                <li><input type="submit" value="すべて"></li>
+                <li><input type="submit" value="Java" name="q"></li>
+                <li><input type="submit" value="C言語" name="q"></li>
+                <li><input type="submit" value="C++" name="q"></li>
+                <li><input type="submit" value="C#" name="q"></li>
+                <li><input type="submit" value="JavaScript" name="q"></li>
+                <li><input type="submit" value="PHP" name="q"></li>
+                <li><input type="submit" value="Python" name="q"></li>
+                <li><input type="submit" value="Ruby" name="q"></li>
+                <li><input type="submit" value="SQL" name="q"></li>
+                <li><input type="submit" value="Windows" name="q"></li>
+                <li><input type="submit" value="macOS" name="q"></li>
+                <li><input type="submit" value="Linux" name="q"></li>
             </ul>
-
         </form>
 
         {% if object_list %}
@@ -131,14 +125,18 @@
 
                     <td><a href="{% url 'skillswap:request-application' course.pk %}"><button  class="btnc" >依頼</button></a></td>
                     <td>
-<!--                        {% for i in course.favorite_set.all %}-->
-                        {{ course.favorite_set.all.course_id }}{{ course.favorite_set.course_id_id }}
-                        {% if course.favorite_set.user_id_id == user.id and course.pk == course.favorite_set.course_id_id %}
                         <a href="{% url 'skillswap:favorite' course.pk %}"><img class="superimg" src="{% static 'assets/favo.png' %}" alt="favorite" height ="30" width="30"></a>
+                        {% for favo in course.favorite_set.all %}
+<!--                        {{ course.favorite_set.all.course_id }}{{ course.favorite_set.course_id_id }}-->
+<!--                        お気に入り→{{ favo.user_id_id }}       自分→{{ user.id }}-->
+                        {% if favo.user_id_id == user.id %}
+                        {% if course.pk == favo.course_id_id %}
+                        済
                         {% else %}
-                        <a href="{% url 'skillswap:favorite' course.pk %}"><img class="superimg" src="{% static 'assets/favo.png' %}" alt="favorite" height ="30" width="30"></a>
+                        <a href="{% url 'skillswap:favorite' course.pk %}"><img class="superimg" src="{% static 'assets/sample.png' %}" alt="favorite" height ="30" width="30"></a>
                         {% endif %}
-<!--                        {% endfor %}-->
+                        {% endif %}
+                        {% endfor %}
                     </td>
 <!--                    {% if course.user_id.favorite != user.id %}-->
 <!--                    <td><a href="{% url 'skillswap:favorite' course.pk %}"><img class="superimg" src="{% static 'assets/favo.png' %}" alt="favorite" height ="30" width="30"></a></td>-->

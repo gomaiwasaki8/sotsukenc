@@ -125,11 +125,14 @@ class EvaluationCreateForm(forms.ModelForm):
     class Meta:
         model = Evaluation
         fields = ('evaluation_num', 'evaluation_text',)
+
         # テキストエリアの高さ、幅を指定
         widgets = {
-            'evaluation_num': forms.NumberInput(attrs={'max':5, 'min':1}),
             'evaluation_text': forms.Textarea(attrs={'rows': 1, 'cols': 40}),
         }
+
+    evaluation_num = forms.fields.ChoiceField(choices=((1, '★☆☆☆☆ 星1'), (2, '★★☆☆☆ 星2'), (3, '★★★☆☆ 星3'),
+                                                       (4, '★★★★☆ 星4'), (5, '★★★★★ 星5')), label='評価', required=True, )
 
 
 class InquiryCreateForm(forms.ModelForm):

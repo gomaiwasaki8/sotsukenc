@@ -113,7 +113,7 @@
             {% endif %}
             </td>
             <th>{{ favorite.course_id.title }}</th>
-            <td><a href="{% url 'skillswap:favorite' favorite.course_id.pk %}"><button>お気に入り解除</button></a></td>
+            <td><a href="{% url 'skillswap:my-favorite' favorite.course_id.pk %}"><button>お気に入り解除</button></a></td>
         </tr>
         {% endfor %}
     </table>

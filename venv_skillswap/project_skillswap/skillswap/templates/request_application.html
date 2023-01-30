@@ -19,9 +19,7 @@
                     {{ form.as_table }}
                 </table>
                 <button class="btn btn-primary" type="submit">送信</button>
-                <div align="center">
-                    <a href="{{request.META.HTTP_REFERER}}">戻る</a>
-                </div>
+                <a href="{{request.META.HTTP_REFERER}}" class="btn">戻る</a>
             </form>
         </div>
     </div>

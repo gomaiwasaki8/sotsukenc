@@ -36,10 +36,13 @@ urlpatterns = [
     path('my-page/my-course-create/', views.MyCourseCreateView.as_view(), name="my-course-create"),
     # マイページのマイ講座更新
     path('my-page/my-course-update/<int:pk>/', views.MyCourseUpdateView.as_view(), name="my-course-update"),
+    # マイページでお気に入り解除
+    path('mypage/favorite/<int:pk>/', views.FavoriteMypageView.as_view(), name="my-favorite"),
     # 講座選択
     path('course-selection/', views.CourseSelectionView.as_view(), name="course-selection"),
     # お気に入り登録・解除
     path('favorite/<int:pk>/', views.FavoriteView.as_view(), name="favorite"),
+
     # 講座詳細
     path('course-detail/<int:user_id_id>/', views.CourseDetailView.as_view(), name="course-detail"),
 
