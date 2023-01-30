@@ -87,7 +87,7 @@
         {% endif %}
 
         {% if object %}
-        <p class="title">講座タイトル：{{ object.title }}</p>
+        <p class="title">{{ object.title }}</p>
         <p class="explanation">説明：{{ object.detail }}</p>
         <p><a href="{% url 'skillswap:request-application' object.pk %}"><button class="btnc" >依頼</button></a></p>
         {% else %}
@@ -104,7 +104,10 @@
             </a>
             <p class="username">{{ skillseat.user_name }} さん</p>
             {% if skillseat.user_evaluation %}
-            <p>評価：{{ skillseat.user_evaluation }}</p>
+            <p>評価
+                <span class="star5_rating" data-rate="{{ skillseat.user_evaluation }}"></span>
+                <span class="small-span">星{{ skillseat.user_evaluation }}</span>
+            </p>
             {% else %}
             <p class="text1">依頼取引を行ったことのないユーザーのため評価はありません。</p>
             {% endif %}
