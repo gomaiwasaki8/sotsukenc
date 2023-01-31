@@ -161,6 +161,7 @@ class Friends(models.Model):
 
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name="user_friends")
     friend = models.ForeignKey(CustomUser, on_delete=models.CASCADE, verbose_name="友達", related_name="friend_friends")
+    review_completed = models.BooleanField(verbose_name="レビュー完了", blank=True, null=True)
 
     def __str__(self):
         return f"{self.friend}"

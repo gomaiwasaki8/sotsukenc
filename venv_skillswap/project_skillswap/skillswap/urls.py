@@ -84,8 +84,10 @@ urlpatterns = [
     path('api/messages', views.UpdateMessage.as_view()),
     path('api/messages/<int:sender>/<int:receiver>', views.UpdateMessage.as_view()),
 
-    # レビュー
+    # 1回目のレビュー
     path("review/<int:pk>/", views.ReviewView.as_view(), name="review"),
+    # 2回目以降の更新
+    path("review-update/<int:pk>/", views.ReviewUpdateView.as_view(), name="review-update"),
     path("reviewcompleted/", views.ReviewCompletedView.as_view(), name="review_completed"),
 
     # 管理者ログイン後

@@ -95,7 +95,7 @@ class LanguageCreateView(LoginRequiredMixin, generic.CreateView):
     template_name = "language_create.html"
     form_class = LanguageCreateForm
     success_url = reverse_lazy('skillswap:course-selection')
-
+# 今参考になるかも
     def post(self, request, *args, **kwrgs):
         # 空の配列を作ります
         genre_1List = []
@@ -241,7 +241,7 @@ class ProfileTextUpdateView(LoginRequiredMixin, OnlyYouSkillseat, generic.Update
 #         else:
 #             return course.select_related('user_id').filter(~Q(user_id_id=self.request.user.id), user_id_id__in=active).order_by('created_at')
 
-# 変更中
+# 講座選択の検索とか
 class CourseSelectionView(generic.ListView):
     model = Course
     template_name = "course_selection.html"
@@ -251,7 +251,6 @@ class CourseSelectionView(generic.ListView):
         context = super(CourseSelectionView, self).get_context_data(**kwargs)
         courses = Course.objects.select_related('user_id').filter(~Q(user_id_id=self.request.user.id))
         favorite = Favorite.objects.prefetch_related('user_id', 'course_id').values('course_id').filter(user_id_id=self.request.user.id)
-        print(favorite)
         context.update({
             'course_request_list': courses,
             'favorite_list': favorite,
@@ -278,7 +277,7 @@ class CourseSelectionView(generic.ListView):
             return course.select_related('user_id').filter(~Q(user_id_id=self.request.user.id), user_id_id__in=active).order_by('created_at')
 
 
-# お気に入り登録
+# お気に入り登録(講座一覧から)
 class FavoriteView(LoginRequiredMixin, generic.View):
 
     def get(self, request, *args, **kwargs):
@@ -295,7 +294,7 @@ class FavoriteView(LoginRequiredMixin, generic.View):
         return redirect('skillswap:course-selection')
 
 
-# お気に入り登録
+# お気に入り登録(マイページから)
 class FavoriteMypageView(LoginRequiredMixin, generic.View):
 
     def get(self, request, *args, **kwargs):
@@ -686,7 +685,7 @@ class UpdateMessage(LoginRequiredMixin, generic.View):
         return JsonResponse(serializer.data, safe=False)
 
 
-# レビューを行う
+# 1回目のレビュー(作成)
 class ReviewView(LoginRequiredMixin, OnlyYouFriends, generic.CreateView):
     model = Evaluation
     template_name = "review.html"
@@ -718,6 +717,58 @@ class ReviewView(LoginRequiredMixin, OnlyYouFriends, generic.CreateView):
         skillseat = Skillseat.objects.get(user_id_id=friend['friend_id'])
         skillseat.user_evaluation = evaluation_ave
         skillseat.save()
+        # friendsテーブルにレビュー完了したかを保存
+        friends = Friends.objects.get(pk=self.kwargs['pk'])
+        friends.review_completed = True
+        friends.save()
+        return super().form_valid(form)
+
+
+#2回目以降のレビュー(更新)
+class ReviewUpdateView(LoginRequiredMixin, OnlyYouFriends, generic.CreateView):
+    model = Evaluation
+    template_name = "review.html"
+    form_class = EvaluationCreateForm
+    # 処理を行った後遷移する画面の指定
+    success_url = reverse_lazy('skillswap:review_completed')
+
+    def get_context_data(self, **kwargs):
+        friend = Friends.objects.values('friend_id').get(pk=self.kwargs['pk'])
+        context = super(ReviewUpdateView, self).get_context_data(**kwargs)
+        context.update({
+            'course_list': Course.objects.filter(user_id_id=friend['friend_id']),
+        })
+        return context
+
+    def form_valid(self, form):
+        friend = Friends.objects.values('friend_id').get(pk=self.kwargs['pk'])
+        evaluation = Evaluation.objects.get(user1_id_id=self.request.user.id, user2_id_id=friend['friend_id'])
+        evaluation = form.save(commit=False)
+        evaluation.user1_id_id = self.request.user.id
+        evaluation.user2_id_id = friend['friend_id']
+        evaluation.save()
+        # レビューを計算して対象のユーザの平均評価を保存
+        evaluation_list = Evaluation.objects.filter(user2_id_id=friend['friend_id'])
+        evaluation_num = 0
+        for eva in evaluation_list:
+            evaluation_num += eva.evaluation_num
+        # 平均の計算
+        evaluation_ave = round(evaluation_num / evaluation_list.count(), 1)
+        skillseat = Skillseat.objects.get(user_id_id=friend['friend_id'])
+        skillseat.user_evaluation = evaluation_ave
+        skillseat.save()
+        # friendsテーブルにレビュー完了したかを保存
+        friends = Friends.objects.get(pk=self.kwargs['pk'])
+        friends.review_completed = True
+        friends.save()
+
+        # 今
+        favorite = Favorite.objects.create(
+            user_id_id=self.request.user.id,
+            course_id_id=self.kwargs['pk'],
+        )
+        favorite.save()
+
         return super().form_valid(form)
 
 
