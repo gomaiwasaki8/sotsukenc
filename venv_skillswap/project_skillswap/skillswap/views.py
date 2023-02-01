@@ -54,6 +54,23 @@ class OnlyYouFriends(UserPassesTestMixin):
         return self.request.user.id == friends.user_id
 
 
+# ベルマークで使うモデルを使えるようにするやつ
+# class PostContextMixin(generic.base.ContextMixin):
+#
+#     # def get_context_data(self, **kwargs):
+#     #     context = super().get_context_data(**kwargs)
+#     #     context['category_list'] = Category.objects.all()
+#     #     return context
+#
+#     def get_context_data(self, **kwargs):
+#         context = super(PostContextMixin, self).get_context_data(**kwargs)
+#         context.update({
+#             'request_list': Request.objects.select_related('user_id').filter(
+#                 receiver_id_id=self.request.user, request_completed__isnull=True).order_by('created_at'),
+#         })
+#         return context
+
+
 # ホーム画面（ログイン前）
 class IndexView(generic.TemplateView):
     template_name = "index.html"
@@ -95,7 +112,7 @@ class LanguageCreateView(LoginRequiredMixin, generic.CreateView):
     template_name = "language_create.html"
     form_class = LanguageCreateForm
     success_url = reverse_lazy('skillswap:course-selection')
-# 今参考になるかも
+
     def post(self, request, *args, **kwrgs):
         # 空の配列を作ります
         genre_1List = []
