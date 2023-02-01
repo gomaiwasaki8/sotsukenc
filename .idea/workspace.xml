@@ -3,8 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="f62b4dcd-2126-419e-91bb-6103e30e50b9" name="変更" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv_skillswap/project_skillswap/skillswap/templates/course_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/venv_skillswap/project_skillswap/skillswap/templates/course_detail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv_skillswap/project_skillswap/skillswap/templates/course_selection.html" beforeDir="false" afterPath="$PROJECT_DIR$/venv_skillswap/project_skillswap/skillswap/templates/course_selection.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv_skillswap/project_skillswap/static/css/mystyle.css" beforeDir="false" afterPath="$PROJECT_DIR$/venv_skillswap/project_skillswap/static/css/mystyle.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,7 +39,7 @@
     &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   }
 }</component>
-  <component name="RunManager" selected="Python.runserver">
+  <component name="RunManager" selected="Python.migrate">
     <configuration name="makemigrations" type="PythonConfigurationType" factoryName="Python">
       <module name="sotsukenc" />
       <option name="INTERPRETER_OPTIONS" value="" />
