@@ -94,6 +94,15 @@
         <p>まだ講座を作成していないユーザーです。</p>
         {% endif %}
 
+        <a href="{% url 'skillswap:favorite-detail' course.pk %}"><img class="superimg" src="{% static 'assets/favo2.png' %}" alt="favorite" height ="30" width="30"></a>
+        {% for favo in course.favorite_set.all %}
+        {% if favo.user_id_id == user.id %}
+        {% if course.pk == favo.course_id_id %}
+        <a href="{% url 'skillswap:favorite-detail' course.pk %}"><img class="superimg" src="{% static 'assets/favo.png' %}" alt="favorite" height ="30" width="30"></a>
+        {% endif %}
+        {% endif %}
+        {% endfor %}
+
         {% for skillseat in skillseat_list %}
             <a href="{% url 'skillswap:others-profile-text' skillseat.pk %}">
             {% if skillseat.user_img %}

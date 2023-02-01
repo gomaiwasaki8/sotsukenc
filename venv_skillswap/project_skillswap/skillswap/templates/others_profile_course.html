@@ -36,7 +36,20 @@
                 {% else %}
                 <img class="superimg" src="{% static 'assets/sample.png' %}" width="200" height="200"/>
                 {% endif %}
-                <td><a href="{% url 'skillswap:favorite' course.pk %}"><button>お気に入り</button></a></td>
+                <td><a href="{% url 'skillswap:request-application' course.pk %}"><button class="btnc" >依頼</button></a></td>
+                <td>
+
+                    <a href="{% url 'skillswap:favorite-profile' course.pk %}"><img class="superimg" src="{% static 'assets/favo2.png' %}" alt="favorite" height ="30" width="30"></a>
+                    {% for favo in course.favorite_set.all %}
+                    {% if favo.user_id_id == user.id %}
+                    {% if course.pk == favo.course_id_id %}
+                    <a href="{% url 'skillswap:favorite-profile' course.pk %}"><img class="superimg" src="{% static 'assets/favo.png' %}" alt="favorite" height ="30" width="30"></a>
+                    {% endif %}
+                    {% endif %}
+                    {% endfor %}
+
+                </td>
+
             </tr>
         </table>
     {% endfor %}

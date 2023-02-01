@@ -45,12 +45,17 @@ urlpatterns = [
 
     # 講座詳細
     path('course-detail/<int:user_id_id>/', views.CourseDetailView.as_view(), name="course-detail"),
+    # 講座詳細からお気に入り
+    path('course-detail/favorite-detail/<int:pk>/', views.FavoriteDetailView.as_view(), name="favorite-detail"),
 
     # 相手のプロフィール（プロフィール文章）閲覧
     path('others-profile/text/<int:pk>/', views.OthersProfileTextView.as_view(), name="others-profile-text"),
     # 相手のプロフィール（講座）閲覧
     path('others-profile/course/<int:user_id_id>/', views.OthersProfileCourseView.as_view(),
          name="others-profile-course"),
+    # 相手のプロフィール(講座)からお気に入り
+    path('others-profile/course/favorite/<int:pk>/', views.FavoriteProfileView.as_view(),
+         name="favorite-profile"),
     # 相手のプロフィール（スキルシート）閲覧
     path('others-profile/skillseat/<int:user_id_id>/', views.OthersProfileSkillseatView.as_view(),
          name="others-profile-skillseat"),
@@ -74,7 +79,6 @@ urlpatterns = [
     # お知らせ（運営から）
     path('news/management-list/', views.ManagementListView.as_view(), name="management-list"),
 
-
     # チャット
     # path('chat_room/', views.ChatRoom.as_view(), name="chat_room"),
     path("search/", views.SearchUser.as_view(), name="search_user"),
@@ -86,7 +90,7 @@ urlpatterns = [
 
     # 1回目のレビュー
     path("review/<int:pk>/", views.ReviewView.as_view(), name="review"),
-    # 2回目以降の更新
+    # 2回目以降のレビュー更新
     path("review-update/<int:pk>/", views.ReviewUpdateView.as_view(), name="review-update"),
     path("reviewcompleted/", views.ReviewCompletedView.as_view(), name="review_completed"),
 
