@@ -428,3 +428,10 @@ input{
 .small-span{
     font-size: 18px;
 }
+
+/* 画像のプレビュー */
+.previewimg{
+    position: static;
+    transform: translateY(0%);
+    width: 100px;
+}

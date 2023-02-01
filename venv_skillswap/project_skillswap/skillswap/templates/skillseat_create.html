@@ -11,33 +11,36 @@
     text-align:center;
     }
 </style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script type="text/javascript">
+$(function() {
+  $('input[type=file]').after('<span></span>');
 
-<!--<script type="text/javascript">-->
-<!--$(function() {-->
-<!--  $('input[type=file]').after('<span></span>');-->
+  // アップロードするファイルを選択
+  $('input[type=file]').change(function() {
+    var file = $(this).prop('files')[0];
 
-<!--  // アップロードするファイルを選択-->
-<!--  $('input[type=file]').change(function() {-->
-<!--    var file = $(this).prop('files')[0];-->
+    // 画像以外は処理を停止
+    if (! file.type.match('image.*')) {
+      // クリア
+      $(this).val('');
+      $('#pimg').html('');
+      return;
+    }
 
-<!--    // 画像以外は処理を停止-->
-<!--    if (! file.type.match('image.*')) {-->
-<!--      // クリア-->
-<!--      $(this).val('');-->
-<!--      $('#pimg').html('');-->
-<!--      return;-->
-<!--    }-->
-
-<!--    // 画像表示-->
-<!--    var reader = new FileReader();-->
-<!--    reader.onload = function() {-->
-<!--      var img_src = $('<img>').attr('src', reader.result);-->
-<!--      $('#pimg').html(img_src);-->
-<!--    }-->
-<!--    reader.readAsDataURL(file);-->
-<!--  });-->
-<!--});-->
-<!--</script>-->
+    // 画像表示
+    var reader = new FileReader();
+    reader.onload = function() {
+      var img_src = $('<img>').attr({
+        src: reader.result,
+        class: 'previewimg',
+      });
+      $('#pimg').html(img_src);
+    }
+    reader.readAsDataURL(file);
+  });
+});
+</script>
 
 {% endblock %}
 
@@ -54,9 +57,9 @@
                     {{ form.as_table }}
                 </table>
 <!--                <input type="file" name="userfile" accept="image/*"><br />-->
-<!--                <div id="pimg"></div>-->
                 <button class="btn btn-primary" type="submit">確定</button>
             </form>
+            <div id="pimg"></div>
         </div>
     </div>
 </div>
