@@ -121,6 +121,13 @@ class RequestApplicationCreateForm(forms.ModelForm):
         }
 
 
+FIELD_NAME_MAPPING = {
+        # 'Modelクラスのフィールド名' : 'name属性の値'
+        'evaluation_num': 'evaluation_num',
+        'evaluation_text': 'evaluation_text',
+    }
+
+
 class EvaluationCreateForm(forms.ModelForm):
     class Meta:
         model = Evaluation

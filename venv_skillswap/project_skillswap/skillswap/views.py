@@ -725,7 +725,7 @@ class ReviewView(LoginRequiredMixin, OnlyYouFriends, generic.CreateView):
 
 
 #2回目以降のレビュー(更新)
-class ReviewUpdateView(LoginRequiredMixin, OnlyYouFriends, generic.CreateView):
+class ReviewUpdateView(LoginRequiredMixin, OnlyYouFriends, generic.FormView):
     model = Evaluation
     template_name = "review.html"
     form_class = EvaluationCreateForm
@@ -743,10 +743,12 @@ class ReviewUpdateView(LoginRequiredMixin, OnlyYouFriends, generic.CreateView):
     def form_valid(self, form):
         friend = Friends.objects.values('friend_id').get(pk=self.kwargs['pk'])
         evaluation = Evaluation.objects.get(user1_id_id=self.request.user.id, user2_id_id=friend['friend_id'])
-        evaluation = form.save(commit=False)
         evaluation.user1_id_id = self.request.user.id
         evaluation.user2_id_id = friend['friend_id']
+        evaluation.evaluation_num = self.request.POST['evaluation_num']
+        evaluation.evaluation_text = self.request.POST['evaluation_text']
         evaluation.save()
+
         # レビューを計算して対象のユーザの平均評価を保存
         evaluation_list = Evaluation.objects.filter(user2_id_id=friend['friend_id'])
         evaluation_num = 0
@@ -761,14 +763,6 @@ class ReviewUpdateView(LoginRequiredMixin, OnlyYouFriends, generic.CreateView):
         friends = Friends.objects.get(pk=self.kwargs['pk'])
         friends.review_completed = True
         friends.save()
-
-        # 今
-        favorite = Favorite.objects.create(
-            user_id_id=self.request.user.id,
-            course_id_id=self.kwargs['pk'],
-        )
-        favorite.save()
-
         return super().form_valid(form)
 
 
