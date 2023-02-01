@@ -30,6 +30,7 @@
         <a href="{% url 'skillswap:management-list' %}"><button>運営からのお知らせ</button></a>
         <ul>
             {% for request in request_list %}
+            <li>送信者：{{ request.user_id.skillseat.user_name }}</li>
             <li>メッセージ：{{ request.message }}</li>
             <li><a href="{% url 'skillswap:addfriend' request.user_id_id %}"><button>許可</button></a></li>
             <li><a href="{% url 'skillswap:request-rejection' request.pk %}"><button>拒否</button></a></li>

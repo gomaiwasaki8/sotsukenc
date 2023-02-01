@@ -529,7 +529,7 @@ class RequestReceivedView(LoginRequiredMixin, generic.ListView):
     def get_context_data(self, **kwargs):
         context = super(RequestReceivedView, self).get_context_data(**kwargs)
         context.update({
-            'request_list': Request.objects.filter(
+            'request_list': Request.objects.select_related('user_id').filter(
                 receiver_id_id=self.request.user, request_completed__isnull=True).order_by('created_at'),
             # 'course_list': Course.objects.filter().order_by('created_at'),
         })
