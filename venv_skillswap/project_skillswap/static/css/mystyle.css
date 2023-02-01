@@ -116,10 +116,14 @@ search-box button:hover {
 .infomation{
   position: absolute;
 <<<<<<< HEAD
+<<<<<<< HEAD
   left:85%;
 =======
   left: 85%;
 >>>>>>> 65b36997495e24ccc008cf356cb516a8eb24db07
+=======
+  left:85%;
+>>>>>>> db6d2b951d4f34bd6c4d25961a1915567f0c4dbe
   top: 47%;
 }
 
