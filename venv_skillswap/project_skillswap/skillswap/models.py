@@ -2,6 +2,20 @@
 from django.db import models
 # アカウントテーブルを参照するためにインポートCustomUserかAccount
 from accounts.models import CustomUser
+# 禁止ワードのチェック
+from django.core.exceptions import ValidationError
+
+# 禁止ワード
+bad_words = [
+    "死ね", "タヒね", "ﾀﾋね",
+]
+
+
+def validate_bad_word(value):
+    for word in bad_words:
+        if word in value:
+            #TIPS:forループ中でもraise命令で後続の処理は実行されなくなるため、breakは不要
+            raise ValidationError("不適切な単語が含まれています。", params={'value': value}, )
 
 
 # スキルシートテーブル
@@ -41,8 +55,8 @@ class Language(models.Model):
 class Course(models.Model):
 
     user_id = models.OneToOneField(CustomUser, verbose_name="ユーザーID", on_delete=models.PROTECT, max_length=10)
-    title = models.CharField(verbose_name="講座タイトル", max_length=100)
-    detail = models.CharField(verbose_name="講座詳細", max_length=500)
+    title = models.CharField(verbose_name="講座タイトル", max_length=100, validators=[validate_bad_word])
+    detail = models.CharField(verbose_name="講座詳細", max_length=500, validators=[validate_bad_word])
     course_img = models.ImageField(verbose_name='イメージ画像', max_length=30, blank=True, null=True)
     created_at = models.DateTimeField(verbose_name='作成日時', auto_now_add=True)
     updated_at = models.DateTimeField(verbose_name='更新日時', auto_now=True)
