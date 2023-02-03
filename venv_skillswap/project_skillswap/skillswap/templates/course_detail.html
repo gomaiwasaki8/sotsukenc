@@ -9,14 +9,16 @@
 <style>
     .userimg{
       position: relative;
-      top: -180px;
-      left: 1050px;
+      top: -100px;
+      left: 75%;
     }
     .title{
       position: relative;
-      top: -160px;
-      left: -300px;
-      font-size: 250%;
+      top: -140px;
+      left: 20%;
+      font-size: 150%;
+      width: 450px;
+      word-wrap: break-word;
     }
     .btnc{
        width:80px;
@@ -26,23 +28,26 @@
        cursor : pointer;
        font-family: cursive, 'Noto Sans JP', sans-serif;
        position: relative;
-       top: -245px;
-       left: 80px;
+       top: -90px;
+       left: 0px;
      }
      .image{
        position: relative;
-       top: 10px;
-       left: -280px;
+       top: 50px;
+       left: -390px;
      }
      .kouzaimg{
        position: absolute;
-       top: 350px;
-       left: 375px;
+       top: 400px;
+       left: 275px;
+     }
+     .title{
+
      }
      .explanation{
        position: absolute;
-       top: 25%;
-       left: 45%;
+       top: 40%;
+       left: 40%;
        width: 300px;
        word-wrap: break-word;
      }
@@ -50,10 +55,12 @@
        position: absolute;
        top: 80px;
        left: 1120px;
+       width: 250px;
+       word-wrap: break-word;
      }
      .text1{
        position: relative;
-       top: -130px;
+       top: 0px;
        left: 0px;
      }
      .backbtn{
@@ -63,12 +70,17 @@
        border-radius:35px;
        cursor : pointer;
        font-family: cursive, 'Noto Sans JP', sans-serif;
-       position: relative;
-       top: -90px;
-       left: 700px;
+       position: absolute;
+       top: 85%;
+       left: 48%;
      }
      .container{
        padding: 40px 0px 0px 0px;
+     }
+     .hyouka{
+       position: absolute;
+       top: 55%;
+       left: 79%;
      }
 </style>
 {% endblock %}
@@ -88,20 +100,11 @@
 
         {% if object %}
         <p class="title">{{ object.title }}</p>
-        <p class="explanation">説明：{{ object.detail }}</p>
+        <p class="explanation">{{ object.detail }}</p>
         <p><a href="{% url 'skillswap:request-application' object.pk %}"><button class="btnc" >依頼</button></a></p>
         {% else %}
         <p>まだ講座を作成していないユーザーです。</p>
         {% endif %}
-
-        <a href="{% url 'skillswap:favorite-detail' course.pk %}"><img class="superimg" src="{% static 'assets/favo2.png' %}" alt="favorite" height ="30" width="30"></a>
-        {% for favo in course.favorite_set.all %}
-        {% if favo.user_id_id == user.id %}
-        {% if course.pk == favo.course_id_id %}
-        <a href="{% url 'skillswap:favorite-detail' course.pk %}"><img class="superimg" src="{% static 'assets/favo.png' %}" alt="favorite" height ="30" width="30"></a>
-        {% endif %}
-        {% endif %}
-        {% endfor %}
 
         {% for skillseat in skillseat_list %}
             <a href="{% url 'skillswap:others-profile-text' skillseat.pk %}">
@@ -113,9 +116,9 @@
             </a>
             <p class="username">{{ skillseat.user_name }} さん</p>
             {% if skillseat.user_evaluation %}
-            <p>評価
-                <span class="star5_rating" data-rate="{{ skillseat.user_evaluation }}"></span>
-                <span class="small-span">星{{ skillseat.user_evaluation }}</span>
+            <p class="hyouka">
+            <span class="star5_rating" data-rate="{{ skillseat.user_evaluation }}"></span>
+            <span class="small-span">星{{ skillseat.user_evaluation }}</span>
             </p>
             {% else %}
             <p class="text1">依頼取引を行ったことのないユーザーのため評価はありません。</p>

@@ -6,46 +6,62 @@
 {% block active_diary_list %}active{% endblock %}
 
 {% block head %}
-<style>
+  <style>
     table{
-        text-align:center;
-        position: relative;
-        left:30%;
-        top: 10px;
+      text-align:center;
+      position: relative;
+      left:30%;
+      top: 10px;
     }
     th{
-        width: 150px;
+      width: 150px;
     }
     td{
-        width: 0px;
+      width: 0px;
     }
     h1{
-        position: fixed;
-        top: 70px;
-        left: 50px;
+      position: fixed;
+      top: 70px;
+      left: 95px;
      }
-    .superform{
-        position: fixed;
-        top: 140px;
-        left: 50px;
-    }
-    table tr td:nth-of-type(2){
-        width: 500px;
-        /* お気に入りボタンハートになったら横幅増やす */
-    }
-    table tr td:nth-of-type(3){
-        width: 100px;
-    }
-    .btnc{
-    /* お気に入りマークハートにしたら適用やめる */
-        width:100px;
-        height:35px;
-        background:rgb(0,206,209);
-        border-radius:35px;
-        cursor : pointer;
-        font-family: cursive, 'Noto Sans JP', sans-serif;
-    }
-</style>
+     .superform{
+       position: fixed;
+       top: 140px;
+       left: 100px;
+     }
+     .superform2{
+       position: fixed;
+       top: 190px;
+       left: 50px;
+     }
+     table tr td:nth-of-type(2){
+       width: 550px;
+     }
+     table tr td:nth-of-type(3){
+       width: 100px;
+     }
+     .btnc{
+       width:80px;
+       height:35px;
+       background:rgb(0,206,209);
+       border-radius:35px;
+       cursor : pointer;
+       font-family: cursive, 'Noto Sans JP', sans-serif;
+     }
+     .favoritebtn{
+
+     }
+     .superform2{
+       margin: 2em 0;
+       padding: 0.5em 1em;
+       border: double 5px #4ec4d3;
+     }
+     .superform2 input{
+       width: 100px;
+       background-color: rgb(0,206,209);
+       padding: 0.5px;
+     }
+  </style>
 {% endblock %}
 
 {% block header %}{% endblock %}
@@ -53,12 +69,33 @@
 {% block contents %}
 <div class="container">
     <div>
-        <h1>講座選択</h1>
-
         <form action="{% url 'skillswap:course-selection' %}" method="GET" class="superform">
             {% csrf_token %}
+            <h1>講座選択</h1>
             <input type="submit" value="新着順" name="new">
             <input type="submit" value="投稿順" name="old">
+            <input type="hidden" value="{{ q }}" name="q">
+        </form>
+
+
+        <form action="{% url 'skillswap:course-selection' %}" method="GET" class="superform2">
+            {% csrf_token %}
+            <h2>言語、環境で探す</h2>
+            <ul>
+                <li><input type="submit" value="すべて"></li>
+                <li><input type="submit" value="Java" name="q"></li>
+                <li><input type="submit" value="C言語" name="q"></li>
+                <li><input type="submit" value="C++" name="q"></li>
+                <li><input type="submit" value="C#" name="q"></li>
+                <li><input type="submit" value="JavaScript" name="q"></li>
+                <li><input type="submit" value="PHP" name="q"></li>
+                <li><input type="submit" value="Python" name="q"></li>
+                <li><input type="submit" value="Ruby" name="q"></li>
+                <li><input type="submit" value="SQL" name="q"></li>
+                <li><input type="submit" value="Windows" name="q"></li>
+                <li><input type="submit" value="macOS" name="q"></li>
+                <li><input type="submit" value="Linux" name="q"></li>
+            </ul>
         </form>
 
         {% if object_list %}
@@ -87,10 +124,24 @@
                     </td>
 
 
-                    <td><a href="{% url 'skillswap:request-application' course.pk %}"><button class="btnc">依頼</button></a></td>
-<!--                    <td>あいうえお　{{ course.favorite.id }}</td>-->
+                    <td><a href="{% url 'skillswap:request-application' course.pk %}"><button  class="btnc" >依頼</button></a></td>
+                    <td>
+                        <a href="{% url 'skillswap:favorite' course.pk %}"><img class="superimg" src="{% static 'assets/favo2.png' %}" alt="favorite" height ="30" width="30"></a>
+                        {% for favo in course.favorite_set.all %}
+<!--                        {{ course.favorite_set.all.course_id }}{{ course.favorite_set.course_id_id }}-->
+<!--                        お気に入り→{{ favo.user_id_id }}       自分→{{ user.id }}-->
+                        {% if favo.user_id_id == user.id %}
+                        {% if course.pk == favo.course_id_id %}
+                        <a href="{% url 'skillswap:favorite' course.pk %}"><img class="superimg" src="{% static 'assets/favo.png' %}" alt="favorite" height ="30" width="30"></a>
+                        {% else %}
+                        <!--ここの処理に入っていない-->
+                        <a href="{% url 'skillswap:favorite' course.pk %}"><img class="superimg" src="{% static 'assets/sample.png' %}" alt="favorite" height ="30" width="30"></a>
+                        {% endif %}
+                        {% endif %}
+                        {% endfor %}
+                    </td>
 <!--                    {% if course.user_id.favorite != user.id %}-->
-                    <td><a href="{% url 'skillswap:favorite' course.pk %}"><button class="btnc">お気に入り</button></a></td>
+<!--                    <td><a href="{% url 'skillswap:favorite' course.pk %}"><img class="superimg" src="{% static 'assets/favo.png' %}" alt="favorite" height ="30" width="30"></a></td>-->
 <!--                    {% endif %}-->
 
                 </tr>
