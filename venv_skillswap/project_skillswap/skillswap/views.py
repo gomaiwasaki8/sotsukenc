@@ -269,8 +269,9 @@ class CourseSelectionView(generic.ListView):
         courses = Course.objects.select_related('user_id').filter(~Q(user_id_id=self.request.user.id))
         favorite = Favorite.objects.prefetch_related('user_id', 'course_id').values('course_id').filter(user_id_id=self.request.user.id)
         context.update({
-            'course_request_list': courses,
-            'favorite_list': favorite,
+            'course_request_list': courses, # 使ってない
+            'favorite_list': favorite, # 使ってない
+            'q': self.request.GET.get('q'),
         })
         return context
 
@@ -281,7 +282,9 @@ class CourseSelectionView(generic.ListView):
         active = CustomUser.objects.filter(is_active=True)
 
         # 検索バーから抽出
-        if q := query.get('q'):
+        if query.get('q') == "None":
+            course = course.select_related('user_id').filter(~Q(user_id_id=self.request.user.id), user_id_id__in=active).order_by('created_at')
+        elif q := query.get('q'):
             course = course.select_related('user_id').filter(Q(user_id_id__in=active), ~Q(user_id_id=self.request.user.id), Q(title__icontains=q) | Q(detail__icontains=q), )
         # 新着順
         if query.get('new'):

@@ -51,8 +51,8 @@
         }, 800);
     }
     //画面上に追加するメッセージの定義
-    const text_box = '<div class="outgoing_msg">' +
-        '<div class="sent_msg">' +
+    const text_box = '<div class="outgoing_msg my-div-style">' +
+        '<div class="sent_msg my-div-style">' +
         '<p>{description}</p>' +
         '<span class="time_date">{time}</span>' +
         '</div>' +
@@ -91,10 +91,10 @@
     })
 
 
-    const text = '<div class="incoming_ms">' +
-        '<div class="incoming_msg_img"> <img src="{thumbnail}" alt="sunil"> </div>' +
-        '<div class="received_msg">' +
-        '<div class="received_withd_msg">' +
+    const text = '<div class="incoming_ms my-div-style">' +
+
+        '<div class="received_msg my-div-style">' +
+        '<div class="received_withd_msg my-div-style">' +
         '<p>{description}</p>' +
         '<span class="time_date">{time}</span>' +
         '</div>' +

@@ -108,7 +108,6 @@ class MyCourseCreateForm(forms.ModelForm):
         }
 
 
-
 # 依頼申請文作成フォーム
 class RequestApplicationCreateForm(forms.ModelForm):
     class Meta:
