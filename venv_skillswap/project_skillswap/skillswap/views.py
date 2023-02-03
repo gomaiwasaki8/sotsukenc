@@ -512,20 +512,37 @@ class OthersProfileReviewView(generic.ListView):
 
 
 # 依頼申請の作成
-class RequestApplicationView(LoginRequiredMixin, generic.CreateView):
+class RequestApplicationView(LoginRequiredMixin, generic.FormView):
     model = Request
     template_name = "request_application.html"
     form_class = RequestApplicationCreateForm
     success_url = reverse_lazy('skillswap:course-selection')
 
     def form_valid(self, form):
-        request = form.save(commit=False)
-        request.user_id = self.request.user
-        request.course_id_id = self.kwargs['pk']
-        receiver = Course.objects.get(pk=self.kwargs['pk'])
-        request.receiver_id_id = receiver.user_id_id
-        request.save()
+
+        form = RequestApplicationCreateForm(self.request.POST or None)
+        if self.request.method == 'POST':
+            if form.is_valid():
+                receiver = Course.objects.get(pk=self.kwargs['pk'])
+                Request.objects.update_or_create(user_id=self.request.user, course_id_id=self.kwargs['pk'],
+                                                 receiver_id_id=receiver.user_id_id, request_completed__isnull=True,
+                                                 defaults={'user_id': self.request.user,
+                                                           'course_id_id': self.kwargs['pk'],
+                                                           'receiver_id_id': receiver.user_id_id,
+                                                           'message': self.request.POST['message']})
         return super().form_valid(form)
+
+    # def form_valid(self, form):
+    #     requests = Request.objects.filter(user_id=self.request.user, course_id_id=self.kwargs['pk']).exists()
+    #     if requests:
+    #         return redirect('skillswap:course-selection')
+    #     request = form.save(commit=False)
+    #     request.user_id = self.request.user
+    #     request.course_id_id = self.kwargs['pk']
+    #     receiver = Course.objects.get(pk=self.kwargs['pk'])
+    #     request.receiver_id_id = receiver.user_id_id
+    #     request.save()
+    #     return super().form_valid(form)
 
 
 # 依頼申請済みの講座閲覧
