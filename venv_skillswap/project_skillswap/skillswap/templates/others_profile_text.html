@@ -1,3 +1,4 @@
+<!-- 作成者：岩崎・古越・藤谷 -->
 {% extends 'others_profile.html' %}
 {% load static %}
 
@@ -11,50 +12,9 @@
 
 {% block contents %}
 <div class="container">
-<!--        {% for skillseat in skillseat_list %}-->
-<!--        {% if skillseat.user_img %}-->
-<!--        <img class="superimg" src="{{ skillseat.user_img.url }}" width="200" height="200"/>-->
-<!--        {% else %}-->
-<!--        <img class="superimg" src="{% static 'assets/sample.png' %}" width="200" height="200"/>-->
-<!--        {% endif %}-->
-<!--        <div class="info">-->
-<!--            <h2>名前：{{ skillseat.user_name }}</h2>-->
-<!--            <h2>性別：{{ skillseat.gender }}</h2>-->
-<!--            <h2>生年月日：{{ skillseat.birthday }}</h2>-->
-<!--            {% if skillseat.user_evaluation %}-->
-<!--            <h2>評価：{{ skillseat.user_evaluation }}</h2>-->
-<!--            {% endif %}-->
-<!--        </div>-->
-<!--        <a href="{% url 'skillswap:others-profile-course' skillseat.user_id_id %}">講座</a>-->
-<!--        <a href="{% url 'skillswap:others-profile-skillseat' skillseat.user_id_id %}">スキルシート</a>-->
-<!--        <p>プロフィール文章：{{ skillseat.profile_text }}</p>-->
-<!--        {% endfor %}-->
-<!--        <a href="{{request.META.HTTP_REFERER}}">戻る</a>-->
-<!--    </div>-->
-
     <div class="daily">
-<!--        {% for skillseat in skillseat_list %}-->
-<!--        {% if skillseat.user_img %}-->
-<!--        <img class="img1" src="{{ skillseat.user_img.url }}" width="120" height="120"/>-->
-<!--        {% else %}-->
-<!--        <img class="img1" src="{% static 'assets/sample.png' %}" width="120" height="120"/>-->
-<!--        {% endif %}-->
-
-<!--        <div class="info">-->
-<!--            <h2>-->
-<!--                <span class="cl1">名前：{{ skillseat.user_name }}</span>-->
-<!--                <span class="cl2">性別：{{ skillseat.gender }}</span>-->
-<!--                生年月日：{{ skillseat.birthday }}-->
-<!--            </h2>-->
-<!--            {% if skillseat.user_evaluation %}-->
-<!--            <h2>評価：{{ skillseat.user_evaluation }}</h2>-->
-<!--            {% endif %}-->
-<!--        </div>-->
-
         <p>{{ skillseat.profile_text }}</p>
-        {% endfor %}
         <a href="{{request.META.HTTP_REFERER}}">戻る</a>
-
     </div>
 
 </div>

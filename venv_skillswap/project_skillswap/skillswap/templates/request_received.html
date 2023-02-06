@@ -1,3 +1,4 @@
+<!-- 作成者：岩崎・古越・藤谷 -->
 {% extends 'base.html' %}
 {% load static %}
 
@@ -12,20 +13,6 @@
 {% block contents %}
 <div class="container">
     <div>
-
-<!--        <ul>-->
-<!--            {% for course in course_list %}-->
-<!--            {% if course.course_img %}-->
-<!--            <li><img src="{{ course.course_img.url }}" width="200" height="200"/></li>-->
-<!--            {% else %}-->
-<!--            <li><img src="{% static 'assets/sample.png' %}" width="200" height="200"/></li>-->
-<!--            {% endif %}-->
-<!--            <li>{{ course.title }}</li>-->
-<!--            <li>{{ course.detail }}</li>-->
-<!--            <li><a href=""><button>許可</button></a></li>-->
-<!--            <li><a href=""><button>拒否</button></a></li>-->
-<!--            {% endfor %}-->
-<!--        </ul>-->
         <a href="{% url 'skillswap:request-received' %}"><button>もらった依頼一覧</button></a>
         <a href="{% url 'skillswap:management-list' %}"><button>運営からのお知らせ</button></a>
         <ul>

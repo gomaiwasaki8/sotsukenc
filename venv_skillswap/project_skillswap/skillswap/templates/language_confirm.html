@@ -1,3 +1,5 @@
+<!-- 作成者：岩崎・古越・藤谷 -->
+<!-- 使ってない -->
 {% extends 'base.html' %}
 {% load static %}
 
@@ -8,15 +10,11 @@
 {% block header %}{% endblock %}
 
 {% block contents %}
-仮なので変更してください
 <div class="container" align="center">
-    言語確認画面
-<!--    <a href="{% url 'skillswap:language-input' %}" class="btn btn-primary btn-lg">戻る</a>-->
     <hr>
     <form action="{% url 'skillswap:language-create' %}" method="POST">
         {% for field in form %}
         <div class="form-group">
-    <!--        <label for="{{ field.id_for_label }}">{{ field.label_tag }}</label>-->
             {{ field.value }}
         </div>
         {% endfor %}

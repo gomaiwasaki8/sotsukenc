@@ -1,3 +1,4 @@
+<!-- 作成者：岩崎・古越・藤谷 -->
 {% extends 'base.html' %}
 {% load static %}
 
@@ -18,22 +19,17 @@
 {% endblock %}
 
 {% block contents %}
-仮なので変更してください
 <div class="container" align="center">
-    確認画面
     <a href="{% url 'skillswap:skillseat-input' %}" class="btn btn-primary btn-lg">戻る</a>
     <hr>
     <form action="{% url 'skillswap:skillseat-create' %}" method="POST">
         {% for field in form %}
         <div class="form-group">
-    <!--        <label for="{{ field.id_for_label }}">{{ field.label_tag }}</label>-->
             {% if field.value %}
                 {{ field.value }}
             {% endif %}
         </div>
         {% endfor %}
-<!--        {{ img }}<br>-->
-
         <button type="submit" class="btn btn-primary btn-lg">送信</button>
         {% csrf_token %}
     </form>

@@ -1,3 +1,4 @@
+<!-- 作成者：岩崎・古越・藤谷 -->
 {% extends 'base.html' %}
 {% load static %}
 
@@ -34,10 +35,8 @@
                     {{ form.as_table }}
                 </table>
                 <a href="{% url 'skillswap:review_completed' %}"><button class="btn">取引を完了する</button></a>
-                <div align="center">
-<!--                    <a href="{% url 'skillswap:index' %}">戻る</a>-->
-                </div>
             </form>
+            <a href="{% url 'skillswap:search_user' %}"><button class="btn">戻る</button></a>
         </div>
     </div>
 </div>

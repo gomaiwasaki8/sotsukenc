@@ -1,3 +1,4 @@
+<!-- 作成者：岩崎・古越・藤谷 -->
 {% extends 'base.html' %}
 {% load static %}
 
@@ -38,9 +39,7 @@ $(function() {
                 <input type="button" value="追加" class="language_add btn">
                 <button class="btn btn-primary" type="submit">確定</button>
             </form>
-
-<!--            aタグにcssつける-->
-            <a href="{{request.META.HTTP_REFERER}}">戻る</a>
+            <a href="{{request.META.HTTP_REFERER}}"><button class="btn">戻る</button></a>
 
         </div>
     </div>

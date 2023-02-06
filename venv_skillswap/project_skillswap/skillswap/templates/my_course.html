@@ -1,3 +1,4 @@
+<!-- 作成者：岩崎・古越・藤谷 -->
 {% extends 'mypage.html' %}
 {% load static %}
 
@@ -6,11 +7,6 @@
 {% block active_diary_list %}active{% endblock %}
 
 {% block head %}
-<!--<style>-->
-<!--    table{-->
-<!--      left:20%;-->
-<!--    }-->
-<!--</style>-->
 <style>
     .btn1{
       width:80px;
@@ -116,6 +112,5 @@
     <p>マイ講座を作成してください。</p>
     <a href="{% url 'skillswap:my-course-create' %}"><button class="wbtn">作成</button></a>
     {% endfor %}
-<!--        <a href="{% url 'skillswap:skillseat-browse' %}">戻る</a>-->
 </div>
 {% endblock %}
