@@ -17,10 +17,8 @@
             <form method="POST" enctype='multipart/form-data'>
                 {% csrf_token %}
                 <button class="btn btn-primary" type="submit">復旧</button>
-                <div align="center">
-                    <a href="{% url 'skillswap:user-list' %}">戻る</a>
-                </div>
             </form>
+            <a href="{% url 'skillswap:user-list' %}"><button class="btn">戻る</button></a>
         </div>
     </div>
 </div>
