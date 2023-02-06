@@ -52,13 +52,14 @@ class ProfileTextCreateForm(forms.ModelForm):
         }
 
 
-
 FIELD_NAME_MAPPING = {
         # 'Modelクラスのフィールド名' : 'name属性の値'
         'genre_1': 'genres_1_0',
         'genre_2': 'genres_2_0',
         'career': 'career_0',
         'language_detail': 'language_detail_0',
+        'evaluation_num': 'evaluation_num',
+        'evaluation_text': 'evaluation_text',
     }
 
 
@@ -118,11 +119,11 @@ class RequestApplicationCreateForm(forms.ModelForm):
         }
 
 
-FIELD_NAME_MAPPING = {
-        # 'Modelクラスのフィールド名' : 'name属性の値'
-        'evaluation_num': 'evaluation_num',
-        'evaluation_text': 'evaluation_text',
-    }
+# FIELD_NAME_MAPPING = {
+#         # 'Modelクラスのフィールド名' : 'name属性の値'
+#         'evaluation_num': 'evaluation_num',
+#         'evaluation_text': 'evaluation_text',
+#     }
 
 
 class EvaluationCreateForm(forms.ModelForm):

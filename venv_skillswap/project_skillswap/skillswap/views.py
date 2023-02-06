@@ -108,12 +108,14 @@ class SkillseatCreateView(LoginRequiredMixin, generic.CreateView):
 
 # 言語スキルシート作成（確認画面無し。入力フォーム増減可能。）
 class LanguageCreateView(LoginRequiredMixin, generic.CreateView):
+    print("LanguageCreateViewに入った")
     model = Language
     template_name = "language_create.html"
     form_class = LanguageCreateForm
     success_url = reverse_lazy('skillswap:course-selection')
 
     def post(self, request, *args, **kwrgs):
+        print("def postに入った")
         # 空の配列を作ります
         genre_1List = []
         genre_2List = []
@@ -122,6 +124,8 @@ class LanguageCreateView(LoginRequiredMixin, generic.CreateView):
 
         # request.POST.items()でPOSTで送られてきた全てを取得。
         for i in request.POST.items():
+            print("for文にはいった")
+            print("i -> ", i)
             # name属性のtitle_から始まるものをtitleListに追加
             if re.match(r'genres_1_*', i[0]):
                 genre_1List.append(i[1])
@@ -132,8 +136,10 @@ class LanguageCreateView(LoginRequiredMixin, generic.CreateView):
             if re.match(r'language_detail_*', i[0]):
                 language_detailList.append(i[1])
 
+        print("genre_1List -> ", genre_1List)
         # titleListの要素数分を回す
         for i in range(len(genre_1List)):
+            print("二個目のfor文")
             language = Language.objects.create(
                 user_id_id=self.request.user.id,
                 genre_1=genre_1List[i],
@@ -142,6 +148,7 @@ class LanguageCreateView(LoginRequiredMixin, generic.CreateView):
                 language_detail=language_detailList[i],
             )
             language.save()
+            print("language.saveにはいった")
         return redirect("skillswap:course-selection")
 
 
