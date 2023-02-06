@@ -1,25 +1,19 @@
+# 作成者：岩崎・古越・大和
 import requests
 from django.shortcuts import render
-
-# Create your views here.
-
 from django.views import generic
 from django.urls import reverse_lazy
 from django.views.decorators.http import require_POST
 from django.shortcuts import render, redirect
 from django.views.generic import ListView
-
 from .forms import *
 from .models import *
 from django import forms
-
 from django.db.models import Q
 import re
-
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.shortcuts import get_object_or_404
-
-# チャット機能で使う
+# チャット機能で利用する
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 from django.http.response import JsonResponse
@@ -54,42 +48,29 @@ class OnlyYouFriends(UserPassesTestMixin):
         return self.request.user.id == friends.user_id
 
 
-# ベルマークで使うモデルを使えるようにするやつ
-# class PostContextMixin(generic.base.ContextMixin):
-#
-#     # def get_context_data(self, **kwargs):
-#     #     context = super().get_context_data(**kwargs)
-#     #     context['category_list'] = Category.objects.all()
-#     #     return context
-#
-#     def get_context_data(self, **kwargs):
-#         context = super(PostContextMixin, self).get_context_data(**kwargs)
-#         context.update({
-#             'request_list': Request.objects.select_related('user_id').filter(
-#                 receiver_id_id=self.request.user, request_completed__isnull=True).order_by('created_at'),
-#         })
-#         return context
-
-
-# ホーム画面（ログイン前）
+# ログイン前のホーム画面
 class IndexView(generic.TemplateView):
     template_name = "index.html"
 
 
-# ログイン後の遷移先
+# ログイン後の遷移先指定
 class AfterLoginView(LoginRequiredMixin, generic.View):
     def get(self, request):
+        # スーパーユーザの場合管理者画面へ遷移
         if self.request.user.is_superuser:
             return redirect('skillswap:administrator')
+        # プロフィールと言語を作成していた場合トップの講座選択画面へ遷移
         elif Language.objects.filter(user_id_id=self.request.user).exists() and Skillseat.objects.filter(user_id_id=self.request.user).exists():
             return redirect('skillswap:course-selection')
+        # プロフィールを作成していた場合言語作成画面へ遷移
         elif Skillseat.objects.filter(user_id_id=self.request.user).exists():
             return redirect('skillswap:language-create')
+        # それ以外（プロフィールも言語も作成していなかった場合）プロフィール作成画面へ遷移
         else:
             return redirect('skillswap:skillseat-create')
 
 
-# アカウント情報新規作成（確認画面無し）
+# アカウント情報（プロフィール）新規作成
 class SkillseatCreateView(LoginRequiredMixin, generic.CreateView):
     model = Skillseat
     template_name = "skillseat_create.html"
@@ -99,23 +80,18 @@ class SkillseatCreateView(LoginRequiredMixin, generic.CreateView):
     def form_valid(self, form):
         skillseat = form.save(commit=False)
         skillseat.user_id = self.request.user
-        # try:
         skillseat.save()
         return super().form_valid(form)
-        # except:
-        #     return None
 
 
-# 言語スキルシート作成（確認画面無し。入力フォーム増減可能。）
+# 言語スキルシート作成（入力フォーム増減可能）
 class LanguageCreateView(LoginRequiredMixin, generic.CreateView):
-    print("LanguageCreateViewに入った")
     model = Language
     template_name = "language_create.html"
     form_class = LanguageCreateForm
     success_url = reverse_lazy('skillswap:course-selection')
 
     def post(self, request, *args, **kwrgs):
-        print("def postに入った")
         # 空の配列を作ります
         genre_1List = []
         genre_2List = []
@@ -124,8 +100,6 @@ class LanguageCreateView(LoginRequiredMixin, generic.CreateView):
 
         # request.POST.items()でPOSTで送られてきた全てを取得。
         for i in request.POST.items():
-            print("for文にはいった")
-            print("i -> ", i)
             # name属性のtitle_から始まるものをtitleListに追加
             if re.match(r'genres_1_*', i[0]):
                 genre_1List.append(i[1])
@@ -136,10 +110,8 @@ class LanguageCreateView(LoginRequiredMixin, generic.CreateView):
             if re.match(r'language_detail_*', i[0]):
                 language_detailList.append(i[1])
 
-        print("genre_1List -> ", genre_1List)
         # titleListの要素数分を回す
         for i in range(len(genre_1List)):
-            print("二個目のfor文")
             language = Language.objects.create(
                 user_id_id=self.request.user.id,
                 genre_1=genre_1List[i],
@@ -148,40 +120,26 @@ class LanguageCreateView(LoginRequiredMixin, generic.CreateView):
                 language_detail=language_detailList[i],
             )
             language.save()
-            print("language.saveにはいった")
         return redirect("skillswap:course-selection")
 
 
-
-# アカウント情報の更新
+# アカウント情報（プロフィール）の更新
 class SkillseatUpdateView(LoginRequiredMixin, OnlyYouSkillseat, generic.UpdateView):
     model = Skillseat
     template_name = "skillseat_update.html"
     form_class = SkillseatUpdateForm
-
     success_url = reverse_lazy('skillswap:skillseat-browse')
 
 
-# 言語スキルシートの更新
+# 言語の更新
 class LanguageUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Language
     template_name = "language_update.html"
     form_class = LanguageCreateForm
-
-    # slug_field = "user_id_id"
-    # slug_url_kwarg = "user_id_id"
-    #
-    # def get_context_data(self, **kwargs):
-    #     context = super(LanguageUpdateView, self).get_context_data(**kwargs)
-    #     context.update({
-    #         'language_list': Language.objects.filter(user_id_id=self.kwargs['user_id_id']),
-    #     })
-    #     return context
-
     success_url = reverse_lazy('skillswap:skillseat-browse')
 
 
-# マイページの言語スキルシート削除
+# マイページの言語削除
 class LanguageDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Language
     template_name = "language_delete.html"
@@ -193,7 +151,7 @@ class LanguageDeleteView(LoginRequiredMixin, generic.DeleteView):
     success_url = reverse_lazy('skillswap:skillseat-browse')
 
 
-# マイページの言語スキルシート閲覧
+# マイページの言語閲覧
 class SkillseatBrowseView(LoginRequiredMixin, generic.ListView):
     template_name = "skillseat_browse.html"
     model = Skillseat
@@ -229,48 +187,11 @@ class ProfileTextUpdateView(LoginRequiredMixin, OnlyYouSkillseat, generic.Update
     success_url = reverse_lazy('skillswap:profile-text')
 
 
-# 講座選択（ログイン後遷移する）
-# これが元
-# class CourseSelectionView(generic.ListView):
-#     model = Course
-#     template_name = "course_selection.html"
-#
-#     # CourseとSkillseat結合
-#     def get_context_data(self, **kwargs):
-#         context = super(CourseSelectionView, self).get_context_data(**kwargs)
-#         courses = Course.objects.select_related('user_id').filter(~Q(user_id_id=self.request.user.id))
-#         # favorite = Favorite.objects.filter()
-#         context.update({
-#             'course_request_list': courses,
-#             # 'favorite_list': favorite,
-#         })
-#         return context
-#
-#     def get_queryset(self, **kwargs):
-#         course = super().get_queryset(**kwargs)
-#         query = self.request.GET
-#         course.select_related('user_id').filter(~Q(user_id_id=self.request.user.id))
-#         active = CustomUser.objects.filter(is_active=True)
-#
-#         # 検索バーから抽出
-#         if q := query.get('q'):
-#             course = course.select_related('user_id').filter(Q(user_id_id__in=active), ~Q(user_id_id=self.request.user.id), Q(title__icontains=q) | Q(detail__icontains=q), )
-#         # 新着順
-#         if query.get('new'):
-#             return course.select_related('user_id').filter(~Q(user_id_id=self.request.user.id), user_id_id__in=active).order_by('-created_at')
-#         # 投稿順
-#         elif query.get('old'):
-#             return course.select_related('user_id').filter(~Q(user_id_id=self.request.user.id), user_id_id__in=active).order_by('created_at')
-#         # それ以外
-#         else:
-#             return course.select_related('user_id').filter(~Q(user_id_id=self.request.user.id), user_id_id__in=active).order_by('created_at')
-
-# 講座選択の検索とか
+# 講座選択画面と検索機能
 class CourseSelectionView(generic.ListView):
     model = Course
     template_name = "course_selection.html"
 
-    # CourseとSkillseat結合
     def get_context_data(self, **kwargs):
         context = super(CourseSelectionView, self).get_context_data(**kwargs)
         courses = Course.objects.select_related('user_id').filter(~Q(user_id_id=self.request.user.id))
@@ -379,7 +300,6 @@ class FavoriteListView(LoginRequiredMixin, generic.ListView):
     models = Favorite
     template_name = "favorite_list.html"
 
-    # CourseとFavoriteを結合
     def get_context_data(self, **kwargs):
         context = super(FavoriteListView, self).get_context_data(**kwargs)
         favorite = Favorite.objects.select_related('course_id').filter(user_id_id=self.request.user)
@@ -393,12 +313,6 @@ class FavoriteListView(LoginRequiredMixin, generic.ListView):
     def get_queryset(self):
         favorite = Favorite.objects.filter(user_id_id=self.request.user)
         return favorite
-    #
-    # def get_queryset(self, **kwargs):
-    #     favorite = super().get_queryset(**kwargs)
-    #     query = self.request.GET
-    #     active = CustomUser.objects.filter(is_active=True)
-    #     return favorite.filter(user_id_id__in=active).order_by('created_at')
 
 
 # 自分の講座の閲覧
@@ -427,7 +341,6 @@ class MyCourseCreateView(LoginRequiredMixin, generic.CreateView):
         course.user_id = self.request.user
         course.save()
         return super().form_valid(form)
-    # 失敗した時の処理
 
 
 # 自分の講座の更新
@@ -444,7 +357,6 @@ class CourseDetailView(LoginRequiredMixin, generic.DetailView):
     template_name = "course_detail.html"
     slug_field = "user_id_id"
     slug_url_kwarg = "user_id_id"
-    # pk_url_kwarg = "user_id_id"
 
     def get_context_data(self, **kwargs):
         context = super(CourseDetailView, self).get_context_data(**kwargs)
@@ -499,6 +411,7 @@ class OthersProfileSkillseatView(generic.DetailView):
         return context
 
 
+# 相手のプロフィール閲覧
 class OthersProfileReviewView(generic.ListView):
     model = Skillseat
     template_name = "others_profile_evaluation.html"
@@ -539,18 +452,6 @@ class RequestApplicationView(LoginRequiredMixin, generic.FormView):
                                                            'message': self.request.POST['message']})
         return super().form_valid(form)
 
-    # def form_valid(self, form):
-    #     requests = Request.objects.filter(user_id=self.request.user, course_id_id=self.kwargs['pk']).exists()
-    #     if requests:
-    #         return redirect('skillswap:course-selection')
-    #     request = form.save(commit=False)
-    #     request.user_id = self.request.user
-    #     request.course_id_id = self.kwargs['pk']
-    #     receiver = Course.objects.get(pk=self.kwargs['pk'])
-    #     request.receiver_id_id = receiver.user_id_id
-    #     request.save()
-    #     return super().form_valid(form)
-
 
 # 依頼申請済みの講座閲覧
 class RequestedCourseView(LoginRequiredMixin, generic.ListView):
@@ -562,11 +463,9 @@ class RequestedCourseView(LoginRequiredMixin, generic.ListView):
 
         context = super(RequestedCourseView, self).get_context_data(**kwargs)
         request = Request.objects.select_related('course_id').filter(user_id_id=self.request.user, request_completed__isnull=True).order_by('created_at')
-        # course = Course.objects.filter(request__user_id_id__exact=self.request.user).order_by('created_at')
 
         context.update({
             'request_list': request,
-            # 'course_list': course,
         })
         return context
 
@@ -591,7 +490,6 @@ class AttendanceHistoryView(LoginRequiredMixin, generic.ListView):
         context = super(AttendanceHistoryView, self).get_context_data(**kwargs)
         request = Request.objects.select_related('course_id').filter(user_id_id=self.request.user,
                                                                      request_completed=True).order_by('created_at')
-        course = Course.objects.filter(request__user_id_id__exact=self.request.user).order_by('created_at')
         context.update({
             'request_list': request,
         })
@@ -611,7 +509,6 @@ class RequestReceivedView(LoginRequiredMixin, generic.ListView):
         context.update({
             'request_list': Request.objects.select_related('user_id').filter(
                 receiver_id_id=self.request.user, request_completed__isnull=True).order_by('created_at'),
-            # 'course_list': Course.objects.filter().order_by('created_at'),
         })
         return context
 
@@ -633,28 +530,24 @@ class InquiryView(generic.CreateView):
     model = Inquiry
     template_name = "inquiry.html"
     form_class = InquiryCreateForm
-    # 処理を行った後遷移する画面の指定
     success_url = reverse_lazy('skillswap:inquiry-completed')
 
-    # 成功した時の処理。
     def form_valid(self, form):
         inquiry = form.save()
         inquiry.save()
         return super().form_valid(form)
-    # 失敗した時の処理
 
 
+# お問い合わせ完了画面
 class InquiryCompletedView(generic.TemplateView):
     template_name="inquiry_completed.html"
 
 
 # フレンドの取得
 def getFriendsList(username):
-    """
-    指定したユーザの友達リストを取得
-    :param: ユーザ名
-    :return: ユーザ名の友達リスト
-    """
+    # 指定したユーザの友達リストを取得
+    # :param: ユーザ名
+    # :return: ユーザ名の友達リスト
     try:
         user = CustomUser.objects.get(username=username)
         friends = list(user.user_friends.all())
@@ -667,7 +560,7 @@ def getFriendsList(username):
 class SearchUser(LoginRequiredMixin, generic.View):
 
     def get(self, request, *args, **kwargs):
-
+        # 検索機能はつけていない。
         if 'search' in self.request.GET:
             query = request.GET.get("search")
             users = list(CustomUser.objects.filter(is_active=True))
@@ -689,9 +582,7 @@ class SearchUser(LoginRequiredMixin, generic.View):
 
 # 許可を押した際にフレンド登録を行う
 def addFriend(request, user_id_id):
-    """
-    引数で受け取ったユーザ名(username)を Friendsテーブルに友達として登録する。
-    """
+    # 引数で受け取ったユーザ名(username)を Friendsテーブルに友達として登録する。
     login_user = request.user.username
     user_name = CustomUser.objects.get(pk=user_id_id)
     friend = CustomUser.objects.get(username=user_name)
@@ -724,12 +615,8 @@ def addFriend(request, user_id_id):
 
 # チャット情報を取得
 def get_message(request, username):
-    """
-    特定ユーザ間のチャット情報を取得する
-    """
-    # usernameがis_active出なければこの処理を抜ける
-    # if CustomUser.objects.filter(is_active=True):
-
+    # 特定ユーザ間のチャット情報を取得する
+    # usernameがis_activeでなければこの処理を抜ける
     friend = CustomUser.objects.get(username=username)
     current_user = CustomUser.objects.get(username=request.user.username)
     messages = Messages.objects.filter(sender_name=current_user.id, receiver_name=friend.id) | \
@@ -770,7 +657,6 @@ class ReviewView(LoginRequiredMixin, OnlyYouFriends, generic.CreateView):
     model = Evaluation
     template_name = "review.html"
     form_class = EvaluationCreateForm
-    # 処理を行った後遷移する画面の指定
     success_url = reverse_lazy('skillswap:review_completed')
 
     def get_context_data(self, **kwargs):
@@ -809,7 +695,6 @@ class ReviewUpdateView(LoginRequiredMixin, OnlyYouFriends, generic.FormView):
     model = Evaluation
     template_name = "review.html"
     form_class = EvaluationCreateForm
-    # 処理を行った後遷移する画面の指定
     success_url = reverse_lazy('skillswap:review_completed')
 
     def get_context_data(self, **kwargs):
@@ -846,17 +731,17 @@ class ReviewUpdateView(LoginRequiredMixin, OnlyYouFriends, generic.FormView):
         return super().form_valid(form)
 
 
-# レビュー完了
+# レビュー完了画面
 class ReviewCompletedView(LoginRequiredMixin, generic.TemplateView):
     template_name = "review_completed.html"
 
 
-# 管理者ログイン後
+# 管理者ログイン後トップページ
 class AdministratorView(LoginRequiredMixin, generic.TemplateView):
     template_name = "Administrator.html"
 
 
-# 管理者側からユーザの一覧
+# 管理者側からユーザの一覧閲覧
 class UserListView(LoginRequiredMixin, generic.ListView):
     model = CustomUser
     template_name = "user_list.html"
@@ -867,24 +752,6 @@ class UserListView(LoginRequiredMixin, generic.ListView):
             'skillseat_list': Skillseat.objects.all()
         })
         return context
-
-    # def get_queryset(self, **kwargs):
-    #     course = super().get_queryset(**kwargs)
-    #     query = self.request.GET
-    #
-    #     # 検索バーから抽出
-    #     if q := query.get('q'):
-    #         course = course.filter(title__contains=q)
-    #         return course.order_by('created_at')
-    #     # 新着順
-    #     elif query.get('new'):
-    #         return course.order_by('-created_at')
-    #     # 投稿順
-    #     elif query.get('old'):
-    #         return course.order_by('created_at')
-    #     # それ以外
-    #     else:
-    #         return course.order_by('created_at')
 
 
 # 管理者側からユーザのアカウント停止処理
@@ -945,7 +812,6 @@ class NewsCreateView(LoginRequiredMixin, generic.CreateView):
     def form_valid(self, form):
         news = form.save(commit=False)
         news.reply_all = True
-        # news.user_id = Null
         news.save()
         return super().form_valid(form)
 
