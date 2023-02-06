@@ -1,4 +1,4 @@
-# デフォルト
+# 作成者：岩崎・古越・大和
 from django.db import models
 # アカウントテーブルを参照するためにインポートCustomUserかAccount
 from accounts.models import CustomUser
@@ -24,7 +24,6 @@ class Skillseat(models.Model):
     user_id = models.OneToOneField(CustomUser, verbose_name="ユーザーID", on_delete=models.PROTECT, max_length=10)
     user_name = models.CharField(verbose_name='名前', max_length=30)
     gender = models.CharField(verbose_name='性別', max_length=5)
-    # max_length=4
     birthday = models.DateField(verbose_name="生年月日", blank=True, null=True)
     user_img = models.ImageField(verbose_name='プロフィール画像', max_length=30, blank=True, null=True)
     profile_text = models.CharField(verbose_name='プロフィール文章', max_length=10000, default="よろしくお願いします")
@@ -167,7 +166,7 @@ class Block(models.Model):
         verbose_name_plural = 'Block'
 
 
-# チャット機能に必要なモデル
+# フレンドテーブル
 class Friends(models.Model):
     class Meta:
         verbose_name = '友達リスト'
@@ -181,6 +180,7 @@ class Friends(models.Model):
         return f"{self.friend}"
 
 
+# チャットのメッセージテーブル
 class Messages(models.Model):
     description = models.TextField()
     sender_name = models.ForeignKey(CustomUser, verbose_name="送信者", on_delete=models.CASCADE, related_name='sender')
@@ -197,5 +197,4 @@ class Messages(models.Model):
         ordering = ('timestamp',)
         verbose_name = 'メッセージリスト'
         verbose_name_plural = 'メッセージリスト'
-
 
