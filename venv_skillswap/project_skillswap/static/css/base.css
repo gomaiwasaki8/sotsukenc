@@ -1,11 +1,10 @@
+/* 作成者：藤谷 */
 @import url('https://fonts.googleapis.com/css?family=Noto+Sans+JP');
 /*「#」から始まるのはID、「.」から始まるのはクラス*/
 body, #wrapper {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    /* 背景色赤はエグい */
-    /*background-color: rgb(244, 46, 46);*/
     margin: 0;
 }
 
