@@ -19,7 +19,8 @@ from django.utils.decorators import method_decorator
 from django.http.response import JsonResponse
 from rest_framework.parsers import JSONParser
 from skillswap.serializers import MessageSerializer
-
+# ソート時
+from django.db.models import F
 
 # ログインユーザのみスキルシートを閲覧出来る
 class OnlyYouSkillseat(UserPassesTestMixin):
@@ -220,6 +221,10 @@ class CourseSelectionView(generic.ListView):
         # 投稿順
         elif query.get('old'):
             return course.select_related('user_id').filter(~Q(user_id_id=self.request.user.id), user_id_id__in=active).order_by('created_at')
+        # 人気順今ここ
+        elif query.get('popular'):
+            return course.select_related('user_id').filter(~Q(user_id_id=self.request.user.id),
+                                                           user_id_id__in=active).order_by(F('user_id_id__skillseat__user_evaluation').desc(nulls_last=True))
         # それ以外
         else:
             return course.select_related('user_id').filter(~Q(user_id_id=self.request.user.id), user_id_id__in=active).order_by('created_at')

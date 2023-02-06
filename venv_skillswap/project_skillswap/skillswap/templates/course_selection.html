@@ -85,6 +85,7 @@
             <h1>講座選択</h1>
             <input type="submit" value="新着順" name="new">
             <input type="submit" value="投稿順" name="old">
+            <input type="submit" value="人気順" name="popular">
             <input type="hidden" value="{{ q }}" name="q">
         </form>
 
@@ -113,7 +114,6 @@
         <table border="1">
         {% for course in object_list %}
                 <tr>
-
                     <td>
                         <a href="{% url 'skillswap:course-detail' course.user_id_id %}">
                         {% if course.course_img %}
@@ -133,8 +133,6 @@
                         {{ course.detail }}
                         </a>
                     </td>
-
-
                     <td><a href="{% url 'skillswap:request-application' course.pk %}"><button  class="btnc" >依頼</button></a></td>
                     <td>
                         <a href="{% url 'skillswap:favorite' course.pk %}"><img class="superimg1" src="{% static 'assets/favo2.png' %}" alt="favorite" height ="30" width="30"></a>
