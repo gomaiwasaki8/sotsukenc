@@ -6,7 +6,6 @@ import datetime
 
 
 # 一番初めのプロフィール作成
-# 今ここコメント書いているだけ
 class SkillseatCreateForm(forms.ModelForm):
     class Meta:
         model = Skillseat
