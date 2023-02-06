@@ -221,7 +221,7 @@ class CourseSelectionView(generic.ListView):
         # 投稿順
         elif query.get('old'):
             return course.select_related('user_id').filter(~Q(user_id_id=self.request.user.id), user_id_id__in=active).order_by('created_at')
-        # 人気順今ここ
+        # 人気順
         elif query.get('popular'):
             return course.select_related('user_id').filter(~Q(user_id_id=self.request.user.id),
                                                            user_id_id__in=active).order_by(F('user_id_id__skillseat__user_evaluation').desc(nulls_last=True))

@@ -138,32 +138,19 @@
                     <td>
                         <a href="{% url 'skillswap:favorite' course.pk %}"><img class="superimg1" src="{% static 'assets/favo2.png' %}" alt="favorite" height ="30" width="30"></a>
                         {% for favo in course.favorite_set.all %}
-<!--                        {{ course.favorite_set.all.course_id }}{{ course.favorite_set.course_id_id }}-->
-<!--                        お気に入り→{{ favo.user_id_id }}       自分→{{ user.id }}-->
                         {% if favo.user_id_id == user.id %}
                         {% if course.pk == favo.course_id_id %}
                         <a href="{% url 'skillswap:favorite' course.pk %}"><img class="superimg2" src="{% static 'assets/favo.png' %}" alt="favorite" height ="30" width="30"></a>
                         {% else %}
-                        <!--ここの処理に入っていない-->
                         <a href="{% url 'skillswap:favorite' course.pk %}"><img class="superimg" src="{% static 'assets/sample.png' %}" alt="favorite" height ="30" width="30"></a>
                         {% endif %}
                         {% endif %}
                         {% endfor %}
                     </td>
-<!--                    {% if course.user_id.favorite != user.id %}-->
-<!--                    <td><a href="{% url 'skillswap:favorite' course.pk %}"><img class="superimg" src="{% static 'assets/favo.png' %}" alt="favorite" height ="30" width="30"></a></td>-->
-<!--                    {% endif %}-->
-
                 </tr>
 
             {% endfor %}
 
-<!--           {% for favorite in course_request_list %}-->
-<!--            <tr>-->
-<!--                <td>{{ favorite.course_id_id }}</td>-->
-<!--                <td>{{ favorite.course_id_id.title }}</td>-->
-<!--            </tr>-->
-<!--            {% endfor %}-->
         </table>
         {% else %}
         <p>条件に合う講座がありません。</p>
