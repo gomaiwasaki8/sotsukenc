@@ -1,8 +1,8 @@
+<!-- 作成者：岩崎・古越・藤谷 -->
 {% load static %}
 <html lang="ja">
 <head>
     <meta charset="utf-8">
-    <!-- This file has been downloaded from Bootsnipp.com. Enjoy! -->
     <title>SKILLSWAP | チャット</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="http://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
@@ -10,7 +10,6 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" type="text/css" rel="stylesheet">
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
-    <!--  mystyle  -->
     <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon.ico' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/mystyle.css' %}">
     <link href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" rel="stylesheet">
@@ -43,11 +42,9 @@
             </button>
         </form>
 
-<!--        {% if user.is_authenticated %}-->
         <a class="infomation" href="{% url 'skillswap:request-received' %}">
             <img src="{% static 'assets/news.png' %}" alt="news" width="37" height="37">
         </a>
-<!--        {% endif %}-->
 
         <select class="select1" name="sampledrop" onChange="location.href=value;">
             <img src="sample.png" alt="home" width="135" height="55">
