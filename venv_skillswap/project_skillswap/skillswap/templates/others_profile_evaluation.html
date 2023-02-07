@@ -25,6 +25,8 @@
                 <td>{{ evaluation.evaluation_num }}</td>
                 <td>{{ evaluation.evaluation_text }}</td>
             </tr>
+            {% empty %}
+            <p>レビューがありません。</p>
             {% endfor %}
         </table>
     <a href="{{request.META.HTTP_REFERER}}"><button class="btn">戻る</button></a>
