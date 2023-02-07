@@ -190,6 +190,11 @@ select:hover png { opacity: 0.7; }*/
   margin-top: 150px;
 }*/
 
+/* btnのmarginを消す */
+.btn-margin-5{
+  margin-top: 5px;
+}
+
 /*クラスのないすべてのdivに適用。左から順に「上、右、下、左」の時計回り*/
 div{
   padding: 40px 0px 25px 0px;
@@ -441,3 +446,4 @@ input{
     transform: translateY(0%);
     width: 100px;
 }
+

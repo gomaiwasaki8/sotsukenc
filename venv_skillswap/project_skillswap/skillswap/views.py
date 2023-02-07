@@ -373,13 +373,7 @@ class CourseDetailView(LoginRequiredMixin, generic.DetailView):
 
 # 自分に来たレビューの閲覧
 class MyReviewView(LoginRequiredMixin, generic.ListView):
-    # model = Evaluation
     template_name = "my_review_list.html"
-    #
-    # def get_queryset(self):
-    #     evaluation = Evaluation.objects.filter(user2_id_id=self.request.user)
-    #     return evaluation
-
     model = Skillseat
     context_object_name = 'skillseat_list'
 

@@ -57,10 +57,8 @@ $(function() {
                     {{ form.as_table }}
                 </table>
                 <button class="btn btn-primary" type="submit">送信</button>
-                <div align="center">
-                    <a href="{{request.META.HTTP_REFERER}}">戻る</a>
-                </div>
             </form>
+            <a href="{{request.META.HTTP_REFERER}}"><button class="btn">戻る</button></a>
             <div id="pimg"></div>
         </div>
     </div>
