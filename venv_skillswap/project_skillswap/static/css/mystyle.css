@@ -1,4 +1,3 @@
-/* 作成者：藤谷 */
 @import url('https://fonts.googleapis.com/css?family=Noto+Sans+JP');
 /*「#」から始まるのはID、「.」から始まるのはクラス*/
 body, #wrapper {
@@ -116,7 +115,7 @@ search-box button:hover {
 /*ヘッダー鈴アイコンの調整*/
 .infomation{
   position: absolute;
-  left: 85%;
+  left:85%;
   top: 47%;
 }
 
@@ -179,7 +178,7 @@ select:hover png { opacity: 0.7; }*/
   /*width:80px;*/
   width:100px;
   height:35px;
-  background:rgb(70,130,180);
+  background:rgb(0,206,209);
   border-radius:35px;
   cursor : pointer;
   margin-top: 150px;
@@ -189,11 +188,6 @@ select:hover png { opacity: 0.7; }*/
 /*.btn{
   margin-top: 150px;
 }*/
-
-/* btnのmarginを消す */
-.btn-margin-5{
-  margin-top: 5px;
-}
 
 /*クラスのないすべてのdivに適用。左から順に「上、右、下、左」の時計回り*/
 div{
@@ -230,17 +224,17 @@ a{
 .info{
   border: 1px solid black;
   margin: 0px 0px 0px 300px;
-  padding: 0px 0px 15px 0px;
+  padding: 0px 0px 0px 0px;
 }
 /*マイページ上部、ユーザー情報を横並びにした時の左右の余白*/
 /* 名前 */
 .cl1{
-  margin-right: 55px;
-  margin-left: 60px;
+  position: relative;
 }
 /* 性別 */
 .cl2{
-  margin-right: 55px;
+  position: relative;
+  top: 0px;
 }
 
 /*プロフィール文章の位置*/
@@ -354,6 +348,10 @@ input{
   top: 50%;
   left: 47%;
 }
+.otherimg{
+  position: relative;
+  top: 10%;
+}
 /* 星(岩崎) */
 .star5_rating{
     position: relative;
@@ -379,7 +377,7 @@ input{
 }
 
 .star5_rating[data-rate="5"]:after{ width: 100%; } /* 星5 */
-.star5_rating[data-rate="5.0"]:after{ width: 100%; } /* 星5.0 */
+.star5_rating[data-rate="5.0"]:after{ width: 100%; } /* 星5 */
 .star5_rating[data-rate="4.9"]:after{ width: 98%; } /* 星4.9 */
 .star5_rating[data-rate="4.8"]:after{ width: 96%; } /* 星4.8 */
 .star5_rating[data-rate="4.7"]:after{ width: 94%; } /* 星4.7 */
@@ -390,7 +388,7 @@ input{
 .star5_rating[data-rate="4.2"]:after{ width: 84%; } /* 星4.2 */
 .star5_rating[data-rate="4.1"]:after{ width: 82%; } /* 星4.1 */
 .star5_rating[data-rate="4"]:after{ width: 80%; } /* 星4 */
-.star5_rating[data-rate="4.0"]:after{ width: 80%; } /* 星4.0 */
+.star5_rating[data-rate="4.0"]:after{ width: 80%; } /* 星4 */
 .star5_rating[data-rate="3.9"]:after{ width: 78%; } /* 星3.9 */
 .star5_rating[data-rate="3.8"]:after{ width: 76%; } /* 星3.8 */
 .star5_rating[data-rate="3.7"]:after{ width: 74%; } /* 星3.7 */
@@ -401,7 +399,7 @@ input{
 .star5_rating[data-rate="3.2"]:after{ width: 64%; } /* 星3.2 */
 .star5_rating[data-rate="3.1"]:after{ width: 62%; } /* 星3.1 */
 .star5_rating[data-rate="3"]:after{ width: 60%; } /* 星3 */
-.star5_rating[data-rate="3.0"]:after{ width: 60%; } /* 星3.0 */
+.star5_rating[data-rate="3.0"]:after{ width: 60%; } /* 星3 */
 .star5_rating[data-rate="2.9"]:after{ width: 58%; } /* 星2.9 */
 .star5_rating[data-rate="2.8"]:after{ width: 56%; } /* 星2.8 */
 .star5_rating[data-rate="2.7"]:after{ width: 54%; } /* 星2.7 */
@@ -412,7 +410,7 @@ input{
 .star5_rating[data-rate="2.2"]:after{ width: 44%; } /* 星2.2 */
 .star5_rating[data-rate="2.1"]:after{ width: 42%; } /* 星2.1 */
 .star5_rating[data-rate="2"]:after{ width: 40%; } /* 星2 */
-.star5_rating[data-rate="2.0"]:after{ width: 40%; } /* 星2.0 */
+.star5_rating[data-rate="2.0"]:after{ width: 40%; } /* 星2 */
 .star5_rating[data-rate="1.9"]:after{ width: 38%; } /* 星1.9 */
 .star5_rating[data-rate="1.8"]:after{ width: 36%; } /* 星1.8 */
 .star5_rating[data-rate="1.7"]:after{ width: 34%; } /* 星1.7 */
@@ -423,7 +421,7 @@ input{
 .star5_rating[data-rate="1.2"]:after{ width: 24%; } /* 星1.2 */
 .star5_rating[data-rate="1.1"]:after{ width: 22%; } /* 星1.1 */
 .star5_rating[data-rate="1"]:after{ width: 20%; } /* 星1 */
-.star5_rating[data-rate="1.0"]:after{ width: 20%; } /* 星1.0 */
+.star5_rating[data-rate="1.0"]:after{ width: 20%; } /* 星1 */
 .star5_rating[data-rate="0.9"]:after{ width: 18%; } /* 星0.9 */
 .star5_rating[data-rate="0.8"]:after{ width: 16%; } /* 星0.8 */
 .star5_rating[data-rate="0.7"]:after{ width: 14%; } /* 星0.7 */
@@ -446,4 +444,86 @@ input{
     transform: translateY(0%);
     width: 100px;
 }
+.other-info{
+  position: relative;
+  top: -150px;
+  border: 1px solid black;
+  margin: 0px 0px 0px 300px;
+  padding: 0px 0px 0px 0px;
+}
+.godimg{
+  position: relative;
+  top: 40px;
+  left: 60px;
+}
+.menu1{
+  position: relative;
+  top: -110px;
+  left: 5%;
+  font-size: 150%;
+  width: 8000px;
+  font-family: cursive, 'Noto Sans JP', sans-serif;
+  border-bottom:2px solid;
+  padding-bottom: 10px;
+}
+.menu2{
+  position: relative;
+  top: -110px;
+  left: 8%;
+  font-size: 150%;
+  width: 8000px;
+  font-family: cursive, 'Noto Sans JP', sans-serif;
+  border-bottom:2px solid;
+  padding-bottom: 10px;
+}
+.menu3{
+  position: relative;
+  top: -110px;
+  left: 13%;
+  font-size: 150%;
+  width: 8000px;
+  font-family: cursive, 'Noto Sans JP', sans-serif;
+  border-bottom:2px solid;
+  padding-bottom: 10px;
+}
+.menu4{
+  position: relative;
+  top: -110px;
+  left: 18%;
+  font-size: 150%;
+  width: 8000px;
+  font-family: cursive, 'Noto Sans JP', sans-serif;
+  border-bottom:2px solid;
+  padding-bottom: 10px;
+}
+.cl2{
+  position: absolute;
+  top: 22%;
+  right: 57%;
+}
+.cl3{
+  position: absolute;
+  top: 22%;
+  right: 35%;
+}
+.cl22{
+  position: absolute;
+  top: 58%;
+  left: 60%;
+}
+.cl33{
+  position: absolute;
+  top: 58%;
+  right: 45%;
+}
+.other-text{
+  position: relative;
+  top: -150px;
+}
 
+/*
+ btnのmarginを消す
+.btn-margin-5{
+  margin-top: 5px;
+}
+*/
