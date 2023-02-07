@@ -1,4 +1,3 @@
-<!-- 作成者：岩崎・古越・藤谷 -->
 {% extends 'mypage.html' %}
 {% load static %}
 
@@ -126,6 +125,8 @@
             {% endif %}
             </td>
             <th>{{ request.course_id.title }}</th>
+<!--            <td>{{ request.message }}</td>-->
+<!--            <td><a href="{% url 'skillswap:requested-course-cancel' request.pk %}"><button>キャンセル</button></a></td>-->
         </tr>
         {% endfor %}
     </table>

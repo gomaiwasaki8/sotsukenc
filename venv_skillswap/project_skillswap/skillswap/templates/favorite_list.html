@@ -1,4 +1,3 @@
-<!-- 作成者：岩崎・古越・藤谷 -->
 {% extends 'mypage.html' %}
 {% load static %}
 
@@ -7,19 +6,31 @@
 {% block active_diary_list %}active{% endblock %}
 
 {% block head %}
+<!--<style>-->
+<!--    table{-->
+<!--      left:20%;-->
+<!--    }-->
+<!--</style>-->
 <style>
     .btn1{
       width:80px;
       height:35px;
-      background:rgb(70,130,180);
+      background:rgb(0,206,209);
       border-radius:35px;
       cursor : pointer;
       font-family: cursive, 'Noto Sans JP', sans-serif;
     }
+    .a3{
+      position: relative;
+      top: -50px;
+      left: 80%;
+    }
     .img1{
+      width: 170px;
+      height: 170px;
       position: absolute;
-      top:19%;
-      left:5%;
+      top:22.5%;
+      left:4%;
       z-index: -1;
     }
     .myimg{
@@ -34,8 +45,7 @@
     }
     table{
       position: absolute;
-      left:40%;
-      top:38%;
+      left:0%;
     }
     .btn2{
       width:80px;
@@ -64,7 +74,7 @@
       padding: 0px;
     }
     th{
-      width:  250px;              /* 幅指定 */
+      width:  450px;              /* 幅指定 */
       height: 80px;
       font-size: 20px;
     }
@@ -88,6 +98,24 @@
       top: 50%;
       left: 47%;
     }
+    .myinfo{
+      position: fixed;
+      top: 40%;
+      left: 30%;
+    }
+    .myinfo{
+      height: 344px;
+      width: 700px;
+      overflow-y: scroll;
+    }
+    table{
+      height: 100px;
+    }
+    .superform2{
+      width: 100px;
+      background-color: rgb(0,206,209);
+      padding: 0.5px;
+    }
 </style>
 {% endblock %}
 
@@ -102,13 +130,13 @@
         <tr>
             <td>
             {% if favorite.course_id.course_img %}
-            <img class="superimg" src="{{ favorite.course_id.course_img.url }}" width="170" height="170"/>
+            <img class="superimg" src="{{ favorite.course_id.course_img.url }}" width="120" height="120"/>
             {% else %}
-            <img class="superimg" src="{% static 'assets/sample.png' %}" width="170" height="170"/>
+            <img class="superimg" src="{% static 'assets/sample.png' %}" width="120" height="120"/>
             {% endif %}
             </td>
             <th>{{ favorite.course_id.title }}</th>
-            <td><a href="{% url 'skillswap:my-favorite' favorite.course_id.pk %}"><img class="superimg" src="{% static 'assets/favo.png' %}" alt="favorite" height ="30" width="30"></a></td>
+            <td><a href="{% url 'skillswap:favorite' favorite.course_id.pk %}"><button class="superform2">お気に入り解除</button></a></td>
         </tr>
         {% endfor %}
     </table>

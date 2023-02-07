@@ -1,4 +1,3 @@
-<!-- 作成者：岩崎・古越・藤谷 -->
 {% extends 'mypage.html' %}
 {% load static %}
 
@@ -7,23 +6,36 @@
 {% block active_diary_list %}active{% endblock %}
 
 {% block head %}
+<!--<style>-->
+<!--    table{-->
+<!--      left:20%;-->
+<!--    }-->
+<!--</style>-->
 <style>
     .btn1{
       width:80px;
       height:35px;
-      background:rgb(70,130,180);
+      background:rgb(0,206,209);
       border-radius:35px;
       cursor : pointer;
       font-family: cursive, 'Noto Sans JP', sans-serif;
     }
+    .a3{
+      position: relative;
+      top: -50px;
+      left: 80%;
+    }
     .img1{
+      width: 170px;
+      height: 170px;
       position: absolute;
-      top:19%;
-      left:5%;
+      top:22.5%;
+      left:4%;
       z-index: -1;
     }
     .myimg{
-      left:25%;
+      top: 57%;
+      left:20%;
     }
     .choice{
         font-family: cursive, 'Noto Sans JP', sans-serif;
@@ -34,13 +46,13 @@
     }
     table{
       position: absolute;
-      left:40%;
-      top:38%;
+      left:35.5%;
+      top:45%;
     }
     .btn2{
       width:80px;
       height:35px;
-      background:rgb(70,130,180);
+      background:rgb(0,206,209);
       border-radius:35px;
       cursor : pointer;
       font-family: cursive, 'Noto Sans JP', sans-serif;
@@ -51,13 +63,13 @@
     .wbtn{
       width:80px;
       height:35px;
-      background:rgb(70,130,180);
+      background:rgb(0,206,209);
       border-radius:35px;
       cursor : pointer;
       font-family: cursive, 'Noto Sans JP', sans-serif;
       position: relative;
       top: 80%;
-      left: 79.5%;
+      left: 77.8%;
       margin: 15px;
     }
     .myinfo{
@@ -88,6 +100,12 @@
       top: 50%;
       left: 47%;
     }
+    th{
+       width: 300px;
+    }
+    table tr td:nth-of-type(1){
+       width: 575px;
+    }
 </style>
 {% endblock %}
 
@@ -110,7 +128,8 @@
     <a href="{% url 'skillswap:my-course-update' course.pk %}"><button class="wbtn">編集</button></a>
     {% empty %}
     <p>マイ講座を作成してください。</p>
-    <a href="{% url 'skillswap:my-course-create' %}"><button class="wbtn">作成</button></a>
+    <button class="wbtn"><a href="{% url 'skillswap:my-course-create' %}">作成</a></button>
     {% endfor %}
+<!--        <a href="{% url 'skillswap:skillseat-browse' %}">戻る</a>-->
 </div>
 {% endblock %}
