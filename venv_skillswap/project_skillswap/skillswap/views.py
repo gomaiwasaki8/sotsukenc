@@ -371,6 +371,29 @@ class CourseDetailView(LoginRequiredMixin, generic.DetailView):
         return context
 
 
+# 自分に来たレビューの閲覧
+class MyReviewView(LoginRequiredMixin, generic.ListView):
+    # model = Evaluation
+    template_name = "my_review_list.html"
+    #
+    # def get_queryset(self):
+    #     evaluation = Evaluation.objects.filter(user2_id_id=self.request.user)
+    #     return evaluation
+
+    model = Skillseat
+    context_object_name = 'skillseat_list'
+
+    def get_context_data(self, **kwargs):
+        context = super(MyReviewView, self).get_context_data(**kwargs)
+        context.update({
+            'review_list': Evaluation.objects.filter(user2_id_id=self.request.user)
+            })
+        return context
+
+    def get_queryset(self):
+        return Skillseat.objects.filter(user_id_id=self.request.user)
+
+
 # 他の人のプロフィール文章閲覧
 class OthersProfileTextView(generic.DetailView):
     model = Skillseat

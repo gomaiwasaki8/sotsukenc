@@ -47,6 +47,9 @@ urlpatterns = [
     # マイページでお気に入り解除
     path('mypage/favorite/<int:pk>/', views.FavoriteMypageView.as_view(), name="my-favorite"),
 
+    # マイページの自分に来たレビュー一覧
+    path('my-page/my-review/', views.MyReviewView.as_view(), name="my-review"),
+
     # 講座選択
     path('course-selection/', views.CourseSelectionView.as_view(), name="course-selection"),
 

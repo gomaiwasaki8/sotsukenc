@@ -22,11 +22,11 @@ def validate_bad_word(value):
 class Skillseat(models.Model):
 
     user_id = models.OneToOneField(CustomUser, verbose_name="ユーザーID", on_delete=models.PROTECT, max_length=10)
-    user_name = models.CharField(verbose_name='名前', max_length=30)
+    user_name = models.CharField(verbose_name='名前', max_length=30, validators=[validate_bad_word])
     gender = models.CharField(verbose_name='性別', max_length=5)
     birthday = models.DateField(verbose_name="生年月日", blank=True, null=True)
     user_img = models.ImageField(verbose_name='プロフィール画像', max_length=30, blank=True, null=True)
-    profile_text = models.CharField(verbose_name='プロフィール文章', max_length=10000, default="よろしくお願いします")
+    profile_text = models.CharField(verbose_name='プロフィール文章', max_length=10000, default="よろしくお願いします", validators=[validate_bad_word])
     user_evaluation = models.FloatField(verbose_name='評価', max_length=2, blank=True, null=True)
     created_at = models.DateTimeField(verbose_name='作成日時', auto_now_add=True)
     updated_at = models.DateTimeField(verbose_name='更新日時', auto_now=True)
@@ -39,10 +39,10 @@ class Skillseat(models.Model):
 class Language(models.Model):
 
     user_id = models.ForeignKey(CustomUser, verbose_name="ユーザーID", on_delete=models.PROTECT, max_length=10)
-    genre_1 = models.CharField(verbose_name="ジャンル大", max_length=100)
-    genre_2 = models.CharField(verbose_name="ジャンル小", max_length=100)
-    career = models.CharField(verbose_name="経歴", max_length=100, blank=True, null=True)
-    language_detail = models.CharField(verbose_name="詳細", max_length=500, blank=True, null=True)
+    genre_1 = models.CharField(verbose_name="ジャンル大", max_length=100, validators=[validate_bad_word])
+    genre_2 = models.CharField(verbose_name="ジャンル小", max_length=100, validators=[validate_bad_word])
+    career = models.CharField(verbose_name="経歴", max_length=100, blank=True, null=True, validators=[validate_bad_word])
+    language_detail = models.CharField(verbose_name="詳細", max_length=500, blank=True, null=True, validators=[validate_bad_word])
     created_at = models.DateTimeField(verbose_name='作成日時', auto_now_add=True)
     updated_at = models.DateTimeField(verbose_name='更新日時', auto_now=True)
 
@@ -82,7 +82,7 @@ class Request(models.Model):
     user_id = models.ForeignKey(CustomUser, verbose_name="ユーザー送信者ID", on_delete=models.PROTECT, max_length=10, related_name="user_id")
     receiver_id = models.ForeignKey(CustomUser, verbose_name="ユーザー受信者ID", on_delete=models.PROTECT, max_length=10, related_name="receiver_id")
     course_id = models.ForeignKey(Course, verbose_name="講座ID", on_delete=models.PROTECT, max_length=10)
-    message = models.CharField(verbose_name="メッセージ", max_length=500)
+    message = models.CharField(verbose_name="メッセージ", max_length=500, validators=[validate_bad_word])
     request_completed = models.BooleanField(verbose_name="依頼成立", blank=True, null=True)
     created_at = models.DateTimeField(verbose_name='作成日時', auto_now_add=True)
     updated_at = models.DateTimeField(verbose_name='更新日時', auto_now=True)
@@ -96,7 +96,7 @@ class Chat(models.Model):
 
     request_id = models.ForeignKey(Request, verbose_name="依頼ID", on_delete=models.PROTECT, max_length=10)
     user_id = models.ForeignKey(CustomUser, verbose_name="送信者ID", on_delete=models.PROTECT, max_length=10)
-    message = models.CharField(verbose_name="メッセージ", max_length=500)
+    message = models.CharField(verbose_name="メッセージ", max_length=500, validators=[validate_bad_word])
     file = models.FileField(verbose_name="ファイル", max_length=500, upload_to='static/files/', blank=True, null=True)
     created_at = models.DateTimeField(verbose_name='作成日時', auto_now_add=True)
     updated_at = models.DateTimeField(verbose_name='更新日時', auto_now=True)
@@ -119,7 +119,7 @@ class Evaluation(models.Model):
     )
     # max_length=5
     evaluation_num = models.IntegerField(verbose_name="評価",)
-    evaluation_text = models.CharField(verbose_name="レビュー文", max_length=500, blank=True, null=True)
+    evaluation_text = models.CharField(verbose_name="レビュー文", max_length=500, blank=True, null=True, validators=[validate_bad_word])
     created_at = models.DateTimeField(verbose_name='作成日時', auto_now_add=True)
     updated_at = models.DateTimeField(verbose_name='更新日時', auto_now=True)
 
@@ -132,7 +132,7 @@ class Inquiry(models.Model):
 
     email = models.CharField(verbose_name="メールアドレス", max_length=256)
     user_name = models.CharField(verbose_name="名前", max_length=500)
-    inquiry_content = models.CharField(verbose_name="お問い合わせ内容", max_length=500)
+    inquiry_content = models.CharField(verbose_name="お問い合わせ内容", max_length=500, validators=[validate_bad_word])
     replied = models.BooleanField(verbose_name="返信の有無", blank=True, null=True)
     created_at = models.DateTimeField(verbose_name='作成日時', auto_now_add=True)
 
@@ -144,7 +144,7 @@ class Inquiry(models.Model):
 class News(models.Model):
 
     user_id = models.ForeignKey(CustomUser, verbose_name="ユーザーID", on_delete=models.PROTECT, max_length=10, blank=True, null=True)
-    news_detail = models.CharField(verbose_name="お知らせ内容", max_length=500)
+    news_detail = models.CharField(verbose_name="お知らせ内容", max_length=500, validators=[validate_bad_word])
     reply_all = models.BooleanField(verbose_name="全員へ返信", blank=True, null=True)
     created_at = models.DateTimeField(verbose_name='作成日時', auto_now_add=True)
 
@@ -182,7 +182,7 @@ class Friends(models.Model):
 
 # チャットのメッセージテーブル
 class Messages(models.Model):
-    description = models.TextField()
+    description = models.TextField(validators=[validate_bad_word])
     sender_name = models.ForeignKey(CustomUser, verbose_name="送信者", on_delete=models.CASCADE, related_name='sender')
     receiver_name = models.ForeignKey(CustomUser, verbose_name="受信者", on_delete=models.CASCADE,
                                       related_name='receiver')

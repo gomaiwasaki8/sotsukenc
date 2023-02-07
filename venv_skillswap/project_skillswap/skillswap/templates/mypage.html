@@ -87,12 +87,12 @@
                         生年月日：{{ skillseat.birthday }}
                     </h2>
                     {% if skillseat.user_evaluation %}
-
                     <h2>評価
                         <span class="star5_rating" data-rate="{{ skillseat.user_evaluation }}"></span>
                         <span class="small-span">星{{ skillseat.user_evaluation }}</span>
                     </h2>
-
+                    {% else %}
+                    <h2>評価はありません。</h2>
                     {% endif %}
                     <a class="a3" href="{% url 'skillswap:skillseat-update' skillseat.pk %}"><button class="btn1">編集</button></a>
                 </div>
