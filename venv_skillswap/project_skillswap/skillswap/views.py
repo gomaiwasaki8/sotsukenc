@@ -837,9 +837,10 @@ class InquiryUnrepliedView(LoginRequiredMixin, generic.UpdateView):
 
     def get(self, request, *args, **kwargs):
         result = Inquiry.objects.get(pk=self.kwargs['pk'])
-        result.replied = null
+        result.replied = True
         result.save()
         return redirect('skillswap:inquiry-list')
+
 
 # 管理者側からお知らせ一覧
 class NewsListView(LoginRequiredMixin, generic.ListView):

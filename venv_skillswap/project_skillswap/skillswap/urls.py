@@ -126,9 +126,9 @@ urlpatterns = [
     # 管理者側の受け取ったお問い合わせ一覧
     path("administrator/inquiry-list/", views.InquiryListView.as_view(), name="inquiry-list"),
     # 管理者側の受け取ったお問い合わせ返信済みにする
-    path("administrator/inquiry-replied/", views.InquiryRepiedView.as_view(), name="inquiry-replied"),
+    path("administrator/inquiry-replied/<int:pk>/", views.InquiryRepiedView.as_view(), name="inquiry-replied"),
     # 管理者側の受け取ったお問い合わせ未返信にする
-    path("administrator/inquiry-unreplied/", views.InquiryUnrepliedView.as_view(), name="inquiry-unreplied"),
+    path("administrator/inquiry-unreplied/<int:pk>/", views.InquiryUnrepliedView.as_view(), name="inquiry-unreplied"),
     # 管理者側のお知らせ一覧
     path("administrator/news-list/", views.NewsListView.as_view(), name="news-list"),
     # 管理者側のお知らせ作成
