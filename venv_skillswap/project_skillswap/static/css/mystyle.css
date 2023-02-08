@@ -376,7 +376,6 @@ input{
     color: #ffcf32; /* イエローカラー 自由に設定化 */
 }
 
-.star5_rating[data-rate="5"]:after{ width: 100%; } /* 星5 */
 .star5_rating[data-rate="5.0"]:after{ width: 100%; } /* 星5 */
 .star5_rating[data-rate="4.9"]:after{ width: 98%; } /* 星4.9 */
 .star5_rating[data-rate="4.8"]:after{ width: 96%; } /* 星4.8 */
@@ -387,7 +386,6 @@ input{
 .star5_rating[data-rate="4.3"]:after{ width: 86%; } /* 星4.3 */
 .star5_rating[data-rate="4.2"]:after{ width: 84%; } /* 星4.2 */
 .star5_rating[data-rate="4.1"]:after{ width: 82%; } /* 星4.1 */
-.star5_rating[data-rate="4"]:after{ width: 80%; } /* 星4 */
 .star5_rating[data-rate="4.0"]:after{ width: 80%; } /* 星4 */
 .star5_rating[data-rate="3.9"]:after{ width: 78%; } /* 星3.9 */
 .star5_rating[data-rate="3.8"]:after{ width: 76%; } /* 星3.8 */
@@ -398,7 +396,6 @@ input{
 .star5_rating[data-rate="3.3"]:after{ width: 66%; } /* 星3.3 */
 .star5_rating[data-rate="3.2"]:after{ width: 64%; } /* 星3.2 */
 .star5_rating[data-rate="3.1"]:after{ width: 62%; } /* 星3.1 */
-.star5_rating[data-rate="3"]:after{ width: 60%; } /* 星3 */
 .star5_rating[data-rate="3.0"]:after{ width: 60%; } /* 星3 */
 .star5_rating[data-rate="2.9"]:after{ width: 58%; } /* 星2.9 */
 .star5_rating[data-rate="2.8"]:after{ width: 56%; } /* 星2.8 */
@@ -409,7 +406,6 @@ input{
 .star5_rating[data-rate="2.3"]:after{ width: 46%; } /* 星2.3 */
 .star5_rating[data-rate="2.2"]:after{ width: 44%; } /* 星2.2 */
 .star5_rating[data-rate="2.1"]:after{ width: 42%; } /* 星2.1 */
-.star5_rating[data-rate="2"]:after{ width: 40%; } /* 星2 */
 .star5_rating[data-rate="2.0"]:after{ width: 40%; } /* 星2 */
 .star5_rating[data-rate="1.9"]:after{ width: 38%; } /* 星1.9 */
 .star5_rating[data-rate="1.8"]:after{ width: 36%; } /* 星1.8 */
@@ -420,7 +416,6 @@ input{
 .star5_rating[data-rate="1.3"]:after{ width: 26%; } /* 星1.3 */
 .star5_rating[data-rate="1.2"]:after{ width: 24%; } /* 星1.2 */
 .star5_rating[data-rate="1.1"]:after{ width: 22%; } /* 星1.1 */
-.star5_rating[data-rate="1"]:after{ width: 20%; } /* 星1 */
 .star5_rating[data-rate="1.0"]:after{ width: 20%; } /* 星1 */
 .star5_rating[data-rate="0.9"]:after{ width: 18%; } /* 星0.9 */
 .star5_rating[data-rate="0.8"]:after{ width: 16%; } /* 星0.8 */
@@ -516,14 +511,8 @@ input{
   top: 58%;
   right: 45%;
 }
+/* 上書きされてるから使われてない */
 .other-text{
   position: relative;
   top: -150px;
 }
-
-/*
- btnのmarginを消す
-.btn-margin-5{
-  margin-top: 5px;
-}
-*/
