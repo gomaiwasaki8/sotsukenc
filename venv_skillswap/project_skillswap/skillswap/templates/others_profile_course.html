@@ -1,3 +1,4 @@
+<!-- 作成者：岩崎・古越・藤谷 -->
 {% extends 'others_profile.html' %}
 {% load static %}
 
@@ -54,21 +55,6 @@
 
 {% block contents %}
 <div class="container">
-<!--    {% for skillseat in skillseat_list %}-->
-<!--        {% if skillseat.user_img %}-->
-<!--        <img class="superimg" src="{{ skillseat.user_img.url }}" width="200" height="200"/>-->
-<!--        {% else %}-->
-<!--        <img class="superimg" src="{% static 'assets/sample.png' %}" width="200" height="200"/>-->
-<!--        {% endif %}-->
-
-<!--        <h2>名前：{{ skillseat.user_name }}</h2>-->
-<!--        <h2>性別：{{ skillseat.gender }}</h2>-->
-<!--        <h2>生年月日：{{ skillseat.birthday }}</h2>-->
-<!--        {% if skillseat.user_evaluation %}-->
-<!--        <h2>評価：{{ skillseat.user_evaluation }}</h2>-->
-<!--        {% endif %}-->
-<!--    {% endfor %}-->
-
     {% for course in course_list %}
         <table border="1">
             <tr>

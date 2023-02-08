@@ -1,3 +1,4 @@
+<!-- 作成者：岩崎・古越・藤谷 -->
 {% extends 'others_profile.html' %}
 {% load static %}
 
@@ -64,9 +65,14 @@
                     <img class="superimg" src="{% static 'assets/sample.png' %}" width="170" height="170"/>
                     {% endif %}
                 </td>
-                <td>{{ evaluation.evaluation_num }}</td>
+                <td>
+                    <span class="star5_rating" data-rate="{{ evaluation.evaluation_num }}"></span>
+                    <span class="small-span">星{{ evaluation.evaluation_num }}</span>
+                </td>
                 <td>{{ evaluation.evaluation_text }}</td>
             </tr>
+            {% empty %}
+            <p>レビューがありません。</p>
             {% endfor %}
         </table>
     </div>
