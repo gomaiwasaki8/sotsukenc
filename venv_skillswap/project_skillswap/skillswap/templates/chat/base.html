@@ -11,8 +11,18 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
     <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon.ico' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/mystyle.css' %}">
     <link href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/mystyle.css' %}">
+
+    <style>
+        .chat-input{
+            font-family: initial;
+            font-size: 12px;
+            line-height: initial;
+            padding: 1px 2px;
+        }
+    </style>
+
 </head>
 <body>
 <html>
@@ -36,7 +46,7 @@
 
         <form class="headerform" action="{% url 'skillswap:course-selection' %}" method="GET">
             {% csrf_token %}
-            <input type="search" name="q" placeholder="検索ワード">
+            <input type="search" name="q" class="chat-input" placeholder="検索ワード">
             <button type="submit">
                 <i class="fas fa-search fa-fw"></i>
             </button>
