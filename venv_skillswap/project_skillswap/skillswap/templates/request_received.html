@@ -2,7 +2,7 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}SKILLSWAP | もらった依頼{% endblock %}
+{% block title %}SKILLSWAP | 申し込まれた依頼{% endblock %}
 
 {% block active_diary_list %}active{% endblock %}
 
@@ -13,7 +13,7 @@
 {% block contents %}
 <div class="container">
     <div>
-        <a href="{% url 'skillswap:request-received' %}"><button>もらった依頼一覧</button></a>
+        <a href="{% url 'skillswap:request-received' %}"><button>申し込まれた依頼一覧</button></a>
         <a href="{% url 'skillswap:management-list' %}"><button>運営からのお知らせ</button></a>
         <ul>
             {% for request in request_list %}

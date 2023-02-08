@@ -818,6 +818,29 @@ class InquiryListView(LoginRequiredMixin, generic.ListView):
             return inquiry.order_by('created_at')
 
 
+# お問い合わせを返信済みにする
+class InquiryRepiedView(LoginRequiredMixin, generic.UpdateView):
+    model = Inquiry
+    template_name = "inquiry_list.html"
+
+    def get(self, request, *args, **kwargs):
+        result = Inquiry.objects.get(pk=self.kwargs['pk'])
+        result.replied = True
+        result.save()
+        return redirect('skillswap:inquiry-list')
+
+
+# お問い合わせを未返信にする
+class InquiryUnrepliedView(LoginRequiredMixin, generic.UpdateView):
+    model = Inquiry
+    template_name = "inquiry_list.html"
+
+    def get(self, request, *args, **kwargs):
+        result = Inquiry.objects.get(pk=self.kwargs['pk'])
+        result.replied = null
+        result.save()
+        return redirect('skillswap:inquiry-list')
+
 # 管理者側からお知らせ一覧
 class NewsListView(LoginRequiredMixin, generic.ListView):
     model = News

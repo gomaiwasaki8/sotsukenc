@@ -86,7 +86,7 @@
                 <div class="chat_ib">
                     <h5>{{ friend.friend.skillseat.user_name }}</h5>
                     {% if friend.review_completed != True %}
-                    <a href="{% url 'skillswap:review' friend.pk %}"><button>レビュー</button></a>
+                    <a href="{% url 'skillswap:review' friend.pk %}"><button>取引終了</button></a>
                     {% else %}
                     <a href="{% url 'skillswap:review-update' friend.pk %}"><button>再レビュー</button></a>
                     {% endif %}

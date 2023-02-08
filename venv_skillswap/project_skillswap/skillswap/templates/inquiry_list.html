@@ -40,10 +40,10 @@
                 <tr>
                     {% if object.replied == None %}
                     <td>未返信</td>
-                    <td><a href="#"><button>返信済みにする</button></a></td>
+                    <td><a href="{% url 'skillswap:inquiry-replied' object.pk %}"><button>返信済みにする</button></a></td>
                     {% else %}
                     <td>返信済み</td>
-                    <td><a href="#"><button>未返信にする</button></a></td>
+                    <td><a href="{% url 'skillswap:inquiry-unreplied' object.pk %}"><button>未返信にする</button></a></td>
                     {% endif %}
                 </tr>
             </table>

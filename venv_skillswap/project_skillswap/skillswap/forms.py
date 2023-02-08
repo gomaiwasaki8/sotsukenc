@@ -135,7 +135,7 @@ class EvaluationCreateForm(forms.ModelForm):
 
         # テキストエリアの高さ、幅を指定
         widgets = {
-            'evaluation_text': forms.Textarea(attrs={'rows': 1, 'cols': 40}),
+            'evaluation_text': forms.Textarea(attrs={'rows': 10, 'cols': 40}),
         }
 
     # 入力時プルダウンリストになるよう変更

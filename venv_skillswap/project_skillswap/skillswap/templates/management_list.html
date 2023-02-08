@@ -13,7 +13,7 @@
 {% block contents %}
 <div class="container">
     <div>
-        <a href="{% url 'skillswap:request-received' %}"><button>もらった依頼一覧</button></a>
+        <a href="{% url 'skillswap:request-received' %}"><button>申し込まれた依頼一覧</button></a>
         <a href="{% url 'skillswap:management-list' %}"><button>運営からのお知らせ</button></a>
 
         {% for object in object_list %}
