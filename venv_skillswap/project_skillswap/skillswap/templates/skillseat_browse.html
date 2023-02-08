@@ -105,7 +105,7 @@
             <td>{{ language.genre_2 }}</td>
             <td>{{ language.career }}</td>
             <td>{{ language.language_detail }}</td>
-            <td><a href="{% url 'skillswap:language-update' language.pk %}"><button class="superform2">更新</button></a></td>
+            <td><a href="{% url 'skillswap:language-update' language.pk %}"><button class="superform2">編集</button></a></td>
             <td><a class="superform2" href="{% url 'skillswap:language-delete' language.pk %}"><button class="superform2">削除</button></a></td>
         </tr>
         {% endfor %}

@@ -125,9 +125,14 @@ urlpatterns = [
     path("administrator/user-list/restoration/<int:user_id_id>", views.RestorationView.as_view(), name="restoration"),
     # 管理者側の受け取ったお問い合わせ一覧
     path("administrator/inquiry-list/", views.InquiryListView.as_view(), name="inquiry-list"),
+    # 管理者側の受け取ったお問い合わせ返信済みにする
+    # path("administrator/inquiry-replied/", views.InquiryView.as_view(), name="inquiry-replied"),
+    # 管理者側の受け取ったお問い合わせ一覧
+    # path("administrator/inquiry-unreplied/", views.InquiryView.as_view(), name="inquiry-unreplied"),
     # 管理者側のお知らせ一覧
     path("administrator/news-list/", views.NewsListView.as_view(), name="news-list"),
     # 管理者側のお知らせ作成
     path("administrator/news-create/", views.NewsCreateView.as_view(), name="news-create"),
-
+    # 管理者側のお知らせ更新
+    path("administrator/news-update/<int:pk>/", views.NewsUpdateView.as_view(), name="news-update"),
 ]

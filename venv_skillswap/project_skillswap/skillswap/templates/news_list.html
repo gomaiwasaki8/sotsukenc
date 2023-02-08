@@ -39,6 +39,11 @@
                         {% endif %}
                     </td>
                 </tr>
+                <tr>
+                    <td>
+                        <a href="{% url 'skillswap:news-update' object.pk %}"><button>編集</button></a>
+                    </td>
+                </tr>
             </table>
             <br>
             {% endfor %}

@@ -17,10 +17,14 @@
         <a href="{% url 'skillswap:management-list' %}"><button>運営からのお知らせ</button></a>
         <ul>
             {% for request in request_list %}
+            {% if request.user_id.skillseat.user_img %}
             <li><a href="{% url 'skillswap:others-profile-skillseat' request.user_id.skillseat.user_id_id %}"><img src="{{ request.user_id.skillseat.user_img.url }}" class="superimg" width="200" height="200"/></a></li>
+            {% else %}
+            <li><a href="{% url 'skillswap:others-profile-skillseat' request.user_id.skillseat.user_id_id %}"><img src="{% static 'assets/sample.png' %}" class="superimg" width="200" height="200"/></a></li>
+            {% endif %}
             <li>送信者：<a href="{% url 'skillswap:others-profile-skillseat' request.user_id.skillseat.user_id_id %}">{{ request.user_id.skillseat.user_name }}</a></li>
             <li>メッセージ：{{ request.message }}</li>
-            <li><a href="{% url 'skillswap:addfriend' request.user_id_id %}"><button>許可</button></a></li>
+            <li><a href="{% url 'skillswap:addfriend' request.user_id_id %}"><button>承認</button></a></li>
             <li><a href="{% url 'skillswap:request-rejection' request.pk %}"><button>拒否</button></a></li>
             {% empty %}
             <p>申請された依頼はありません</p>

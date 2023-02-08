@@ -134,7 +134,7 @@
                         {{ course.detail }}
                         </a>
                     </td>
-                    <td><a href="{% url 'skillswap:request-application' course.pk %}"><button  class="btnc" >依頼</button></a></td>
+                    <td><a href="{% url 'skillswap:request-application' course.pk %}"><button  class="btnc" >依頼申請</button></a></td>
                     <td>
                         <a href="{% url 'skillswap:favorite' course.pk %}"><img class="superimg1" src="{% static 'assets/favo2.png' %}" alt="favorite" height ="30" width="30"></a>
                         {% for favo in course.favorite_set.all %}

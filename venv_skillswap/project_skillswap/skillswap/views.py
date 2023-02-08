@@ -838,6 +838,13 @@ class NewsCreateView(LoginRequiredMixin, generic.CreateView):
         return super().form_valid(form)
 
 
+class NewsUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = News
+    template_name = "news_update.html"
+    form_class = NewsCreateForm
+    success_url = reverse_lazy('skillswap:news-list')
+
+
 # 運営からのお知らせ表示
 class ManagementListView(LoginRequiredMixin, ListView):
     model = News

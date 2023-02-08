@@ -38,16 +38,15 @@
                     <td>お問い合わせ内容</td><td>{{ object.inquiry_content }}</td>
                 </tr>
                 <tr>
+                    {% if object.replied == None %}
+                    <td>未返信</td>
+                    <td><a href="#"><button>返信済みにする</button></a></td>
+                    {% else %}
                     <td>返信済み</td>
-                    <td>
-                        {% if object.replied == None %}
-                        未返信
-                        {% else %}
-                        返信済み
-                        {% endif %}
-                    </td>
+                    <td><a href="#"><button>未返信にする</button></a></td>
+                    {% endif %}
                 </tr>
-                </table>
+            </table>
             <br>
                 {% endfor %}
 
