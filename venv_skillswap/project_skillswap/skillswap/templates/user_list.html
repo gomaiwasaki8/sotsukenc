@@ -24,9 +24,9 @@
                 <tr>
                     <th>{{ skillseat.user_name }}</th>
                     {% if skillseat.user_id.is_active == True %}
-                    <td><a href="{% url 'skillswap:suspension' skillseat.user_id_id %}"><button>停止</button></a></td>
+                    <td><a href="{% url 'skillswap:suspension' skillseat.user_id_id %}"><button>アカウント停止</button></a></td>
                     {% else %}
-                    <td><a href="{% url 'skillswap:restoration' skillseat.user_id_id %}"><button>復旧</button></a></td>
+                    <td><a href="{% url 'skillswap:restoration' skillseat.user_id_id %}"><button>アカウント復旧</button></a></td>
                     {% endif %}
                 </tr>
             </table>

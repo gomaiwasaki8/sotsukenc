@@ -92,6 +92,8 @@
                     <h2>評価なし</h2>
                     {% endif %}
                     <a class="a3" href="{% url 'skillswap:skillseat-update' skillseat.pk %}"><button class="btn1" >編集</button></a>
+<!--                    退会処理できるけど使ってない -->
+                    <a href="{% url 'skillswap:my-suspension' skillseat.user_id_id %}" type="hidden"></a>
                 </div>
                 {% endfor %}
                 {% else %}

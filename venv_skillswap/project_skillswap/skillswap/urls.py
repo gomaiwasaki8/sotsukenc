@@ -47,7 +47,7 @@ urlpatterns = [
     # マイページでお気に入り解除
     path('mypage/favorite/<int:pk>/', views.FavoriteMypageView.as_view(), name="my-favorite"),
 
-    # マイページの自分に来たレビュー一覧
+    # マイページの自分に来たレビュー一覧(リンク貼ってないけど使える)
     path('my-page/my-review/', views.MyReviewView.as_view(), name="my-review"),
 
     # 講座選択
@@ -87,6 +87,9 @@ urlpatterns = [
 
     # お気に入りの講座一覧
     path('my-page/favorite-list/', views.FavoriteListView.as_view(), name="favorite-list"),
+
+    # 自分で退会する
+    path("my-page/my-suspension/<int:user_id_id>", views.MySuspensionView.as_view(), name="my-suspension"),
 
     # お知らせ（依頼）
     path('news/request-received/', views.RequestReceivedView.as_view(), name="request-received"),

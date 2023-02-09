@@ -388,6 +388,17 @@ class MyReviewView(LoginRequiredMixin, generic.ListView):
         return Skillseat.objects.filter(user_id_id=self.request.user)
 
 
+# 自分で退会する
+class MySuspensionView(LoginRequiredMixin, generic.TemplateView):
+    template_name = "my_suspension_update.html"
+
+    def post(self, *args, **kwargs):
+        user = CustomUser.objects.get(pk=self.kwargs['user_id_id'])
+        user.is_active = False
+        user.save()
+        return redirect('skillswap:index')
+
+
 # 他の人のプロフィール文章閲覧
 class OthersProfileTextView(generic.DetailView):
     model = Skillseat
@@ -787,7 +798,7 @@ class SuspensionView(LoginRequiredMixin, generic.TemplateView):
         return redirect('skillswap:user-list')
 
 
-# 管理者側からユーザのアカウント停止処理
+# 管理者側からユーザのアカウント復旧処理
 class RestorationView(LoginRequiredMixin, generic.TemplateView):
     template_name = "restoration_update.html"
 
@@ -862,6 +873,7 @@ class NewsCreateView(LoginRequiredMixin, generic.CreateView):
         return super().form_valid(form)
 
 
+# 管理者側からお知らせの更新
 class NewsUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = News
     template_name = "news_update.html"
