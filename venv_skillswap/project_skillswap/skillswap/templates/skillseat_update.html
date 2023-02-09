@@ -2,7 +2,7 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}SKILLSWAP | プロフィール更新{% endblock %}
+{% block title %}SKILLSWAP | プロフィール編集{% endblock %}
 
 {% block active_diary_list %}active{% endblock %}
 
@@ -37,6 +37,19 @@ $(function() {
   });
 });
 </script>
+<style>
+    h1{
+      text-align:left;
+      margin: 0;
+      padding: 0;
+      padding-left:100px;
+      padding-bottom:15px;
+      border-bottom:3px double blue;
+      width: 1300px;
+	  margin-left: auto;
+	  margin-right: auto;
+    }
+</style>
 {% endblock %}
 
 {% block contents %}
@@ -45,6 +58,7 @@ $(function() {
         <div>
             <form method="POST" enctype='multipart/form-data'>
                 {% csrf_token %}
+                <h1>プロフィール</h1>
                 <table class="table">
                     {{ form.as_table }}
                 </table>

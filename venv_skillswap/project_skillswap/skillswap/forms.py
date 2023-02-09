@@ -35,7 +35,7 @@ class SkillseatCreateForm(forms.ModelForm):
 class SkillseatUpdateForm(forms.ModelForm):
     class Meta:
         model = Skillseat
-        fields = ('user_name', 'gender', 'birthday', 'user_img', )
+        fields = ('user_img', 'user_name', 'gender', 'birthday', )
 
     # 入力時プルダウンリストになるよう変更
     gender = forms.fields.ChoiceField(choices=(('男', '男'), ('女', '女'), ('その他', 'その他')), label='性別', required=True,)

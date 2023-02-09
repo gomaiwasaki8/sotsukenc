@@ -6,7 +6,21 @@
 
 {% block active_diary_list %}active{% endblock %}
 
-{% block head %}{% endblock %}
+{% block head %}
+<style>
+    h1{
+      text-align:left;
+      margin: 0;
+      padding: 0;
+      padding-left:100px;
+      padding-bottom:15px;
+      border-bottom:3px double blue;
+      width: 1300px;
+	  margin-left: auto;
+	  margin-right: auto;
+    }
+</style>
+{% endblock %}
 
 {% block header %}{% endblock %}
 
@@ -16,6 +30,7 @@
         <div>
             <form method="POST" enctype='multipart/form-data'>
                 {% csrf_token %}
+                <h1>依頼申請</h1>
                 <table class="table">
                     {{ form.as_table }}
                 </table>

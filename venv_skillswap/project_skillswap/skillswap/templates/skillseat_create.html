@@ -2,7 +2,7 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}SKILLSWAP | アカウント情報登録{% endblock %}
+{% block title %}SKILLSWAP | プロフィール作成{% endblock %}
 
 {% block active_diary_list %}active{% endblock %}
 
@@ -51,7 +51,7 @@ $(function() {
 <div class="container">
     <div class="row">
         <div>
-            <h1>アカウント登録</h1>
+            <h1>プロフィール</h1>
             <form method="POST" enctype='multipart/form-data'>
                 {% csrf_token %}
                 <table class="table">
