@@ -58,6 +58,10 @@
       width: 73.5%;
       overflow-y: scroll;
     }
+    .notext{
+      position: absolute;
+      left: 630px;
+    }
 </style>
 {% endblock %}
 
@@ -80,7 +84,7 @@
             <li><a href="{% url 'skillswap:addfriend' request.user_id_id %}"><button class="irai">承認</button></a></li>
             <li><a href="{% url 'skillswap:request-rejection' request.pk %}"><button class="noirai">拒否</button></a></li>
             {% empty %}
-            <p>申請された依頼はありません</p>
+            <p class="notext">申請された依頼はありません</p>
             {% endfor %}
         </ul>
     </div>
