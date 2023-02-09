@@ -22,6 +22,10 @@
 	  margin-left: auto;
 	  margin-right: auto;
     }
+    .table{
+      position: relative;
+      top: 25px;
+    }
   </style>
 {% endblock %}
 
@@ -30,16 +34,16 @@
 {% block contents %}
 <div class="container">
     <div class="row">
-        <div>
+        <div align="center">
             <form method="POST" enctype='multipart/form-data'>
                 {% csrf_token %}
                 <h1>スキルシート</h1>
                 <table class="table">
                     {{ form.as_table }}
                 </table>
-                <button class="btn btn-primary" type="submit">更新</button>
+                <button class="superbtn" type="submit">更新</button>
             </form>
-            <a href="{% url 'skillswap:skillseat-browse' %}"><button class="btn">戻る</button></a>
+            <a href="{% url 'skillswap:skillseat-browse' %}"><button class="superbtn">戻る</button></a>
         </div>
     </div>
 </div>

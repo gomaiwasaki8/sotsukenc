@@ -123,7 +123,7 @@ class RequestApplicationCreateForm(forms.ModelForm):
 
         # テキストエリアの高さ、幅を指定
         widgets = {
-            'message': forms.Textarea(attrs={'rows': 5, 'cols': 40}),
+            'message': forms.Textarea(attrs={'rows': 15, 'cols': 40}),
         }
 
 

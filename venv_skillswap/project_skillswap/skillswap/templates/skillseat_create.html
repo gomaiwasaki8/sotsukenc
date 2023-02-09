@@ -11,6 +11,28 @@
     p{
     text-align:center;
     }
+    h1{
+      text-align:left;
+      margin: 0;
+      padding: 0;
+      padding-left:100px;
+      padding-bottom:15px;
+      border-bottom:3px double blue;
+      width: 1300px;
+	  margin-left: auto;
+	  margin-right: auto;
+    }
+    .previewimg{
+      position: absolute;
+      top: 180px;
+      left: 300px;
+      width: 150px;
+      height: 150px;
+    }
+    .table{
+      position: relative;
+      top: 25px;
+    }
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script type="text/javascript">
@@ -50,14 +72,14 @@ $(function() {
 {% block contents %}
 <div class="container">
     <div class="row">
-        <div>
+        <div align="center">
             <h1>プロフィール</h1>
             <form method="POST" enctype='multipart/form-data'>
                 {% csrf_token %}
                 <table class="table">
                     {{ form.as_table }}
                 </table>
-                <button class="btn btn-primary" type="submit">確定</button>
+                <button class="superbtn" type="submit">確定</button>
             </form>
             <div id="pimg"></div>
         </div>

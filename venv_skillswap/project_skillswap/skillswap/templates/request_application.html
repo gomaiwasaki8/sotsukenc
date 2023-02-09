@@ -19,6 +19,10 @@
 	  margin-left: auto;
 	  margin-right: auto;
     }
+    .table{
+      position: relative;
+      top: 25px;
+    }
 </style>
 {% endblock %}
 
@@ -31,12 +35,12 @@
             <form method="POST" enctype='multipart/form-data'>
                 {% csrf_token %}
                 <h1>依頼申請</h1>
-                <table class="table">
+                <table class="table" align="center">
                     {{ form.as_table }}
                 </table>
-                <button class="btn btn-primary" type="submit">送信</button>
+                <button class="superbtn" type="submit">送信</button>
             </form>
-            <a href="{{request.META.HTTP_REFERER}}"><button class="btn">戻る</button></a>
+            <a href="{{request.META.HTTP_REFERER}}"><button class="superbtn">戻る</button></a>
         </div>
     </div>
 </div>
