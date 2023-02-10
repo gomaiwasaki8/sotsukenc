@@ -12,6 +12,11 @@
 <!--        書いてること同じ-->
 <!--        <link rel="stylesheet" href="{% static 'css/mystyle.css' %}">-->
 <!--        <link rel="icon" href="{% static 'img/favicon.ico' %}">-->
+        <style>
+            .taikai{
+                color: white;
+            }
+        </style>
     </head>
 
     <body>
@@ -93,7 +98,7 @@
                     {% endif %}
                     <a class="a3" href="{% url 'skillswap:skillseat-update' skillseat.pk %}"><button class="btn1" >編集</button></a>
 <!--                    退会処理できるけど使ってない -->
-                    <a href="{% url 'skillswap:my-suspension' skillseat.user_id_id %}" type="hidden"></a>
+                    <a href="{% url 'skillswap:my-suspension' skillseat.user_id_id %}" class="taikai">ユーザ情報の削除</a>
                 </div>
                 {% endfor %}
                 {% else %}
