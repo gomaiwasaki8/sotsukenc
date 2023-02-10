@@ -13,13 +13,13 @@
 {% block contents %}
 <div class="container">
     <div class="row">
-        <div>
+        <div align="center">
             <p>本当にこのアカウントを停止しますか？</p>
             <form method="POST" enctype='multipart/form-data'>
                 {% csrf_token %}
-                <button class="btn btn-primary" type="submit">停止</button>
+                <button class="superbtn" type="submit">停止</button>
             </form>
-            <a href="{% url 'skillswap:user-list' %}"><button class="btn">戻る</button></a>
+            <a href="{% url 'skillswap:user-list' %}"><button class="superbtn">戻る</button></a>
         </div>
     </div>
 </div>
