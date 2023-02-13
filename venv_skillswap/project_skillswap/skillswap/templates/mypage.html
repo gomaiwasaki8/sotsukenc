@@ -98,7 +98,8 @@
                     {% endif %}
                     <a class="a3" href="{% url 'skillswap:skillseat-update' skillseat.pk %}"><button class="btn1" >編集</button></a>
 <!--                    退会処理できるけど使ってない -->
-                    <a href="{% url 'skillswap:my-suspension' skillseat.user_id_id %}" class="taikai">ユーザ情報の削除</a>
+                    <a href="{% url 'skillswap:my-suspension' skillseat.user_id_id %}" class="taikai">,</a>
+                    <a href="{% url 'skillswap:my-review' %}" class="taikai">.</a>
                 </div>
                 {% endfor %}
                 {% else %}
